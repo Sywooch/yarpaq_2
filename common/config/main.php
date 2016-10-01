@@ -6,13 +6,11 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'class' => 'amnah\yii2\user\components\User',
-        ],
-    ],
-    'modules' => [
-        'user' => [
-            'class' => 'amnah\yii2\user\Module',
-            // set custom module properties here ...
+            'class' => 'webvimark\modules\UserManagement\components\UserConfig',
+
+            'on afterLogin' => function($event) {
+                \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
+            }
         ],
     ],
 ];

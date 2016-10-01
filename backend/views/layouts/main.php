@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
+use webvimark\modules\UserManagement\UserManagementModule;
 
 AppAsset::register($this);
 ?>
@@ -34,24 +35,37 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
+
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems = [
+            ['label'=>'Login', 'url'=>['/user-management/auth/login']],
+//            ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
+//            ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
+//            ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
+//            ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
+//            ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
+        ];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems = [
+            ['label' => 'User', 'items' => UserManagementModule::menuItems()],
+            '<li>'
+                . Html::beginForm(['/logout'], 'post')
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    ['class' => 'btn btn-link']
+                )
+                . Html::endForm()
+                . '</li>'
+        ];
     }
+
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => [
+            'class' => 'navbar-nav navbar-right'
+        ],
         'items' => $menuItems,
+        'encodeLabels' => false
     ]);
     NavBar::end();
     ?>
