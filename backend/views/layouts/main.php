@@ -48,6 +48,7 @@ AppAsset::register($this);
         ];
     } else {
         $menuItems = [
+            ['label'=> 'Manufacturers', 'url' => '/manufacturer'],
             ['label'=> 'Settings', 'items' =>
                 [
                     ['label' => 'Currency List', 'url' => '/currency']
