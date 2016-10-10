@@ -392,6 +392,7 @@ trait FunctionalTesterActions
         return $this->getScenario()->runStep(new \Codeception\Step\Action('writeToFile', func_get_args()));
     }
 
+
  
     /**
      * [!] Method is generated. Documentation taken from corresponding module.

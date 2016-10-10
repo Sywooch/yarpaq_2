@@ -48,6 +48,11 @@ AppAsset::register($this);
         ];
     } else {
         $menuItems = [
+            ['label'=> 'Settings', 'items' =>
+                [
+                    ['label' => 'Currency List', 'url' => '/currency']
+                ]
+            ],
             ['label' => 'User', 'items' => UserManagementModule::menuItems()],
             '<li>'
                 . Html::beginForm(['/logout'], 'post')

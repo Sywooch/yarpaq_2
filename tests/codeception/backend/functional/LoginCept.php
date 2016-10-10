@@ -15,7 +15,7 @@ $loginPage = LoginPage::openBy($I);
 $I->amGoingTo('submit login form with no data');
 $loginPage->login('', '');
 $I->expectTo('see validations errors');
-$I->see('Username cannot be blank.', '.help-block');
+$I->see('Login cannot be blank.', '.help-block');
 $I->see('Password cannot be blank.', '.help-block');
 
 $I->amGoingTo('try to login with wrong credentials');
@@ -25,8 +25,8 @@ $I->expectTo('see validations errors');
 $I->see('Incorrect username or password.', '.help-block');
 
 $I->amGoingTo('try to login with correct credentials');
-$loginPage->login('erau', 'password_0');
+$loginPage->login('zaur', '123456');
 $I->expectTo('see that user is logged');
-$I->see('Logout (erau)', 'form button[type=submit]');
+$I->see('Logout (zaur)', 'form button[type=submit]');
 $I->dontSeeLink('Login');
 $I->dontSeeLink('Signup');

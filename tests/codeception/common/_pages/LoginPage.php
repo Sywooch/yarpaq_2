@@ -3,7 +3,8 @@
 namespace tests\codeception\common\_pages;
 
 use yii\codeception\BasePage;
-use common\models\LoginForm;
+use webvimark\modules\UserManagement\models\forms\LoginForm;
+
 
 /**
  * Represents loging page
@@ -11,7 +12,7 @@ use common\models\LoginForm;
  */
 class LoginPage extends BasePage
 {
-    public $route = 'site/login';
+    public $route = '/login';
 
     /**
      * @param string $username
@@ -23,6 +24,6 @@ class LoginPage extends BasePage
 
         $this->actor->fillField('input[name="' . $loginForm->formName() . '[username]"]', $username);
         $this->actor->fillField('input[name="' . $loginForm->formName() . '[password]"]', $password);
-        $this->actor->click('login-button');
+        $this->actor->click('Login', 'button');
     }
 }

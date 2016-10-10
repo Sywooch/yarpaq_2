@@ -3,15 +3,20 @@
 namespace tests\codeception\backend\acceptance;
 
 use tests\codeception\backend\AcceptanceTester;
-use tests\codeception\common\_pages\LoginPage;
-
 /* @var $scenario \Codeception\Scenario */
 
 $I = new AcceptanceTester($scenario);
-//$I->wantTo('ensure login page works');
+$I->wantTo('ensure login page works');
 //
-//$loginPage = LoginPage::openBy($I, '/login');
-//$I->see('Authorization');
+$I->amOnPage('/login');
+$I->see('Authorization');
+
+$I->fillField('LoginForm[username]','davert');
+$I->fillField('LoginForm[password]','qwerty');
+
+$I->click('Login', 'button');
+$I->see('Incorrect username or password');
+
 //
 //$I->amGoingTo('submit login form with no data');
 //$loginPage->login('', '');
