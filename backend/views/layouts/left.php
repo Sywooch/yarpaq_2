@@ -1,3 +1,6 @@
+<?php
+use webvimark\modules\UserManagement\UserManagementModule;
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -33,7 +36,13 @@
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Manufacturers', 'icon' => 'fa fa-file-code-o', 'url' => ['/manufacturer']],
                     ['label' => 'Currencies', 'icon' => 'fa fa-file-code-o', 'url' => ['/currency']],
-                    ['label' => 'Users', 'icon' => 'fa fa-file-code-o', 'url' => ['/user-management']],
+                    ['label' => 'Users', 'items' => [
+                        ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['/user-management/user/index'], 'icon' => 'fa fa-angle-double-right'],
+                        ['label' => UserManagementModule::t('back', 'Roles'), 'url' => ['/user-management/role/index'], 'icon' => 'fa fa-angle-double-right'],
+                        ['label' => UserManagementModule::t('back', 'Permissions'), 'url' => ['/user-management/permission/index'], 'icon' => 'fa fa-angle-double-right'],
+                        ['label' => UserManagementModule::t('back', 'Permission groups'), 'url' => ['/user-management/auth-item-group/index'], 'icon' => 'fa fa-angle-double-right'],
+                        ['label' => UserManagementModule::t('back', 'Visit log'), 'url' => ['/user-management/user-visit-log/index'], 'icon' => 'fa fa-angle-double-right'],
+                    ]],
                     ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
