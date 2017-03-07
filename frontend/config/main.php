@@ -11,9 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'language' => 'en',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'class' => 'frontend\components\LangRequest'
         ],
 //        'user' => [
 //            'identityClass' => 'common\models\User',
