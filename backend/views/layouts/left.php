@@ -36,6 +36,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Manufacturers', 'icon' => 'fa fa-file-code-o', 'url' => ['/manufacturer']],
                     ['label' => 'Currencies', 'icon' => 'fa fa-file-code-o', 'url' => ['/currency']],
+                    ['label' => 'Languages', 'icon' => 'fa fa-language', 'url' => ['/language']],
                     ['label' => 'Users', 'items' => [
                         ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['/user-management/user/index'], 'icon' => 'fa fa-angle-double-right'],
                         ['label' => UserManagementModule::t('back', 'Roles'), 'url' => ['/user-management/role/index'], 'icon' => 'fa fa-angle-double-right'],
