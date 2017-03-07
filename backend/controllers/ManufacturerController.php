@@ -8,6 +8,7 @@ use backend\models\ManufacturerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ManufacturerController implements the CRUD actions for Manufacturer model.
@@ -45,20 +46,8 @@ class ManufacturerController extends Controller
     }
 
     /**
-     * Displays a single Manufacturer model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Manufacturer model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, the browser will be redirected to the 'update' page.
      * @return mixed
      */
     public function actionCreate()
@@ -67,23 +56,22 @@ class ManufacturerController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            // set current date time
-            $now = new \DateTime();
-            $model->created_at = $now->format('Y-m-d H:i:s');
-            $model->updated_at = $now->format('Y-m-d H:i:s');
-            $model->save();
+            $this->uploadImage($model);
+            $saved = $model->save();
 
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            if ($saved) {
+                return $this->redirect(['update', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
      * Updates an existing Manufacturer model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * If update is successful, the browser will be redirected to the 'update' page.
      * @param integer $id
      * @return mixed
      */
@@ -91,8 +79,12 @@ class ManufacturerController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $this->uploadImage($model);
+            $model->save();
+
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -126,6 +118,23 @@ class ManufacturerController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * @param $model Manufacturer
+     */
+    private function uploadImage($model) {
+        $image = UploadedFile::getInstance($model, 'image');
+        if (!is_null($image)) {
+            $model->image_src_filename = $image->name;
+            $image_parts = explode(".", $image->name);
+            $ext = end($image_parts);
+            // generate a unique file name to prevent duplicate filenames
+            $model->image_web_filename = Yii::$app->security->generateRandomString().".{$ext}";
+
+            $image->saveAs($model->imagePath);
+
         }
     }
 }

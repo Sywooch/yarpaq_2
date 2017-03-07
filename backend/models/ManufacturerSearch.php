@@ -58,14 +58,23 @@ class ManufacturerSearch extends Manufacturer
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        $query->andFilterWhere(['id' => $this->id]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'image', $this->image]);
+        if ($this->created_at != '') {
+            list($created_start, $created_end) = explode(' - ', $this->created_at);
+
+            $query->andFilterWhere(['>=', 'created_at', $created_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'created_at', $created_end . ' 23:59:59']);
+        }
+
+        if ($this->updated_at != '') {
+            list($updated_start, $updated_end) = explode(' - ', $this->updated_at);
+
+            $query->andFilterWhere(['>=', 'updated_at', $updated_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'updated_at', $updated_end . ' 23:59:59']);
+        }
+
 
         return $dataProvider;
     }

@@ -44,6 +44,14 @@ return [
                 'logout' => 'user-management/auth/logout',
             ],
         ],
+
+        'urlManagerUploads' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '//y2aa-frontend.dev/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+
     ],
 
     'modules' => [

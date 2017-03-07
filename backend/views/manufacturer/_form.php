@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Manufacturer */
@@ -10,11 +11,47 @@ use yii\widgets\ActiveForm;
 
 <div class="manufacturer-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'enctype'=>'multipart/form-data'
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?php
+
+    $uploaderPluginOptions = [
+        'allowedFileExtensions' => ['jpg', 'gif', 'png'],
+        'showUpload' => false,
+        'showRemove' => false,
+
+
+        'initialPreviewAsData' => true,
+        'overwriteInitial' => false,
+        'initialCaption' => "Upload image",
+        'initialPreview' => [],
+        'initialPreviewConfig' => []
+    ];
+
+    if ($model->image_web_filename != '') {
+        $uploaderPluginOptions['initialPreview'] = $model->imageUrl;
+        $uploaderPluginOptions['initialPreviewConfig'][] = ['caption' => $model->image_src_filename, 'width' => "120px", 'key' => 1];
+    }
+
+    ?>
+
+    <script type="text/javascript">
+        var image_src_filename = '<?php echo $model->image_src_filename; ?>';
+    </script>
+
+    <?php
+
+    echo $form->field($model, 'image')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => $uploaderPluginOptions
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
