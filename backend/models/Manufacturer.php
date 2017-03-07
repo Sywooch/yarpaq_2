@@ -40,17 +40,6 @@ class Manufacturer extends \yii\db\ActiveRecord
             [['image'], 'safe'],
             [['image'], 'file', 'extensions' => 'jpg, gif, png'],
             [['image'], 'file', 'maxSize' => 1024 * 1024],
-            ['image', 'required', 'when' => function ($model) {
-                if ($model->image_web_filename == '') {
-                    return true;
-                } else {
-                    return false;
-                }
-            },
-                'whenClient' => "function (attribute, value) {
-                    return image_src_filename == '';
-                }"
-            ],
 
             [['image_src_filename', 'image_web_filename'], 'string', 'max' => 255],
         ];

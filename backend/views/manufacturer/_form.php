@@ -26,6 +26,8 @@ use kartik\file\FileInput;
         'showUpload' => false,
         'showRemove' => false,
 
+        'deleteUrl' => \yii\helpers\Url::to(['manufacturer/image-delete']),
+
 
         'initialPreviewAsData' => true,
         'overwriteInitial' => false,
@@ -38,14 +40,6 @@ use kartik\file\FileInput;
         $uploaderPluginOptions['initialPreview'] = $model->imageUrl;
         $uploaderPluginOptions['initialPreviewConfig'][] = ['caption' => $model->image_src_filename, 'width' => "120px", 'key' => 1];
     }
-
-    ?>
-
-    <script type="text/javascript">
-        var image_src_filename = '<?php echo $model->image_src_filename; ?>';
-    </script>
-
-    <?php
 
     echo $form->field($model, 'image')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],

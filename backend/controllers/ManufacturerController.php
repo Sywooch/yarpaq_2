@@ -5,6 +5,8 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Manufacturer;
 use backend\models\ManufacturerSearch;
+use yii\base\ErrorException;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -135,6 +137,96 @@ class ManufacturerController extends Controller
 
             $image->saveAs($model->imagePath);
 
+        }
+    }
+
+    public function actionImageDelete() {
+
+        $key = (int) Yii::$app->request->post('key');
+
+        $image = ArticleGalleryImage::findOne($key);
+        $image->delete();
+
+        return json_encode(['success' => 1]);
+    }
+
+
+    // МЕТОДЫ ДЛЯ СИНХРОНИЗАЦИИ ДАННЫХ СО СТАРОГО САЙТА
+
+
+    /**
+     * Импортирует все бренды, которые еще не импортированы
+     *
+     * @throws \yii\db\Exception
+     */
+    public function actionImport() { // TODO удалить данный метод после полного перехода на новый сайт
+
+        // image urls array
+        $images = [];
+
+        // load rows
+        $rows = Yii::$app->db->createCommand('SELECT * FROM `mans` WHERE manufacturer_id NOT IN ( SELECT old_id FROM man_assoc )')->queryAll();
+
+        // loop
+        foreach ($rows as $row) {
+
+            $model = new Manufacturer();
+            $model->title = $row['name'];
+
+            // if has image -> download it
+            if ($row['image'] != '') {
+                $model->image_src_filename = basename($row['image']);
+                $model->image_web_filename = basename($row['image']);
+
+
+                // save image url
+                $images[] = $row['image'];
+            }
+
+            // save model
+            $model->save();
+
+            // add association
+            Yii::$app->db->createCommand('REPLACE INTO `man_assoc` VALUES ('.$row['manufacturer_id'].', '.$model->id.')')->execute();
+
+        }
+
+        // print json encoded assoc array
+        echo json_encode($images);
+    }
+
+
+    /**
+     * Заупускает скачивание всех картинок брендов со старого сайта
+     */
+    public function actionSyncImages() { // TODO удалить данный метод после полного перехода на новый сайт
+        $images = Yii::$app->db->createCommand('SELECT `image` FROM `mans` WHERE image != ""')->queryAll();
+
+        foreach ($images as $image) {
+            $this->download($image['image']);
+        }
+    }
+
+    /**
+     * Скачивает картинку.
+     * Если картинка с таким именем есть, то ее не скачивает.
+     *
+     * @param $url
+     * @return bool|int|void
+     */
+    private function download($url) { // TODO удалить данный метод после полного перехода на новый сайт
+
+        // if exist -> skip
+        if (is_file('/app/frontend/web/uploads/manufacturers/'.basename($url))) {
+            return;
+        }
+
+        try {
+            $image = file_get_contents('https://yarpaq.az/image/'.$url);
+            return file_put_contents('/app/frontend/web/uploads/manufacturers/'.basename($url), $image);
+        } catch (ErrorException $e) {
+            echo 'Error: '.$url.'<br>';
+            return false;
         }
     }
 }
