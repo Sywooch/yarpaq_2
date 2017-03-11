@@ -60,6 +60,7 @@ return [
             'controllerMap' => [
                 'user' => 'backend\controllers\UserController'
             ],
+            'viewPath' => '@backend/views/user-management'
         ]
     ],
 

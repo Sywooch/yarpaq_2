@@ -256,8 +256,11 @@ class UserImportController extends Controller
                 $modelSaved = $model->save();
                 if (!$modelSaved) {
                     $errors['models'][$old_user_id] = $model;
-                    throw new Exception('model #'.$old_user_id.' not saved');
+                    throw new Exception('model #' . $old_user_id . ' not saved');
                 }
+
+                $this->setRole($model->id, $user['user_group_id']);
+
 
 
                 // сохраняем профайл
@@ -347,8 +350,19 @@ class UserImportController extends Controller
     }
 
 
-    public function actionImportRole() {
+    public function setRole($user_id, $role_id) {
+        $roles = [
+            1 => 'admin',
+            2 => 'seller'
+        ];
 
+        if (!isset($roles[$role_id])) {
+            throw new Exception('Unknown role');
+        }
+
+        $role = $roles[$role_id];
+
+        Yii::$app->db->createCommand('REPLACE INTO {{%auth_assignment}} VALUES ("'.$role.'", '.$user_id.', '.time().')')->execute();
     }
 
 }

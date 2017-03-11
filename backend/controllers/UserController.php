@@ -6,6 +6,7 @@ use Yii;
 use common\models\User;
 use webvimark\modules\UserManagement\models\search\UserSearch;
 use yii\web\NotFoundHttpException;
+use yii\data\ActiveDataProvider;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -20,7 +21,7 @@ class UserController extends \webvimark\modules\UserManagement\controllers\UserC
 	/**
 	 * @var UserSearch
 	 */
-	public $modelSearchClass = 'webvimark\modules\UserManagement\models\search\UserSearch';
+	public $modelSearchClass = 'common\models\UserSearch';
 
 	/**
 	 * @return mixed|string|\yii\web\Response
@@ -60,6 +61,29 @@ class UserController extends \webvimark\modules\UserManagement\controllers\UserC
 		}
 
 		return $this->renderIsAjax('changePassword', compact('model'));
+	}
+
+	/**
+	 * Lists all models.
+	 * @return mixed
+	 */
+	public function actionIndex()
+	{
+		$searchModel  = $this->modelSearchClass ? new $this->modelSearchClass : null;
+
+		if ( $searchModel )
+		{
+			$dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+		}
+		else
+		{
+			$modelClass = $this->modelClass;
+			$dataProvider = new ActiveDataProvider([
+				'query' => $modelClass::find(),
+			]);
+		}
+
+		return $this->renderIsAjax('index', compact('dataProvider', 'searchModel'));
 	}
 
 }
