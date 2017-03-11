@@ -6,7 +6,7 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'class' => 'webvimark\modules\UserManagement\components\UserConfig',
+            'class' => 'common\components\UserConfig',
 
             'on afterLogin' => function($event) {
                 \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);

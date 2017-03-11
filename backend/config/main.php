@@ -57,6 +57,9 @@ return [
     'modules' => [
         'user-management' => [
             'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+            'controllerMap' => [
+                'user' => 'backend\controllers\UserController'
+            ],
         ]
     ],
 
