@@ -6,7 +6,6 @@ use Yii;
 use backend\models\Manufacturer;
 use backend\models\ManufacturerSearch;
 use yii\base\ErrorException;
-use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

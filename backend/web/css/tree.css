@@ -1,0 +1,46 @@
+.actions {
+    margin-left: 20px;
+    display: none;
+}
+.list-group-item:hover .actions {
+    display: inline;
+}
+
+
+.tree .just-padding {
+    padding: 15px;
+}
+
+.tree .list-group.list-group-root {
+    padding: 0;
+    overflow: hidden;
+}
+
+.tree .list-group.list-group-root .list-group {
+    margin-bottom: 0;
+}
+
+.tree .list-group.list-group-root .list-group-item {
+    border-radius: 0;
+    border-width: 1px 0 0 0;
+}
+
+.tree .list-group.list-group-root > .list-group-item:first-child {
+    border-top-width: 0;
+}
+
+/*.tree .list-group.list-group-root > .list-group > .list-group-item {*/
+    /*padding-left: 30px;*/
+/*}*/
+
+/*.tree .list-group.list-group-root > .list-group > .list-group > .list-group-item {*/
+    /*padding-left: 45px;*/
+/*}*/
+
+.list-group.list-group-root .list-group, .list-group.list-group-root .list-group-item {
+    padding-left: 15px;
+}
+
+.tree .list-group-item .glyphicon {
+    margin-right: 5px;
+}

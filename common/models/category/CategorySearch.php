@@ -1,16 +1,15 @@
 <?php
 
-namespace common\models;
+namespace common\models\category;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Page;
 
 /**
- * PageSearch represents the model behind the search form about `common\models\Page`.
+ * CategorySearch represents the model behind the search form about `common\models\Category`.
  */
-class PageSearch extends Page
+class CategorySearch extends Category
 {
     /**
      * @inheritdoc
@@ -18,8 +17,8 @@ class PageSearch extends Page
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'template_id', 'status', 'modified_user_id', 'created_user_id', 'sort'], 'integer'],
-            [['name', 'modified', 'created', 'published'], 'safe'],
+            [['id', 'parent_id', 'status', 'created_user_id', 'updated_user_id', 'sort'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class PageSearch extends Page
      */
     public function search($params)
     {
-        $query = Page::find();
+        $query = Category::find();
 
         // add conditions that should always apply here
 
@@ -61,17 +60,12 @@ class PageSearch extends Page
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'template_id' => $this->template_id,
             'status' => $this->status,
-            'modified' => $this->modified,
-            'modified_user_id' => $this->modified_user_id,
-            'created' => $this->created,
+            'created_at' => $this->created_at,
             'created_user_id' => $this->created_user_id,
-            'published' => $this->published,
-            'sort' => $this->sort,
+            'updated_at' => $this->updated_at,
+            'updated_user_id' => $this->updated_user_id,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
