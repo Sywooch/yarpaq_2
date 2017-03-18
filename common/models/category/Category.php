@@ -299,6 +299,7 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
 
             // set Created At
             if ($this->isNewRecord) {
+                $this->created_user_id = Yii::$app->user->id;
                 $this->created_at = $now->format('Y-m-d H:i:s');
             }
 
@@ -310,7 +311,6 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
                 $this->depth = $this->parent->depth+1;
             }
 
-            $this->created_user_id = Yii::$app->user->id;
             $this->updated_user_id = Yii::$app->user->id;
 
 
@@ -327,11 +327,15 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         if (parent::beforeDelete()) {
 
             // delete children
-            foreach ($this->children as $child) {
-                if (!$child->delete()) {
-                    return false;
+            $children = $this->children;
+            if (count($children)) {
+                foreach ($children as $child) {
+                    if (!$child->delete()) {
+                        return false;
+                    }
                 }
             }
+
 
             return true;
         } else {
