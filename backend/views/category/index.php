@@ -31,21 +31,30 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- Templates -->
 
 
+
+
         <div class="list-group list-group-root well">
 
+            <?php
+            $categories = $root->getChildren()->with('content')->all();
+            foreach ($categories as $category) { ?>
+
             <span class="list-group-item">
-                <a class="bind-a" href="#item-<?php echo $root->id; ?>" data-toggle="collapse" data-children-url="<?php echo Url::toRoute(['category/get-children-data', 'id' => $root->id]); ?>">
-                    <i class="glyphicon glyphicon-chevron-right"></i><span class="bind-header"><?php echo $root->content->title; ?></span>
+                <a class="bind-a" href="#item-<?php echo $category->id; ?>" data-toggle="collapse" data-children-url="<?php echo Url::toRoute(['category/get-children-data', 'id' => $category->id]); ?>">
+                    <i class="glyphicon glyphicon-chevron-right"></i><span class="bind-header"><?php echo $category->content->title; ?></span>
                 </a>
 
                 <span class="actions">
-                    <a class="label bg-light-blue bind-edit" href="<?php echo Url::toRoute(['update', 'id' => $root->id]); ?>">Edit</a>
-                    <a class="label bg-light-blue bind-add" href="<?php echo Url::toRoute(['create', 'parent_id' => $root->id]); ?>">Add</a>
-                    <a class="label bg-light-blue bind-view" href="<?php echo $root->url; ?>" target="_blank">View</a>
+                    <a class="label bg-light-blue bind-edit" href="<?php echo Url::toRoute(['update', 'id' => $category->id]); ?>">Edit</a>
+                    <a class="label bg-light-blue bind-add" href="<?php echo Url::toRoute(['create', 'parent_id' => $category->id]); ?>">Add</a>
+                    <a class="label bg-light-blue bind-view" href="<?php echo $category->url; ?>" target="_blank">View</a>
+                    <a class="label bg-red bind-delete" href="" data-confirm="Are you sure you want to delete this item?">Delete</a>
                 </span>
             </span>
 
+            <?php } ?>
         </div>
+
     </div>
 
 </div>

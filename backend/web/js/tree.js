@@ -53,7 +53,7 @@ $(function () {
         }
     });
 
-    tree.find('.list-group-root .bind-a').click();
+    //tree.find('.list-group-root .bind-a').click();
 
 
     // move up
