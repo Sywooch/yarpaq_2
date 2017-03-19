@@ -7,7 +7,6 @@ use common\models\category\CategoryContent;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\base\Exception;
-use yii\web\Controller;
 
 class CategoryImportController extends AdminDefaultController
 {

@@ -7,7 +7,6 @@ use common\models\User;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\base\Exception;
-use yii\web\Controller;
 
 class UserImportController extends AdminDefaultController
 {
