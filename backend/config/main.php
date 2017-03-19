@@ -43,6 +43,7 @@ return [
             'rules' => [
                 'login' => 'user-management/auth/login',
                 'logout' => 'user-management/auth/logout',
+                'profile' => 'user-management/user/profile',
             ],
         ],
 

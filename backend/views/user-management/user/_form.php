@@ -8,7 +8,9 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 
 /**
  * @var yii\web\View $this
- * @var webvimark\modules\UserManagement\models\User $model
+ * @var common\models\User $model
+ * @var common\models\Profile $profile
+ *
  * @var yii\bootstrap\ActiveForm $form
  */
 ?>
@@ -19,6 +21,7 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 		'id'=>'user',
 		'layout'=>'horizontal',
 		'validateOnBlur' => false,
+		'enableClientValidation' => false
 	]); ?>
 
 	<?= $form->field($model->loadDefaultValues(), 'status')
@@ -32,6 +35,13 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 
 		<?= $form->field($model, 'repeat_password')->passwordInput(['maxlength' => 255, 'autocomplete'=>'off']) ?>
 	<?php endif; ?>
+
+	<?= $form->field($profile, 'firstname')->textInput(['maxlength' => 255]) ?>
+	<?= $form->field($profile, 'lastname')->textInput(['maxlength' => 255]) ?>
+	<?= $form->field($profile, 'org')->textInput(['maxlength' => 255]) ?>
+	<?= $form->field($profile, 'phone1')->textInput(['maxlength' => 255]) ?>
+	<?= $form->field($profile, 'phone2')->textInput(['maxlength' => 255]) ?>
+	<?= $form->field($profile, 'fax')->textInput(['maxlength' => 255]) ?>
 
 
 	<?php if ( User::hasPermission('bindUserToIp') ): ?>

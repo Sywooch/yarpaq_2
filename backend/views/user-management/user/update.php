@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = UserManagementModule::t('back', 'Editing');
 	<div class="panel panel-default">
 		<div class="panel-body">
 
-			<?= $this->render('_form', compact('model')) ?>
+			<?= $this->render('_form', compact('model', 'profile')) ?>
 		</div>
 	</div>
 
