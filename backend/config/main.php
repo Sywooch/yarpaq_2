@@ -58,10 +58,18 @@ return [
     'modules' => [
         'user-management' => [
             'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+
+            'on beforeAction'=>function(yii\base\ActionEvent $event) {
+                if ( $event->action->uniqueId == 'user-management/auth/login' )
+                {
+                    $event->action->controller->layout = 'loginLayout.php';
+                };
+            },
+
             'controllerMap' => [
                 'user' => 'backend\controllers\UserController'
             ],
-            'viewPath' => '@backend/views/user-management'
+            'viewPath' => '@backend/views/user-management',
         ]
     ],
 
