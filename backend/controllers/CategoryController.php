@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\category\Category;
 use common\models\category\CategoryContent;
 use backend\models\Language;
+use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
@@ -13,7 +14,7 @@ use yii\helpers\Url;
 /**
  * PageController implements the CRUD actions for Page model.
  */
-class CategoryController extends BackendController
+class CategoryController extends AdminDefaultController
 {
 
     /**

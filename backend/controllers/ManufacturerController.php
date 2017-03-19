@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use webvimark\components\AdminDefaultController;
 use Yii;
 use backend\models\Manufacturer;
 use backend\models\ManufacturerSearch;
@@ -14,7 +15,7 @@ use yii\web\UploadedFile;
 /**
  * ManufacturerController implements the CRUD actions for Manufacturer model.
  */
-class ManufacturerController extends Controller
+class ManufacturerController extends AdminDefaultController
 {
     /**
      * @inheritdoc

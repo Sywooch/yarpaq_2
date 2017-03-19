@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use webvimark\components\AdminDefaultController;
 use Yii;
 use backend\models\Currency;
 use backend\models\CurrencySearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CurrencyController implements the CRUD actions for Currency model.
  */
-class CurrencyController extends Controller
+class CurrencyController extends AdminDefaultController
 {
     /**
      * @inheritdoc

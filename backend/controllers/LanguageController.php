@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use webvimark\components\AdminDefaultController;
 use Yii;
 use backend\models\Language;
 use backend\models\LanguageSearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * LanguageController implements the CRUD actions for Language model.
  */
-class LanguageController extends Controller
+class LanguageController extends AdminDefaultController
 {
     /**
      * @inheritdoc
