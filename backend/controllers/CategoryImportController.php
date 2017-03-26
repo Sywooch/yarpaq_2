@@ -7,12 +7,13 @@ use common\models\category\CategoryContent;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\base\Exception;
+use yii\web\Controller;
 
 class CategoryImportController extends AdminDefaultController
 {
     private $catAssoc;
     private $categories;
-    private $categories_description;
+    private $categories_description = [];
     private $languages;
     private $errorModels = [];
     private $contents = [];
@@ -50,14 +51,17 @@ class CategoryImportController extends AdminDefaultController
         $this->categories = Yii::$app->db_old->createCommand($category_sql)->queryAll();
 
         $categories_description = Yii::$app->db_old->createCommand($category_description_sql)->queryAll();
+        $cd = [];
         foreach ($categories_description as $desc) {
-            $this->categories_description[ $desc['category_id'] ][] = $desc;
+            $ind = $desc['category_id'];
+            $cd[ $ind ][] = $desc;
         }
+        $this->categories_description = $cd;
 
         $this->languages = [
-            1 => 2, // English
-            2 => 3, // Russian
-            3 => 1, // Azeri
+            1 => 1, // English
+            2 => 2, // Russian
+            3 => 3, // Azeri
         ];
 
         $this->errorModels = ['models' => [], 'profiles' => []];
