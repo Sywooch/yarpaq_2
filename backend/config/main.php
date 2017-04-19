@@ -54,6 +54,13 @@ return [
             'showScriptName' => false,
         ],
 
+        'urlManagerYarpaq' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '//yarpaq.az/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+
     ],
 
     'modules' => [

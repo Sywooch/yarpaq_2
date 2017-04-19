@@ -23,6 +23,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
+                    ['label' => 'Products', 'url' => ['/product']],
                     ['label' => 'Categories', 'icon' => 'fa fa-sitemap', 'url' => ['/category']],
                     ['label' => 'Manufacturers', 'icon' => 'fa fa-tags', 'url' => ['/manufacturer']],
                     ['label' => 'Currencies', 'icon' => 'fa fa-money', 'url' => ['/currency']],

@@ -169,4 +169,22 @@ class UserController extends \webvimark\modules\UserManagement\controllers\UserC
 		return $this->renderIsAjax('update', compact('model', 'profile'));
 	}
 
+	public function actionUserList($q = null, $id = null) {
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		$out = ['results' => ['id' => '', 'text' => '']];
+		if (!is_null($q)) {
+			$searchModel = new UserSearch();
+			$data = $searchModel->search(['UserSearch' => ['email' => $q]]);
+
+			$out['results'] = [];
+			foreach ($data->getModels() as $model) {
+				$out['results'][] = ['id' => $model->id, 'text' => $model->email];
+			}
+		}
+		elseif ($id > 0) {
+			$out['results'] = ['id' => $id, 'text' => User::find($id)->email];
+		}
+		return $out;
+	}
+
 }

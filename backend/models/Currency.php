@@ -59,4 +59,15 @@ class Currency extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+
+    public static function getDropDownData() {
+        $list = self::find()->all();
+
+        $data = [];
+        foreach ($list as $item) {
+            $data[ $item->id ] = $item->code;
+        }
+
+         return $data;
+    }
 }

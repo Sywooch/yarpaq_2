@@ -228,4 +228,22 @@ class ManufacturerController extends AdminDefaultController
             return false;
         }
     }
+
+    public function actionModelList($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $searchModel = new ManufacturerSearch();
+            $data = $searchModel->search(['ManufacturerSearch' => ['title' => $q]]);
+
+            $out['results'] = [];
+            foreach ($data->getModels() as $model) {
+                $out['results'][] = ['id' => $model->id, 'text' => $model->title];
+            }
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Manufacturer::find($id)->title];
+        }
+        return $out;
+    }
 }
