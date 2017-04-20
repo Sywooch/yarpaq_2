@@ -41,16 +41,22 @@ class ProductController extends AdminDefaultController
     {
         $model = new Product();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
-        } else {
-            $zonesData = $this->prepareZonesDataForSelect();
+        if ($model->load(Yii::$app->request->post())) {
+            $this->uploadGalleryFiles($model);
 
-            return $this->render('create', [
-                'model' => $model,
-                'zones' => $zonesData
-            ]);
+            if ($model->save()) {
+                $this->saveGalleryFiles($model);
+                $this->saveSort();
+                return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
+            }
         }
+
+        $zonesData = $this->prepareZonesDataForSelect();
+
+        return $this->render('create', [
+            'model' => $model,
+            'zones' => $zonesData
+        ]);
     }
 
     /**
