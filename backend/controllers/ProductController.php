@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Country;
 use common\models\ProductImage;
 use webvimark\components\AdminDefaultController;
 use Yii;
@@ -27,7 +28,7 @@ class ProductController extends AdminDefaultController
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -43,8 +44,11 @@ class ProductController extends AdminDefaultController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
         } else {
+            $zonesData = $this->prepareZonesDataForSelect();
+
             return $this->render('create', [
                 'model' => $model,
+                'zones' => $zonesData
             ]);
         }
     }
@@ -59,16 +63,35 @@ class ProductController extends AdminDefaultController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $this->saveSort();
-            $this->uploadGallery($model);
+        if ($model->load(Yii::$app->request->post())) {
+            $this->uploadGalleryFiles($model);
 
-            return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            if ($model->save()) {
+                $this->saveGalleryFiles($model);
+                $this->saveSort();
+                return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
+            }
         }
+
+
+        $zonesData = $this->prepareZonesDataForSelect();
+
+        return $this->render('update', [
+            'model' => $model,
+            'zones' => $zonesData,
+        ]);
+    }
+
+    private function prepareZonesDataForSelect() {
+        $country = Country::findOne(15); // Azerbaijan
+        $zones = $country->zones;
+
+        $zonesData = [];
+        foreach ($zones as $zone) {
+            $zonesData[$zone->id] = $zone->name;
+        }
+
+        return $zonesData;
     }
 
     /**
@@ -119,23 +142,26 @@ class ProductController extends AdminDefaultController
         }
     }
 
-    private function uploadGallery($m) {
-        $images = UploadedFile::getInstancesByName('gallery');
+    private function uploadGalleryFiles($model) {
+        $model->galleryFiles = UploadedFile::getInstances($model, 'galleryFiles');
+    }
 
-        if (count($images)) {
+    private function saveGalleryFiles($m) {
+        $files = $m->galleryFiles;
+        if (count($files)) {
             $sort = count($m->gallery);
-            foreach ($images as $image) { $sort++;
-                if (!is_null($image)) {
+            foreach ($files as $file) { $sort++;
+                if (!is_null($file)) {
                     $model = new ProductImage();
                     $model->model_id = $m->id;
-                    $model->src_name = $image->name;
+                    $model->src_name = $file->name;
                     $model->sort = $sort;
-                    $image_parts = explode(".", $image->name);
-                    $ext = end($image_parts);
+                    $file_parts = explode(".", $file->name);
+                    $ext = end($file_parts);
                     // generate a unique file name to prevent duplicate filenames
                     $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
 
-                    $image->saveAs($model->path);
+                    $file->saveAs($model->path);
 
                     $model->save();
                 }

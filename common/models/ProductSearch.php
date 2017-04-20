@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
-            [['model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location', 'moderated_at', 'created_at', 'updated_at'], 'safe'],
+            [['model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at'], 'safe'],
             [['price', 'weight', 'length', 'width', 'height'], 'number'],
         ];
     }
@@ -89,7 +89,7 @@ class ProductSearch extends Product
             ->andFilterWhere(['like', 'jan', $this->jan])
             ->andFilterWhere(['like', 'isbn', $this->isbn])
             ->andFilterWhere(['like', 'mpn', $this->mpn])
-            ->andFilterWhere(['like', 'location', $this->location]);
+            ->andFilterWhere(['location_id' => $this->location_id]);
 
         return $dataProvider;
     }

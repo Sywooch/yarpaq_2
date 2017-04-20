@@ -82,7 +82,22 @@ use yii\helpers\FileHelper;
 
 
                         <!-- Location info -->
-                        <?= $form->field($model, 'location')->textInput(['maxlength' => true]) ?>
+                        <?php
+
+                        if (!$model->location_id) {
+                            $model->location_id = 216;
+                        }
+                        echo $form->field($model, 'location_id')->widget(Select2::classname(), [
+                            'data' => \yii\helpers\ArrayHelper::toArray($zones, ['common\models\Zone' => ['id', 'name']]),
+                            'options' => [
+                                'placeholder' => 'Select location  ...'
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]);
+
+                        ?>
 
                         <!-- Manufacturer -->
                         <?php
@@ -123,7 +138,6 @@ use yii\helpers\FileHelper;
 
                     <!-- Gallery -->
                     <div class="col-xs-12">
-                        <label class="control-label" for="product-weight">Images & Video</label>
 
                         <script type="text/javascript">
                             var gallery_sort = [];
@@ -160,12 +174,11 @@ use yii\helpers\FileHelper;
                             echo '<script type="text/javascript"> gallery_sort.push('.$image->id.'); </script>';
                         }
 
-                        echo FileInput::widget([
-                            'name' => 'gallery[]',
+                        echo $form->field($model, 'galleryFiles[]')->widget(FileInput::className(), [
+                            'model' => $model,
                             'options' => [
                                 'accept' => ['image/*', 'video/*'],
-                                'multiple' => true,
-                                'required' => 'required'
+                                'multiple' => true
                             ],
                             'pluginOptions' => $pluginOptions,
                         ]); ?>

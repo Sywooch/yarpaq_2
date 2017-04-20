@@ -15,7 +15,7 @@ use Yii;
  * @property string $jan
  * @property string $isbn
  * @property string $mpn
- * @property string $location
+ * @property string $location_id
  * @property integer $condition_id
  * @property string $price
  * @property integer $currency_id
@@ -38,6 +38,9 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+
+    public $galleryFiles;
+
     /**
      * @inheritdoc
      */
@@ -52,16 +55,22 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'model', 'condition_id', 'price', 'currency_id', 'quantity', 'location', 'weight'], 'required'],
-            [['condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
+            [['title', 'description', 'model', 'condition_id', 'price', 'currency_id', 'quantity', 'location_id', 'weight'], 'required'],
+            [['condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'location_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
             ['weight_class_id', 'default', 'value' => 1],
             ['length_class_id', 'default', 'value' => 1],
             ['moderated', 'default', 'value' => 1],
+            ['galleryFiles', 'image', 'skipOnEmpty' => false, 'maxFiles' => 10,
+                'when' => function ($model) { return !count($model->gallery); },
+                'whenClient' => "function (attribute, value) {
+                    return $('input[name=\"gallery_sort\"]').val() == '';
+                }"
+            ],
 
             [['price'], 'number'],
             [['weight', 'length', 'width', 'height'], 'number'],
             [['moderated_at', 'created_at', 'updated_at'], 'safe'],
-            [['title', 'model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location'], 'string', 'max' => 255],
+            [['title', 'model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn'], 'string', 'max' => 255],
         ];
     }
 
@@ -79,11 +88,12 @@ class Product extends \yii\db\ActiveRecord
             'jan' => Yii::t('app', 'JAN'),
             'isbn' => Yii::t('app', 'ISBN'),
             'mpn' => Yii::t('app', 'MPN'),
-            'location' => Yii::t('app', 'Location'),
+            'location_id' => Yii::t('app', 'Location'),
             'condition_id' => Yii::t('app', 'Condition'),
             'price' => Yii::t('app', 'Price'),
             'currency_id' => Yii::t('app', 'Currency'),
             'quantity' => Yii::t('app', 'Quantity'),
+            'galleryField' => Yii::t('app', 'Images & Video'),
             'stock_status_id' => Yii::t('app', 'Stock Status'),
             'weight' => Yii::t('app', 'Weight (kg)'),
             'weight_class_id' => Yii::t('app', 'Weight Class'),
