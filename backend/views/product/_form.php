@@ -134,7 +134,7 @@ use yii\helpers\FileHelper;
                             'allowedFileExtensions' => ['jpg', 'gif', 'png', 'mp4'],
                             'showUpload' => false,
 
-                            'error' => 'This field is required',
+
                             'initialPreviewAsData' => true,
                             'deleteUrl' => Url::to(['product/image-delete']),
                             'overwriteInitial' => false,
@@ -164,7 +164,8 @@ use yii\helpers\FileHelper;
                             'name' => 'gallery[]',
                             'options' => [
                                 'accept' => ['image/*', 'video/*'],
-                                'multiple' => true
+                                'multiple' => true,
+                                'required' => 'required'
                             ],
                             'pluginOptions' => $pluginOptions,
                         ]); ?>
