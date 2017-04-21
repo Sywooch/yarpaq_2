@@ -41,6 +41,9 @@ class Product extends \yii\db\ActiveRecord
 
     public $galleryFiles;
 
+    const SCENARIO_IMPORT   = 'import';
+    const SCENARIO_DEFAULT  = 'default';
+
     /**
      * @inheritdoc
      */
@@ -61,7 +64,9 @@ class Product extends \yii\db\ActiveRecord
             ['length_class_id', 'default', 'value' => 1],
             ['moderated', 'default', 'value' => 1],
             ['galleryFiles', 'image', 'skipOnEmpty' => false, 'maxFiles' => 10,
-                'when' => function ($model) { return !count($model->gallery); },
+                'when' => function ($model) {
+                    return !count($model->gallery) || $model->scenarion != 'import';
+                },
                 'whenClient' => "function (attribute, value) {
                     return $('input[name=\"gallery_sort\"]').val() == '';
                 }"
@@ -123,5 +128,12 @@ class Product extends \yii\db\ActiveRecord
 
     public function getGallery() {
         return $this->hasMany(ProductImage::className(), ['model_id' => 'id'])->orderBy('sort');
+    }
+
+    public function scenarios() {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_IMPORT] = [];
+
+        return $scenarios;
     }
 }
