@@ -130,6 +130,14 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductImage::className(), ['model_id' => 'id'])->orderBy('sort');
     }
 
+    public function getStatus() {
+        return $this->hasOne(Status::className(), ['id' => 'status_id']);
+    }
+
+    public function getSeller() {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
     public function scenarios() {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_IMPORT] = [];

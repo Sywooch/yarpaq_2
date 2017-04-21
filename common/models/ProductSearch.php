@@ -19,7 +19,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
-            [['model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at'], 'safe'],
+            [['model', 'title',  'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at'], 'safe'],
             [['price', 'weight', 'length', 'width', 'height'], 'number'],
         ];
     }
@@ -63,6 +63,7 @@ class ProductSearch extends Product
             'id' => $this->id,
             'condition_id' => $this->condition_id,
             'price' => $this->price,
+            'title' => $this->title,
             'currency_id' => $this->currency_id,
             'quantity' => $this->quantity,
             'stock_status_id' => $this->stock_status_id,

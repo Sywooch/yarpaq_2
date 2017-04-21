@@ -22,21 +22,43 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['width' => 80]
+            ],
+            [
+                'format' => 'html',
+                'value' => function($product) {
+                    $gallery = $product->gallery;
 
-            'id',
+                    if (count($gallery)) {
+                        $url = $gallery[0]->url;
+                    } else {
+                        $url = Yii::$app->params['emptyImgUrl'];
+                    }
+
+                    return Html::img($url, ['width'=>'50']);
+                },
+            ],
+            'title',
             'model',
-            'sku',
-            'upc',
-            'ean',
+//            'sku',
+//            'upc',
+//            'ean',
             // 'jan',
             // 'isbn',
             // 'mpn',
             // 'location',
             // 'condition_id',
-            // 'price',
+            [
+                'attribute' => 'price',
+                'contentOptions' => ['width' => 100]
+            ],
             // 'currency_id',
-            // 'quantity',
+            [
+                'attribute' => 'quantity',
+                'contentOptions' => ['width' => 50]
+            ],
             // 'stock_status_id',
             // 'weight',
             // 'weight_class_id',
@@ -44,7 +66,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'width',
             // 'height',
             // 'length_class_id',
-            // 'status_id',
+            'status.name',
+            'seller.email',
             // 'user_id',
             // 'manufacturer_id',
             // 'viewed',

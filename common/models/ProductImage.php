@@ -51,12 +51,24 @@ class ProductImage extends \yii\db\ActiveRecord
         ];
     }
 
+
+    /**
+     * Возвращает полные URL до файла
+     *
+     * @return mixed
+     */
     public function getUrl() {
-        return Yii::$app->urlManagerUploads->createUrl('/'.Yii::$app->params['uploadsDir'].'/'.$this->dir.'/' . $this->web_name);
+        return Yii::$app->urlManagerUploads->createUrl(Yii::$app->params['product.uploads.url'] . $this->web_name);
     }
 
+
+    /**
+     * Возвращает полный путь до файла
+     *
+     * @return string
+     */
     public function getPath() {
-        return Yii::$app->params['uploadsPath'] .'/'.$this->dir.'/' . $this->web_name;
+        return Yii::$app->params['product.uploads.path'] . $this->web_name;
     }
 
     /**

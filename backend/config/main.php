@@ -49,7 +49,7 @@ return [
 
         'urlManagerUploads' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => '//y2aa-frontend.dev/',
+            'baseUrl' => '//yarpaq.az/image/catalog/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

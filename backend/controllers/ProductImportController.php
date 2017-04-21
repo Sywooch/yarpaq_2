@@ -266,6 +266,6 @@ class ProductImportController extends AdminDefaultController
 
 
     private function importOptions() {
-        
+
     }
 }
