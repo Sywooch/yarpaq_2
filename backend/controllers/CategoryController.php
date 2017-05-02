@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use common\models\category\Category;
 use common\models\category\CategoryContent;
-use backend\models\Language;
+use common\models\Language;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\web\BadRequestHttpException;

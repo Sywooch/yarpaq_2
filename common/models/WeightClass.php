@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use backend\models\Language;
+use common\models\Language;
 use Yii;
 
 class WeightClass

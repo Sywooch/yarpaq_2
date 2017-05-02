@@ -9,5 +9,5 @@ use yii\test\ActiveFixture;
  * @package tests\codeception\backend\unit\fixtures
  */
 class CurrencyFixture extends ActiveFixture {
-    public $modelClass = 'backend\models\Currency';
+    public $modelClass = 'common\models\Currency';
 }

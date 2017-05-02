@@ -66,7 +66,7 @@ use yii\helpers\FileHelper;
                             </div>
 
                             <div class="col-xs-6">
-                                <?= $form->field($model, 'currency_id')->dropDownList(\backend\models\Currency::getDropDownData()) ?>
+                                <?= $form->field($model, 'currency_id')->dropDownList(\common\models\Currency::getDropDownData()) ?>
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@ use yii\helpers\FileHelper;
                         <?php
                         $man_list_url = \yii\helpers\Url::to(['manufacturer/model-list']);
                         // Get the initial manufacturer
-                        $manufacturer = empty($model->manufacturer_id) ? '' : \backend\models\Manufacturer::findOne($model->manufacturer_id)->title;
+                        $manufacturer = empty($model->manufacturer_id) ? '' : \common\models\Manufacturer::findOne($model->manufacturer_id)->title;
 
                         echo $form->field($model, 'manufacturer_id')->widget(Select2::classname(), [
                             'initValueText' => $manufacturer,

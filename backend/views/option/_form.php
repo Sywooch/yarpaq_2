@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <?php $i=0; foreach (\backend\models\Language::find()->all() as $l) { ?>
+                    <?php $i=0; foreach (\common\models\Language::find()->all() as $l) { ?>
                     <li class="<?php echo !$i ? 'active' : '' ?>"><a href="#lang_<?php echo $l->id; ?>" data-toggle="tab"><?php echo $l->label; ?></a></li>
                     <?php $i++; } ?>
                 </ul>

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Manufacturer */
+/* @var $model common\models\Manufacturer */
 
 $this->title = Yii::t('app', 'Create Manufacturer');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Manufacturers'), 'url' => ['index']];

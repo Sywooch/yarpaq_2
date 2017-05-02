@@ -2,7 +2,7 @@
 
 namespace common\behaviors;
 
-use backend\models\Language;
+use common\models\Language;
 use yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;

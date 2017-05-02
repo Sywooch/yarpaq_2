@@ -4,8 +4,8 @@ namespace backend\controllers;
 
 use webvimark\components\AdminDefaultController;
 use Yii;
-use backend\models\Currency;
-use backend\models\CurrencySearch;
+use common\models\Currency;
+use common\models\CurrencySearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

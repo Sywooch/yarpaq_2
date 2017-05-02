@@ -1,16 +1,15 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Currency;
 
 /**
- * CurrencySearch represents the model behind the search form about `backend\models\Currency`.
+ * ManufacturerSearch represents the model behind the search form about `common\models\Manufacturer`.
  */
-class CurrencySearch extends Currency
+class ManufacturerSearch extends Manufacturer
 {
     /**
      * @inheritdoc
@@ -18,9 +17,8 @@ class CurrencySearch extends Currency
     public function rules()
     {
         return [
-            [['id', 'decimal_place', 'status'], 'integer'],
-            [['title', 'code', 'created_at', 'updated_at'], 'safe'],
-            [['value'], 'number'],
+            [['id'], 'integer'],
+            [['title', 'image', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -42,7 +40,7 @@ class CurrencySearch extends Currency
      */
     public function search($params)
     {
-        $query = Currency::find();
+        $query = Manufacturer::find();
 
         // add conditions that should always apply here
 
@@ -59,17 +57,23 @@ class CurrencySearch extends Currency
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'value' => $this->value,
-            'decimal_place' => $this->decimal_place,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        $query->andFilterWhere(['id' => $this->id]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'code', $this->code]);
+        if ($this->created_at != '') {
+            list($created_start, $created_end) = explode(' - ', $this->created_at);
+
+            $query->andFilterWhere(['>=', 'created_at', $created_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'created_at', $created_end . ' 23:59:59']);
+        }
+
+        if ($this->updated_at != '') {
+            list($updated_start, $updated_end) = explode(' - ', $this->updated_at);
+
+            $query->andFilterWhere(['>=', 'updated_at', $updated_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'updated_at', $updated_end . ' 23:59:59']);
+        }
+
 
         return $dataProvider;
     }

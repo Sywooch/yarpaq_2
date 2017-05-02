@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Currency */
+/* @var $model common\models\Currency */
 
 $this->title = Yii::t('app', 'Create Currency');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Currencies'), 'url' => ['index']];

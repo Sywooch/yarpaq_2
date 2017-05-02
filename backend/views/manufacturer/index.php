@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ManufacturerSearch */
+/* @var $searchModel common\models\ManufacturerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app', 'Manufacturers');

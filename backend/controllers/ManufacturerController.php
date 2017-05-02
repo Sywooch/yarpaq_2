@@ -4,8 +4,8 @@ namespace backend\controllers;
 
 use webvimark\components\AdminDefaultController;
 use Yii;
-use backend\models\Manufacturer;
-use backend\models\ManufacturerSearch;
+use common\models\Manufacturer;
+use common\models\ManufacturerSearch;
 use yii\base\ErrorException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

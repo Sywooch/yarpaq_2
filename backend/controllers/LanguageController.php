@@ -4,8 +4,8 @@ namespace backend\controllers;
 
 use webvimark\components\AdminDefaultController;
 use Yii;
-use backend\models\Language;
-use backend\models\LanguageSearch;
+use common\models\Language;
+use common\models\LanguageSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

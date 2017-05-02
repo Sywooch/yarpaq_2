@@ -3,7 +3,7 @@
 namespace common\models\category;
 
 use Yii;
-use backend\models\Language;
+use common\models\Language;
 
 /**
  * This is the model class for table "{{%category_content}}".

@@ -4,7 +4,7 @@ namespace frontend\components;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\Request;
-use backend\models\Language as Lang;
+use common\models\Language as Lang;
 
 class LangRequest extends Request
 {

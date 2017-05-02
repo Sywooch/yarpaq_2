@@ -2,7 +2,7 @@
 
 namespace common\models\category;
 
-use backend\models\Language;
+use common\models\Language;
 use common\models\Template;
 use common\models\User;
 use Yii;

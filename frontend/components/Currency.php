@@ -6,8 +6,8 @@ use Yii;
 use yii\base\Component;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
-use backend\models\Currency as CurrencyModel;
-use backend\models\CurrencySearch;
+use common\models\Currency as CurrencyModel;
+use common\models\CurrencySearch;
 
 /**
  * Class Currency
