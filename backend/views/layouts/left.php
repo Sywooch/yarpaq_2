@@ -36,7 +36,7 @@ use yii\helpers\Url;
                         ['label' => UserManagementModule::t('back', 'Permission groups'), 'url' => ['/user-management/auth-item-group/index'], 'icon' => 'fa fa-angle-double-right'],
                         ['label' => UserManagementModule::t('back', 'Visit log'), 'url' => ['/user-management/user-visit-log/index'], 'icon' => 'fa fa-angle-double-right'],
                     ]],
-                    ['label' => 'Preferences', 'items' => [
+                    ['label' => 'Base', 'items' => [
                         ['label' => 'Options', 'url' => ['option/index']]
                     ]],
                     ['label' => 'System', 'options' => ['class' => 'header']],

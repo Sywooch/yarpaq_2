@@ -63,16 +63,24 @@ class OptionController extends AdminDefaultController
      */
     public function actionCreate()
     {
-        $model = new Option();
+        $option = new Option();
 
-        if ($model->load(Yii::$app->request->post())) {
+        if (
+            $option->load(Yii::$app->request->post())
+            &&
+            Model::loadMultiple($option->contents, Yii::$app->request->post())
+        ) {
 
-            $model->save();
+            $option->save();
+            foreach ($option->contents as $content) {
+                $content->link('option', $option);
+                $content->save();
+            }
 
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $option->id]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $option,
             ]);
         }
     }
