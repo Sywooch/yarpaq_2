@@ -88,6 +88,26 @@ class ProductController extends AdminDefaultController
         ]);
     }
 
+    /**
+     * Updates options of existing Product model.
+     * If update is successful, the browser will be redirected to the 'options' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionOptions($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            return $this->redirect(['options', 'id' => $model->id, 'alert' => 'success']);
+        }
+
+        return $this->render('options', [
+            'model' => $model
+        ]);
+    }
+
     private function prepareZonesDataForSelect() {
         $country = Country::findOne(15); // Azerbaijan
         $zones = $country->zones;

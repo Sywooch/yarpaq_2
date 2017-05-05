@@ -13,13 +13,13 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <?= $form->field($model, 'type')->textInput(['maxlength' => true, 'class' => 'form-control col-lg']) ?>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -42,6 +42,45 @@ use yii\widgets\ActiveForm;
             <!-- nav-tabs-custom -->
         </div>
         <!-- /.col -->
+    </div>
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-primary btn-sm pull-right">
+                Добавить
+            </button>
+            <h3 class="box-title">Option values</h3>
+        </div>
+
+        <div class="box-body">
+
+            <?php foreach ($model->values as $value) { ?>
+            <div class="row">
+
+                <div class="col-md-1">
+                    <p class="text-muted">#<?php echo $value->id; ?></p>
+                </div>
+
+                <?php foreach ($value->contents as $content) { ?>
+                <div class="col-md-3">
+                    <?php
+                    echo $form->field($content, '['.$content->option_value_id.']name')
+                        ->textInput(['class' => 'form-control input-sm'])
+                        ->label(false);
+                    ?>
+                </div>
+                <?php } ?>
+
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-danger btn-sm pull-right">
+                        Удалить
+                    </button>
+                </div>
+
+            </div>
+            <?php } ?>
+
+        </div>
     </div>
 
     <div class="form-group">

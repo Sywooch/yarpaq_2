@@ -21,9 +21,8 @@ class ProductImportController extends AdminDefaultController
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 
-        //$this->importProducts();
+        $this->importProducts();
         //$this->importImages();
-        $this->importOptions();
     }
 
     private function getProductAssoc() {
@@ -261,11 +260,6 @@ class ProductImportController extends AdminDefaultController
             }
         }
 
-
-    }
-
-
-    private function importOptions() {
 
     }
 }

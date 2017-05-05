@@ -55,4 +55,8 @@ class Option extends ActiveRecord
             'type' => Yii::t('app', 'Type'),
         ];
     }
+
+    public function getValues() {
+        return $this->hasMany(OptionValue::className(), ['option_id' => 'id']);
+    }
 }

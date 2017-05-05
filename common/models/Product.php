@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\option\ProductOption;
 use Yii;
 
 /**
@@ -143,5 +144,9 @@ class Product extends \yii\db\ActiveRecord
         $scenarios[self::SCENARIO_IMPORT] = [];
 
         return $scenarios;
+    }
+
+    public function getOptions() {
+        return $this->hasMany(ProductOption::className(), ['product_id' => 'id']);
     }
 }

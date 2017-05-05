@@ -27,7 +27,7 @@ use yii\helpers\FileHelper;
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tab_basic" data-toggle="tab" aria-expanded="true">Basic</a></li>
             <li><a href="#tab_advanced" data-toggle="tab" aria-expanded="false">Advanced</a></li>
-            <li><a href="#tab_options" data-toggle="tab" aria-expanded="false">Options</a></li>
+            <li><a href="<?php echo Url::to(['product/options', 'id' => $model->id]); ?>">Options</a></li>
         </ul>
         <div class="tab-content">
 
