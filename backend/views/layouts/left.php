@@ -25,6 +25,7 @@ use yii\helpers\Url;
                 'items' => [
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
                     ['label' => 'Products', 'icon' => 'list', 'url' => ['/product']],
+                    ['label' => 'Orders', 'icon' => 'list', 'url' => ['/order']],
                     ['label' => 'Categories', 'icon' => 'sitemap', 'url' => ['/category']],
                     ['label' => 'Manufacturers', 'icon' => 'tags', 'url' => ['/manufacturer']],
                     ['label' => 'Currencies', 'icon' => 'money', 'url' => ['/currency']],
