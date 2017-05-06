@@ -61,6 +61,14 @@ return [
             'showScriptName' => false,
         ],
 
+        // сипольщуется для временной линковки картинок товаров,
+        // после запуска можно уже переделать под общий лад
+        'urlManagerProduct' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '//y2aa-frontend.dev/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
     ],
 
     'modules' => [

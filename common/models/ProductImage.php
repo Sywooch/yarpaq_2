@@ -58,7 +58,7 @@ class ProductImage extends \yii\db\ActiveRecord
      * @return mixed
      */
     public function getUrl() {
-        return Yii::$app->urlManagerUploads->createUrl(Yii::$app->params['product.uploads.url'] . $this->web_name);
+        return Yii::$app->urlManagerProduct->createUrl(Yii::$app->params['product.uploads.url'] . $this->web_name);
     }
 
 
