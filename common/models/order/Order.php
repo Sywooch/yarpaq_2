@@ -10,7 +10,7 @@ use common\models\User;
 /**
  * This is the model class for table "{{%order}}".
  *
- * @property integer $order_id
+ * @property integer $id
  * @property integer $user_id
  * @property string $firstname
  * @property string $lastname
@@ -105,7 +105,7 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'order_id' => Yii::t('app', 'Order ID'),
+            'id' => Yii::t('app', 'Order ID'),
             'user_id' => Yii::t('app', 'User ID'),
             'firstname' => Yii::t('app', 'Firstname'),
             'lastname' => Yii::t('app', 'Lastname'),

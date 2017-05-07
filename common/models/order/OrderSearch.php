@@ -17,7 +17,7 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['order_id', 'user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
+            [['id', 'user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
             [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'custom_field', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_address_format', 'payment_custom_field', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_address_format', 'shipping_custom_field', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at'], 'safe'],
             [['total', 'currency_value'], 'number'],
         ];
@@ -59,7 +59,7 @@ class OrderSearch extends Order
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'order_id' => $this->order_id,
+            'id' => $this->id,
             'user_id' => $this->user_id,
             'payment_country_id' => $this->payment_country_id,
             'payment_zone_id' => $this->payment_zone_id,
