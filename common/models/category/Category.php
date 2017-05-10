@@ -9,6 +9,7 @@ use Yii;
 use creocoder\nestedsets\NestedSetsBehavior;
 use common\models\IPage;
 use common\models\IDocument;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -349,5 +350,14 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
 
     public function getUpdatedUser() {
         return $this->hasOne(User::className(), ['id' => 'updated_user_id']);
+    }
+
+    public static function getData() {
+        return ArrayHelper::map(self::find()
+            ->where(['>', 'parent_id', 0])
+            ->andWhere(['status' => Category::STATUS_ACTIVE])
+            ->orderBy('lft')
+            ->all(), 'id', 'title'
+        );
     }
 }

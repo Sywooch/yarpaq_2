@@ -2,8 +2,10 @@
 
 namespace common\models;
 
+use common\models\category\Category;
 use common\models\option\ProductOption;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%product}}".
@@ -41,6 +43,7 @@ class Product extends \yii\db\ActiveRecord
 {
 
     public $galleryFiles;
+    public $categoryIDs = [];
 
     const SCENARIO_IMPORT   = 'import';
     const SCENARIO_DEFAULT  = 'default';
@@ -65,8 +68,10 @@ class Product extends \yii\db\ActiveRecord
             ['length_class_id', 'default', 'value' => 1],
             ['moderated', 'default', 'value' => 1],
             ['galleryFiles', 'image', 'skipOnEmpty' => false, 'maxFiles' => 10,
+                // не пропускать пустое значение, если:
                 'when' => function ($model) {
-                    return !count($model->gallery) || $model->scenarion != 'import';
+                    // в галерее 0 картинок или сценарий НЕ ИМПОРТ
+                    return count($model->gallery) == 0 || $model->scenario != 'import';
                 },
                 'whenClient' => "function (attribute, value) {
                     return $('input[name=\"gallery_sort\"]').val() == '';
@@ -77,6 +82,7 @@ class Product extends \yii\db\ActiveRecord
             [['weight', 'length', 'width', 'height'], 'number'],
             [['moderated_at', 'created_at', 'updated_at'], 'safe'],
             [['title', 'model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn'], 'string', 'max' => 255],
+            ['categoryIDs', 'each', 'rule' => ['integer']]
         ];
     }
 
@@ -127,6 +133,18 @@ class Product extends \yii\db\ActiveRecord
         return new ProductQuery(get_called_class());
     }
 
+    public function afterFind() {
+        parent::afterFind();
+
+        $this->categoryIDs = ArrayHelper::map($this->categories, 'id', 'id');
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+
+        ProductCategory::saveProductCategories($this->categoryIDs, $this->id);
+    }
+
     public function getGallery() {
         return $this->hasMany(ProductImage::className(), ['model_id' => 'id'])->orderBy('sort');
     }
@@ -137,6 +155,15 @@ class Product extends \yii\db\ActiveRecord
 
     public function getSeller() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getProductCategories() {
+        return $this->hasMany(ProductCategory::className(), ['product_id' => 'id']);
+    }
+
+    public function getCategories() {
+        return $this->hasMany(Category::className(), ['id' => 'category_id'])
+            ->viaTable('{{%product_category}}', ['product_id' => 'id']);
     }
 
     public function scenarios() {

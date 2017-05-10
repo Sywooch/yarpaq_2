@@ -134,7 +134,7 @@ use yii\helpers\FileHelper;
                 </div>
 
 
-                <div class="row" style="margin-bottom: 20px;">
+                <div class="row">
 
                     <!-- Gallery -->
                     <div class="col-xs-12">
@@ -160,6 +160,8 @@ use yii\helpers\FileHelper;
                         $gallery_sort = [];
 
                         foreach ($model->gallery as $image) {
+                            if (!is_file($image->path)) continue;
+
                             $pluginOptions['initialPreview'][] = $image->url;
                             $mimetype = FileHelper::getMimeType( $image->path );
                             $pluginOptions['initialPreviewConfig'][] = [
@@ -187,6 +189,29 @@ use yii\helpers\FileHelper;
 
                     </div>
                     <!-- END of gallery -->
+                </div>
+
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-xs-12">
+
+                        <?php
+                        $categoriesData = \common\models\category\Category::getData();
+
+                        echo $form->field($model, 'categoryIDs')->widget(Select2::classname(), [
+                            'data' => $categoriesData,
+                            'options' => [
+                                'placeholder' => 'Select category ...',
+                                'multiple' => true,
+                            ],
+                            'pluginOptions' => [
+                                'tags' => true,
+                                'tokenSeparators' => [',', ' '],
+                                'maximumInputLength' => 10,
+                            ],
+                        ])->label('Category');
+
+                        ?>
+                    </div>
                 </div>
 
                 <div class="row">
