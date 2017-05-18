@@ -29,6 +29,8 @@ use yii\helpers\Url;
                     ['label' => 'Categories', 'icon' => 'sitemap', 'url' => ['/category']],
                     ['label' => 'Manufacturers', 'icon' => 'tags', 'url' => ['/manufacturer']],
                     ['label' => 'Currencies', 'icon' => 'money', 'url' => ['/currency']],
+                    ['label' => 'Payment methods', 'url' => ['/payment-method']],
+                    ['label' => 'Shipping methods', 'url' => ['/shipping-method']],
                     ['label' => 'Languages', 'icon' => 'language', 'url' => ['/language']],
                     ['label' => 'Users', 'icon' => 'users', 'url' => ['#'], 'items' => [
                         ['label' => UserManagementModule::t('back', 'Users'), 'url' => ['/user-management/user/index'], 'icon' => 'angle-double-right'],
