@@ -71,4 +71,8 @@ class User extends BaseUser {
     private function generateSalt() {
         return substr(md5(uniqid(rand(), true)), 0, 9);
     }
+
+    public function getFullname() {
+        return $this->profile->firstname . ' ' . $this->profile->lastname;
+    }
 }
