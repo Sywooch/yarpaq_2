@@ -27,6 +27,15 @@ class User extends BaseUser {
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
+    /**
+     * Возвращает все адреса пользователя, если есть.
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAddresses() {
+        return $this->hasMany(Address::className(), ['id' => 'user_id']);
+    }
+
 
     /**
      * Finds user by email

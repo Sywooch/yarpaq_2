@@ -12,7 +12,6 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
         'css/tree.css'
     ];
     public $js = [
@@ -20,6 +19,7 @@ class AppAsset extends AssetBundle
         'js/page.js',
         'js/gallery.js',
         'js/common.js',
+        'js/order.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

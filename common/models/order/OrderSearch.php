@@ -19,7 +19,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
-            [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_address_format', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_address_format', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status'], 'safe'],
+            [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status'], 'safe'],
             [['total', 'currency_value'], 'number']
         ];
     }
@@ -89,7 +89,6 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'payment_postcode', $this->payment_postcode])
             ->andFilterWhere(['like', 'payment_country', $this->payment_country])
             ->andFilterWhere(['like', 'payment_zone', $this->payment_zone])
-            ->andFilterWhere(['like', 'payment_address_format', $this->payment_address_format])
             ->andFilterWhere(['like', 'payment_method', $this->payment_method])
             ->andFilterWhere(['like', 'payment_code', $this->payment_code])
             ->andFilterWhere(['like', 'shipping_firstname', $this->shipping_firstname])
@@ -100,7 +99,6 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'shipping_postcode', $this->shipping_postcode])
             ->andFilterWhere(['like', 'shipping_country', $this->shipping_country])
             ->andFilterWhere(['like', 'shipping_zone', $this->shipping_zone])
-            ->andFilterWhere(['like', 'shipping_address_format', $this->shipping_address_format])
             ->andFilterWhere(['like', 'shipping_method', $this->shipping_method])
             ->andFilterWhere(['like', 'shipping_code', $this->shipping_code])
             ->andFilterWhere(['like', 'comment', $this->comment])

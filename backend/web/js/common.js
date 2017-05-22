@@ -43,3 +43,17 @@ function onChangeOrderUser(e) {
         }
     });
 }
+
+// override getJSON fn
+var getJSONfn = $.getJSON;
+
+function getJSON(url, data, callback) {
+    if (loading) return false;
+
+    var loading = true;
+    $.getJSON(url, data, function (response) {
+        loading = false;
+
+        callback(response);
+    });
+}

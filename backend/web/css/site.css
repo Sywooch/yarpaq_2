@@ -129,3 +129,11 @@ a.desc:after {
     right: 25px;
     top:5px;
 }
+
+.align-center {
+    text-align: center;
+}
+
+.form-control {
+    border-radius: 5px;
+}
