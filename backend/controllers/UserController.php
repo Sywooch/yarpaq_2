@@ -5,8 +5,9 @@ namespace backend\controllers;
 use common\models\Profile;
 use Yii;
 use common\models\User;
-use webvimark\modules\UserManagement\models\search\UserSearch;
+use common\models\UserSearch;
 use yii\base\Exception;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 
@@ -169,20 +170,42 @@ class UserController extends \webvimark\modules\UserManagement\controllers\UserC
 		return $this->renderIsAjax('update', compact('model', 'profile'));
 	}
 
+	public function actionInfo($user_id) {
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+		$user = User::find()
+			->where(['y2_user.id' => $user_id])
+			->joinWith('profile')->one();
+
+		$user = User::find()->with('profile')->where(['id' => $user_id])->one();
+
+		if ($user) {
+			return ['status' => 1, 'data' => [
+				'firstname' => $user->profile->firstname,
+				'lastname' 	=> $user->profile->lastname,
+				'email' 	=> $user->email,
+				'phone1' 	=> $user->profile->phone1,
+				'phone2' 	=> $user->profile->phone2,
+				'fax' 		=> $user->profile->fax,
+			]];
+		}
+	}
+
 	public function actionUserList($q = null, $id = null) {
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		$out = ['results' => ['id' => '', 'text' => '']];
 		if (!is_null($q)) {
 			$searchModel = new UserSearch();
-			$data = $searchModel->search(['UserSearch' => ['email' => $q]]);
+			$data = $searchModel->search(['UserSearch' => ['email' => $q, 'firstname' => $q, 'lastname' => $q]]);
 
 			$out['results'] = [];
 			foreach ($data->getModels() as $model) {
-				$out['results'][] = ['id' => $model->id, 'text' => $model->email];
+				$out['results'][] = ['id' => $model->id, 'text' => $model->fullname . ' ('.$model->email.')'];
 			}
 		}
 		elseif ($id > 0) {
-			$out['results'] = ['id' => $id, 'text' => User::find($id)->email];
+			$model = User::find($id);
+			$out['results'] = ['id' => $id, 'text' => $model->fullname . ' ('.$model->email.')'];
 		}
 		return $out;
 	}

@@ -17,7 +17,6 @@ use common\models\User;
  * @property string $email
  * @property string $phone1
  * @property string $phone2
- * @property string $fax
  * @property string $payment_firstname
  * @property string $payment_lastname
  * @property string $payment_company
@@ -28,7 +27,6 @@ use common\models\User;
  * @property integer $payment_country_id
  * @property string $payment_zone
  * @property integer $payment_zone_id
- * @property string $payment_address_format
  * @property string $payment_method
  * @property string $payment_code
  * @property string $shipping_firstname
@@ -41,7 +39,6 @@ use common\models\User;
  * @property integer $shipping_country_id
  * @property string $shipping_zone
  * @property integer $shipping_zone_id
- * @property string $shipping_address_format
  * @property string $shipping_method
  * @property string $shipping_code
  * @property string $comment
@@ -79,11 +76,11 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
-            [['firstname', 'lastname', 'email', 'phone1', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_country_id', 'payment_zone', 'payment_zone_id', 'payment_address_format', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_country_id', 'shipping_zone', 'shipping_zone_id', 'shipping_address_format', 'shipping_method', 'shipping_code', 'comment', 'language_id', 'currency_id', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at'], 'required'],
-            [['payment_address_format', 'shipping_address_format', 'comment'], 'string'],
+            [['firstname', 'lastname', 'email', 'phone1', 'payment_firstname', 'payment_lastname', 'payment_address', 'payment_city', 'payment_country', 'payment_country_id', 'payment_zone', 'payment_zone_id', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_address', 'shipping_city', 'shipping_country', 'shipping_country_id', 'shipping_zone', 'shipping_zone_id', 'shipping_method', 'shipping_code', 'language_id', 'currency_id', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at'], 'required'],
+            [['comment'], 'string'],
             [['total', 'currency_value'], 'number'],
             [['created_at', 'modified_at'], 'safe'],
-            [['firstname', 'lastname', 'phone1', 'fax', 'payment_firstname', 'payment_lastname', 'shipping_firstname', 'shipping_lastname'], 'string', 'max' => 32],
+            [['firstname', 'lastname', 'phone1', 'payment_firstname', 'payment_lastname', 'shipping_firstname', 'shipping_lastname'], 'string', 'max' => 32],
             [['email'], 'string', 'max' => 96],
             [['phone2', 'user_agent', 'accept_language'], 'string', 'max' => 255],
             [['payment_company', 'shipping_company', 'ip', 'forwarded_ip'], 'string', 'max' => 40],
@@ -109,36 +106,33 @@ class Order extends \yii\db\ActiveRecord
             'email' => Yii::t('app', 'Email'),
             'phone1' => Yii::t('app', 'Phone1'),
             'phone2' => Yii::t('app', 'Phone2'),
-            'fax' => Yii::t('app', 'Fax'),
-            'payment_firstname' => Yii::t('app', 'Payment Firstname'),
-            'payment_lastname' => Yii::t('app', 'Payment Lastname'),
-            'payment_company' => Yii::t('app', 'Payment Company'),
-            'payment_address' => Yii::t('app', 'Payment Address'),
-            'payment_city' => Yii::t('app', 'Payment City'),
-            'payment_postcode' => Yii::t('app', 'Payment Postcode'),
-            'payment_country' => Yii::t('app', 'Payment Country'),
-            'payment_country_id' => Yii::t('app', 'Payment Country ID'),
-            'payment_zone' => Yii::t('app', 'Payment Zone'),
-            'payment_zone_id' => Yii::t('app', 'Payment Zone ID'),
-            'payment_address_format' => Yii::t('app', 'Payment Address Format'),
-            'payment_method' => Yii::t('app', 'Payment Method'),
-            'payment_code' => Yii::t('app', 'Payment Code'),
-            'shipping_firstname' => Yii::t('app', 'Shipping Firstname'),
-            'shipping_lastname' => Yii::t('app', 'Shipping Lastname'),
-            'shipping_company' => Yii::t('app', 'Shipping Company'),
-            'shipping_address' => Yii::t('app', 'Shipping Address'),
-            'shipping_city' => Yii::t('app', 'Shipping City'),
-            'shipping_postcode' => Yii::t('app', 'Shipping Postcode'),
-            'shipping_country' => Yii::t('app', 'Shipping Country'),
-            'shipping_country_id' => Yii::t('app', 'Shipping Country ID'),
-            'shipping_zone' => Yii::t('app', 'Shipping Zone'),
-            'shipping_zone_id' => Yii::t('app', 'Shipping Zone ID'),
-            'shipping_address_format' => Yii::t('app', 'Shipping Address Format'),
-            'shipping_method' => Yii::t('app', 'Shipping Method'),
-            'shipping_code' => Yii::t('app', 'Shipping Code'),
+            'payment_firstname' => Yii::t('app', 'Firstname'),
+            'payment_lastname' => Yii::t('app', 'Lastname'),
+            'payment_company' => Yii::t('app', 'Company'),
+            'payment_address' => Yii::t('app', 'Address'),
+            'payment_city' => Yii::t('app', 'City'),
+            'payment_postcode' => Yii::t('app', 'Postcode'),
+            'payment_country' => Yii::t('app', 'Country'),
+            'payment_country_id' => Yii::t('app', 'Country'),
+            'payment_zone' => Yii::t('app', 'Zone'),
+            'payment_zone_id' => Yii::t('app', 'Zone'),
+            'payment_method' => Yii::t('app', 'Payment method'),
+            'payment_code' => Yii::t('app', 'Code'),
+            'shipping_firstname' => Yii::t('app', 'Firstname'),
+            'shipping_lastname' => Yii::t('app', 'Lastname'),
+            'shipping_company' => Yii::t('app', 'Company'),
+            'shipping_address' => Yii::t('app', 'Address'),
+            'shipping_city' => Yii::t('app', 'City'),
+            'shipping_postcode' => Yii::t('app', 'Postcode'),
+            'shipping_country' => Yii::t('app', 'Country'),
+            'shipping_country_id' => Yii::t('app', 'Country'),
+            'shipping_zone' => Yii::t('app', 'Region'),
+            'shipping_zone_id' => Yii::t('app', 'Region'),
+            'shipping_method' => Yii::t('app', 'Shipping method'),
+            'shipping_code' => Yii::t('app', 'Code'),
             'comment' => Yii::t('app', 'Comment'),
             'total' => Yii::t('app', 'Total'),
-            'order_status_id' => Yii::t('app', 'Order Status ID'),
+            'order_status_id' => Yii::t('app', 'Status'),
             'language_id' => Yii::t('app', 'Language ID'),
             'currency_id' => Yii::t('app', 'Currency ID'),
             'currency_code' => Yii::t('app', 'Currency Code'),
@@ -174,5 +168,14 @@ class Order extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getStatus() {
+        return $this->hasOne(OrderStatus::className(), ['order_status_id' => 'order_status_id'])
+            ->andWhere(['language_id' => Language::getCurrent()]);
+    }
+
+    public function getOrderProducts() {
+        return $this->hasMany(OrderProduct::className(), ['order_id' => 'id']);
     }
 }

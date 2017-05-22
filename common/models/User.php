@@ -27,6 +27,15 @@ class User extends BaseUser {
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
+    /**
+     * Возвращает все адреса пользователя, если есть.
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAddresses() {
+        return $this->hasMany(Address::className(), ['id' => 'user_id']);
+    }
+
 
     /**
      * Finds user by email
@@ -70,5 +79,9 @@ class User extends BaseUser {
 
     private function generateSalt() {
         return substr(md5(uniqid(rand(), true)), 0, 9);
+    }
+
+    public function getFullname() {
+        return $this->profile->firstname . ' ' . $this->profile->lastname;
     }
 }

@@ -7,10 +7,14 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * UserSearch represents the model behind the search form about `webvimark\modules\UserManagement\models\User`.
+ * UserSearch represents the model behind the search form about `common\models\User`.
  */
-class UserSearch extends \webvimark\modules\UserManagement\models\search\UserSearch
+class UserSearch extends User
 {
+    public $firstname;
+    public $lastname;
+
+
     public function rules()
     {
         return [
@@ -31,6 +35,7 @@ class UserSearch extends \webvimark\modules\UserManagement\models\search\UserSea
         $query = User::find();
 
         $query->with(['roles']);
+        $query->joinWith(['profile pr']);
 
         if ( !Yii::$app->user->isSuperadmin )
         {
@@ -76,7 +81,9 @@ class UserSearch extends \webvimark\modules\UserManagement\models\search\UserSea
         }
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email]);
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'pr.firstname', $this->firstname])
+            ->andFilterWhere(['like', 'pr.lastname', $this->lastname]);
 
         return $dataProvider;
     }
