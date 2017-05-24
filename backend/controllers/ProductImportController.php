@@ -19,7 +19,7 @@ class ProductImportController extends AdminDefaultController
 
     public function actionIndex() {
         ini_set('memory_limit', '-1');
-        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+        ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
 
         $this->importProducts();
         //$this->importImages();
