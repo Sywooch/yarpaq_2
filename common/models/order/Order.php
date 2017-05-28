@@ -2,6 +2,10 @@
 
 namespace common\models\order;
 
+use common\models\option\ProductOption;
+use common\models\option\ProductOptionValue;
+use common\models\OrderOption;
+use common\models\Product;
 use Yii;
 use common\models\Currency;
 use common\models\Language;
@@ -177,5 +181,36 @@ class Order extends \yii\db\ActiveRecord
 
     public function getOrderProducts() {
         return $this->hasMany(OrderProduct::className(), ['order_id' => 'id']);
+    }
+
+    public function addProduct(Product $product, array $options) {
+        $orderProduct               = new OrderProduct();
+        $orderProduct->order_id     = $this->id;
+        $orderProduct->product_id   = $product->id;
+        $orderProduct->save();
+
+        if ( !empty($options) ) { // если переданы опции
+
+            foreach ($options as $product_option_id => $product_option_value_id) {
+
+                $productOption      = ProductOption::findOne($product_option_id);
+                $productOptionValue = ProductOptionValue::findOne($product_option_value_id);
+
+                $orderOption                            = new OrderOption();
+                $orderOption->order_id                  = $this->id;
+                $orderOption->order_product_id          = $orderProduct->id;
+                $orderOption->product_option_id         = $product_option_id;
+                $orderOption->product_option_value_id   = $product_option_value_id;
+
+                $orderOption->name                      = $productOption->option->content->name;
+                $orderOption->value                     = $productOptionValue->value;
+                $orderOption->type                      = $productOption->option->type;
+
+                $orderOption->save();
+            }
+
+        }
+
+        return true;
     }
 }

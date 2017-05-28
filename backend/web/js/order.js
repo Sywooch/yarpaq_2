@@ -109,21 +109,46 @@ $(function () {
      * Действие после выбора товара
      */
     new_product_el.change(function () {
-        checkForOptions($(this).val());
+        clearOptions();
+
+        var product_id = $(this).val();
+
+        if (product_id != '') {
+            checkForOptions(product_id);
+        }
+
+
     });
+
+    function clearOptions() {
+        $('#options').html('');
+    }
 
 
     /**
      * Нажатие на кнопку "Добавить продукт"
      */
     $('.order-product-add-btn').click(function () {
+        var self = $(this);
+        var order_id = self.data('id');
+        var product_id = new_product_el.val();
+        var options_data = {};
+        $.each($('.option_el'), function () {
+            options_data[ $(this).data('id') ] = $(this).val();
+        });
 
-        getJSON('/product/info?product_id=' + new_product_el.val(), function (response) {
+        var data = {
+            'order_id': order_id,
+            'product_id': product_id,
+            'options': options_data
+        };
+
+        // добавление order option
+        postJSON('/order/add-product-to-order', data, function (response) {
 
             if (response.status) {
                 var nextNum = table.find('tr').size();
 
-                var product_id      = response.data.id;
                 var quantity        = quantity_el.val();
                 var name            = response.data.title;
                 var model           = response.data.model;
@@ -135,7 +160,7 @@ $(function () {
                 html += '<tr>';
                 html +=     '<td>'+nextNum+'.</td>';
                 html +=     '<td>'+name;
-                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][order_id]" value="'+$('.order-product-add-btn').data('id')+'">';
+                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][order_id]" value="'+order_id+'">';
                 html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][product_id]" value="'+product_id+'">';
                 html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][name]" value="'+name+'">';
                 html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][model]" value="'+model+'">';
@@ -171,14 +196,16 @@ $(function () {
     function checkForOptions(product_id) {
         getJSON('/product/check-for-options', {product_id: product_id}, function (response) {
             if (response.status) {
-                if (response.data.options != undefined) {
-                    $.each(response.data.options, function (option_id, option) {
+                if (response.data.product_options != undefined) {
+                    $.each(response.data.product_options, function (index, product_option) {
+
+                        var option = product_option.option;
 
                         // добавить select с данными опции
-                        var block = generateSelectBlock('option-'+option_id, option.name);
+                        var block = generateSelectBlock(product_option.id, option.name);
                         var select = block.find('select');
-                        $.each(option.values, function (key, value) {
-                            select.append('<option value="'+value.id+'">'+value.name+'</option>');
+                        $.each(product_option.values, function (key, product_option_value) {
+                            select.append('<option value="'+product_option_value.id+'">'+product_option_value.name+'</option>');
                         });
 
                         $('#options').append(block);
@@ -193,7 +220,7 @@ $(function () {
         var html = '';
         html += '<div class="form-group required">\n';
         html += '<label class="control-label" for="option-size">'+label+'</label>\n';
-        html += '<select id="'+id+'" class="form-control" name="'+id+'" aria-required="true" aria-invalid="false">\n';
+        html += '<select id="options_el_'+id+'" class="form-control option_el" data-id="'+id+'" name="options['+id+']" aria-required="true" aria-invalid="false">\n';
         html += '</select>';
         html += '</div>';
 

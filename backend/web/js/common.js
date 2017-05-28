@@ -57,3 +57,14 @@ function getJSON(url, data, callback) {
         callback(response);
     });
 }
+
+function postJSON(url, data, callback) {
+    if (loading) return false;
+
+    var loading = true;
+    $.post(url, data, function (response) {
+        loading = false;
+
+        callback(response);
+    }, 'json');
+}

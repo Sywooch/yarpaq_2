@@ -3,11 +3,15 @@
 namespace backend\controllers;
 
 use backend\models\OrderProductAddForm;
+use common\models\OrderOption;
+use common\models\Product;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\order\OrderProduct;
 use common\models\order\Order;
 use common\models\order\OrderSearch;
+use yii\base\Exception;
+use yii\base\InvalidValueException;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -148,6 +152,37 @@ class OrderController extends AdminDefaultController
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * Добавляет товар к заказу.
+     * Возвращает ID связи товара с заказом
+     *
+     * @return array
+     */
+    public function actionAddProductToOrder() {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $order_id = Yii::$app->request->post('order_id');
+        $product_id = Yii::$app->request->post('product_id');
+
+        $order      = Order::findOne($order_id);
+        $product    = Product::findOne($product_id);
+
+        if (!$order) { throw new InvalidValueException('Order '.$order_id.' not found'); }
+        if (!$product) { throw new InvalidValueException('Product '.$product_id.' not found'); }
+
+        // сначала создаем товар к заказу
+
+        $order->addProduct($product, Yii::$app->request->post('options'));
+
+
+
+        if ($product) {
+            return ['status' => 1, 'data' => $product->toArray(['id', 'title', 'model', 'price'])];
+        } else {
+            return ['status' => 0, 'error' => 'Product not found'];
         }
     }
 
