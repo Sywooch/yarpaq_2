@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\models\category\Category;
+use common\models\option\Option;
 use common\models\option\ProductOption;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -174,6 +175,14 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function getOptions() {
+        return $this->hasMany(Option::className(), ['id' => 'option_id'])->via('productOptions');
+    }
+
+    public function getProductOptions() {
         return $this->hasMany(ProductOption::className(), ['product_id' => 'id']);
     }
+
+
+
+
 }

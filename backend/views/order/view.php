@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -36,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone1',
             'phone2',
             'fax',
-            'custom_field:ntext',
             'payment_firstname',
             'payment_lastname',
             'payment_company',
@@ -47,8 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'payment_country_id',
             'payment_zone',
             'payment_zone_id',
-            'payment_address_format:ntext',
-            'payment_custom_field:ntext',
             'payment_method',
             'payment_code',
             'shipping_firstname',
@@ -61,8 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'shipping_country_id',
             'shipping_zone',
             'shipping_zone_id',
-            'shipping_address_format:ntext',
-            'shipping_custom_field:ntext',
             'shipping_method',
             'shipping_code',
             'comment:ntext',

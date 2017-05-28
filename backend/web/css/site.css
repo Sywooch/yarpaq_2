@@ -137,3 +137,15 @@ a.desc:after {
 .form-control {
     border-radius: 5px;
 }
+
+.modal [order-product-name] {
+    font-weight: bold;
+}
+
+.order-product-add-btn {
+    margin-top: 10px;
+}
+
+#orderProductAdd {
+    margin-top: 10px;
+}

@@ -63,7 +63,6 @@ class ProductSearch extends Product
             'id' => $this->id,
             'condition_id' => $this->condition_id,
             'price' => $this->price,
-            'title' => $this->title,
             'currency_id' => $this->currency_id,
             'quantity' => $this->quantity,
             'stock_status_id' => $this->stock_status_id,
@@ -83,7 +82,10 @@ class ProductSearch extends Product
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'model', $this->model])
+
+        $query
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'sku', $this->sku])
             ->andFilterWhere(['like', 'upc', $this->upc])
             ->andFilterWhere(['like', 'ean', $this->ean])

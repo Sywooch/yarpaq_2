@@ -2,12 +2,15 @@
 
 namespace backend\controllers;
 
+use backend\models\OrderProductAddForm;
 use Yii;
+use common\models\order\OrderProduct;
 use common\models\order\Order;
 use common\models\order\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -24,6 +27,7 @@ class OrderController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'delete-product-from-order' => ['POST']
                 ],
             ],
         ];
@@ -84,13 +88,36 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->order_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
+            $isValid = $model->validate();
+
+            $orderProducts = [];
+            foreach (Yii::$app->request->post('OrderProduct') as $orderProductData) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->attributes = $orderProductData;
+
+                $isValid = $orderProduct->validate() && $isValid;
+
+                $orderProducts[] = $orderProduct;
+            }
+
+            if ($isValid) {
+                $model->save(false);
+
+                foreach ($orderProducts as $orderProduct) {
+                    $orderProduct->save(false);
+                }
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+
+        $orderProductAddForm = new OrderProductAddForm();
+        return $this->render('update', [
+            'model' => $model,
+            'orderProductAddForm' => $orderProductAddForm
+        ]);
     }
 
     /**
@@ -119,6 +146,18 @@ class OrderController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function actionDeleteProductFromOrder($order_product_id) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $item = OrderProduct::findOne($order_product_id);
+
+        if ($item && $item->delete()) {
+            return ['status' => 1];
+        } else {
+            return ['status' => 0];
         }
     }
 }

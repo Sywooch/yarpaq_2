@@ -108,7 +108,7 @@ $order = $model;
 
         <div class="box-body">
 
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="productsTable">
                 <tbody>
                     <tr>
                         <th style="width: 10px">#</th>
@@ -131,13 +131,107 @@ $order = $model;
                         <td><?= $orderProduct->price; ?></td>
                         <td><?= $orderProduct->total; ?></td>
 
-                        <td><button type="button" class="btn btn-danger btn-xs"><?= Yii::t('app', 'Delete from order'); ?></button></td>
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-danger btn-xs"
+                                order-product-delete-btn
+                                data-name="<?= htmlentities($orderProduct->product->title); ?>"
+                                data-id="<?= $orderProduct->id; ?>"
+                            ><?= Yii::t('app', 'Delete from order'); ?></button></td>
                     </tr>
 
                     <?php $num++; } ?>
 
                 </tbody>
             </table>
+
+
+            <!-- Order Product Delete Confirmation Modal -->
+
+            <div id="orderDeleteModal" class="modal fade in">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title"><?= Yii::t('app', 'Removing product from order'); ?></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <?= Yii::t('app', 'Are you sure you want to remove this product from the order: '); ?>
+                            </p>
+
+                            <p class="lead" order-product-name></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?= Yii::t('app', 'Close'); ?></button>
+                            <button type="button" class="btn btn-primary" confirm-btn data-id="" data-loading-text="<?= Yii::t('app', 'Loading...'); ?>"><?= Yii::t('app', 'Confirm'); ?></button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+
+            <!-- ### Order Product Delete Confirmation Modal -->
+
+            <div id="orderProductAdd">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <h4><?= Yii::t('app', 'Add product'); ?></h4>
+
+                        <?php
+
+                        echo $form->field($orderProductAddForm, 'product_id')->widget(Select2::className(), [
+                            'id' => 'selectAddOrderProduct',
+                            'name' => 'add_product',
+                            'options' => [
+                                'placeholder' => 'Search for a product ...',
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'minimumInputLength' => 3,
+                                'language' => [
+                                    'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+                                ],
+                                'ajax' => [
+                                    'url' => Url::to(['product/list']),
+                                    'dataType' => 'json',
+                                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                                ],
+                                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                                'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                                'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                            ],
+                        ]);
+
+                        ?>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <?= $form->field($orderProductAddForm, 'quantity')->textInput(['maxlength' => true]) ?>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6" id="options">
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-info btn-sm order-product-add-btn" data-id="<?= $order->id; ?>"><?= Yii::t('app', 'Add product'); ?></button>
+                </div>
+            </div>
 
         </div>
     </div>

@@ -76,7 +76,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
-            [['firstname', 'lastname', 'email', 'phone1', 'payment_firstname', 'payment_lastname', 'payment_address', 'payment_city', 'payment_country', 'payment_country_id', 'payment_zone', 'payment_zone_id', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_address', 'shipping_city', 'shipping_country', 'shipping_country_id', 'shipping_zone', 'shipping_zone_id', 'shipping_method', 'shipping_code', 'language_id', 'currency_id', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at'], 'required'],
+            [['firstname', 'lastname', 'email', 'phone1', 'payment_firstname', 'payment_lastname', 'payment_address', 'payment_city', 'payment_country', 'payment_country_id', 'payment_zone', 'payment_zone_id', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_address', 'shipping_city', 'shipping_country', 'shipping_country_id', 'shipping_zone', 'shipping_zone_id', 'shipping_method', 'shipping_code', 'language_id', 'currency_id', 'currency_code', 'ip', 'user_agent', 'accept_language', 'created_at', 'modified_at'], 'required'],
             [['comment'], 'string'],
             [['total', 'currency_value'], 'number'],
             [['created_at', 'modified_at'], 'safe'],

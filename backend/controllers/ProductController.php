@@ -3,11 +3,13 @@
 namespace backend\controllers;
 
 use common\models\Country;
+use common\models\option\Option;
 use common\models\ProductImage;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -203,5 +205,68 @@ class ProductController extends AdminDefaultController
         $image->delete();
 
         return json_encode(['success' => 1]);
+    }
+
+    public function actionInfo($product_id) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $product = Product::findOne($product_id);
+
+        if ($product) {
+            return ['status' => 1, 'data' => $product->toArray(['id', 'title', 'model', 'price'])];
+        } else {
+            return ['status' => 0, 'error' => 'Product not found'];
+        }
+    }
+
+    public function actionList($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $searchModel = new ProductSearch();
+            $data = $searchModel->search(['ProductSearch' => ['title' => $q]]);
+
+            $out['results'] = [];
+            foreach ($data->getModels() as $model) {
+                $out['results'][] = ['id' => $model->id, 'text' => $model->title . ' ('.$model->id.')'];
+            }
+        }
+        elseif ($id > 0) {
+            $model = Product::find($id);
+            $out['results'] = ['id' => $id, 'text' => $model->title . ' ('.$model->id.')'];
+        }
+        return $out;
+    }
+
+    public function actionCheckForOptions($product_id) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $product = Product::findOne($product_id);
+        $options = $product->getOptions()->with('values')->all();
+
+        return [
+            'status' => 1,
+            'data' => [
+                'options' => ArrayHelper::toArray($options, [
+                    'common\models\option\Option' => [
+                        'id',
+                        'type',
+                        'name' => function ($option) {
+                            return $option->content->name;
+                        },
+                        'values' => function ($option) {
+                            return ArrayHelper::toArray($option->values, [
+                                'common\models\option\OptionValue' => [
+                                    'id',
+                                    'name' => function ($optionValue) {
+                                        return $optionValue->content->name;
+                                    }
+                                ]
+                            ]);
+                        },
+                    ]
+                ])
+            ]
+        ];
     }
 }
