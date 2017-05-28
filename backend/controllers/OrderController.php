@@ -3,11 +3,12 @@
 namespace backend\controllers;
 
 use backend\models\OrderProductAddForm;
+use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\order\OrderProduct;
 use common\models\order\Order;
 use common\models\order\OrderSearch;
-use yii\web\Controller;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -15,14 +16,14 @@ use yii\web\Response;
 /**
  * OrderController implements the CRUD actions for Order model.
  */
-class OrderController extends Controller
+class OrderController extends AdminDefaultController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
+        $b = ArrayHelper::merge(parent::behaviors(), [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -30,7 +31,8 @@ class OrderController extends Controller
                     'delete-product-from-order' => ['POST']
                 ],
             ],
-        ];
+        ]);
+        return $b;
     }
 
     /**
