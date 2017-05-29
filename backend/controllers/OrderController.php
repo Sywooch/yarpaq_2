@@ -99,19 +99,20 @@ class OrderController extends AdminDefaultController
 
             $isValid = $order->save();
 
-            foreach (Yii::$app->request->post('OrderProduct') as $orderProductData) {
-                $product = Product::findOne($orderProductData['product_id']);
+            if (Yii::$app->request->post('OrderProduct')) {
+                foreach (Yii::$app->request->post('OrderProduct') as $orderProductData) {
+                    $product = Product::findOne($orderProductData['product_id']);
 
-                if (isset($orderProductData['options'])) {
-                    $isValid = $order->addProduct($product, $orderProductData['quantity'], $orderProductData['options']) && $isValid;
+                    if (isset($orderProductData['options'])) {
+                        $isValid = $order->addProduct($product, $orderProductData['quantity'], $orderProductData['options']) && $isValid;
+                    }
+
                 }
 
+                if ($isValid) {
+                    return $this->redirect(['view', 'id' => $order->id]);
+                }
             }
-
-            if ($isValid) {
-                return $this->redirect(['view', 'id' => $order->id]);
-            }
-
         }
 
 
