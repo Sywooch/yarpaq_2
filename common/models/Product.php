@@ -232,5 +232,21 @@ class Product extends \yii\db\ActiveRecord
         return $price;
     }
 
+    public function getTitleWithOptions() {
+        $title = $this->title;
+
+        foreach ($this->appliedOptions as $appliedOption) {
+            $productOption = $appliedOption['product_option'];
+            $productOptionValue = $appliedOption['product_option_value'];
+
+            $name = $productOption->option->content->name;
+            $value = $productOptionValue->optionValue->content->name;
+
+            $title .= ' &mdash; <small>'.$name.': '.$value.'</small>';
+        }
+
+        return $title;
+    }
+
 
 }

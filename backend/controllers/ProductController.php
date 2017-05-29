@@ -290,7 +290,7 @@ class ProductController extends AdminDefaultController
             'status'    => 1,
             'data'      => [
                 'id' => $product_id,
-                'title' => $product->title,
+                'title' => $product->getTitleWithOptions(),
                 'model' => $product->model,
                 'price' => $product->getPrice(true),
                 'currency' => $product->currency->code

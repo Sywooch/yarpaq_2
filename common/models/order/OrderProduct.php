@@ -2,6 +2,7 @@
 
 namespace common\models\order;
 
+use common\models\OrderOption;
 use Yii;
 use common\models\Product;
 
@@ -77,5 +78,9 @@ class OrderProduct extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    public function getOrderProductOptions() {
+        return $this->hasMany(OrderOption::className(), ['order_product_id' => 'id'])->andWhere(['order_id' => $this->order_id]);
     }
 }

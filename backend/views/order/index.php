@@ -14,8 +14,6 @@ $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a(Yii::t('app', 'Create Order'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -25,7 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'id',
+                'options'   => [
+                    'width' => '80px'
+                ]
+            ],
             'firstname',
             'lastname',
             'email:email',
@@ -83,7 +86,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['date', 'php:d.m.Y H:i:s']
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

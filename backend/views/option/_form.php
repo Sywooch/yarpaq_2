@@ -47,9 +47,9 @@ use yii\widgets\ActiveForm;
     <div class="box box-solid">
         <div class="box-header with-border">
             <button type="button" class="btn btn-primary btn-sm pull-right">
-                Добавить
+                <?= Yii::t('app', 'Add') ?>
             </button>
-            <h3 class="box-title">Option values</h3>
+            <h3 class="box-title"><?= Yii::t('app', 'Option values') ?></h3>
         </div>
 
         <div class="box-body">
@@ -73,7 +73,7 @@ use yii\widgets\ActiveForm;
 
                 <div class="col-md-2">
                     <button type="button" class="btn btn-danger btn-sm pull-right">
-                        Удалить
+                        <?= Yii::t('app', 'Delete') ?>
                     </button>
                 </div>
 

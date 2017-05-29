@@ -125,7 +125,12 @@ $order = $model;
                     foreach ($order->orderProducts as $orderProduct) { ?>
                     <tr>
                         <td><?=$num?>.</td>
-                        <td><?= $orderProduct->product->title; ?></td>
+                        <td>
+                            <?= $orderProduct->product->title; ?>
+                            <?php foreach ($orderProduct->orderProductOptions as $orderProductOption) { ?>
+                                <small> &mdash; <?= $orderProductOption->name . ': '. $orderProductOption->value; ?></small>
+                            <?php } ?>
+                        </td>
                         <td><?= $orderProduct->product->model; ?></td>
                         <td><?= $orderProduct->quantity; ?></td>
                         <td><?= $orderProduct->price; ?></td>
