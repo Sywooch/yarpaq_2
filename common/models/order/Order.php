@@ -183,34 +183,64 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasMany(OrderProduct::className(), ['order_id' => 'id']);
     }
 
-    public function addProduct(Product $product, array $options) {
+    /**
+     * Прикрепляет товар к заказу в определенном количестве с учетом опций
+     *
+     * @param Product $product
+     * @param $quantity
+     * @param array $options
+     * @return bool
+     */
+    public function addProduct(Product $product, $quantity, array $options) {
+
+        $tr = $this->getDb()->beginTransaction();
+
+        // создаем связь заказа и товара
         $orderProduct               = new OrderProduct();
         $orderProduct->order_id     = $this->id;
         $orderProduct->product_id   = $product->id;
-        $orderProduct->save();
+        $orderProduct->name         = $product->title;
+        $orderProduct->model        = $product->model;
+        $orderProduct->quantity     = $quantity;
 
-        if ( !empty($options) ) { // если переданы опции
-
+        // если переданы опции, применяем их
+        if ( !empty($options) ) {
             foreach ($options as $product_option_id => $product_option_value_id) {
-
                 $productOption      = ProductOption::findOne($product_option_id);
                 $productOptionValue = ProductOptionValue::findOne($product_option_value_id);
 
-                $orderOption                            = new OrderOption();
-                $orderOption->order_id                  = $this->id;
-                $orderOption->order_product_id          = $orderProduct->id;
-                $orderOption->product_option_id         = $product_option_id;
-                $orderOption->product_option_value_id   = $product_option_value_id;
-
-                $orderOption->name                      = $productOption->option->content->name;
-                $orderOption->value                     = $productOptionValue->value;
-                $orderOption->type                      = $productOption->option->type;
-
-                $orderOption->save();
+                $product->applyOption($productOption, $productOptionValue);
             }
-
         }
 
-        return true;
+
+        $orderProduct->price        = $product->getPrice(true);
+        $orderProduct->total        = $quantity * $product->getPrice(true);
+        $isValid = $orderProduct->save();
+
+        // создаем опции товара в заказе
+        foreach ($product->appliedOptions as $appliedOption) {
+
+            $product_option         = $appliedOption['product_option'];
+            $product_option_value   = $appliedOption['product_option_value'];
+
+            $orderOption                            = new OrderOption();
+            $orderOption->order_id                  = $this->id;
+            $orderOption->order_product_id          = $orderProduct->id;
+            $orderOption->product_option_id         = $product_option->id;
+            $orderOption->product_option_value_id   = $product_option_value->id;
+
+            $orderOption->name                      = $product_option->option->content->name;
+            $orderOption->value                     = $product_option_value->optionValue->name;
+            $orderOption->type                      = $product_option->option->type;
+
+            $isValid = $orderOption->save() && $isValid;
+        }
+
+        if ($isValid) {
+            $tr->commit();
+        }
+
+        return $isValid;
     }
 }

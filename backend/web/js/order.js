@@ -130,7 +130,6 @@ $(function () {
      */
     $('.order-product-add-btn').click(function () {
         var self = $(this);
-        var order_id = self.data('id');
         var product_id = new_product_el.val();
         var options_data = {};
         $.each($('.option_el'), function () {
@@ -138,13 +137,12 @@ $(function () {
         });
 
         var data = {
-            'order_id': order_id,
             'product_id': product_id,
             'options': options_data
         };
 
         // добавление order option
-        postJSON('/order/add-product-to-order', data, function (response) {
+        postJSON('/product/info?'+ $.param(data), function (response) {
 
             if (response.status) {
                 var nextNum = table.find('tr').size();
@@ -160,13 +158,13 @@ $(function () {
                 html += '<tr>';
                 html +=     '<td>'+nextNum+'.</td>';
                 html +=     '<td>'+name;
-                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][order_id]" value="'+order_id+'">';
                 html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][product_id]" value="'+product_id+'">';
-                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][name]" value="'+name+'">';
-                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][model]" value="'+model+'">';
                 html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][quantity]" value="'+quantity+'">';
-                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][price]" value="'+price+'">';
-                html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][total]" value="'+total_price+'">';
+
+                $.each(options_data, function (product_option_id, product_option_value_id) {
+                    html +=     '<input type="hidden" name="OrderProduct['+nextNum+'][options]['+product_option_id+']" value="'+product_option_value_id+'">';
+                });
+
                 html +=     '</td>';
                 html +=     '<td>'+model+'</td>';
                 html +=     '<td>'+quantity+'</td>';

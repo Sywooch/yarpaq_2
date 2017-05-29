@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\OrderProductAddForm;
+use common\models\option\ProductOption;
 use common\models\OrderOption;
 use common\models\Product;
 use webvimark\components\AdminDefaultController;
@@ -92,36 +93,32 @@ class OrderController extends AdminDefaultController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $order = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $isValid = $model->validate();
+        if ($order->load(Yii::$app->request->post())) {
 
-            $orderProducts = [];
+            $isValid = $order->save();
+
             foreach (Yii::$app->request->post('OrderProduct') as $orderProductData) {
-                $orderProduct = new OrderProduct();
-                $orderProduct->attributes = $orderProductData;
+                $product = Product::findOne($orderProductData['product_id']);
 
-                $isValid = $orderProduct->validate() && $isValid;
+                if (isset($orderProductData['options'])) {
+                    $isValid = $order->addProduct($product, $orderProductData['quantity'], $orderProductData['options']) && $isValid;
+                }
 
-                $orderProducts[] = $orderProduct;
             }
 
             if ($isValid) {
-                $model->save(false);
-
-                foreach ($orderProducts as $orderProduct) {
-                    $orderProduct->save(false);
-                }
-
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $order->id]);
             }
+
         }
 
 
         $orderProductAddForm = new OrderProductAddForm();
+
         return $this->render('update', [
-            'model' => $model,
+            'model' => $order,
             'orderProductAddForm' => $orderProductAddForm
         ]);
     }
@@ -152,37 +149,6 @@ class OrderController extends AdminDefaultController
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    /**
-     * Добавляет товар к заказу.
-     * Возвращает ID связи товара с заказом
-     *
-     * @return array
-     */
-    public function actionAddProductToOrder() {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $order_id = Yii::$app->request->post('order_id');
-        $product_id = Yii::$app->request->post('product_id');
-
-        $order      = Order::findOne($order_id);
-        $product    = Product::findOne($product_id);
-
-        if (!$order) { throw new InvalidValueException('Order '.$order_id.' not found'); }
-        if (!$product) { throw new InvalidValueException('Product '.$product_id.' not found'); }
-
-        // сначала создаем товар к заказу
-
-        $order->addProduct($product, Yii::$app->request->post('options'));
-
-
-
-        if ($product) {
-            return ['status' => 1, 'data' => $product->toArray(['id', 'title', 'model', 'price'])];
-        } else {
-            return ['status' => 0, 'error' => 'Product not found'];
         }
     }
 

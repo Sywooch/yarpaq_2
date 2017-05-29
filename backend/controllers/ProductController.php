@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use common\models\Country;
 use common\models\option\OptionValue;
+use common\models\option\ProductOption;
+use common\models\option\ProductOptionValue;
 use common\models\ProductImage;
 use webvimark\components\AdminDefaultController;
 use Yii;
@@ -265,6 +267,33 @@ class ProductController extends AdminDefaultController
                         }
                     ]
                 ])
+            ]
+        ];
+    }
+
+    public function actionInfo($product_id) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $product = Product::findOne($product_id);
+
+        if (Yii::$app->request->get('options')) {
+            $options = Yii::$app->request->get('options');
+
+            foreach ($options as $option => $value) {
+                $product_option         = ProductOption::findOne($option);
+                $product_option_value   = ProductOptionValue::findOne($value);
+                $product->applyOption($product_option, $product_option_value);
+            }
+        }
+
+        return [
+            'status'    => 1,
+            'data'      => [
+                'id' => $product_id,
+                'title' => $product->title,
+                'model' => $product->model,
+                'price' => $product->getPrice(true),
+                'currency' => $product->currency->code
             ]
         ];
     }

@@ -50,6 +50,8 @@ class Product extends \yii\db\ActiveRecord
     const SCENARIO_IMPORT   = 'import';
     const SCENARIO_DEFAULT  = 'default';
 
+    protected $appliedOptions;
+
     /**
      * @inheritdoc
      */
@@ -159,6 +161,10 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getCurrency() {
+        return $this->hasOne(Currency::className(), ['id' => 'currency_id']);
+    }
+
     public function getProductCategories() {
         return $this->hasMany(ProductCategory::className(), ['product_id' => 'id']);
     }
@@ -182,4 +188,49 @@ class Product extends \yii\db\ActiveRecord
     public function getProductOptions() {
         return $this->hasMany(ProductOption::className(), ['product_id' => 'id']);
     }
+
+    /**
+     * Применить опцию (со значением) к товару
+     *
+     * @param ProductOption $productOption
+     * @param ProductOptionValue $productOptionValue
+     */
+    public function applyOption(ProductOption $productOption, ProductOptionValue $productOptionValue) {
+        $this->appliedOptions[] = [
+            'product_option'        => $productOption,
+            'product_option_value'  => $productOptionValue
+        ];
+    }
+
+    public function getAppliedOptions() {
+        return $this->appliedOptions;
+    }
+
+    /**
+     * Получение цены.
+     * Получение базовой цены либо с учетом опций.
+     * Чтобы учитывать опции их сначало надо применить к товару.
+     *
+     * @param bool|false $considerOptions Флаг - учитывай примененные опции или нет.
+     * @return string
+     */
+    public function getPrice($considerOptions = false) {
+        $price = $this->price;
+
+        if ($considerOptions) {
+            foreach ($this->appliedOptions as $appliedOption) {
+                $productOptionValue = $appliedOption['product_option_value'];
+
+                if ($productOptionValue->price_prefix == '-') {
+                    $price -= $productOptionValue->price;
+                } else {
+                    $price += $productOptionValue->price;
+                }
+            }
+        }
+
+        return $price;
+    }
+
+
 }
