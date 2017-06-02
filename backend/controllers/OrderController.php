@@ -3,16 +3,21 @@
 namespace backend\controllers;
 
 use backend\models\OrderProductAddForm;
+use common\models\Country;
+use common\models\Currency;
+use common\models\Language;
 use common\models\option\ProductOption;
 use common\models\OrderOption;
+use common\models\payment\PaymentMethod;
 use common\models\Product;
+use common\models\shipping\ShippingMethod;
+use common\models\Zone;
+use Faker\Provider\tr_TR\DateTime;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\order\OrderProduct;
 use common\models\order\Order;
 use common\models\order\OrderSearch;
-use yii\base\Exception;
-use yii\base\InvalidValueException;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -74,15 +79,53 @@ class OrderController extends AdminDefaultController
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $order = new Order();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->order_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($order->load(Yii::$app->request->post())) {
+
+            $currency               = Currency::findOne(1); // TODO прописывать чтото дельное
+            $order->currency_id     = $currency->id;
+            $order->currency_code   = $currency->code;
+
+            $order->payment_country = Country::findOne($order->payment_country_id)->name;
+            $order->shipping_country = Country::findOne($order->shipping_country_id)->name;
+
+            $payment_method = PaymentMethod::findOne($order->payment_method_id);
+            $order->payment_code    = $payment_method->code;
+            $order->payment_method  = $payment_method->name;
+
+            $payment_zone = Zone::findOne($order->payment_zone_id);
+            $order->payment_zone    = $payment_zone->name;
+
+            $shipping_method = ShippingMethod::findOne($order->shipping_method_id);
+            $order->shipping_code    = $shipping_method->code;
+            $order->shipping_method  = $shipping_method->name;
+
+            $shipping_zone = Zone::findOne($order->shipping_zone_id);
+            $order->shipping_zone   = $shipping_zone->name;
+
+
+
+            $order->language_id     = Language::getCurrent()->id;
+            $order->user_agent      = Yii::$app->request->userAgent;
+            $order->ip              = Yii::$app->request->userIP;
+            $order->accept_language = implode(';', Yii::$app->request->acceptableLanguages);
+            $order->created_at      = (new \DateTime())->format('Y-m-d H:i:s');
+            $order->modified_at     = $order->created_at;
+
+
+
+            if ($order->save()) {
+                return $this->redirect(['view', 'id' => $order->id]);
+            }
+
         }
+
+        $orderProductAddForm = new OrderProductAddForm();
+        return $this->render('create', [
+            'model' => $order,
+            'orderProductAddForm' => $orderProductAddForm
+        ]);
     }
 
     /**

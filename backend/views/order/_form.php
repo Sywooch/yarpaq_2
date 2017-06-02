@@ -352,12 +352,12 @@ $order = $model;
 
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($order, 'payment_method')
+                    <?= $form->field($order, 'payment_method_id')
                         ->dropDownList(ArrayHelper::map(PaymentMethod::find()->all(), 'id', 'name')); ?>
                 </div>
 
                 <div class="col-md-6">
-                    <?= $form->field($order, 'shipping_method')
+                    <?= $form->field($order, 'shipping_method_id')
                         ->dropDownList(ArrayHelper::map(ShippingMethod::find()->all(), 'id', 'name')); ?>
                 </div>
             </div>
