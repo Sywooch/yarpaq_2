@@ -25,6 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <a class="label bg-light-blue bind-edit" href="">Edit</a>
                 <a class="label bg-light-blue bind-add" href="">Add</a>
                 <a class="label bg-light-blue bind-view" href="">View</a>
+                <a class="label bg-light-blue bind-move-up" href="">▲</a>
+                <a class="label bg-light-blue bind-move-down" href="">▼</a>
                 <a class="label bg-red bind-delete" href="" data-confirm="Are you sure you want to delete this item?">Delete</a>
             </span>
         </span>
@@ -45,9 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 </a>
 
                 <span class="actions">
-                    <a class="label bg-light-blue bind-edit" href="<?php echo Url::toRoute(['update', 'id' => $category->id]); ?>">Edit</a>
-                    <a class="label bg-light-blue bind-add" href="<?php echo Url::toRoute(['create', 'parent_id' => $category->id]); ?>">Add</a>
-                    <a class="label bg-light-blue bind-view" href="<?php echo $category->url; ?>" target="_blank">View</a>
+                    <a class="label bg-light-blue bind-edit"        href="<?php echo Url::toRoute(['update', 'id' => $category->id]); ?>">Edit</a>
+                    <a class="label bg-light-blue bind-add"         href="<?php echo Url::toRoute(['create', 'parent_id' => $category->id]); ?>">Add</a>
+                    <a class="label bg-light-blue bind-view"        href="<?php echo $category->url; ?>" target="_blank">View</a>
+                    <a class="label bg-light-blue bind-move-up"     href="<?php echo Url::toRoute(['move-up', 'id' => $category->id]); ?>">▲</a>
+                    <a class="label bg-light-blue bind-move-down"   href="<?php echo Url::toRoute(['move-down', 'id' => $category->id]); ?>">▼</a>
+
                     <a class="label bg-red bind-delete" href="" data-confirm="Are you sure you want to delete this item?">Delete</a>
                 </span>
             </span>

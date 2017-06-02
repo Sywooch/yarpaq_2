@@ -204,7 +204,7 @@ class CategoryController extends AdminDefaultController
         // если найден
         if ($node)
         {
-            $children = $node->getChildren()->joinWith('content c')->orderBy('c.title')->all();
+            $children = $node->getChildren()->all();
 
             foreach ($children as $child) {
 
@@ -212,13 +212,15 @@ class CategoryController extends AdminDefaultController
                  * @var Category $child
                  */
                 $tree[] = [
-                    'id' => $child->id,
-                    'header' => $child->title,
-                    'editUrl' => Url::toRoute(['update', 'id' => $child->id]),
-                    'addUrl' => Url::toRoute(['create', 'parent_id' => $child->id]),
-                    'viewUrl' => $child->url,
-                    'deleteUrl' => Url::toRoute(['delete', 'id' => $child->id]),
-                    'childrenUrl' => Url::toRoute(['get-children-data', 'id' => $child->id]),
+                    'id'            => $child->id,
+                    'header'        => $child->title,
+                    'editUrl'       => Url::toRoute(['update', 'id' => $child->id]),
+                    'moveUpUrl'     => Url::toRoute(['move-up', 'id' => $child->id]),
+                    'moveDownUrl'   => Url::toRoute(['move-down', 'id' => $child->id]),
+                    'addUrl'        => Url::toRoute(['create', 'parent_id' => $child->id]),
+                    'viewUrl'       => $child->url,
+                    'deleteUrl'     => Url::toRoute(['delete', 'id' => $child->id]),
+                    'childrenUrl'   => Url::toRoute(['get-children-data', 'id' => $child->id]),
                     'childrenCount' => count( $child->children )
                 ];
             }
@@ -230,5 +232,37 @@ class CategoryController extends AdminDefaultController
         }
 
         return \yii\helpers\Json::encode($tree);
+    }
+
+    public function actionMoveUp($id) {
+        $current_node = Category::findOne($id);
+        if (!$current_node->id) {
+            throw new BadRequestHttpException();
+        }
+
+        $prev_node = $current_node->prev()->one();
+        if (!$prev_node) { // нет предыдущего
+            throw new BadRequestHttpException();
+        }
+
+        $result = $current_node->insertBefore($prev_node);
+
+        echo json_encode(['result' => $result]);
+    }
+
+    public function actionMoveDown($id) {
+        $current_node = Category::findOne($id);
+        if (!$current_node->id) {
+            throw new BadRequestHttpException();
+        }
+
+        $next_node = $current_node->next()->one();
+        if (!$next_node) { // нет следующего
+            throw new BadRequestHttpException();
+        }
+
+        $result = $current_node->insertAfter($next_node);
+
+        echo json_encode(['result' => $result]);
     }
 }

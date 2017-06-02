@@ -14,8 +14,6 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Categories'), 'url' 
 ?>
 <div class="page-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_update_form', [
         'model' => $model,
         'parent' => $parent,
