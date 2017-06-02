@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\category\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\category\Category */
@@ -68,6 +70,12 @@ use yii\widgets\ActiveForm;
                     $templates_data[ $template->id ] = $template->name;
                 }
                 echo $form->field($model, 'template_id')->dropDownList($templates_data);
+
+                $categories_data = ArrayHelper::map(Category::find()->orderBy('lft')->all(), 'id', function ($category) {
+                    return str_repeat('—', $category->depth - 1) .' '. $category->content->title;
+                });
+
+                echo $form->field($model, 'parent_id')->dropDownList($categories_data);
                 ?>
             </div>
         </div>

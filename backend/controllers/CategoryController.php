@@ -117,6 +117,7 @@ class CategoryController extends AdminDefaultController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $parent_id = $model->parent_id;
         $contents = $model->contents;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -125,7 +126,11 @@ class CategoryController extends AdminDefaultController
 
             $s = true;
 
-            $model->save();
+            if ($model->parent_id != $parent_id) {
+                $model->appendTo($this->findModel($model->parent_id));
+            } else {
+                $model->save();
+            }
 
             foreach ($contents as $content) {
                 /**
