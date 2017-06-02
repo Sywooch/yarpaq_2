@@ -2,19 +2,16 @@
 
 namespace backend\controllers;
 
+use Yii;
 use backend\models\OrderProductAddForm;
 use common\models\Country;
 use common\models\Currency;
 use common\models\Language;
-use common\models\option\ProductOption;
-use common\models\OrderOption;
 use common\models\payment\PaymentMethod;
 use common\models\Product;
 use common\models\shipping\ShippingMethod;
 use common\models\Zone;
-use Faker\Provider\tr_TR\DateTime;
 use webvimark\components\AdminDefaultController;
-use Yii;
 use common\models\order\OrderProduct;
 use common\models\order\Order;
 use common\models\order\OrderSearch;
@@ -37,7 +34,7 @@ class OrderController extends AdminDefaultController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'confirm-delete' => ['POST'],
                     'delete-product-from-order' => ['POST']
                 ],
             ],
@@ -167,13 +164,22 @@ class OrderController extends AdminDefaultController
         ]);
     }
 
+    public function actionDelete($id) {
+
+        $order = $this->findModel($id);
+
+        return $this->render('delete', [
+            'order' => $order
+        ]);
+    }
+
     /**
      * Deletes an existing Order model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionConfirmDelete($id)
     {
         $this->findModel($id)->delete();
 

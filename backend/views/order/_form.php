@@ -369,7 +369,9 @@ $order = $model;
         </div>
     </div>
 
-
+    <div class="form-group pull-right">
+        <?= Html::a(Yii::t('app', 'Delete'), ['order/delete', 'id' => $order->id], ['class' => 'btn btn-danger']) ?>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($order->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $order->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
