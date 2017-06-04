@@ -51,7 +51,7 @@ class Language extends \yii\db\ActiveRecord
     {
         $language = self::getLangByName($url);
         self::$current = ($language === null) ? self::getDefault() : $language;
-        Yii::$app->language = self::$current->code;
+        Yii::$app->language = self::$current->name;
     }
 
     /**

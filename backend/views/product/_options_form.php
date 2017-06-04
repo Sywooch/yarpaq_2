@@ -28,7 +28,7 @@ use yii\helpers\ArrayHelper;
 
                 <!-- Product options -->
                 <?php
-                foreach ($product->options as $product_option) {
+                foreach ($product->productOptions as $product_option) {
                     /**
                      * @var $product_option \common\models\option\ProductOption
                      */

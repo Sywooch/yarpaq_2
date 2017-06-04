@@ -47,6 +47,9 @@ class Product extends \yii\db\ActiveRecord
     public $galleryFiles;
     public $categoryIDs = [];
 
+    const STATUS_INACTIVE   = 0;
+    const STATUS_ACTIVE     = 1;
+
     const SCENARIO_IMPORT   = 'import';
     const SCENARIO_DEFAULT  = 'default';
 

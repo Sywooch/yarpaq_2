@@ -3,6 +3,7 @@
 namespace common\models\category;
 
 use common\models\Language;
+use common\models\Product;
 use common\models\Template;
 use common\models\User;
 use Yii;
@@ -191,8 +192,12 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getParents() {
-        return $this->parents();
+    public function getParents($includeRoot = false) {
+        if ($includeRoot) {
+            return $this->parents();
+        } else {
+            return $this->parents()->andWhere(['>', 'depth', 1]);
+        }
     }
 
     public static function getRoot() {
@@ -359,5 +364,9 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             ->orderBy('lft')
             ->all(), 'id', 'title'
         );
+    }
+
+    public function getProducts() {
+        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('{{%product_category}}', ['category_id' => 'id']);
     }
 }

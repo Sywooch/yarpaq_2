@@ -5,7 +5,6 @@ namespace frontend\components;
 use Yii;
 use yii\base\Component;
 use yii\base\Exception;
-use yii\base\InvalidConfigException;
 use common\models\Currency as CurrencyModel;
 use common\models\CurrencySearch;
 
@@ -31,6 +30,12 @@ class Currency extends Component
      * @var Array
      */
     protected $currencies;
+
+    public function init() {
+        parent::init();
+
+        $this->setDefaultCurrency();
+    }
 
     /**
      * Конвертация цены на основе валюты товара и валюты выбранной на сайте
@@ -106,7 +111,24 @@ class Currency extends Component
     }
 
     public function getUserCurrency() {
+        if ($this->userCurrency) {
+            return $this->userCurrency;
+        } else {
+            $session = Yii::$app->session;
+
+            if ($session->get('currency_id')) {
+                $currency = CurrencyModel::findOne($session->get('currency_id'));
+                if ($currency) {
+                    $this->setUserCurrency($currency);
+                }
+            }
+        }
+
         return $this->userCurrency;
+    }
+
+    protected function setDefaultCurrency() {
+        $this->userCurrency = $this->getCurrencies()[0];
     }
 
 }
