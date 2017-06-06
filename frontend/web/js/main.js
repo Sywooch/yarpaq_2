@@ -1,3 +1,71 @@
+function GetURLParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
+}
+
+function ProductFilter() {
+    var self = this;
+
+    this.condition  = null;
+    this.brand      = null;
+    this.price_from = null;
+    this.price_to   = null;
+
+    this.init = function () {
+
+        if (GetURLParameter('ProductFilter[brand]')) {
+            this.brand = GetURLParameter('ProductFilter[brand]');
+        }
+
+        if (GetURLParameter('ProductFilter[condition]')) {
+            this.condition = GetURLParameter('ProductFilter[condition]');
+        }
+
+        if (GetURLParameter('ProductFilter[price_from]')) {
+            this.price_from = GetURLParameter('ProductFilter[price_from]');
+        }
+
+        if (GetURLParameter('ProductFilter[price_to]')) {
+            this.price_to = GetURLParameter('ProductFilter[price_to]');
+        }
+
+    };
+
+    this.setBrand = function (brand_id) {
+        this.brand = brand_id;
+    };
+
+    this.setCondition = function (condition_id) {
+        self.condition = condition_id;
+        self.update();
+    };
+
+    this.setPrice = function (from, to) {
+        this.price_from = from;
+        this.price_to   = to;
+        self.update();
+    };
+
+
+    this.update = function () {
+        var href = '?ProductFilter[brand]='+this.brand+'&ProductFilter[condition]='+this.condition;
+        href    += '&ProductFilter[price_from]='+this.price_from+'&ProductFilter[price_to]='+this.price_to;
+        location.href = href;
+    };
+}
+
+var ProductFilter = new ProductFilter();
+ProductFilter.init();
+
 $(document).ready(function() {
 
     var owl = $(".owl-carousel:not(.owl-three,.owl-one)");
@@ -157,7 +225,7 @@ function getName (str){
     var uploaded = document.getElementsByClassName("fileformlabel")[0];
     uploaded.innerHTML = filename;
 }
-$(".product-filter_elem .button-view>button").click(function(){
+$(".product-filter_elem .button-view>button").click(function() {
     $(".product-filter_elem .button-view>button").removeClass("active");
     $(this).addClass("active");
     if(this.id=='list-view'){
@@ -177,12 +245,20 @@ $(".product-filter_elem .button-view>button").click(function(){
 
     }
 })
-$("#range_02").ionRangeSlider({
 
+$("#range_02").ionRangeSlider({
+    type: "double",
+    //grid: true,
     min: 0,
-    max: 450,
-    from: 330
+    max: 1000,
+    from: 200,
+    to: 800,
+    postfix: "<span class=\"manatFont\">M</span>",
+    onFinish: function (data) {
+        ProductFilter.setPrice(data.from, data.to);
+    }
 });
+
 $(".photo_container>a").click( function(){
     $(".photo_container a").removeClass("activeThumb");
     $(this).addClass("activeThumb");
@@ -232,3 +308,17 @@ $(".hide-footer").click(function(){
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+
+
+
+$(function () {
+
+    $('.condition_filter').change(function () {
+        ProductFilter.setCondition($(this).val());
+    });
+
+    $('.brand_filter').change(function () {
+        ProductFilter.setBrand($(this).val());
+    });
+
+});

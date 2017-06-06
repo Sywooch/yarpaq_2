@@ -10,7 +10,7 @@
 
                     <div class="infoMenuBox light-gray_bg filterProductBox">
                         <div class="filter-btn">
-                            Filter
+                            <?= Yii::t('app', 'Filter'); ?>
                             <i class="fa fa-angle-up pull-right"> </i>
                         </div>
                         <div class="list-infoMenu">
@@ -24,79 +24,49 @@
 
                             <ul class="sub-infoMenu" style="display: block;">
                                 <li>
-                                    <span class="title-filter">Brend</span>
+                                    <span class="title-filter"><?= Yii::t('app', 'Brend'); ?></span>
 
                                     <ul>
+                                        <?php foreach ($filterBrands as $brand) { ?>
                                         <li>
-                                            <input class="radio" id="radio5" name="method_payment" type="radio">
-                                            <label for="radio5"> Kenwood</label>
+                                            <input class="radio" id="radio<?= $brand->id; ?>" name="ProductFilter[brand]" type="radio" value="<?= $brand->id; ?>" <?php if ($productFilter->brand == $brand-id) echo 'checked'; ?>>
+                                            <label for="radio5"> <?= $brand->title; ?></label>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="title-filter"> <?= Yii::t('app', 'Vəziyyət');?></span>
+                                    <ul>
+                                        <li>
+                                            <input class="radio condition_filter" id="radio1" name="ProductFilter[condition]" type="radio" value="1" <?php if ($productFilter->condition == 1) echo 'checked'; ?>>
+                                            <label for="radio1"> <?= Yii::t('app', 'Yeni');?></label>
                                         </li>
                                         <li>
-                                            <input class="radio" id="radio6" name="method_payment" type="radio">
-                                            <label for="radio6"> JBL</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio7" name="method_payment" type="radio">
-                                            <label for="radio7"> Harman & Kardon</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio8" name="method_payment" type="radio">
-                                            <label for="radio8">Sony</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio9" name="method_payment" type="radio">
-                                            <label for="radio9">Samsung</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio10" name="method_payment" type="radio">
-                                            <label for="radio10">Apple</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio11" name="method_payment" type="radio">
-                                            <label for="radio11">Beats by Dre</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio12" name="method_payment" type="radio">
-                                            <label for="radio12">Yamaha</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio13" name="method_payment" type="radio">
-                                            <label for="radio13">Bang & Olufsen</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio14" name="method_payment" type="radio">
-                                            <label for="radio14">Infinity</label>
+                                            <input class="radio condition_filter" id="radio2" name="ProductFilter[condition]" type="radio" value="2" <?php if ($productFilter->condition == 2) echo 'checked'; ?>>
+                                            <label for="radio2"> <?= Yii::t('app', 'İşlənmiş');?></label>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <span class="title-filter"> Vəziyyət</span>
-                                    <ul>
-                                        <li>
-                                            <input class="radio" id="radio3" name="method_payment" type="radio">
-                                            <label for="radio3"> İşlənmiş</label>
-                                        </li>
-                                        <li>
-                                            <input class="radio" id="radio4" name="method_payment" type="radio">
-                                            <label for="radio4">     Yeni</label>
-                                        </li>
-                                    </ul>
+                                    <span class="title-filter"><?= Yii::t('app', 'Qiymət intervalı'); ?></span>
+                                    <input type="text" id="range_02" name="ProductFilter[price]" value=""
+                                        <?php if ($productFilter->price_from) echo 'data-from="'.$productFilter->price_from.'"'; ?>
+                                        <?php if ($productFilter->price_to) echo 'data-to="'.$productFilter->price_to.'"'; ?>
+                                        >
                                 </li>
                                 <li>
-                                    <span class="title-filter">Qiymət intervalı</span>
-
-                                    <input type="text" id="range_02" name="range" value="" >
-                                </li>
-                                <li>
-                                    <button class="btn btn-green">Axtarışı Təmizlə</button>
+                                    <button class="btn btn-green"><?= Yii::t('app', 'Axtarışı Təmizlə'); ?></button>
                                 </li>
                             </ul>
 
                         </div>
                     </div>
+
+                    <!-- Recently viewed -->
                     <div class="some-products  green  categoryProducts hidden-xs hidden-sm" style="margin-right: 20px">
                         <div class="box-heading">
-                            <h3>Baxılmış məhsullar</h3>
+                            <h3><?= Yii::t('app', 'Baxılmış məhsullar'); ?></h3>
                         </div>
                         <div>
                             <div class="col-md-12">
@@ -125,40 +95,41 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Recently viewed END -->
                 </aside>
                 <div class="col-sm-8 col-md-9">
                     <div class="row margin-right-0">
+
                         <div class="content-box-heading3 light-gray_bg clearfix">
-                            <h6 class="pull-left">Görüntü</h6>
+                            <h6 class="pull-left"><?= Yii::t('app', 'Görüntü'); ?></h6>
                             <div class="pull-right filter-btn">
-                                Filter
+                                <?= Yii::t('app', 'Filter'); ?>
                                 <i class="fa fa-angle-down pull-right"> </i>
                             </div>
                             <div class="product-filter_elem pull-left">
                                 <div class="button-view">
                                     <button type="button" id="grid-view" class="active"><i class="fa fa-th"></i></button>
-
                                     <button type="button" id="list-view"><i class="fa fa-th-list"></i></button>
                                 </div>
                             </div>
 
-                            <div class="pull-right no-padding hidden-xs">
+                            <div class="pull-right no-padding hidden-xs hide">
                                 <div class="limit-product">
-                                    Göstər
+                                    <?= Yii::t('app', 'Göstər'); ?>
                                     <div class="form-group">
                                         <label class="select">
-                                            <select class="form-control" title="Ölkə">
+                                            <select class="form-control">
                                                 <option value="">26</option>
                                             </select>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="sort-product">
-                                    Sırala
+                                    <?= Yii::t('app', 'Sırala'); ?>
                                     <div class="form-group">
                                         <label class="select">
-                                            <select class="form-control" title="Ölkə">
-                                                <option value="">yenisi</option>
+                                            <select class="form-control">
+                                                <option value=""><?= Yii::t('app', 'yenisi'); ?></option>
                                             </select>
                                         </label>
                                     </div>
@@ -178,7 +149,7 @@
 
                                 <div class="product_image">
 
-                                    <a href="#">
+                                    <a href="#" style="background-image: url('<?= @$product->gallery[0]->url ?>')">
                                         <!--
                                         <div class="new-product">
                                             <span class="dejavu-bold">Yeni</span>
@@ -187,10 +158,10 @@
                                             <span class="dejavu-bold">%</span>
                                         </div>
                                         -->
-                                        <img src="<?= $product->gallery[0]->url ?>" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
+                                        <img src="<?= @$product->gallery[0]->url ?>" alt="Favourable unreserved nay" title=" Favourable unreserved nay " class="hide">
                                     </a>
 
-                                    <div class="hover-info">
+                                    <div class="hover-info hide">
                                         <ul class="product-icons list-inline">
                                             <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
                                             <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
@@ -201,10 +172,7 @@
                                 </div>
                                 <div class="product_info">
 
-                                    <p class="g-title"><?= $product->title; ?></p>
-                                    <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                        genuine original usb bluetooth aux clock alarm
-                                        table comfort premium</p>
+                                    <p class="g-title"><a href="#"><?= $product->title; ?></a></p>
                                     <span class="g-price"><?= $product->price; ?>  <b class="manatFont">M</b></span>
 
                                     <!--
@@ -242,6 +210,19 @@
 
                             <?php } ?>
 
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+                            <?php
+                            echo \frontend\components\CustomLinkPager::widget([
+                                'pagination'    => $pages,
+                                'options'       => [
+                                    'class' => 'yrpq pagination pagination pagination-sm'
+                                ]
+                            ]);
+                            ?>
                         </div>
 
                     </div>

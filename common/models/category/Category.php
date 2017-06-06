@@ -4,6 +4,7 @@ namespace common\models\category;
 
 use common\models\Language;
 use common\models\Product;
+use common\models\ProductCategory;
 use common\models\Template;
 use common\models\User;
 use Yii;
@@ -366,7 +367,13 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         );
     }
 
-    public function getProducts() {
-        return $this->hasMany(Product::className(), ['id' => 'product_id'])->viaTable('{{%product_category}}', ['category_id' => 'id']);
+    public function getProducts($categoryIDs = null) {
+        $categoryIDs[] = $this->id;
+
+        return $this
+            ->hasMany(Product::className(), ['id' => 'product_id'])
+            ->viaTable('{{%product_category}}', ['category_id' => 'id'], function ($query) {
+                $query->orWhere('in', 'category_id', $this->categoryIDs);
+            });
     }
 }

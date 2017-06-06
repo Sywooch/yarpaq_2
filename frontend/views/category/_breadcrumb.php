@@ -22,7 +22,7 @@ $parents = $category->getParents(true)->all();
 
     <div style="margin-left: <?= $category->depth * 12 ?>px">
         <?= $category->title; ?>
-        <div class="green"><?= $productsCount; ?> <? Yii::t('app', 'nəticə'); ?></div>
+        <div class="green"><?= $productsCount; ?> <?= Yii::t('app', 'məhsul'); ?></div>
     </div>
 
 </div>

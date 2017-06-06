@@ -53,8 +53,8 @@ use yii\helpers\FileHelper;
                         <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
 
                         <?= $form->field($model, 'condition_id')->dropDownList([
-                            1 => 'New',
-                            2 => 'Used'
+                            1 => Yii::t('app', 'New'),
+                            2 => Yii::t('app', 'Used')
                         ]) ?>
 
 
