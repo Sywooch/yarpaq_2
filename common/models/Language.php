@@ -90,9 +90,9 @@ class Language extends \yii\db\ActiveRecord
 
     public function getUrlPrefix() {
         if ($this->isDefault()) {
-            return '/';
+            return '';
         } else {
-            return '/'.$this->name.'/';
+            return '/'.$this->name;
         }
     }
 

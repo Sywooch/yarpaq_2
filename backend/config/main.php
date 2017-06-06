@@ -15,6 +15,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'class'     => 'frontend\components\LangRequest'
         ],
 //        'user' => [
 //            'identityClass' => 'common\models\User',
@@ -37,7 +38,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'urlManager' => [
+            'class' => 'backend\components\MultiLangUrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
