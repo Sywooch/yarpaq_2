@@ -1336,7 +1336,7 @@ hr {
 .g-title {
     margin: 5px 0 0px
 }
-.categoryProductsAll .g-title {
+.productinfo-wrapper .g-title {
     margin: 14px 0 7px;
     height: 50px;
     overflow: hidden;
@@ -1458,7 +1458,7 @@ footer{
     position: absolute;
     text-align: center;
     width: 100%;}
-.productinfo-wrapper{position:relative; }
+.productinfo-wrapper{position:relative; padding: 10px; }
 .some-products .productinfo-wrapper {
     margin: auto !important;
 

@@ -547,7 +547,7 @@
     <?php //} ?>
 
     <!-- Tape -->
-    <?php echo \frontend\components\Tape::widget(); ?>
+    <?php echo \frontend\components\BestSellersTape::widget(); ?>
     <!-- Tape END -->
 
 

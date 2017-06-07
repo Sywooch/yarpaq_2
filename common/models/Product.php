@@ -206,6 +206,11 @@ class Product extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Возвращает примененные опции к товару
+     *
+     * @return mixed
+     */
     public function getAppliedOptions() {
         return $this->appliedOptions;
     }
@@ -260,6 +265,10 @@ class Product extends \yii\db\ActiveRecord
     public function isNew() {
         $month_ago = (new \DateTime())->modify('-1 month');
         return (new \DateTime($this->moderated_at)) >= $month_ago;
+    }
+
+    public function getUrl() {
+        return '#';
     }
 
 }
