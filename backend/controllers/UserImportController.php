@@ -130,6 +130,7 @@ class UserImportController extends AdminDefaultController
             $model->bind_to_ip = '';
             $model->email = strtolower($user['email']);
             $model->email_confirmed = $user['approved'];
+            $model->cart = $user['cart'];
 
 
             // вставляем данные

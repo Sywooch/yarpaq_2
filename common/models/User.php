@@ -13,7 +13,7 @@ class User extends BaseUser {
     public function rules() {
         $rules = parent::rules();
 
-        $rules[] = ['salt', 'string'];
+        $rules[] = [['salt', 'cart'], 'string'];
 
         return $rules;
     }

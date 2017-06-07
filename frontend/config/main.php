@@ -13,6 +13,9 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'en',
     'components' => [
+        'cart' => [
+            'class' => 'frontend\components\Cart'
+        ],
         'currency' => [
             'class' => 'frontend\components\Currency'
         ],
@@ -50,8 +53,14 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'home/index',
-                //'product/<url:.+>/<id:\d+>' => 'article/index',
-                '<url:.+>'                  => 'category/index'
+
+                'cart'          => 'cart/test',
+
+                'login' => 'user-management/auth/login',
+                'logout' => 'user-management/auth/logout',
+                'profile' => 'user-management/user/profile',
+
+                '<url:.+>'      => 'category/index'
             ],
         ],
 
