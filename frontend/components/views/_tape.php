@@ -1,4 +1,4 @@
-<div class="some-products green gray">
+<div class="some-products green">
     <div class="container">
         <div class="row">
 
@@ -18,7 +18,7 @@
                 <div class="productinfo-wrapper">
                     <div class="product_image">
                         <a href="<?= $product->url; ?>">
-                            <img src="<?= $product->gallery[0]->url; ?>"
+                            <img src="<?= @$product->gallery[0]->url; ?>"
                                  alt="<?= $product->title; ?>"
                                  title="<?= $product->title; ?>"
                                  width="100%">

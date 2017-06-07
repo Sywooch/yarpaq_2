@@ -4,6 +4,7 @@ namespace frontend\components;
 
 
 use common\models\order\OrderProduct;
+use common\models\Product;
 
 class BestSellersTape extends Tape
 {
@@ -14,13 +15,17 @@ class BestSellersTape extends Tape
         $topSellOrderProducts = OrderProduct::find('product_id IS NOT NULL')
             ->select(['COUNT(product_id) AS count, product_id'])
             ->groupBy('product_id')
-            ->orderBy('count')
+            ->orderBy(['count' => SORT_DESC])
             ->limit(10)
             ->with('product')
             ->all();
 
         foreach ($topSellOrderProducts as $orderProduct) {
-            $this->products[] = $orderProduct->product;
+
+            if ($orderProduct->product instanceof Product) {
+                $this->products[] = $orderProduct->product;
+            }
+
         }
     }
 }

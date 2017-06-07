@@ -129,7 +129,7 @@ $this->beginPage();
                                     </a>
 
                                     <div class="torch-green-border pull-right">
-                                        <a href="#">və ya Satlşa başla</a>
+                                        <a href="#">Begin To Sell</a>
                                     </div>
                                 </li>
 

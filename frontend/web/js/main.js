@@ -202,7 +202,7 @@ function displayReSize(){
 
     }
       else {
-        $(".search_query").attr('placeholder','Axtarış sözünü burada yazın....');
+        $(".search_query").attr('placeholder','Axtarış sözünü burada yazın...');
     }
 
 }
@@ -210,13 +210,11 @@ function displayReSize(){
 
 function setWidthProduct(){
     displayReSize();
-    var widthProduct=$(".special-new-years .owl-item").width();
-    $(".special-new-years .product_image").css({'height':widthProduct}) ;
-    $(".special-new-years .product_image img").css({'height':widthProduct}) ;
+    $(".special-new-years .product_image").height($(".special-new-years .product_image").width());
 }
 $(window).resize(function() {
    // setWidthProduct();
-    setInterval(setWidthProduct,10);
+    //setInterval(setWidthProduct,10);
     displayReSize();
 });
 $('.product_tabs  a[href="#best_seller"]').tab('show');

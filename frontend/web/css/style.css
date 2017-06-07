@@ -1233,7 +1233,7 @@ hr {
     padding: 10px 0 12px;
 }
 .some-products .box-heading {
-    border-bottom: 3px solid
+    border-bottom: 2px solid
 }
 
 .some-products.green .box-heading {
@@ -1266,6 +1266,7 @@ hr {
 .some-products .product_image {
     overflow: hidden;
     width: 100%;
+    border-radius: 5px;
     position: relative;
 }
 .christmas-title{background: rgba(0, 0, 0, 0) url("../img/christmas_title.png") no-repeat scroll center top;
@@ -1300,7 +1301,7 @@ hr {
 .some-products .product-add:hover,
 .some-products .productinfo-wrapper .product-add:hover {background-color: #79b237;color:#fff; border-color: #79b237}
 .some-products .owl-carousel .owl-item {
- padding: 0 10px
+ padding: 10px;
 }
 
 .some-products,.description-product {
@@ -1355,7 +1356,7 @@ hr {
 .all-products-link span{
     display: inline-block;
     padding: 9px 4px;}
-.some-products.gray .box-heading{border-color:#474747!important;color:#474747!important}
+.some-products.gray .box-heading{border-color:#999!important;color:#474747!important}
 .some-products .box-heading h3{font-size: 20px}
 .top-footer {
     background-color: #79b237;
