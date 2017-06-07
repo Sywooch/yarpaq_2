@@ -62,54 +62,33 @@
                 <div class="col-sm-12 col-md-9">
                     <div class="row margin-right-0">
                         <div class="name-pr2">
-                            <h3 class="green name-pr">Bowers &amp; Wilkins MM-1 Hi-Fi Speakers</h3>
+                            <h3 class="green name-pr"><?= $product->title; ?></h3>
                             <p class="type-pr">Portativ Səs Sistemləri</p>
                         </div>
                         <div class="col-md-6 col-sm-12 no-padding zoomsArea">
 
                             <section class="center slider hidden-lg hidden-sm hidden-md">
+                                <?php foreach ($product->gallery as $image) { ?>
                                 <div>
-                                    <img src="http://placehold.it/350x300?text=1" class="img-responsive">
+                                    <img src="<?= $image->url ?>" class="img-responsive">
                                 </div>
-                                <div>
-                                    <img src="http://placehold.it/350x300?text=2" class="img-responsive">
-                                </div>
-                                <div>
-                                    <img src="http://placehold.it/350x300?text=3" class="img-responsive">
-                                </div>
-                                <div>
-                                    <img src="http://placehold.it/350x300?text=4" class="img-responsive">
-                                </div>
-                                <div>
-                                    <img src="http://placehold.it/350x300?text=5" class="img-responsive">
-                                </div>
-                                <div>
-                                    <img src="http://placehold.it/350x300?text=6" class="img-responsive">
-                                </div>
+                                <?php } ?>
                             </section>
 
                             <div class="row padding-right-20 hidden-xs">
-                                <a href="/img/3-Z.jpg" class="cloud-zoom" id="cloudZoom">
-                                    <img src="/img/3-Z.jpg" class="img-responsive">
+                                <a href="<?= $product->gallery[0]->url ?>" class="cloud-zoom" id="cloudZoom">
+                                    <img src="<?= $product->gallery[0]->url ?>" class="img-responsive">
                                 </a>
+
                                 <ul class="recent_list">
 
+                                    <?php foreach ($product->gallery as $image) { ?>
                                     <li class="photo_container col-xs-3 no-padding">
-                                        <a href="/img/5-M.jpg" rel="useZoom: 'cloudZoom', smallImage: 'img/4-Z.jpg'" class="cloud-zoom-gallery">
-                                            <img itemprop="image" src="/img/4-M.jpg" class="img-responsive">
+                                        <a href="<?= $image->url ?>" rel="useZoom: 'cloudZoom', smallImage: '<?= $image->url ?>'" class="cloud-zoom-gallery">
+                                            <img itemprop="image" src="<?= $image->url ?>" class="img-responsive">
                                         </a>
                                     </li>
-
-                                    <li class="photo_container col-xs-3 no-padding">
-                                        <a href="/img/5-M.jpg" rel=" useZoom: 'cloudZoom', smallImage: 'img/5-Z.jpg'" class="cloud-zoom-gallery">
-                                            <img itemprop="image" src="/img/5-M.jpg" class="img-responsive">
-                                        </a>
-                                    </li>
-                                    <li class="photo_container col-xs-3 no-padding">
-                                        <a href="/img/3-Z.jpg" rel="useZoom: 'cloudZoom', smallImage: 'img/3-Z.jpg'" class="cloud-zoom-gallery">
-                                            <img itemprop="image" src="/img/3-M.jpg" class="img-responsive">
-                                        </a>
-                                    </li>
+                                    <?php } ?>
                                 </ul>
 
                             </div>
@@ -118,27 +97,26 @@
 
 
                             <div class="name-pr1">
-                                <h3 class="green name-pr">Bowers & Wilkins MM-1 Hi-Fi Speakers</h3>
+                                <h3 class="green name-pr"><?= $product->title; ?></h3>
                                 <p class="type-pr">Portativ Səs Sistemləri</p>
                             </div>
                             <div class="info-pr">
                                 <div class="row">
                                     <div class="col-md-8 col-xs-7">
-                                        <p>Məhsulun kodu: <span>36986</span></p>
-                                        <p>Dükan:
-                                            <span >
-                                                <span class="green dejavu-bold">Bowers & Wilkins</span><br>
-                                                <a class="green">(digər məhsullarına baxmaq)</a>
-                                            </span>
+                                        <p><?= Yii::t('app', 'Product code'); ?>: <span><?= $product->id; ?></span></p>
+                                        <p><?= Yii::t('app', 'Store');?>:
+                                            <a class="green" href="" title="<?= Yii::t('app', 'see other products'); ?>">
+                                                <span class="green dejavu-bold"><?= $product->seller->fullname; ?></span><br>
+                                            </a>
                                         </p>
                                     </div>
-                                    <div class="col-md-4 col-xs-5 no-padding">
+                                    <div class="col-md-4 col-xs-5 no-padding hide">
                                         <p>Baxışların sayı: <span>1507</span></p>
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="stars-area">
+                            <div class="stars-area hide">
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star-o "></i>
                                 <i class="fa fa-star-o "></i>
@@ -148,17 +126,15 @@
                             <del class="del-price green">1090.99 <span class="manatFont">M</span></del>
                             <span class="g-price sizex26">425.00  <b class="manatFont">M</b></span>
                             <div class="col-md-8 no-padding">
-                                <div class="v-margin-15 product-colors  col-md-6 no-padding">
+                                <div class="v-margin-15 product-colors  col-md-6 no-padding hide">
                                     <div><span class="yellowBg"></span></div>
                                     <div><span class="greenBg"></span></div>
                                     <div><span class="brownBg"></span></div>
                                     <div><span class="blackBg"></span></div>
                                 </div>
-                                <div class="v-margin-15 col-md-6 padding-5 no-padding-right hidden-xs hidden-sm">
-                                    <input class="radio" id="radio15" name="method_payment" type="radio">
-                                    <label for="radio15" style="margin-bottom:2px">
-                                        <span class="light-gray2">Mövcutluğu:</span>
-                                        <span>99</span></label> </div>
+                                <div class="col-md-6 no-padding-right hidden-xs hidden-sm">
+                                    <span class="light-gray2">Mövcutluğu: 99</span>
+                                </div>
 
 
                                 <div class="clearfix"></div>

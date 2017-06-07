@@ -53,7 +53,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'home/index',
-
+                'product-<id:\d+>' => 'product/index',
                 'cart'          => 'cart/test',
 
                 'login' => 'user-management/auth/login',

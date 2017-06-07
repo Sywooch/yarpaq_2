@@ -92,7 +92,7 @@ $this->beginPage();
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?= Yii::$app->currency->userCurrency->code; ?></a>
                             <ul class="dropdown-menu" role="menu">
                                 <?php foreach (Yii::$app->currency->currencies as $currency) {
-                        if ($currency == Yii::$app->currency->userCurrency) { continue; } ?>
+                                    if ($currency == Yii::$app->currency->userCurrency) { continue; } ?>
                                     <li><a href="#"><?= $currency->code; ?></a></li>
                                 <?php } ?>
                             </ul>
@@ -553,6 +553,35 @@ $this->beginPage();
 <script type="text/javascript" src="/js/jquery.hoverIntent.js"></script>
 <script type="text/javascript" src="/js/megamenus.js"></script>
 
+<!-- Only for product page -->
+<script type="text/javascript" src="/js/cloud-zoom.js"></script>
+<script>
+    $(document).ready(function(){
+        if($(".chosen-select").length>0)
+            $(".chosen-select").chosen();$(document).on('click','.toggle-menu',function(){$(this).closest('.nav-menu').find('.menu-collapse').slideToggle("slow");return false;})
+    })
+</script>
+<script type="text/javascript" src="/js/jquery.chosen.js"></script>
+
+<script src="/js/bootstrap-datepicker.js"></script>
+<script>
+    $('input.date-pick').datepicker('setDate', 'today');
+</script>
+<script src="/slick/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).on('ready', function() {
+
+        $(".center").slick({
+            dots: true,
+            infinite: true,
+            centerMode: true,
+            slidesToShow: 1,
+            slidesToScroll: 2
+        });
+
+    });
+</script>
+<!-- Only for product page END -->
 
 <script>
     $(window).load(function () {

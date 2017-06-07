@@ -268,7 +268,7 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function getUrl() {
-        return '#';
+        return Language::getCurrent()->urlPrefix.'/product-'.$this->id;
     }
 
 }

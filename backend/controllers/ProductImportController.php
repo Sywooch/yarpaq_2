@@ -15,11 +15,14 @@ class ProductImportController extends AdminDefaultController
     private $productAssoc;
     private $products;
     private $errorModels = [];
+    private $userAssoc;
 
 
     public function actionIndex() {
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
+
+        $this->userAssoc = $this->getUserAssoc();
 
         $this->importProducts();
         //$this->importImages();
@@ -139,7 +142,12 @@ class ProductImportController extends AdminDefaultController
 
 
         $model->manufacturer_id = $desc_data['manufacturer_id'];
-        $model->user_id         = $desc_data['user_id'];
+
+        $user_id = null;
+        if (isset($this->userAssoc[$desc_data['user_id']])) {
+            $user_id = $this->userAssoc[$desc_data['user_id']];
+        }
+        $model->user_id         = $user_id;
 
         $model->moderated       = $desc_data['moderated'];
         $model->moderated_at    = $desc_data['moderation_date'];

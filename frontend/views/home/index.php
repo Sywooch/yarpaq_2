@@ -247,7 +247,7 @@
     <!-- New Year END-->
 
     <!-- New Tape -->
-    <?php echo \frontend\components\BestSellersTape::widget(); ?>
+    <?php echo \frontend\components\NewTape::widget(); ?>
     <!-- New Tape END -->
 
     <!-- Bestsellers Tape -->
