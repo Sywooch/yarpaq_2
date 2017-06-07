@@ -12,7 +12,8 @@ $parents = $category->getParents(true)->all();
 
         <?php foreach (array_slice($parents, 1) as $parent) { ?>
 
-        <a href="<?= $parent->url; ?>" class="name-product" style="margin-left: <?= ($parent->depth - 2) * 12 ?>px">
+        <a href="<?= $parent->url; ?>" class="name-product"
+           style="margin-left: <?= ($parent->depth - 2) * 12 ?>px; margin-top: 4px;">
             <span><?= $parent->title; ?></span>
         </a>
 
@@ -20,9 +21,18 @@ $parents = $category->getParents(true)->all();
 
     <?php } ?>
 
-    <div style="margin-left: <?= $category->depth * 12 ?>px">
+    <div style="margin-left: <?= $category->depth * 12 ?>px; margin-top: 4px;">
         <?= $category->title; ?>
-        <div class="green"><?= $productsCount; ?> <?= Yii::t('app', 'məhsul'); ?></div>
+        <div class="green hide"><?= $productsCount; ?> <?= Yii::t('app', 'məhsul'); ?></div>
     </div>
+
+    <?php foreach ($category->getChildren()->all() as $childCategory) { ?>
+        <a href="<?= $childCategory->url; ?>" class="name-product"
+           style="margin-left: <?= ($childCategory->depth - 2) * 12 ?>px; margin-top: 4px;">
+            <span><?= $childCategory->title; ?></span>
+        </a>
+    <?php } ?>
+
+
 
 </div>

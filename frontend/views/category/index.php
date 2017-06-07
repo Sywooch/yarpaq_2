@@ -22,9 +22,39 @@
                             ]); ?>
                             <!-- Breadcrumbs END -->
 
+
+
                             <ul class="sub-infoMenu" style="display: block;">
+
+
                                 <li>
-                                    <span class="title-filter"><?= Yii::t('app', 'Brend'); ?></span>
+                                    <span class="title-filter"><?= Yii::t('app', 'Price range'); ?></span>
+                                    <input type="text" id="range_02" name="ProductFilter[price]" value=""
+                                           data-min="<?=$productFilter->price_min?>"
+                                           data-max="<?=$productFilter->price_max?>"
+                                           data-from="<?= $productFilter->price_from ? $productFilter->price_from : $productFilter->price_min; ?>"
+                                           data-to="<?= $productFilter->price_to ? $productFilter->price_to : $productFilter->price_max; ?>"
+                                        >
+                                </li>
+
+                                <li>
+                                    <span class="title-filter"> <?= Yii::t('app', 'Condition');?></span>
+                                    <ul>
+                                        <li>
+                                            <input class="radio condition_filter" id="radio1" name="ProductFilter[condition]" type="radio" value="1" <?php if ($productFilter->condition == 1) echo 'checked'; ?>>
+                                            <label for="radio1"> <?= Yii::t('app', 'New');?></label>
+                                        </li>
+                                        <li>
+                                            <input class="radio condition_filter" id="radio2" name="ProductFilter[condition]" type="radio" value="2" <?php if ($productFilter->condition == 2) echo 'checked'; ?>>
+                                            <label for="radio2"> <?= Yii::t('app', 'Used');?></label>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <?php if (count($filterBrands)) { ?>
+
+                                <li>
+                                    <span class="title-filter"><?= Yii::t('app', 'Brand'); ?></span>
 
                                     <ul>
                                         <?php foreach ($filterBrands as $brand) { ?>
@@ -35,38 +65,24 @@
                                         <?php } ?>
                                     </ul>
                                 </li>
+
+                                <?php } ?>
+
+
                                 <li>
-                                    <span class="title-filter"> <?= Yii::t('app', 'Vəziyyət');?></span>
-                                    <ul>
-                                        <li>
-                                            <input class="radio condition_filter" id="radio1" name="ProductFilter[condition]" type="radio" value="1" <?php if ($productFilter->condition == 1) echo 'checked'; ?>>
-                                            <label for="radio1"> <?= Yii::t('app', 'Yeni');?></label>
-                                        </li>
-                                        <li>
-                                            <input class="radio condition_filter" id="radio2" name="ProductFilter[condition]" type="radio" value="2" <?php if ($productFilter->condition == 2) echo 'checked'; ?>>
-                                            <label for="radio2"> <?= Yii::t('app', 'İşlənmiş');?></label>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <span class="title-filter"><?= Yii::t('app', 'Qiymət intervalı'); ?></span>
-                                    <input type="text" id="range_02" name="ProductFilter[price]" value=""
-                                        <?php if ($productFilter->price_from) echo 'data-from="'.$productFilter->price_from.'"'; ?>
-                                        <?php if ($productFilter->price_to) echo 'data-to="'.$productFilter->price_to.'"'; ?>
-                                        >
-                                </li>
-                                <li>
-                                    <button class="btn btn-green"><?= Yii::t('app', 'Axtarışı Təmizlə'); ?></button>
+                                    <button class="btn btn-green reset_filter"><?= Yii::t('app', 'Reset filter'); ?></button>
                                 </li>
                             </ul>
+
 
                         </div>
                     </div>
 
                     <!-- Recently viewed -->
+                    <?php if (!Yii::$app->user->isGuest) { ?>
                     <div class="some-products  green  categoryProducts hidden-xs hidden-sm" style="margin-right: 20px">
                         <div class="box-heading">
-                            <h3><?= Yii::t('app', 'Baxılmış məhsullar'); ?></h3>
+                            <h4><?= Yii::t('app', 'Recently viewed'); ?></h4>
                         </div>
                         <div>
                             <div class="col-md-12">
@@ -95,41 +111,47 @@
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                     <!-- Recently viewed END -->
                 </aside>
                 <div class="col-sm-8 col-md-9">
                     <div class="row margin-right-0">
 
                         <div class="content-box-heading3 light-gray_bg clearfix">
-                            <h6 class="pull-left"><?= Yii::t('app', 'Görüntü'); ?></h6>
+
+                            <h6 class="pull-left hide"><?= Yii::t('app', 'View mode'); ?></h6>
                             <div class="pull-right filter-btn">
                                 <?= Yii::t('app', 'Filter'); ?>
                                 <i class="fa fa-angle-down pull-right"> </i>
                             </div>
-                            <div class="product-filter_elem pull-left">
+                            <div class="product-filter_elem pull-left hide">
                                 <div class="button-view">
                                     <button type="button" id="grid-view" class="active"><i class="fa fa-th"></i></button>
                                     <button type="button" id="list-view"><i class="fa fa-th-list"></i></button>
                                 </div>
                             </div>
 
-                            <div class="pull-right no-padding hidden-xs hide">
+                            <div class="pull-right no-padding hidden-xs">
                                 <div class="limit-product">
-                                    <?= Yii::t('app', 'Göstər'); ?>
+                                    <?= Yii::t('app', 'Items per page'); ?>
                                     <div class="form-group">
                                         <label class="select">
-                                            <select class="form-control">
-                                                <option value="">26</option>
+                                            <select class="form-control" id="ProductFilterPerPage">
+                                                <?php foreach ($productFilter->perPageOptions as $perPageOption) { ?>
+                                                <option <?= $productFilter->per_page == $perPageOption ? 'selected' : '';?> ><?=$perPageOption?></option>
+                                                <?php } ?>
                                             </select>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="sort-product">
-                                    <?= Yii::t('app', 'Sırala'); ?>
+                                    <?= Yii::t('app', 'Sort'); ?>
                                     <div class="form-group">
                                         <label class="select">
-                                            <select class="form-control">
-                                                <option value=""><?= Yii::t('app', 'yenisi'); ?></option>
+                                            <select class="form-control" id="ProductFilterSort">
+                                                <?php foreach ($productFilter->sortOptions as $sortOptionValue => $sortOptionLabel) { ?>
+                                                <option <?= $productFilter->sort == $sortOptionValue ? 'selected' : '';?> value="<?=$sortOptionValue?>"><?= $sortOptionLabel ?></option>
+                                                <?php } ?>
                                             </select>
                                         </label>
                                     </div>
@@ -144,59 +166,29 @@
 
                         <div class="row some-products categoryProducts categoryProductsAll">
 
-                            <?php foreach ($products as $product) { ?>
-                            <div class="productinfo-wrapper col-lg-3 col-md-3 col-sm-4 col-xs-4">
+                            <?php if (count($products)) { ?>
 
-                                <div class="product_image">
 
-                                    <a href="#" style="background-image: url('<?= @$product->gallery[0]->url ?>')">
-                                        <!--
-                                        <div class="new-product">
-                                            <span class="dejavu-bold">Yeni</span>
-                                        </div>
-                                        <div class="discount">
-                                            <span class="dejavu-bold">%</span>
-                                        </div>
-                                        -->
-                                        <img src="<?= @$product->gallery[0]->url ?>" alt="Favourable unreserved nay" title=" Favourable unreserved nay " class="hide">
-                                    </a>
+                                <?php foreach ($products as $product) { ?>
+                                <div class="productinfo-wrapper col-lg-3 col-md-3 col-sm-4 col-xs-4">
 
-                                    <div class="hover-info hide">
-                                        <ul class="product-icons list-inline">
-                                            <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                            <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                            <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                        </ul>
-                                        <div class="hover_text"> </div>
-                                    </div>
-                                </div>
-                                <div class="product_info">
+                                    <div class="product_image">
 
-                                    <p class="g-title"><a href="#"><?= $product->title; ?></a></p>
-                                    <span class="g-price"><?= $product->price; ?>  <b class="manatFont">M</b></span>
+                                        <a href="#" style="background-image: url('<?= @$product->gallery[0]->url ?>')">
+                                            <?php if ($product->isNew()) { ?>
+                                            <div class="new-product">
+                                                <span class="dejavu-bold"><?= Yii::t('app', 'New'); ?></span>
+                                            </div>
+                                            <?php } ?>
+                                            <!--
+                                            <div class="discount">
+                                                <span class="dejavu-bold">%</span>
+                                            </div>
+                                            -->
+                                            <img src="<?= @$product->gallery[0]->url ?>" alt="Favourable unreserved nay" title=" Favourable unreserved nay " class="hide">
+                                        </a>
 
-                                    <!--
-                                    <div>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star-o "></i>
-                                        <i class="fa fa-star-o "></i>
-                                        <i class="fa fa-star-o "></i>
-                                        <i class="fa fa-star-o "></i>
-                                    </div>
-                                    -->
-
-                                    <div class="product-colors">
-                                        <div><span class="yellowBg"></span></div>
-                                        <div><span class="greenBg"></span></div>
-                                        <div><span class="brownBg"></span></div>
-                                        <div><span class="blackBg"></span></div>
-                                    </div>
-
-                                </div>
-                                <div class="operations-order">
-                                    <button class="product-add">Səbətə at</button>
-                                    <div class="hidden-xs hidden-sm">
-                                        <div class=" text-center">
+                                        <div class="hover-info hide">
                                             <ul class="product-icons list-inline">
                                                 <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
                                                 <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
@@ -205,8 +197,51 @@
                                             <div class="hover_text"> </div>
                                         </div>
                                     </div>
+                                    <div class="product_info">
+
+                                        <p class="g-title"><a href="#"><?= $product->title; ?></a></p>
+                                        <span class="g-price"><?= $product->price; ?> <b class="manatFont">M</b></span>
+                                        <div class="g-description"><?= html_entity_decode($product->description); ?></div>
+                                        <!--
+                                        <div>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o "></i>
+                                            <i class="fa fa-star-o "></i>
+                                            <i class="fa fa-star-o "></i>
+                                            <i class="fa fa-star-o "></i>
+                                        </div>
+                                        -->
+
+                                        <div class="product-colors">
+                                            <div><span class="yellowBg"></span></div>
+                                            <div><span class="greenBg"></span></div>
+                                            <div><span class="brownBg"></span></div>
+                                            <div><span class="blackBg"></span></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="operations-order">
+                                        <button class="product-add">Səbətə at</button>
+                                        <div class="hidden-xs hidden-sm">
+                                            <div class=" text-center">
+                                                <ul class="product-icons list-inline">
+                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
+                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
+                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
+                                                </ul>
+                                                <div class="hover_text"> </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <?php } ?>
+
+                            <?php } else { ?>
+
+                                <div class="col-xs-12">
+                                    <p><?= Yii::t('app', 'No results'); ?></p>
+                                </div>
 
                             <?php } ?>
 

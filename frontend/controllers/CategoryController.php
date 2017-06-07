@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Manufacturer;
 use frontend\models\ProductFilter;
 use Yii;
+use yii\base\Exception;
 use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
 use common\models\Product;
@@ -23,7 +24,11 @@ class CategoryController extends BasicController
 
         // Параметры фильтра
         $productFilter = new ProductFilter();
-        $productFilter->load($r->get());
+        $productFilter->attributes = $r->get();
+
+        if (!$productFilter->validate()) {
+            throw new Exception('Wrong filter');
+        }
 
         // Поиск среди категорий
         $category = Category::findByUrl($url);
@@ -34,13 +39,42 @@ class CategoryController extends BasicController
         // GET Products
         $products = Product::find()
             ->leftJoin('{{%product_category}}', '`product_id` = `id`')
-            ->where(['category_id' => $childrenCategoriesIDs])
-            ->orderBy(['price' => SORT_ASC]);
+            ->where(['category_id' => $childrenCategoriesIDs]);
 
+        // get min price
+        $minPriceProducts = clone $products;
+        $productFilter->price_min = $minPriceProducts->min('price');
+        // get max price
+        $maxPriceProducts = clone $products;
+        $productFilter->price_max = $maxPriceProducts->max('price');
+
+        if ($productFilter->condition) {
+            $products->andWhere(['condition_id' => $productFilter->condition]);
+        }
+
+        if ($productFilter->brand) {
+            $products->andWhere(['manufacturer_id' => $productFilter->brand]);
+        }
+
+        if ($productFilter->price_from) {
+            $products->andWhere(['>=', 'price', $productFilter->price_from]);
+        }
+
+        if ($productFilter->price_to) {
+            $products->andWhere(['<=', 'price', $productFilter->price_to]);
+        }
+
+        if ($productFilter->sort) {
+            $products->orderBy( $productFilter->sortSetting );
+        } else {
+            $products->orderBy(['price' => SORT_ASC]);
+        }
+
+        // pagination
         $productsCount = clone $products;
         $pages = new Pagination([
             'totalCount' => $productsCount->count(),
-            'defaultPageSize' => 16
+            'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24
         ]);
         $models = $products->offset($pages->offset)
             ->limit($pages->limit)
@@ -69,7 +103,7 @@ class CategoryController extends BasicController
     private function getAllChildrenCategories($category) {
         $childrenCategories = $category->children()->all();
 
-        $childrenCategoriesIDs = [];
+        $childrenCategoriesIDs = [$category->id];
         foreach ($childrenCategories as $cat) {
             $childrenCategoriesIDs[] = $cat->id;
         }

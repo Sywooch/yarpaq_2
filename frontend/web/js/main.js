@@ -19,23 +19,33 @@ function ProductFilter() {
     this.brand      = null;
     this.price_from = null;
     this.price_to   = null;
+    this.per_page   = null;
+    this.sort       = null;
 
     this.init = function () {
 
-        if (GetURLParameter('ProductFilter[brand]')) {
-            this.brand = GetURLParameter('ProductFilter[brand]');
+        if (GetURLParameter('brand')) {
+            this.brand = GetURLParameter('brand');
         }
 
-        if (GetURLParameter('ProductFilter[condition]')) {
-            this.condition = GetURLParameter('ProductFilter[condition]');
+        if (GetURLParameter('condition')) {
+            this.condition = GetURLParameter('condition');
         }
 
-        if (GetURLParameter('ProductFilter[price_from]')) {
-            this.price_from = GetURLParameter('ProductFilter[price_from]');
+        if (GetURLParameter('price_from')) {
+            this.price_from = GetURLParameter('price_from');
         }
 
-        if (GetURLParameter('ProductFilter[price_to]')) {
-            this.price_to = GetURLParameter('ProductFilter[price_to]');
+        if (GetURLParameter('price_to')) {
+            this.price_to = GetURLParameter('price_to');
+        }
+
+        if (GetURLParameter('per_page')) {
+            this.per_page = GetURLParameter('per_page');
+        }
+
+        if (GetURLParameter('sort')) {
+            this.sort = GetURLParameter('sort');
         }
 
     };
@@ -55,12 +65,52 @@ function ProductFilter() {
         self.update();
     };
 
+    this.setPerPage = function (perPage) {
+        this.per_page = perPage;
+        self.update();
+    };
+
+    this.setSort = function (sort) {
+        this.sort = sort;
+        self.update();
+    };
+
 
     this.update = function () {
-        var href = '?ProductFilter[brand]='+this.brand+'&ProductFilter[condition]='+this.condition;
-        href    += '&ProductFilter[price_from]='+this.price_from+'&ProductFilter[price_to]='+this.price_to;
-        location.href = href;
+        var params = [];
+
+        if (this.brand) {
+            params.push('brand='+this.brand);
+        }
+        if (this.condition) {
+            params.push('condition='+this.condition);
+        }
+        if (this.price_from) {
+            params.push('price_from='+this.price_from);
+        }
+        if (this.price_to) {
+            params.push('price_to='+this.price_to);
+        }
+        if (this.per_page) {
+            params.push('per_page='+this.per_page);
+        }
+        if (this.sort) {
+            params.push('sort='+this.sort);
+        }
+
+        location.href = '?'+params.join('&');
     };
+
+    this.reset = function () {
+        this.condition  = null;
+        this.brand      = null;
+        this.price_from = null;
+        this.price_to   = null;
+        this.per_page   = null;
+        this.sort       = null;
+
+        this.update();
+    }
 }
 
 var ProductFilter = new ProductFilter();
@@ -248,11 +298,6 @@ $(".product-filter_elem .button-view>button").click(function() {
 
 $("#range_02").ionRangeSlider({
     type: "double",
-    //grid: true,
-    min: 0,
-    max: 1000,
-    from: 200,
-    to: 800,
     postfix: "<span class=\"manatFont\">M</span>",
     onFinish: function (data) {
         ProductFilter.setPrice(data.from, data.to);
@@ -320,5 +365,19 @@ $(function () {
     $('.brand_filter').change(function () {
         ProductFilter.setBrand($(this).val());
     });
+
+    $('#ProductFilterPerPage').change(function () {
+        ProductFilter.setPerPage($(this).val());
+    });
+
+    $('#ProductFilterSort').change(function () {
+        ProductFilter.setSort($(this).val());
+    });
+
+    $('.reset_filter').click(function () {
+        ProductFilter.reset();
+    });
+
+
 
 });

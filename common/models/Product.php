@@ -6,6 +6,7 @@ use common\models\category\Category;
 use common\models\option\Option;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
+use Faker\Provider\DateTime;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -251,5 +252,14 @@ class Product extends \yii\db\ActiveRecord
         return $title;
     }
 
+    /**
+     * Отвечает на вопрос является ли товар новым
+     *
+     * @return bool
+     */
+    public function isNew() {
+        $month_ago = (new \DateTime())->modify('-1 month');
+        return (new \DateTime($this->moderated_at)) >= $month_ago;
+    }
 
 }
