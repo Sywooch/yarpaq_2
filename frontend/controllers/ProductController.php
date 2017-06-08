@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\ViewedProduct;
 use Yii;
 use common\models\Product;
 
@@ -18,8 +19,16 @@ class ProductController extends BasicController
         // Поиск продукта
         $product = Product::findOne($id);
 
-        return $this->render('index', [
-            'product'      => $product
-        ]);
+        if ($product) {
+
+            ViewedProduct::log($product->id);
+
+            return $this->render('index', [
+                'product'      => $product
+            ]);
+        } else {
+
+        }
+
     }
 }
