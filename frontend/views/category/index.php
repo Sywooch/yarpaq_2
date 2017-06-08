@@ -174,7 +174,7 @@
 
                                     <div class="product_image">
 
-                                        <a href="#" style="background-image: url('<?= @$product->gallery[0]->url ?>')">
+                                        <a href="<?= $product->url; ?>" style="background-image: url('<?= @$product->gallery[0]->url ?>')">
                                             <?php if ($product->isNew()) { ?>
                                             <div class="new-product">
                                                 <span class="dejavu-bold"><?= Yii::t('app', 'New'); ?></span>
@@ -199,18 +199,17 @@
                                     </div>
                                     <div class="product_info">
 
-                                        <p class="g-title"><a href="#"><?= $product->title; ?></a></p>
+                                        <p class="g-title"><a href="<?= $product->url ?>"><?= $product->title; ?></a></p>
                                         <span class="g-price"><?= $product->price; ?> <b class="manatFont">M</b></span>
                                         <div class="g-description"><?= html_entity_decode($product->description); ?></div>
-                                        <!--
+
                                         <div>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>
                                             <i class="fa fa-star-o "></i>
                                             <i class="fa fa-star-o "></i>
                                             <i class="fa fa-star-o "></i>
                                             <i class="fa fa-star-o "></i>
                                         </div>
-                                        -->
 
                                         <div class="product-colors">
                                             <div><span class="yellowBg"></span></div>

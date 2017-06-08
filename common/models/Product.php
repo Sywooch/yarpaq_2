@@ -54,6 +54,11 @@ class Product extends \yii\db\ActiveRecord
     const SCENARIO_IMPORT   = 'import';
     const SCENARIO_DEFAULT  = 'default';
 
+    protected $conditions = [
+        '1' => 'new',
+        '2' => 'used'
+    ];
+
     protected $appliedOptions;
 
     /**
@@ -269,6 +274,14 @@ class Product extends \yii\db\ActiveRecord
 
     public function getUrl() {
         return Language::getCurrent()->urlPrefix.'/product-'.$this->id;
+    }
+
+    public function getCondition() {
+        return $this->conditions[$this->condition_id];
+    }
+
+    public function getLocation() {
+        return $this->hasOne(Zone::className(), ['id' => 'location_id']);
     }
 
 }

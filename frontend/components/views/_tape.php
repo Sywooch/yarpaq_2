@@ -34,12 +34,12 @@
                         </div>
                     </div>
 
-                    <p class="g-title"><?= $product->title; ?></p>
+                    <a href="<?= $product->url; ?>" class="g-title"><?= $product->title; ?></a>
 
                     <span class="g-price"><?= $product->price; ?> <b class="manatFont">M</b></span>
 
-                    <div class="hide">
-                        <i class="fa fa-star" aria-hidden="true"></i>
+                    <div class="stars-area">
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
                         <i class="fa fa-star-o "></i>
                         <i class="fa fa-star-o "></i>
                         <i class="fa fa-star-o "></i>

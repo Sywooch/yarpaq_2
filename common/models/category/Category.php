@@ -273,21 +273,22 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         // все родители
         $parents = $this->getParents()->with('content')->all();
 
-        // убираем home url, он не учитывается
         foreach ($parents as $parent) {
 
             // пропускаем корень
             if ($parent->parent_id == 0) { continue; }
 
             // строим URL
-            $url .= $parent->name.'/';
+            $url .= '/' . $parent->name;
         }
 
 
         // если включительно
         if ($includingSelf) {
-            $url .= $this->name . '/';
+            $url .= '/'.$this->name;
         }
+
+        $url .= '/';
 
         return $url;
     }

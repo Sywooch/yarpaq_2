@@ -1340,6 +1340,8 @@ hr {
 .productinfo-wrapper .g-title {
     margin: 14px 0 7px;
     height: 50px;
+    display: block;
+    color: #333;
     overflow: hidden;
 }
 
@@ -2067,8 +2069,7 @@ background: url("../img/payment.png") no-repeat;
 .btn-green{
     border-radius: 5px;
     background-color: rgb(121, 178, 55);
-    height: 30px;
-    padding: 0 22px;
+    padding: 6px 22px 3px;
     color: #fff;
     font-size: 12px;
 }
@@ -2752,7 +2753,7 @@ margin:3px 0;font-size: 9px;
     color: #696969;
     vertical-align: middle;
     margin:0;
-    line-height: 25px !important
+    line-height: 27px
 }
 .caption-for-taksit {
     background-color: #959595;
@@ -2769,7 +2770,6 @@ margin:3px 0;font-size: 9px;
     text-align: center;
     top: 0;
     width: 122px;
-    z-index: 283;
     margin-top: -15px;
 }
 

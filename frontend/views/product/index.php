@@ -8,26 +8,20 @@
                     <div class="infoMenuBox light-gray_bg filterProductBox">
                         <div class="list-infoMenu">
 
-                            <div class="selected-product">
-                                <div class="title-filter">
-                                    <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                    Elektronika
-                                </div>
-                                <div class="name-product">
-                                    <span>Audio - Video</span>
-                                    <ul>
-                                        <li>
-                                            Portativ səs sistemi
-                                            <div class="green">2 456 nəticə</div>
-                                        </li>
+                            <!-- Breadcrumbs -->
+                            <?php
 
-                                    </ul>
-                                </div>
-                            </div>
+                            if (count($product->categories)) {
+                                echo $this->render('_breadcrumb', [
+                                    'category' => $product->categories[0]
+                                ]);
+                            }
+                            ?>
+                            <!-- Breadcrumbs END -->
 
                         </div>
                     </div>
-                    <div class="some-products  green  categoryProducts" style="margin-right: 20px">
+                    <div class="some-products green categoryProducts" style="margin-right: 20px">
                         <div class="box-heading">
                             <h3>Baxılmış məhsullar</h3>
                         </div>
@@ -98,14 +92,16 @@
 
                             <div class="name-pr1">
                                 <h3 class="green name-pr"><?= $product->title; ?></h3>
-                                <p class="type-pr">Portativ Səs Sistemləri</p>
+                                <?php if (count($product->categories)) { ?>
+                                <p class="type-pr"><?= $product->categories[0]->title; ?></p>
+                                <?php } ?>
                             </div>
                             <div class="info-pr">
                                 <div class="row">
                                     <div class="col-md-8 col-xs-7">
                                         <p><?= Yii::t('app', 'Product code'); ?>: <span><?= $product->id; ?></span></p>
                                         <p><?= Yii::t('app', 'Store');?>:
-                                            <a class="green" href="" title="<?= Yii::t('app', 'see other products'); ?>">
+                                            <a class="green" href="#" title="<?= Yii::t('app', 'see other products'); ?>">
                                                 <span class="green dejavu-bold"><?= $product->seller->fullname; ?></span><br>
                                             </a>
                                         </p>
@@ -116,15 +112,19 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="stars-area hide">
-                                <i class="fa fa-star" aria-hidden="true"></i>
+                            <div class="stars-area">
+                                <i class="fa fa-star-o" aria-hidden="true"></i>
                                 <i class="fa fa-star-o "></i>
                                 <i class="fa fa-star-o "></i>
                                 <i class="fa fa-star-o "></i>
                                 <i class="fa fa-star-o "></i>
                             </div>
-                            <del class="del-price green">1090.99 <span class="manatFont">M</span></del>
-                            <span class="g-price sizex26">425.00  <b class="manatFont">M</b></span>
+
+                            <div>
+                                <del class="del-price green hide">1090.99 <span class="manatFont">M</span></del>
+                                <span class="g-price sizex26"><?= $product->price; ?> <b class="manatFont">M</b></span>
+                            </div>
+
                             <div class="col-md-8 no-padding">
                                 <div class="v-margin-15 product-colors  col-md-6 no-padding hide">
                                     <div><span class="yellowBg"></span></div>
@@ -132,30 +132,29 @@
                                     <div><span class="brownBg"></span></div>
                                     <div><span class="blackBg"></span></div>
                                 </div>
-                                <div class="col-md-6 no-padding-right hidden-xs hidden-sm">
+
+                                <div class="col-md-6 no-padding-right hidden-xs hidden-sm hide">
                                     <span class="light-gray2">Mövcutluğu: 99</span>
                                 </div>
 
 
                                 <div class="clearfix"></div>
-                                <div class="col-xs-6  padding-right-2  no-padding-left">
-
+                                <div class="col-xs-6  padding-right-2  no-padding-left hide">
                                     <button class="simple_gray_btn ">
                                         <i class="cart-icon iconBag"> </i>
-                                        <span>Səbətə əlavə et </span>
+                                        <span><?= Yii::t('app', 'Add to basket'); ?></span>
                                     </button>
                                 </div>
-                                <div class=" col-xs-6 padding-left-2  no-padding-right">
-
+                                <div class=" col-xs-6 padding-left-2  no-padding-right hide">
                                     <button class="simple_gray_btn">
                                         <i class="fa fa-heart"></i>
-                                        <span>İstəklərə əlavə et </span>
+                                        <span><?= Yii::t('app', 'Add to wishlist'); ?></span>
                                     </button>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class=" clearfix v-margin-20">
                                     <div class="quantity quantity2 col-md-6 padding-right-2  no-padding-left">
-                                        <label> Miqdar</label>
+                                        <label><?= Yii::t('app', 'Quantity'); ?></label>
                                         <div class="le-quantity pull-right">
                                             <form>
                                                 <a class="sp-minus" href="#reduce">-</a>
@@ -165,7 +164,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-md-6 padding-left-2 no-padding-right">
-                                        <button class="btn btn-green">Dərhal əldə et</button>
+                                        <button class="btn btn-green"><?= Yii::t('app', 'Add to basket'); ?></button>
                                     </div>
 
                                 </div>
@@ -173,8 +172,8 @@
 
 
                             <div class="clearfix"></div>
-                            <div class="taksit-calculator ">
-                                <div class="caption-for-taksit">Taksit kalkulatoru</div>
+                            <div class="taksit-calculator">
+                                <div class="caption-for-taksit"><?= Yii::t('app', 'Taksit calculator'); ?></div>
                                 <table class="full-width">
                                     <thead>
                                     <tr>
@@ -204,22 +203,20 @@
                                 <div class="clearfix">
 
                                     <div class="col-xs-4 gray_light-gray ">
-                                        <p>Vəziyyəti: <span>Yeni</span></p>
-                                        <p>Yerləşmə: <span>Bakı şəhəri</span></p>
-                                        <p>Çatdırma: <span>Pulsuz</span></p>
+                                        <p><?= Yii::t('app', 'Condition'); ?>: <span><?= Yii::t('app', $product->condition); ?></span></p>
+                                        <p><?= Yii::t('app', 'Location'); ?>: <span><?= $product->location->name; ?></span></p>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <img src="/img/security.png">
                                         <div class="sizex10  v-margin-10 gray2">
-                                            Alıcı hüquqlarının<br>
-                                            100% qorunması</div>
+                                            <?= Yii::t('app', 'customer rights'); ?>
+                                        </div>
                                     </div>
                                     <div class="col-xs-4 text-center">
 
                                         <img src="/img/moneyback.png">
                                         <div class="sizex10 v-margin-10 gray2">
-                                            Pulun 100%<br>
-                                            qaytarılması (ətraflı)
+                                            <?= Yii::t('app', 'moneyback'); ?>
                                         </div>
                                     </div>
                                 </div>
