@@ -403,4 +403,18 @@ $(function () {
         countryField.change();
     }
 
+    var loginForm = $('#loginForm');
+    if (loginForm.size()) {
+        loginForm.submit(function () {
+            $.post(loginForm.attr('action'), loginForm.serialize(), function (response) {
+                if (response.status == 1) {
+                    location.reload();
+                }
+            });
+
+            return false;
+        });
+    }
+
+
 });

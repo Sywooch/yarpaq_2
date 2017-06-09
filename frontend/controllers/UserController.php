@@ -7,16 +7,19 @@ use common\models\Country;
 use common\models\Language;
 use common\models\Profile;
 use common\models\Zone;
+use frontend\models\LoginForm;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use common\models\User;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 
 class UserController extends BasicController
 {
 
-    public $freeAccessActions = ['registration'];
+    public $freeAccessActions = ['registration', 'login'];
 
     public function actionRegistration()
     {
@@ -95,6 +98,18 @@ class UserController extends BasicController
             'countries'     => ArrayHelper::map($countries, 'id', 'name'),
             'zones'         => ArrayHelper::map($zones,     'id', 'name', 'country_id')
         ]);
+    }
+
+    public function actionLogin() {
+
+        $model = new LoginForm();
+
+        if ( $model->load(Yii::$app->request->post()) AND $model->login() )
+        {
+            return ['status' => 1];
+        }
+
+        return ['status' => 0];
     }
 
 

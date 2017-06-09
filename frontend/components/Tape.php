@@ -21,6 +21,9 @@ abstract class Tape extends Widget
     abstract public function loadProducts();
 
     public function run() {
+
+        if (empty($this->products)) return '';
+
         return $this->render('_tape', [
             'mainLabel'     => $this->mainLabel,
             'seeAllLabel'   => $this->seeAllLabel,

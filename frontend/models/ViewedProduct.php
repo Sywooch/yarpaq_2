@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Product;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -26,6 +27,9 @@ class ViewedProduct extends ActiveRecord
 
             $view->save();
         }
+    }
 
+    public function getProduct() {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 }

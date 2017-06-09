@@ -501,30 +501,33 @@ $this->beginPage();
                                         <div class="col-md-12">
                                             <h4 class="margin-bottom-15 margin-top-0"><?= Yii::t('app', 'Sign in'); ?></h4>
 
-                                            <div class="form-group">
-                                                <input placeholder="<?= Yii::t('app', 'Email'); ?>" id="inputUsernameEmail"
-                                                       class="form-control" type="text">
-                                            </div>
-                                            <div class="form-group margin-bottom-10">
-                                                <input placeholder="<?= Yii::t('app', 'Password'); ?>" id="inputPassword" class="form-control"
-                                                       type="password">
-                                            </div>
-                                            <a href="#" class="hide" id="forgot_pw"><?= Yii::t('app', 'Restore password'); ?></a>
-                                            <input class="button_drop greenBg pull-right" value="<?= Yii::t('app', 'Sign in'); ?>"
-                                                   type="submit">
+                                            <form action="<?= Language::getCurrent()->urlPrefix; ?>/login" method="post" id="loginForm">
+                                                <div class="form-group">
+                                                    <input placeholder="<?= Yii::t('app', 'Email'); ?>" id="inputUsernameEmail"
+                                                           class="form-control" type="text" name="LoginForm[email]">
+                                                </div>
+                                                <div class="form-group margin-bottom-10">
+                                                    <input placeholder="<?= Yii::t('app', 'Password'); ?>" id="inputPassword" class="form-control"
+                                                           type="password" name="LoginForm[password]">
+                                                </div>
+                                                <a href="#" class="hide" id="forgot_pw"><?= Yii::t('app', 'Restore password'); ?></a>
+                                                <input type="hidden" name="<?= Yii::$app->request->csrfParam ?>" value="<?= Yii::$app->request->getCsrfToken()?>">
+                                                <input class="button_drop greenBg pull-right" value="<?= Yii::t('app', 'Sign in'); ?>"
+                                                       type="submit">
 
-                                            <div class="clearfix"></div>
-                                            <!--
-                                            <div class="col-md-6 col-sm-6 col-xs-6  no-padding bt_facebook">
-                                                <a class="bt_soc " href="#">Login with Facebook </a>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-6 bt_gmail no-padding">
-                                                <a class="bt_soc " href="#">Sign in with Google+</a>
-                                            </div>
-                                            -->
-                                            <div class="clearfix"></div>
-                                            <h4 class="margin-top-20 margin-bottom-10"><?= Yii::t('app', 'Join us'); ?></h4>
-                                            <a href="<?= Language::getCurrent()->urlPrefix; ?>/registration" class="button_drop greenBg col-md-12"><?= Yii::t('app', 'Register'); ?></a>
+                                                <div class="clearfix"></div>
+                                                <!--
+                                                <div class="col-md-6 col-sm-6 col-xs-6  no-padding bt_facebook">
+                                                    <a class="bt_soc " href="#">Login with Facebook </a>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 bt_gmail no-padding">
+                                                    <a class="bt_soc " href="#">Sign in with Google+</a>
+                                                </div>
+                                                -->
+                                                <div class="clearfix"></div>
+                                                <h4 class="margin-top-20 margin-bottom-10"><?= Yii::t('app', 'Join us'); ?></h4>
+                                                <a href="<?= Language::getCurrent()->urlPrefix; ?>/registration" class="button_drop greenBg col-md-12"><?= Yii::t('app', 'Register'); ?></a>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

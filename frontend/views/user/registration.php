@@ -131,7 +131,7 @@
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
-                                <div >
+                                <div>
                                     <h4 class="registration-title"><?= Yii::t('app', 'Address'); ?></h4>
                                     <div class="forms">
 

@@ -4,10 +4,12 @@
 
             <div class="box-heading">
                 <h3><?= Yii::t('app', $mainLabel); ?>
+                    <?php if (!empty($seeAllLabel)) { ?>
                     <a href="#" class="all-products-link pull-right hide">
                         <span><?= Yii::t('app', $seeAllLabel); ?></span>
                         <i class="fa fa-angle-right"></i>
                     </a>
+                    <?php } ?>
                 </h3>
             </div>
 
