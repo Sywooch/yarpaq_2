@@ -362,11 +362,14 @@ background: url("../img/headerBg1.png")
     box-shadow: none;
     border: 0;
     left: 0;
-    background: #bdbdbd; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover, #bdbdbd 0%, #a0a0a0 49%, #a0a0a0 51%, #6d6e6d 100%); /* FF3.6-15 */
-    background: -webkit-radial-gradient(center, ellipse cover, #bdbdbd 0%,#a0a0a0 49%,#a0a0a0 51%,#6d6e6d 100%); /* Chrome10-25,Safari5.1-6 */
-    background: radial-gradient(ellipse at center, #bdbdbd 0%,#a0a0a0 49%,#a0a0a0 51%,#6d6e6d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdbdbd', endColorstr='#6d6e6d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    background: url('/img/back-photo1.png');
+
+    /*background: #bdbdbd; /!* Old browsers *!/*/
+    /*background: -moz-radial-gradient(center, ellipse cover, #bdbdbd 0%, #a0a0a0 49%, #a0a0a0 51%, #6d6e6d 100%); /!* FF3.6-15 *!/*/
+    /*background: -webkit-radial-gradient(center, ellipse cover, #bdbdbd 0%,#a0a0a0 49%,#a0a0a0 51%,#6d6e6d 100%); /!* Chrome10-25,Safari5.1-6 *!/*/
+    /*background: radial-gradient(ellipse at center, #bdbdbd 0%,#a0a0a0 49%,#a0a0a0 51%,#6d6e6d 100%); /!* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!/*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdbdbd', endColorstr='#6d6e6d',GradientType=1 ); /!* IE6-9 fallback on horizontal gradient *!/*/
 }
 
 .homeslider-style2 .homeslider .bx-controls-direction .bx-prev,
@@ -1020,7 +1023,7 @@ hr {
 .cart-login .dropdown-menu .form-control{font-size: 14px;color:#a6a6a6}
 .cart-login .dropdown-menu h4{font-size: 16px;color:#a0a0a0;}
 .cart-login .dropdown-menu>div>a{
-    color: #a0a0a0;
+    color: #fff;
     display: inline-block;
     font-size: 14px;
     padding-top: 4px !important;
@@ -2275,10 +2278,16 @@ float: left;}
     text-align:center ;
 }
 
+.form-group.error input, .form-group.error select, .form-group.error textarea {
+    border: 1px solid red;
+}
+
 .registration-info .form-group {
     position: relative;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
+
+
 
 .forms {
     margin: 25px 0;
@@ -2652,8 +2661,8 @@ margin:3px 0;font-size: 9px;
 
 .name-pr {
     font-size: 20px;
-    line-height: 18px;
-    margin-top: 0;
+    line-height: 22px;
+    margin-top: -3px;
 }
 
 .type-pr {

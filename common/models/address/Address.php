@@ -36,7 +36,7 @@ class Address extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'firstname', 'lastname', 'company', 'address_1', 'country_id', 'zone_id', 'city', 'postcode'], 'required'],
+            [['user_id', 'firstname', 'lastname', 'address_1', 'country_id', 'zone_id', 'city', 'postcode'], 'required'],
             [['user_id', 'country_id', 'zone_id'], 'integer'],
             [['firstname', 'lastname'], 'string', 'max' => 32],
             [['company'], 'string', 'max' => 40],

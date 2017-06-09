@@ -149,7 +149,7 @@ $(document).ready(function() {
         rewindNav: false,
         navigation: true // itemsMobile disabled - inherit from itemsTablet option
     });
-  //  $('#best_seller').tab('show');
+    // $('#best_seller').tab('show');
 
     $(".product-icons i").mouseover(function(){
       var getText=$(this).data("text");
@@ -167,44 +167,43 @@ $(document).ready(function() {
         $('.sp-minus').addClass("disabled-sp");
 
     }
-$('.cart-remove-btn').on('click', function(){
-    $(this).parents('tr').remove();
-});
+
+    $('.cart-remove-btn').on('click', function(){
+        $(this).parents('tr').remove();
+    });
 
 
-$(document).mouseup(function (e)
-{
-    var container = $(".desktop-nav.vertical-left-megamenu");
-    var container1 = $(".widgets-content");
+    //$(document).mouseup(function (e) {
+    //    var container = $(".desktop-nav.vertical-left-megamenu");
+    //    var container1 = $(".widgets-content");
+    //
+    //    if (!container.is(e.target) // if the target of the click isn't the container...
+    //        && container.has(e.target).length === 0) // ... nor a descendant of the container
+    //    {
+    //        container.parents('.nav-vertical-left-megamenu').removeClass('active');
+    //        container1.removeClass('widgets-content-active');
+    //    }
+    //});
 
-    if (!container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0) // ... nor a descendant of the container
-    {
-        container.parents('.nav-vertical-left-megamenu').removeClass('active');
-        container1.removeClass('widgets-content-active');
-    }
+
+    $(document).mouseup(function (e) {
+        var obj = $(e.target);
+        if ( obj.hasClass('overlap-content') || obj.hasClass('header-second') ) {
+
+            // close menu
+            $('.nav-vertical-left-megamenu').removeClass('active');
+
+            // hide overlay
+            $(".widgets-content").removeClass('widgets-content-active');
+        }
+    });
 });
-$(document).mouseup(function (e)
-{
-    var container = $(".desktop-nav.vertical-left-megamenu");
-    var container1 = $(".widgets-content");
-    if (!container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0) // ... nor a descendant of the container
-    {
-        container.removeClass('actived');
-        container1.removeClass('widgets-content-active');
-    }
-});
-})
 function displayReSize(){
     if ( $(window).width() <= 600) {
         $(".search_query").attr('placeholder','Axtarış sözü ...');
-
-    }
-      else {
+    } else {
         $(".search_query").attr('placeholder','Axtarış sözünü burada yazın...');
     }
-
 }
 
 
@@ -220,15 +219,23 @@ $(window).resize(function() {
 $('.product_tabs  a[href="#best_seller"]').tab('show');
 $('.product-tab a[href="#comment_product"]').tab('show');
 
-$(".cart-login .dropdown-cart").click(function(){
-    if($(this).hasClass('open')){
-        $(".widgets-content").removeClass('widgets-content-active');
+//$(".cart-login .dropdown-cart").click(function(){
+//    if($(this).hasClass('open')){
+//        $(".widgets-content").removeClass('widgets-content-active');
+//
+//    } else{
+//        $(".widgets-content").addClass('widgets-content-active');
+//
+//    }
+//})
 
-    } else{
-        $(".widgets-content").addClass('widgets-content-active');
+$('.dropdown-cart').on('hide.bs.dropdown', function(){
+    $(".widgets-content").removeClass('widgets-content-active');
+});
+$('.dropdown-cart').on('show.bs.dropdown', function(){
+    $(".widgets-content").addClass('widgets-content-active');
+});
 
-    }
-})
 $(".border-list>li .toggle-down").click(function(){
     $(this).parent().toggleClass("active");
     $(this).children("i").toggleClass("fa-angle-down");
@@ -377,5 +384,23 @@ $(function () {
     });
 
 
+    var regForm = $('#regForm');
+    if (regForm.size()) {
+        var countryField    = regForm.find('#countryField');
+        var zoneField       = regForm.find('#zoneField');
+
+        countryField.change(function () {
+            var country_id = $(this).val();
+            zoneField.children().slice(1).remove();
+
+            $.each(zones[country_id], function (id, name) {
+                zoneField.append('<option value="'+id+'">'+name+'</option>');
+            });
+
+        });
+
+        countryField.val(15);
+        countryField.change();
+    }
 
 });

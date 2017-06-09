@@ -3,6 +3,7 @@
 namespace common\models;
 
 
+use common\models\address\Address;
 use webvimark\modules\UserManagement\models\User as BaseUser;
 
 class User extends BaseUser {

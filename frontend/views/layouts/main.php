@@ -129,7 +129,7 @@ $this->beginPage();
                                     </a>
 
                                     <div class="torch-green-border pull-right">
-                                        <a href="#">Begin To Sell</a>
+                                        <a href="https://sell.yarpaq.az/"><?= Yii::t('app', 'Begin To Sell'); ?></a>
                                     </div>
                                 </li>
 
@@ -494,23 +494,23 @@ $this->beginPage();
                             <li>
                                 <div class="dropdown dropdown-cart">
                                     <a id="access_link" data-toggle="dropdown" class="dropdown-toggle login-link" href="#">
-                                        <?= Yii::$app->user->isGuest ? Yii::t('app', 'Daxil ol') : Yii::t('app', 'Hesabım'); ?>
+                                        <?= Yii::$app->user->isGuest ? Yii::t('app', 'Sign in') : Yii::t('app', 'Account'); ?>
                                     </a>
 
                                     <div class="dropdown-menu">
                                         <div class="col-md-12">
-                                            <h4 class="margin-bottom-15 margin-top-0">Hesaba giriş</h4>
+                                            <h4 class="margin-bottom-15 margin-top-0"><?= Yii::t('app', 'Sign in'); ?></h4>
 
                                             <div class="form-group">
-                                                <input placeholder="E-Mail ünvanınız" id="inputUsernameEmail"
+                                                <input placeholder="<?= Yii::t('app', 'Email'); ?>" id="inputUsernameEmail"
                                                        class="form-control" type="text">
                                             </div>
                                             <div class="form-group margin-bottom-10">
-                                                <input placeholder="Şifrəniz" id="inputPassword" class="form-control"
+                                                <input placeholder="<?= Yii::t('app', 'Password'); ?>" id="inputPassword" class="form-control"
                                                        type="password">
                                             </div>
-                                            <a href="#" id="forgot_pw">Şifrəni unutdum</a>
-                                            <input class="button_drop greenBg pull-right" value="Daxil ol"
+                                            <a href="#" class="hide" id="forgot_pw"><?= Yii::t('app', 'Restore password'); ?></a>
+                                            <input class="button_drop greenBg pull-right" value="<?= Yii::t('app', 'Sign in'); ?>"
                                                    type="submit">
 
                                             <div class="clearfix"></div>
@@ -523,8 +523,8 @@ $this->beginPage();
                                             </div>
                                             -->
                                             <div class="clearfix"></div>
-                                            <h4 class="margin-top-20 margin-bottom-10">Bizə qoşulun</h4>
-                                            <input class="button_drop greenBg col-md-12" value="Qeydiyyat" type="submit">
+                                            <h4 class="margin-top-20 margin-bottom-10"><?= Yii::t('app', 'Join us'); ?></h4>
+                                            <a href="<?= Language::getCurrent()->urlPrefix; ?>/registration" class="button_drop greenBg col-md-12"><?= Yii::t('app', 'Register'); ?></a>
                                         </div>
                                     </div>
                                 </div>

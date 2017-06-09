@@ -11,7 +11,6 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-    'language' => 'en',
     'components' => [
         'cart' => [
             'class' => 'frontend\components\Cart'
@@ -56,9 +55,10 @@ return [
                 'product-<id:\d+>' => 'product/index',
                 'cart'          => 'cart/test',
 
-                'login' => 'user-management/auth/login',
-                'logout' => 'user-management/auth/logout',
-                'profile' => 'user-management/user/profile',
+                'login'         => 'user-management/auth/login',
+                'registration'  => 'user/registration',
+                'logout'        => 'user-management/auth/logout',
+                'profile'       => 'user-management/user/profile',
 
                 '<url:.+>'      => 'category/index'
             ],
