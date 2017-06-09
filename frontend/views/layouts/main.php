@@ -40,7 +40,7 @@ $this->beginPage();
 
 <header class="header-second">
     <div class="header-top">
-        <div class="container" style="padding-left: 0; padding-right: 0;">
+        <div class="container" style="padding-right: 0;">
             <div class="top-logo col-xs-12 col-md-3 col-sm-3">
                 <a href="<?php echo \frontend\components\HomePageLink::widget(); ?>" title="yarpaq.az" class="logo">
                     <img src="/img/logo.png" alt="yarpaq.az logo">

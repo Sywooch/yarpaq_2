@@ -11,11 +11,11 @@
                 <div id="homepage-slider" class="homeslider">
                     <div class="content-slide">
                         <ul id="homeslider" class="contenhomeslider" style="max-height:337px;"
-                            data-infiniteloop="0" data-auto="0"
+                            data-infiniteloop="1" data-auto="0"
                             data-speed="500" data-pause="3000" data-mode="horizontal"
                             data-usecss="0" data-minslide="1" data-maxslide="1"
-                            data-hidecontrolonend="0" data-pager="1" data-autohover="1"
-                            data-startslide="0" data-controls="1" data-slidemargin="0">
+                            data-hidecontrolonend="1" data-pager="0" data-autohover="1"
+                            data-startslide="0" data-controls="0" data-slidemargin="0">
 
                             <li class="homeslider-container">
                                 <div class="container" style="position:relative;">
