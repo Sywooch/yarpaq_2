@@ -10,6 +10,7 @@ use common\models\Zone;
 use frontend\models\LoginForm;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\User;
 use yii\web\Response;
@@ -106,10 +107,10 @@ class UserController extends BasicController
 
         if ( $model->load(Yii::$app->request->post()) AND $model->login() )
         {
-            return ['status' => 1];
+            return Json::encode(['status' => 1]);
         }
 
-        return ['status' => 0];
+        return Json::encode(['status' => 0]);
     }
 
 

@@ -493,7 +493,8 @@ $this->beginPage();
                             </li>
                             <li>
                                 <div class="dropdown dropdown-cart">
-                                    <a id="access_link" data-toggle="dropdown" class="dropdown-toggle login-link" href="#">
+                                    <a id="access_link" data-toggle="dropdown"
+                                       class="dropdown-toggle login-link <?= !Yii::$app->user->isGuest ? 'loggedIn' : ''; ?>" href="#">
                                         <?= Yii::$app->user->isGuest ? Yii::t('app', 'Sign in') : Yii::t('app', 'Account'); ?>
                                     </a>
 
