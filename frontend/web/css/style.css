@@ -223,8 +223,8 @@ background: url("../img/headerBg1.png")
     background-color: #79b237;
     color: #fff;
     font-size: 14px;
-    border-radius: 0 0 10px 10px;
-    margin-top: 0px;
+    border-radius: 0 0 6px 6px;
+    margin-top: 0;
     margin-bottom: 5px;
     padding: 7px 30px;
 }
@@ -1010,10 +1010,11 @@ a.button_drop:hover, .button_drop:hover {
 }
 
 .cart-login .dropdown-menu {
-    min-width: 277px;
+    min-width: 180px;
     right: 0;
     left: auto;
     background-color: #e7e7e7;
+    color: #464646;
     padding:15px 0 20px;
     border-width: 0px;
     margin-top: 13px;
@@ -1026,7 +1027,7 @@ hr {
 .cart-login .dropdown-menu .form-control{font-size: 14px;color:#a6a6a6}
 .cart-login .dropdown-menu h4{font-size: 16px;color:#a0a0a0;}
 .cart-login .dropdown-menu>div>a{
-    color: #fff;
+    color: #464646;
     display: inline-block;
     font-size: 14px;
     padding-top: 4px !important;
@@ -3299,4 +3300,38 @@ button.btn-grey:hover {
 
 input {
     outline: none;
+}
+
+.cabinet {
+    right: 0;
+    left: auto;
+    background-color: #fff;
+    color: #464646;
+    padding:15px 0 20px;
+    border-width: 0px;
+    margin-top: 13px;
+}
+
+
+.cabinet a:hover {
+    color: #79b237 !important;
+    text-decoration: underline;
+}
+
+.exit-link {
+    background-color: #ff0048;
+    border-radius: 6px;
+    color: #fff !important;
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 3px 12px;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+a.exit-link:hover {
+    color: #fff !important;
+    text-decoration: none !important;
 }

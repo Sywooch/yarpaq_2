@@ -48,12 +48,13 @@ return [
         ],
 
         'urlManager' => [
+            'class' => 'frontend\components\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 '' => 'home/index',
                 'product-<id:\d+>' => 'product/index',
-                'cart'          => 'cart/test',
+                'cart'          => 'cart/index',
                 'login'         => 'user/login',
                 'search'        => 'search/index',
                 'registration'  => 'user/registration',

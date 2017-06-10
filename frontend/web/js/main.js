@@ -170,7 +170,6 @@ $(document).ready(function() {
 
         $(".hover_text").text(' ');
     });
-    displayReSize();
     setWidthProduct();
     if($('.quantity-input').val()==1){
         $('.sp-minus').addClass("disabled-sp");
@@ -207,24 +206,12 @@ $(document).ready(function() {
         }
     });
 });
-function displayReSize(){
-    if ( $(window).width() <= 600) {
-        $(".search_query").attr('placeholder','Axtarış sözü ...');
-    } else {
-        $(".search_query").attr('placeholder','Axtarış sözünü burada yazın...');
-    }
-}
 
 
 function setWidthProduct(){
-    displayReSize();
     $(".special-new-years .product_image").height($(".special-new-years .product_image").width());
 }
-$(window).resize(function() {
-   // setWidthProduct();
-    //setInterval(setWidthProduct,10);
-    displayReSize();
-});
+
 $('.product_tabs  a[href="#best_seller"]').tab('show');
 $('.product-tab a[href="#comment_product"]').tab('show');
 

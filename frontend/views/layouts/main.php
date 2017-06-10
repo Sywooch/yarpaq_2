@@ -83,7 +83,7 @@ $this->beginPage();
                         <ul class="dropdown-menu" role="menu">
                             <?php foreach (Language::find()->all() as $language) {
                                 if ($language == Language::getCurrent()) { continue; } ?>
-                                <li><a href="<?= $language->urlPrefix; ?>"><?= $language->name; ?></a></li>
+                                <li><a href="<?= $language->urlPrefix; ?>/"><?= $language->name; ?></a></li>
                             <?php } ?>
                         </ul>
                     </li>
@@ -474,8 +474,7 @@ $this->beginPage();
                                             <hr class="white">
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding-xs">
-                                                    <button type="button" class="btn-grey btn btn-link">Səbətə keç
-                                                    </button>
+                                                    <a href="<?= \yii\helpers\Url::toRoute(['cart/index']); ?>" type="button" class="btn-grey btn btn-link">Səbətə keç</a>
                                                 </div>
 
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 no-padding-xs">
@@ -490,13 +489,17 @@ $this->beginPage();
                                     </div>
                                 </div>
                             </li>
+
                             <li>
+
                                 <div class="dropdown dropdown-cart">
                                     <a id="access_link" data-toggle="dropdown"
                                        class="dropdown-toggle login-link <?= !Yii::$app->user->isGuest ? 'loggedIn' : ''; ?>" href="#">
                                         <?= Yii::$app->user->isGuest ? Yii::t('app', 'Sign in') : Yii::t('app', 'Account'); ?>
                                     </a>
 
+
+                                    <?php if (Yii::$app->user->isGuest) { ?>
                                     <div class="dropdown-menu">
                                         <div class="col-md-12">
                                             <h4 class="margin-bottom-15 margin-top-0"><?= Yii::t('app', 'Sign in'); ?></h4>
@@ -530,8 +533,27 @@ $this->beginPage();
                                             </form>
                                         </div>
                                     </div>
+                                    <?php } else { ?>
+                                    <div class="dropdown-menu cabinet">
+                                        <div class="col-md-12">
+
+                                            <a href="#" id="orders"><?= Yii::t('app', 'Orders history'); ?></a>
+                                            <div class="clearfix"></div>
+
+                                            <a href="#" id="adresses"><?= Yii::t('app', 'Addresses'); ?></a>
+                                            <div class="clearfix"></div>
+
+                                            <a href="#" id="own_info"><?= Yii::t('app', 'Personal information'); ?></a>
+                                            <div class="clearfix"></div>
+
+                                            <a id="exit_link" class="exit-link" href="<?= Language::getCurrent()->urlPrefix;?>/logout"><?= Yii::t('app', 'Logout'); ?></a>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </div>
