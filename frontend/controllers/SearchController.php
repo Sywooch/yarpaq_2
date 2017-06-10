@@ -50,7 +50,7 @@ class SearchController extends BasicController
             $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
 
             $products->leftJoin('{{%product_category}}', '`product_id` = `id`')
-                ->where(['category_id' => $childrenCategoriesIDs]);
+                ->andWhere(['category_id' => $childrenCategoriesIDs]);
         }
 
 
@@ -93,7 +93,7 @@ class SearchController extends BasicController
             ->limit($pages->limit)
             ->all();
         // GET Products END
-        
+
 
         // GET Brands
         $brands = Manufacturer::find()
