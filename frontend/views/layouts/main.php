@@ -48,15 +48,15 @@ $this->beginPage();
             </div>
             <div class="col-xs-9 col-sm-7 col-md-7 no-padding clearfix">
                 <div class="row">
-                    <form action="">
+                    <form action="<?= Language::getCurrent()->urlPrefix.'/search';?>" method="get">
                         <div class="form-search">
                             <div class=" form-group form-category search_combo hidden-sm hidden-xs">
 
                                 <div class="relative">
                                     <div class="form-group form-category search_category hidden-xs hidden-sm">
-                                        <select id="search_category" name="search_category" class="chosen-select"
+                                        <select id="search_category" name="category_id" class="chosen-select"
                                                 style="width:178px">
-                                            <option value="*"><?= Yii::t('app', 'All sections'); ?></option>
+                                            <option value=""><?= Yii::t('app', 'All sections'); ?></option>
 
                                             <?php foreach ($main_categories as $category) { ?>
                                                 <option value="<?= $category->id; ?>"><?= $category->title; ?></option>
@@ -67,7 +67,7 @@ $this->beginPage();
                                 </div>
                             </div>
                             <div class="form-group input-search input-serach">
-                                <input placeholder="<?= Yii::t('app', 'Axtarış sözünü burada yazın'); ?>..." class="search_query" autocomplete="off" type="text">
+                                <input placeholder="<?= Yii::t('app', 'Enter product name'); ?>..." class="search_query" name="q" autocomplete="off" type="text" value="<?= @htmlentities($this->params['q']); ?>">
                             </div>
                             <button type="submit" class="btn-search">
                                 <i class="button-search-icon"></i>

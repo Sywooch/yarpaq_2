@@ -3295,3 +3295,8 @@ button.btn-grey:hover {
     cursor: default;
     background-color: #79b237;
 }
+
+
+input {
+    outline: none;
+}

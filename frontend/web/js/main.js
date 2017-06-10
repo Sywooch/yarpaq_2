@@ -15,6 +15,7 @@ function GetURLParameter(sParam)
 function ProductFilter() {
     var self = this;
 
+    this.title      = null
     this.condition  = null;
     this.brand      = null;
     this.price_from = null;
@@ -23,6 +24,10 @@ function ProductFilter() {
     this.sort       = null;
 
     this.init = function () {
+
+        if (GetURLParameter('q')) {
+            this.q = GetURLParameter('q');
+        }
 
         if (GetURLParameter('brand')) {
             this.brand = GetURLParameter('brand');
@@ -78,6 +83,10 @@ function ProductFilter() {
 
     this.update = function () {
         var params = [];
+
+        if (this.q) {
+            params.push('q='+this.q);
+        }
 
         if (this.brand) {
             params.push('brand='+this.brand);
