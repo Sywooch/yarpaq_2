@@ -20,6 +20,7 @@
                         </div>
                     </div>
                 </aside>
+
                 <div class="col-sm-8 col-md-9 inner-content">
                     <div class="row margin-right-0">
                         <div class="content-box-heading light-gray_bg clearfix">
@@ -45,22 +46,22 @@
                                         <?php foreach ($cart->products as $key => $product) { ?>
                                         <tr>
                                             <td valign="top" width="34px">
-                                                <input id="radio7" type="checkbox" class="radio square-radio"
+                                                <input id="radio<?= $product['product_id']; ?>" type="checkbox" class="radio square-radio"
                                                        name="method_payment"/>
                                                 <label for="radio7"></label>
                                             </td>
                                             <td class="description-backetProduct">
-                                                <img src="img/basketFile.jpg" width="78" height="78">
+                                                <img src="<?= $product['image']; ?>" width="78" height="78">
 
                                                 <div>
                                                     <div class="description-backetPr col-md-11 no-padding">
-
+                                                        <?= $product['title']; ?>
                                                     </div>
                                                     <div class="description-backetPrColor">
                                                         Rəng: Qara
                                                     </div>
 
-                                                    <div class="green sum-green">Cəmi: 425.00 <b class="manatFont">M</b>
+                                                    <div class="green sum-green"><?= Yii::t('app', 'Total'); ?>: <?= $product['total']; ?> <b class="manatFont">M</b>
                                                     </div>
                                                 </div>
                                             </td>
@@ -68,16 +69,16 @@
                                                 <div class="quantity">
                                                     <div class="le-quantity">
                                                         <form>
-                                                            <a class="sp-minus dejavu-bold" href="#reduce">-</a>
+                                                            <i class="sp-minus dejavu-bold">-</i>
                                                             <input class="quantity-input" name="quantity-input"
-                                                                   readonly="readonly" type="text" value="1"/>
-                                                            <a class="sp-plus dejavu-bold" href="#add">+</a>
+                                                                   readonly="readonly" type="text" value="<?= $product['quantity']; ?>"/>
+                                                            <i class="sp-plus dejavu-bold">+</i>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td valign="top">425.00<b class="manatFont">M</b></td>
-                                            <td valign="top">425.00<b class="manatFont">M</b></td>
+                                            <td valign="top"><?= $product['price']; ?> <b class="manatFont">M</b></td>
+                                            <td valign="top"><?= $product['total']; ?> <b class="manatFont">M</b></td>
                                             <td valign="bottom">
                                                 <button class="btn cart-remove-btn ">x</button>
                                             </td>

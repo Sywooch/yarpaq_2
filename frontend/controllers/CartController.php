@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
 use Yii;
 
 class CartController extends BasicController
@@ -24,9 +25,30 @@ class CartController extends BasicController
     }
 
     public function actionTest() {
-        $cart = Yii::$app->cart;
 
-        var_dump($cart->products);
+        $users = User::find()->all();
+
+        foreach ($users as $user) {
+
+            $cart = $user->cart;
+
+
+            if ($cart == '') continue;
+
+            $cart = unserialize($cart);
+
+            foreach ($cart as $key => $quantity) {
+                $product = unserialize(base64_decode($key));
+
+                $product_id = $product['product_id'];
+
+                if ($product_id >= 1866) {
+                    echo $user->id .' - '.$product_id.'<br>';
+                }
+            }
+
+        }
+
     }
 
     public function actionIndex() {

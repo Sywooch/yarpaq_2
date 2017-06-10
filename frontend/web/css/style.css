@@ -2099,6 +2099,7 @@ background: url("../img/payment.png") no-repeat;
 .le-quantity .sp-minus, .le-quantity .sp-plus {
     background-color: #a1a1a1;
     border-radius: 5px;
+    font-style: normal;
     color: #fff;
     display: block;
     height: 17px;
@@ -2108,6 +2109,7 @@ background: url("../img/payment.png") no-repeat;
     font-size: 10px;
     margin: 4px 0;
     float: left;
+    cursor: pointer;
 }
 
 .le-quantity .sp-minus:hover, .le-quantity .sp-plus:hover {

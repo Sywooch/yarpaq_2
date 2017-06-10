@@ -173,7 +173,6 @@ $(document).ready(function() {
     setWidthProduct();
     if($('.quantity-input').val()==1){
         $('.sp-minus').addClass("disabled-sp");
-
     }
 
     $('.cart-remove-btn').on('click', function(){
@@ -244,14 +243,19 @@ $(".list-infoMenu>li").click(function(){
 });
 
 var sap = jQuery.noConflict();
-sap('.sp-plus').on('click', function(){
-    $('.sp-minus').removeClass("disabled-sp");
-    var oldVal = sap('.quantity-input').val();
-    var newVal = (parseInt(sap('.quantity-input').val(),10) +1);
-    sap('.quantity-input').val(newVal);
+sap('.sp-plus').on('click', function() {
+
+    var container = sap(this).closest('.le-quantity');
+
+    // включаем "минус" полюбому
+    container.find('.sp-minus').removeClass("disabled-sp");
+
+    var newVal = parseInt(container.find('.quantity-input').val(), 10) + 1;
+    container.find('.quantity-input').val(newVal);
 });
 
-sap('.sp-minus').on('click', function(){
+sap('.sp-minus').on('click', function() {
+
     var oldVal = sap('.quantity-input').val();
     var newVal = (parseInt(sap('.quantity-input').val(),10) -1);
     if (oldVal > 1) {

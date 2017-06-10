@@ -55,6 +55,7 @@ return [
                 '' => 'home/index',
                 'product-<id:\d+>' => 'product/index',
                 'cart'          => 'cart/index',
+                'cart/test'     => 'cart/test',
                 'login'         => 'user/login',
                 'search'        => 'search/index',
                 'registration'  => 'user/registration',

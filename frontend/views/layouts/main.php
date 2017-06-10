@@ -580,12 +580,7 @@ $this->beginPage();
 
 <!-- Only for product page -->
 <script type="text/javascript" src="/js/cloud-zoom.js"></script>
-<script>
-    $(document).ready(function(){
-        if($(".chosen-select").length>0)
-            $(".chosen-select").chosen();$(document).on('click','.toggle-menu',function(){$(this).closest('.nav-menu').find('.menu-collapse').slideToggle("slow");return false;})
-    })
-</script>
+
 <script type="text/javascript" src="/js/jquery.chosen.js"></script>
 
 <script src="/js/bootstrap-datepicker.js"></script>
@@ -646,6 +641,7 @@ $this->beginPage();
         })
     })
 </script>
+
 <script type="text/javascript" src="/js/jquery.chosen.js"></script>
 
 <?php $this->endBody(); ?>
