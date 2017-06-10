@@ -113,5 +113,11 @@ class UserController extends BasicController
         return Json::encode(['status' => 0]);
     }
 
+    public function actionLogout() {
+        Yii::$app->user->logout();
+
+        return $this->redirect(Yii::$app->homeUrl);
+    }
+
 
 }

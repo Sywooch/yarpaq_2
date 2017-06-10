@@ -104,7 +104,7 @@ $this->beginPage();
     </div>
     <div class="header-bottom">
         <div class="container no-padding">
-            <div class="row">
+            <div class="row" style="height: 31px;">
                 <div class="main-categories static col-md-3 col-sm-1">
                     <div class="md-relative widget-categories">
                         <nav class="megamenus nav-vertical-left-megamenu style-2">
@@ -112,8 +112,7 @@ $this->beginPage();
 
                                 <a class="link-open-dropdown" href="javascript:void(0)">
                                     <i class="fa fa-bars"></i>
-                                    <span class="title"><?= Yii::t('app', 'Bölmələr'); ?></span>
-                                    <span class="fa fa-angle-down pull-right"></span>
+                                    <span class="title"><?= Yii::t('app', 'All categories'); ?></span>
                                 </a>
                             </h3>
 

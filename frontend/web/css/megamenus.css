@@ -84,15 +84,19 @@ body.option4 .nav-horizontal-top-megamenu .menu>li >a{padding: 0 10px}
 .nav-vertical-left-megamenu .menu li li a{padding:0;}
 .nav-vertical-left-megamenu .menu li ul.sub-menus li a{padding:10px 0;}
 .nav-vertical-left-megamenu .widget-title{
-	height: 39px;
-	margin: 0;
-	max-width: 171px;
+	/*height: 39px;*/
+	/*margin: 0;*/
+	display: inline-block;
+	/*max-width: 171px;*/
 }
 
 .nav-vertical-left-megamenu.active .widget-title, .nav-vertical-left-megamenu.active a ,
-.nav-vertical-left-megamenu:hover .widget-title, .nav-vertical-left-megamenu:hover .link-open-dropdown{
-	background-color: transparent;
-	color: #464646;
+.nav-vertical-left-megamenu:hover .link-open-dropdown{
+
+}
+
+.nav-vertical-left-megamenu:hover .widget-title {
+
 }
 
 .vertical-none-toggle-menu,
@@ -728,9 +732,9 @@ ul.vertical-left-megamenu {
 }
 .link-open-dropdown{
 	color: #fff;
-	display: block;
+	display: inline-block;
 	line-height: 18px;
-	padding: 12px 23px 12px 12px;}
+}
 .vertical-left-megamenu>li.active>a{ border-style: solid; border-color: #ebebeb; color: #79b237; }
 
 .mega-group-header {
@@ -743,8 +747,8 @@ ul.vertical-left-megamenu {
 @media (min-width:740px)and (max-width:961px){
 }
 @media(max-width: 991px){
-		.responsive-btn{display:block;padding:15px;}
-		     .nav-vertical-left-megamenu .widget-title{display:none;}
+	.responsive-btn{display:block;padding:15px;}
+	.nav-vertical-left-megamenu .widget-title{display:none;}
 }
 
 @media (max-width: 991px) and (min-width: 768px){

@@ -223,17 +223,20 @@ background: url("../img/headerBg1.png")
     background-color: #79b237;
     color: #fff;
     font-size: 14px;
-    padding:0;
+    border-radius: 0 0 10px 10px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding: 7px 30px;
 }
 .header-bottom{
     padding:2px 0 0;
 }
 .link-open-dropdown i{
-    font-size: 18px !important;
-    padding: 0 5px 0 10px;
-    vertical-align: middle;
+    font-size: 16px !important;
 }
-
+.link-open-dropdown .title{
+    padding-left: 10px;
+}
 .desktop-nav  .torch-green-border a{font-family: "DejaVu Sans Condensed Bold"!important;}
 .header-second .header-bottom{padding:0;}
 /*--------------------      HEADER end       --------------------------------*/
