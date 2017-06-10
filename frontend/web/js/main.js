@@ -410,7 +410,7 @@ $(function () {
                 if (response.status == 1) {
                     location.reload();
                 }
-            });
+            }, 'json');
 
             return false;
         });
