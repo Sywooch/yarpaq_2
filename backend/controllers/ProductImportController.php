@@ -24,8 +24,8 @@ class ProductImportController extends AdminDefaultController
 
         $this->userAssoc = $this->getUserAssoc();
 
-        $this->importProducts();
-        //$this->importImages();
+        //$this->importProducts();
+        $this->importImages();
     }
 
     private function getProductAssoc() {
@@ -62,7 +62,11 @@ class ProductImportController extends AdminDefaultController
         $this->productAssoc = $this->getProductAssoc();
 
         // запрос для получения товаров со старого сайта
-        $product_sql = 'SELECT `p`.*, `pd`.`name` as `d_name`, `pd`.`description` as `d_desc` FROM `oc_product` `p` LEFT JOIN `oc_product_description` `pd` ON `p`.`product_id` = `pd`.`product_id` WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
+        $product_sql = '
+SELECT `p`.*, `pd`.`name` as `d_name`, `pd`.`description` as `d_desc`
+FROM `oc_product` `p` LEFT JOIN `oc_product_description` `pd` ON `p`.`product_id` = `pd`.`product_id`
+WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
+        $product_sql .= ' LIMIT 10000, 2000';
 
         // выполняем запрос
         $this->products = Yii::$app->db_old->createCommand($product_sql)->queryAll();
@@ -261,7 +265,6 @@ class ProductImportController extends AdminDefaultController
             $model->src_name    = $src;
             $model->web_name    = $url;
             $model->sort        = $sort;
-
 
             if (!$model->save() ) {
                 echo $product['product_id'].' '.json_encode( $model->getErrors() ).'<br>';
