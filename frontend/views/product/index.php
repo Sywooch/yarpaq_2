@@ -1,6 +1,6 @@
 <div class="widgets-content">
     <div class="overlap-content"></div>
-    <div class="v-padding-30">
+    <div class="v-padding-30 no-padding-xs">
 
         <div class="container no-padding">
             <div class="row">

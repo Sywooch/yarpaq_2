@@ -237,10 +237,13 @@ class CheckoutController extends BasicController
             }
 
             if ($trans->isActive) {
+                $trans->commit();
 
                 $cart->clear();
                 $cart->save();
-                $trans->commit();
+                $session->remove('payment_method');
+                $session->remove('shipping_method');
+                $session->remove('guest');
 
                 // Redirect to payment page
                 $this->redirect(Url::toRoute('success'));

@@ -69,7 +69,7 @@ class Cart extends Component
             foreach ($session->get('cart') as $key => $quantity) {
                 $product = unserialize(base64_decode($key));
 
-                $product_id = $this->getNewID($product['product_id']);
+                $product_id = (int)$product['product_id'];
 
                 $stock = true;
 

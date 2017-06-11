@@ -1,6 +1,6 @@
 <div class="widgets-content">
     <div class="overlap-content"></div>
-    <div class="v-padding-30">
+    <div class="v-padding-30 no-padding-xs">
 
         <div class="container no-padding">
             <div class="row">
@@ -170,8 +170,8 @@
                                             <div class="v-margin-10">
                                                 <div class="sizex10 green text-uppercase hide">AZN YARPAQ YY555 kuponu: -10 M</div>
                                                 <div>
-                                                    <span class="dejavu-bold sizex14">CƏMİ:</span>
-                                                    <span class="dejavu-bold sizex24">327<b class="manatFont">M</b> </span>
+                                                    <span class="dejavu-bold sizex14"><?= Yii::t('app', 'Total'); ?>:</span>
+                                                    <span class="dejavu-bold sizex24"><?= $cart->total; ?><b class="manatFont">M</b> </span>
                                                 </div>
                                             </div>
 
