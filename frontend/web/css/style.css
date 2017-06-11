@@ -1869,15 +1869,18 @@ translateY(- 50 %) rotateX(0 deg);
 }
 
 .order-registration ul {
-    padding: 0 15px
+    padding-left: 37px
 }
+
+
 
 .delivery-address h5::before, .delivery-method h5::before {
     background: url("../img/payment-icons.png") no-repeat;
 }
 .delivery-address ul {
-     border-bottom: 1px solid #e9e9e9;
-     margin-bottom: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    line-height: 24px;
  }
 .payment-method h5::before {
     background: rgba(0, 0, 0, 0) url("../img/payment-icons.png") no-repeat scroll -31px 0
@@ -1978,17 +1981,18 @@ translateY(- 50 %) rotateX(0 deg);
 background: url("../img/payment.png") no-repeat;
 }
 .payment-list li{padding: 0 2px}
-.payment-list a{
-    border-radius: 3px;
+.payment-list i{
     display: block;
-    width: 29px;
-    height:20px;
+    border: 2px solid #fff;
+    border-radius: 3px;
+    width: 32px;
+    height: 22px;
     background: url("../img/payment.png") no-repeat;
 }
-.payment-list a:hover{border:1px solid #79b237}
-.payment-list a.visa-icon{background-position: -71px  1px}
-.payment-list a.masterCard-icon{background-position: -104px  1px}
-.payment-list a.americanExpress-icon{background-position: -137px 1px}
+.payment-list i:hover, .payment-list i.active { border:2px solid #79b237 }
+.payment-list .visa-icon{background-position: -71px 0}
+.payment-list .masterCard-icon{background-position: -104px 0}
+.payment-list .americanExpress-icon{background-position: -137px 0}
 
 
 .addresses-list table,.basket-list table {margin:0 35px;
@@ -2348,29 +2352,29 @@ float: left;}
     width: 35px;
     margin-right: 5px;}
 .registration-video-link div{width: 110px;text-align: left;display: inline-block;vertical-align: top;}
-label.select::before {
-    background: #fff none repeat scroll 0 0;
-    border-radius: 5px;
-    content: "";
-    display: block;
-    height: 29px;
-    pointer-events: none;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    width: 22px;
-}
-label.select::after {
-    color: #878787;
-    content: "";
-    font: 15px "FontAwesome";
-    margin-right: 0;
-    padding: 4px 0;
-    pointer-events: none;
-    position: absolute;
-    right: 4px;
-    top: 0;
-}
+/*label.select::before {*/
+    /*background: #fff none repeat scroll 0 0;*/
+    /*border-radius: 5px;*/
+    /*content: "";*/
+    /*display: block;*/
+    /*height: 29px;*/
+    /*pointer-events: none;*/
+    /*position: absolute;*/
+    /*right: 0px;*/
+    /*top: 0px;*/
+    /*width: 22px;*/
+/*}*/
+/*label.select::after {*/
+    /*color: #878787;*/
+    /*content: "";*/
+    /*font: 15px "FontAwesome";*/
+    /*margin-right: 0;*/
+    /*padding: 4px 0;*/
+    /*pointer-events: none;*/
+    /*position: absolute;*/
+    /*right: 4px;*/
+    /*top: 0;*/
+/*}*/
 .registration-info label.select::after {  margin-right: 26px;}
 label.select {
     border-radius: 5px;
@@ -2407,7 +2411,7 @@ label.select select.form-control {
 .news-checked .radio:not(checked) + label::after, .news-checked .radio:not(checked) + label::before {
     top: 4.5px
 }
-.smallSelects>div{width: 75px;height:18px;color:#9a9a9a;font-size: 10px;margin-right: 5px}
+.smallSelects > div {width: 75px;height:18px;color:#9a9a9a;font-size: 10px;margin-right: 5px}
 .smallSelects select{padding:0px 3px;font-weight: normal;height:19px!important;font-size: 10px}
 .smallSelects label.select::after{margin-right: 2px;font-size: 12px;padding: 3px 0;}
 .smallSelects label.select::before,.smallSelects label.select{height: 17px}
@@ -2857,7 +2861,9 @@ margin:3px 0;font-size: 9px;
 .payment-method .select .form-control:hover{border-color:#79b237;color:#79b237}
 .payment-method .payment-list {
     line-height: 1;
-    padding: 0 20px;
+    padding: 0px;
+    vertical-align: middle;
+    display: inline-block;
 }
 .payment-method .smallSelects {
     padding: 5px 0 5px 15px;

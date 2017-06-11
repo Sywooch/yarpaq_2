@@ -437,4 +437,19 @@ $(function () {
         }, 'json');
     });
 
+
+    $('#visaType').click(function () {
+        $('.payment-list .card_type').removeClass('active');
+        $(this).addClass('active');
+        $('#cardType').val('v');
+    });
+
+    $('#masterCardType').click(function () {
+        $('.payment-list .card_type').removeClass('active');
+        $(this).addClass('active');
+        $('#cardType').val('m');
+    });
+
+
+
 });

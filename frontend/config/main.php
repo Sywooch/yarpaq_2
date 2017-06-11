@@ -23,7 +23,7 @@ return [
             'class' => 'frontend\components\LangRequest'
         ],
         'user' => [
-            'class' => 'webvimark\modules\UserManagement\components\UserConfig',
+            'class' => 'common\components\UserConfig',
 
             // Comment this if you don't want to record user logins
             'on afterLogin' => function($event) {
@@ -56,6 +56,7 @@ return [
                 'product-<id:\d+>' => 'product/index',
                 'cart'          => 'cart/index',
                 'cart/add'      => 'cart/add-to-cart',
+                'checkout'      => 'checkout/index',
                 'login'         => 'user/login',
                 'search'        => 'search/index',
                 'registration'  => 'user/registration',

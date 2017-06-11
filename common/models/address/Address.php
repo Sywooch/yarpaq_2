@@ -2,6 +2,7 @@
 
 namespace common\models\address;
 
+use common\models\Country;
 use common\models\Zone;
 use Yii;
 
@@ -52,6 +53,10 @@ class Address extends \yii\db\ActiveRecord
         if ($zone->country_id != $this->country_id) {
             $this->addError($attribute, 'Invalid zone for this country');
         }
+    }
+
+    public function getCountry() {
+        return $this->hasOne(Country::className(), ['id' => 'country_id']);
     }
 
     /**

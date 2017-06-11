@@ -95,7 +95,7 @@
                                                 class="manatFont">M</b></p>
                                     </div>
                                     <div>
-                                        <button class="pull-right btn greenBg white">ÖDƏMƏYƏ KEÇ</button>
+                                        <a href="<?= \yii\helpers\Url::toRoute('/checkout'); ?>" class="pull-right btn greenBg white"><?= Yii::t('app', 'Checkout'); ?></a>
                                     </div>
                                 </div>
                             </div>

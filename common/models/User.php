@@ -34,7 +34,7 @@ class User extends BaseUser {
      * @return \yii\db\ActiveQuery
      */
     public function getAddresses() {
-        return $this->hasMany(Address::className(), ['id' => 'user_id']);
+        return $this->hasMany(Address::className(), ['user_id' => 'id']);
     }
 
 
