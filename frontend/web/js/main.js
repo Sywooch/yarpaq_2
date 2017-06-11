@@ -431,6 +431,7 @@ $(function () {
         $.post('/cart/add', post_data, function (response) {
             if (response.status == 1) {
                 console.log('Product successfully added to your cart');
+                location.href = '/cart';
             } else {
                 console.log('Product could not be added to your cart');
             }

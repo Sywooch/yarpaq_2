@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Language;
+use common\models\notification\NewOrderAdminNotification;
 use common\models\notification\NewOrderUserNotification;
 use common\models\order\Order;
 use common\models\order\OrderProduct;
@@ -249,7 +250,7 @@ class CheckoutController extends BasicController
                 //$userNotification = new NewOrderUserNotification($user, $order);
                 //$userNotification->send();
 
-                $adminNotification = new NewOrderUserNotification($user, $order);
+                $adminNotification = new NewOrderAdminNotification($user, $order);
                 $adminNotification->send();
 
 

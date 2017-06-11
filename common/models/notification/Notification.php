@@ -9,8 +9,6 @@ class Notification
 
     public $to;
     public $subject = 'Default subject';
-    public $text = '';
-    public $html = '';
     protected $layout;
     protected $layoutData;
 
@@ -19,8 +17,6 @@ class Notification
             ->setFrom(Yii::$app->params['supportEmail'])
             ->setTo($this->to)
             ->setSubject($this->subject)
-            ->setTextBody($this->text)
-            ->setHtmlBody($this->html)
             ->send();
     }
 }

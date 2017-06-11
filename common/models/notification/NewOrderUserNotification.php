@@ -6,8 +6,6 @@ use Yii;
 
 class NewOrderUserNotification extends Notification
 {
-
-    public $subject;
     protected $layout = 'new-order-for-user';
 
     public function __construct($user, $order) {
