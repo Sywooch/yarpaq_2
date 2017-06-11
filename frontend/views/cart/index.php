@@ -43,12 +43,12 @@
                                     </thead>
                                     <tbody>
 
-                                        <?php foreach ($cart->products as $key => $product) { ?>
+                                        <?php foreach ($cart->getProducts() as $key => $product) { ?>
                                         <tr>
                                             <td valign="top" width="34px">
                                                 <input id="radio<?= $product['product_id']; ?>" type="checkbox" class="radio square-radio"
                                                        name="method_payment"/>
-                                                <label for="radio7"></label>
+                                                <label for="radio<?= $product['product_id']; ?>"></label>
                                             </td>
                                             <td class="description-backetProduct">
                                                 <img src="<?= $product['image']; ?>" width="78" height="78">
@@ -87,72 +87,14 @@
                                     </tbody>
                                 </table>
                                 <div class=" hmargin-30">
-                                    <div class=" vborder-gray v-padding-30">
-                                        <div class="content-box-heading2 clearfix">
-                                            <h4>Növbəti addımın nə olmasını istərdiniz?</h4>
-                                        </div>
 
-                                        <p class="light-gray">
-                                            İstifadə etmək istədiyiniz endirim kodu ya da bonuslarınız varsa, və ya
-                                            çatdırılma
-                                            qiymətini dəyərləndirmək istəyirsinizsə, Seçin.
-                                        </p>
-                                        <ul class="border-list">
-                                            <li>
-                                                <div class="toggle-down">
-                                                    Kupon Kodundan İstifadə Et
-                                                    <i class="fa fa-angle-down pull-right"> </i>
-                                                </div>
-                                                <div class="angle-down-more margin-top-10" style="display: none">
-
-                                                    <div class="fileform">
-                                                        <div class="fileformlabel"></div>
-                                                        <div class="selectbutton">KUPONDAN İSTİFADƏ ET</div>
-                                                        <input type="file" name="upload" class="upload"
-                                                               onchange="getName(this.value);"/>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="toggle-down">
-                                                    Hədiyyə Çekindən İstifadə
-                                                    <i class="fa fa-angle-down pull-right"> </i>
-                                                </div>
-                                                <div class="angle-down-more margin-top-10" style="display: none">
-
-                                                    <div class="fileform">
-                                                        <div class="fileformlabel"></div>
-                                                        <div class="selectbutton">KUPONDAN İSTİFADƏ ET</div>
-                                                        <input type="file" name="upload" class="upload"
-                                                               onchange="getName(this.value);"/>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="toggle-down">
-                                                    Çatdırılma Dəyəri & Vergilər
-                                                    <i class="fa fa-angle-down pull-right"> </i>
-                                                </div>
-                                                <div class="angle-down-more margin-top-10" style="display: none">
-
-                                                    <div class="fileform">
-                                                        <div class="fileformlabel"></div>
-                                                        <div class="selectbutton">KUPONDAN İSTİFADƏ ET</div>
-                                                        <input type="file" name="upload" class="upload"
-                                                               onchange="getName(this.value);"/>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     <div class="text-right size16 v-margin-15">
-                                        <p class="margin-0"> Cəmi: 57.50 <b class="manatFont">M</b></p>
+                                        <p class="margin-0"> <?= Yii::t('app', 'Subtotal'); ?>: <?= $cart->subTotal; ?> <b class="manatFont">M</b></p>
 
-                                        <p class="green dejavu-bold margin-0">Yekun məbləğ: 57.50 <b
+                                        <p class="green dejavu-bold margin-0"><?= Yii::t('app', 'Total'); ?>: <?= $cart->subTotal; ?> <b
                                                 class="manatFont">M</b></p>
                                     </div>
                                     <div>
-                                        <button class="pull-left btn btn-white">ALIŞ-VERİŞİ DAVA ET</button>
                                         <button class="pull-right btn greenBg white">ÖDƏMƏYƏ KEÇ</button>
                                     </div>
                                 </div>

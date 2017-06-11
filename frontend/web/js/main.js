@@ -417,4 +417,24 @@ $(function () {
     }
 
 
+    var addProductBtns = $('.product-add');
+    addProductBtns.click(function () {
+        var self = $(this);
+
+        var csrf_param = $('meta[name=csrf-param]').prop('content');
+        var csrf_token = $('meta[name=csrf-token]').prop('content');
+
+        var post_data = {};
+        post_data['product_id'] = self.data('id');
+        post_data[csrf_param]   = csrf_token;
+
+        $.post('/cart/add', post_data, function (response) {
+            if (response.status == 1) {
+                console.log('Product successfully added to your cart');
+            } else {
+                console.log('Product could not be added to your cart');
+            }
+        }, 'json');
+    });
+
 });

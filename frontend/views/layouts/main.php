@@ -2,6 +2,7 @@
 
 use common\models\Language;
 use common\models\category\Category;
+use yii\helpers\Html;
 
 $main_categories = Category::find()->andWhere(['depth' => 2])->orderBy('lft')->all();
 
@@ -11,6 +12,7 @@ $this->beginPage();
 <html>
 <head lang="<?= Yii::$app->language ?>">
     <meta charset="UTF-8">
+    <?= Html::csrfMetaTags() ?>
     <script>
         if (navigator.userAgent.match(/Android/i)
             || navigator.userAgent.match(/webOS/i)

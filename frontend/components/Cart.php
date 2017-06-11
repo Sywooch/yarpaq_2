@@ -4,16 +4,13 @@ namespace frontend\components;
 
 use common\models\Language;
 use common\models\Product;
-use common\models\User;
 use Yii;
 use yii\base\Component;
-use yii\db\ActiveQuery;
 
 class Cart extends Component
 {
     private $config;
     private $data = [];
-    private $cart_data = [];
 
     public function __construct($config = array()) {
 //        $this->config = $registry->get('config');
@@ -84,11 +81,12 @@ class Cart extends Component
                 }
 
                 $product_model = Product::find()
-                    ->where(['status_id' => Product::STATUS_ACTIVE])->one();
+                    ->where(['id' => $product_id])
+                    ->andWhere(['status_id' => Product::STATUS_ACTIVE])
+                    ->one();
 
                 if ($product_model) {
                     $option_price = 0;
-                    $option_points = 0;
                     $option_weight = 0;
 
                     $option_data = array();
@@ -208,39 +206,6 @@ class Cart extends Component
 
                     $price = $product_model->price;
 
-                    // Product Discounts
-//                    $discount_quantity = 0;
-//
-//                    foreach ($this->session->data['cart'] as $key_2 => $quantity_2) {
-//                        $product_2 = (array)unserialize(base64_decode($key_2));
-//
-//                        if ($product_2['product_id'] == $product_id) {
-//                            $discount_quantity += $quantity_2;
-//                        }
-//                    }
-//
-//                    $product_discount_query = $this->db->query("SELECT price FROM " . DB_PREFIX . "product_discount WHERE product_id = '" . (int)$product_id . "' AND customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND quantity <= '" . (int)$discount_quantity . "' AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) ORDER BY quantity DESC, priority ASC, price ASC LIMIT 1");
-//
-//                    if ($product_discount_query->num_rows) {
-//                        $price = $product_discount_query->row['price'];
-//                    }
-
-                    // Product Specials
-//                    $product_special_query = $this->db->query("SELECT price FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "' AND customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) ORDER BY priority ASC, price ASC LIMIT 1");
-//
-//                    if ($product_special_query->num_rows) {
-//                        $price = $product_special_query->row['price'];
-//                    }
-
-                    // Reward Points
-//                    $product_reward_query = $this->db->query("SELECT points FROM " . DB_PREFIX . "product_reward WHERE product_id = '" . (int)$product_id . "' AND customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "'");
-//
-//                    if ($product_reward_query->num_rows) {
-//                        $reward = $product_reward_query->row['points'];
-//                    } else {
-//                        $reward = 0;
-//                    }
-
                     // Stock
                     if (!$product_model->quantity || ($product_model->quantity < $quantity)) {
                         $stock = false;
@@ -251,17 +216,12 @@ class Cart extends Component
                         'product_id'      => $product_model->id,
                         'title'           => $product_model->title,
                         'model'           => $product_model->model,
-                        //'shipping'        => $product_model->shipping,
                         'image'           => $product_model->gallery[0]->url,
                         'option'          => $option_data,
                         'quantity'        => $quantity,
-
                         'stock'           => $stock,
                         'price'           => ($price + $option_price),
                         'total'           => ($price + $option_price) * $quantity,
-                        //'reward'          => $reward * $quantity,
-                        //'points'          => ($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $quantity : 0),
-                        //'tax_class_id'    => $product_query->row['tax_class_id'],
                         'weight'          => ($product_model->weight + $option_weight) * $quantity,
                         'weight_class_id' => $product_model->weight_class_id,
                         'length'          => $product_model->length,
@@ -270,7 +230,7 @@ class Cart extends Component
                         'length_class_id' => $product_model->length_class_id,
                     );
                 } else {
-                    $this->remove($key);
+                    //$this->remove($key);
                 }
             }
         }
@@ -278,6 +238,14 @@ class Cart extends Component
         return $this->data;
     }
 
+
+    /**
+     * Добавляет товар в корзину
+     *
+     * @param $product_id
+     * @param int $qty
+     * @param array $option
+     */
     public function add($product_id, $qty = 1, $option = array()) {
         $this->data = array();
 
@@ -289,49 +257,75 @@ class Cart extends Component
 
         $key = base64_encode(serialize($product));
 
+
+        $cart = Yii::$app->session->get('cart');
         if ((int)$qty && ((int)$qty > 0)) {
-            if (!isset($this->session->data['cart'][$key])) {
-                $this->session->data['cart'][$key] = (int)$qty;
+            if (!isset($cart[$key])) {
+                $cart[$key] = (int)$qty;
             } else {
-                $this->session->data['cart'][$key] += (int)$qty;
+                $cart[$key] += (int)$qty;
             }
         }
+        Yii::$app->session->set('cart', $cart);
     }
 
+    /**
+     * Обновляет количество товара в корзине по ключу (base64)
+     *
+     * @param $key
+     * @param $qty
+     */
     public function update($key, $qty) {
-        $this->data = array();
+        $this->data = [];
 
-        if ((int)$qty && ((int)$qty > 0) && isset($this->session->data['cart'][$key])) {
-            $this->session->data['cart'][$key] = (int)$qty;
+        $cart = Yii::$app->session->get('cart');
+
+        if ((int)$qty && ((int)$qty > 0) && isset($cart[$key])) {
+            $cart[$key] = (int)$qty;
         } else {
             $this->remove($key);
         }
     }
 
+    /**
+     * Удаляет товар из корзины по ключу (base64)
+     *
+     * @param $key
+     */
     public function remove($key) {
-        $this->data = array();
+        unset($this->data[$key]);
 
-        unset($this->session->data['cart'][$key]);
+        $cart = Yii::$app->session->get('cart');
+        unset($cart[$key]);
+
+        Yii::$app->session->set('cart', $cart);
     }
 
+
+    /**
+     * Очищает корзину
+     */
     public function clear() {
         $this->data = array();
-
-        $this->session->data['cart'] = array();
+        Yii::$app->session->set('cart', []);
     }
+
 
     public function getWeight() {
         $weight = 0;
 
         foreach ($this->getProducts() as $product) {
-            if ($product['shipping']) {
-                $weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
-            }
+            $weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
         }
 
         return $weight;
     }
 
+    /**
+     * Возвращает сумму стоимостей всех товаров, без учета налогов, расходов на достувку и пр.
+     *
+     * @return int
+     */
     public function getSubTotal() {
         $total = 0;
 
@@ -342,15 +336,28 @@ class Cart extends Component
         return $total;
     }
 
+
+    /**
+     * Возвращает общую (финальную) стоимость заказа
+     *
+     * @return int
+     */
     public function getTotal() {
         $total = 0;
 
         foreach ($this->getProducts() as $product) {
-            $total += $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'];
+            $total += $product['price'] * $product['quantity'];
         }
 
         return $total;
     }
+
+
+    /**
+     * Возвращает количество товаров в корзине
+     *
+     * @return int
+     */
 
     public function countProducts() {
         $product_total = 0;
@@ -364,8 +371,13 @@ class Cart extends Component
         return $product_total;
     }
 
+    /**
+     * Показывает есть ли товары в корзине
+     *
+     * @return int
+     */
     public function hasProducts() {
-        return count($this->cart_data);
+        return count(Yii::$app->session->get('cart'));
     }
 
     public function hasStock() {
@@ -392,5 +404,12 @@ class Cart extends Component
         }
 
         return $shipping;
+    }
+
+    public function save() {
+        $user = Yii::$app->user->identity;
+
+        $user->cart = serialize(Yii::$app->session->get('cart'));
+        return $user->save();
     }
 }

@@ -47,7 +47,7 @@
                         <i class="fa fa-star-o "></i>
                         <i class="fa fa-star-o "></i>
                     </div>
-                    <button class="product-add">
+                    <button class="product-add" data-id="<?= $product->id; ?>">
                         <?= Yii::t('app', 'Add to basket'); ?>
                     </button>
 
