@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Language;
+use common\models\notification\NewOrderUserNotification;
 use common\models\order\Order;
 use common\models\order\OrderProduct;
 use common\models\OrderOption;
@@ -244,6 +245,14 @@ class CheckoutController extends BasicController
                 $session->remove('payment_method');
                 $session->remove('shipping_method');
                 $session->remove('guest');
+
+                //$userNotification = new NewOrderUserNotification($user, $order);
+                //$userNotification->send();
+
+                $adminNotification = new NewOrderUserNotification($user, $order);
+                $adminNotification->send();
+
+
 
                 // Redirect to payment page
                 $this->redirect(Url::toRoute('success'));
