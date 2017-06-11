@@ -5,7 +5,8 @@
     <title>Yarpaq.az - Sifariş <?= $order->id; ?></title>
 </head>
 <body style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000;">
-<div style="width: 680px;"><a href="https://www.yarpaq.az/" title="Yarpaq.az"><img src="http://www.yarpaq.az/image/catalog/yarpag_logo%20Extens-1.png" alt="Yarpaq.az" style="margin-bottom: 20px; border: none;width:150px;" /></a>
+<div style="width: 680px;"><a href="https://www.yarpaq.az/" title="Yarpaq.az">
+        <img src="http://www.yarpaq.az/image/catalog/yarpag_logo%20Extens-1.png" alt="Yarpaq.az" style="margin-bottom: 20px; border: none;width:150px;" /></a>
     <p style="margin-top: 0px; margin-bottom: 20px;">Yeni sifariş aldınız.</p>
     <p style="margin-top: 0px; margin-bottom: 20px;"></p>
     <p style="margin-top: 0px; margin-bottom: 20px;"><a href=""></a></p>
@@ -17,12 +18,12 @@
         </thead>
         <tbody>
         <tr>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>Sifarişin nömrəsi:</b> 3300<br />
-                <b>Tarix əlavə olundu:</b> 09.06.2017 20:17<br />
-                <b>Ödəmə üsulu:</b> Çatdırılma Zamanı Nəğd Ödəniş<br />
-                <b>Çatdırılma üsulu:</b> Bakı Daxili  (Çəki: 0.20kg)          </td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><b>Sifarişin nömrəsi:</b> <?= $order->id; ?><br />
+                <b>Tarix əlavə olundu:</b> <?= $order->created_at; ?><br />
+                <b>Ödəmə üsulu:</b> <?= $order->payment_method; ?><br />
+                <b>Çatdırılma üsulu:</b> <?= $order->shipping_method; ?></td>
             <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">
-                <b>Sifarişin statusu:</b> Gözləmədə<br /></td>
+                <b>Sifarişin statusu:</b> <?= $order->status->name; ?><br /></td>
         </tr>
         </tbody>
     </table>
@@ -38,27 +39,25 @@
         </tr>
         </thead>
         <tbody>
+        <?php foreach ($order->orderProducts as $orderProduct) { ?>
         <tr>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">Gemei GM-6005<br> Kod: 47615          </td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">GM-6005\13</td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">1</td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">20.00 AZN</td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">20.00 AZN</td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?= $orderProduct->name; ?><br> Kod: <?= $orderProduct->product_id; ?></td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?= $orderProduct->model; ?></td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $orderProduct->quantity; ?></td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $orderProduct->price; ?> AZN</td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $orderProduct->total; ?> AZN</td>
         </tr>
+        <?php } ?>
         </tbody>
         <tfoot>
 
         <tr>
             <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Cəmi:</b></td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">20.00 AZN</td>
-        </tr>
-        <tr>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Bakı Daxili  (Çəki: 0.20kg):</b></td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">0.00 AZN</td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $order->total; ?> AZN</td>
         </tr>
         <tr>
             <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Yekun məbləğ:</b></td>
-            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;">20.00 AZN</td>
+            <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $order->total; ?> AZN</td>
         </tr>
 
         </tfoot>
