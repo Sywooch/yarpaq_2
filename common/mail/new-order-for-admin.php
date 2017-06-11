@@ -23,7 +23,7 @@
                 <b>Ödəmə üsulu:</b> <?= $order->payment_method; ?><br />
                 <b>Çatdırılma üsulu:</b> <?= $order->shipping_method; ?></td>
             <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;">
-                <b>Sifarişin statusu:</b> <?= $order->status->name; ?><br /></td>
+                <b>Sifarişin statusu:</b> <?= $order->order_status_id; ?> <br /></td>
         </tr>
         </tbody>
     </table>

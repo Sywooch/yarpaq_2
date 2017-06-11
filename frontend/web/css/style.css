@@ -2074,7 +2074,7 @@ background: url("../img/payment.png") no-repeat;
     border: 1px solid #c8c8c8;
     color: #464646;
 }
-.btn-white{border:1px solid #a1a1a1;background-color:#fff;}
+.btn-white{border:1px solid #a1a1a1;background-color:#fff; color: #a1a1a1;}
 .btn-red{
     background-color: #ff0048;
     border: 1px solid #ff0048;

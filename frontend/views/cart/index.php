@@ -25,7 +25,7 @@
                     <div class="row margin-right-0">
                         <div class="content-box-heading light-gray_bg clearfix">
                             <h4 class="pull-left"><?= Yii::t('app', 'Cart'); ?></h4>
-                            <button class="pull-right btn btn-red "><?= Yii::t('app', 'Remove checked items'); ?></button>
+                            <button class="pull-right btn btn-red hide"><?= Yii::t('app', 'Remove checked items'); ?></button>
                         </div>
 
                         <div class="cart-list basket-list row">
@@ -33,7 +33,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <td width="30px"></td>
+                                            <!--<td width="30px"></td>-->
                                             <td><?= Yii::t('app', 'Product'); ?></td>
                                             <td width="103px"><?= Yii::t('app', 'Quantity');?></td>
                                             <td width="100px">1x <?= Yii::t('app', 'Price');?></td>
@@ -45,11 +45,14 @@
 
                                         <?php foreach ($cart->getProducts() as $key => $product) { ?>
                                         <tr>
+                                            <!--
                                             <td valign="top" width="34px">
+
                                                 <input id="radio<?= $product['product_id']; ?>" type="checkbox" class="radio square-radio"
                                                        name="method_payment"/>
                                                 <label for="radio<?= $product['product_id']; ?>"></label>
                                             </td>
+                                            -->
                                             <td class="description-backetProduct">
                                                 <img src="<?= $product['image']; ?>" width="78" height="78">
 
@@ -95,6 +98,7 @@
                                                 class="manatFont">M</b></p>
                                     </div>
                                     <div>
+                                        <a class="pull-left btn btn-white" href="<?= \yii\helpers\Url::previous(); ?>"><?= Yii::t('app', 'Continue shopping'); ?></a>
                                         <a href="<?= \yii\helpers\Url::toRoute('/checkout'); ?>" class="pull-right btn greenBg white"><?= Yii::t('app', 'Checkout'); ?></a>
                                     </div>
                                 </div>

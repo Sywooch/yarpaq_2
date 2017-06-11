@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Response;
 use common\models\User;
 
@@ -61,24 +62,18 @@ class CartController extends BasicController
     }
 
     /**
-     * Ajax действие
      * Добавляет товар в корзину (1 шт)
      */
     public function actionAddToCart() {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         $r = Yii::$app->request;
 
-        $product_id = (int)$r->post('product_id');
+        $product_id = (int)$r->get('product_id');
 
         $cart = Yii::$app->cart;
 
         $cart->add($product_id, 1);
 
-        if ($cart->save() ) {
-            return ['status'  => 1];
-        } else {
-            return ['status'  => 0];
-        }
+        $this->redirect( Url::toRoute('index') );
     }
 
     public function actionPlus() {
