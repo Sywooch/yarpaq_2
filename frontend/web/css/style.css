@@ -980,9 +980,10 @@ a.button_drop:hover, .button_drop:hover {
     background: rgba(0, 0, 0, 0) url("../img/iconBag.png") no-repeat scroll 0 0;
     color: #fff;
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     height: 24px;
-    padding:8.5px 0 0;
+    font-weight: bold;
+    padding: 10px 0 0;
     text-align: center;
     width: 26px;
 }
@@ -1273,6 +1274,7 @@ hr {
 
 .some-products .product_image {
     overflow: hidden;
+    height: 151px;
     width: 100%;
     border-radius: 5px;
     position: relative;
@@ -2571,15 +2573,15 @@ margin:3px 0;font-size: 9px;
     margin:0 7px;
 }
 
-.limit-product label.select::after {
-    content: url("../img/select.png");
-    padding: 5px;
-    transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-}
+/*.limit-product label.select::after {*/
+    /*content: url("../img/select.png");*/
+    /*padding: 5px;*/
+    /*transform: rotate(0deg);*/
+    /*-moz-transform: rotate(0deg);*/
+    /*-ms-transform: rotate(0deg);*/
+    /*-webkit-transform: rotate(0deg);*/
+    /*-o-transform: rotate(0deg);*/
+/*}*/
 .limit-product .form-group,.sort-product .form-group {
     display: inline-block;
     margin: 0;
@@ -2595,7 +2597,7 @@ margin:3px 0;font-size: 9px;
     text-align: center;
     color:#959595;
 }
-.product-compare{display: inline-block;margin-left: 40px}
+.product-compare { display: inline-block; margin-left: 40px }
 .product-compare > a {
     border: 1px solid #79b237;
     border-radius: 5px;

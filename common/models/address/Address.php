@@ -59,6 +59,10 @@ class Address extends \yii\db\ActiveRecord
         return $this->hasOne(Country::className(), ['id' => 'country_id']);
     }
 
+    public function getZone() {
+        return $this->hasOne(Zone::className(), ['id' => 'zone_id']);
+    }
+
     /**
      * @inheritdoc
      */

@@ -148,10 +148,10 @@ class OrderController extends AdminDefaultController
                     }
 
                 }
+            }
 
-                if ($isValid) {
-                    return $this->redirect(['view', 'id' => $order->id]);
-                }
+            if ($isValid) {
+                return $this->redirect(['update', 'id' => $order->id]);
             }
         }
 

@@ -83,7 +83,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id', 'payment_method_id', 'shipping_method_id'], 'integer'],
-            [['firstname', 'lastname', 'email', 'phone1', 'payment_firstname', 'payment_lastname', 'payment_address', 'payment_city', 'payment_country', 'payment_country_id', 'payment_zone', 'payment_zone_id', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_address', 'shipping_city', 'shipping_country', 'shipping_country_id', 'shipping_zone', 'shipping_zone_id', 'shipping_method', 'shipping_code', 'language_id', 'currency_id', 'currency_code', 'ip', 'user_agent', 'accept_language', 'created_at', 'modified_at'], 'required'],
+            [['firstname', 'lastname', 'email', 'phone1', 'payment_firstname', 'payment_lastname', 'payment_address', 'payment_city', 'payment_country', 'payment_country_id', 'payment_zone', 'payment_zone_id', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_address', 'shipping_city', 'shipping_country', 'shipping_country_id', 'shipping_zone', 'shipping_zone_id', 'shipping_method', 'shipping_code', 'language_id', 'currency_id', 'currency_code'], 'required'],
             [['comment'], 'string'],
             [['total', 'currency_value'], 'number'],
             [['created_at', 'modified_at'], 'safe'],
@@ -97,6 +97,19 @@ class Order extends \yii\db\ActiveRecord
             [['currency_id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['currency_id' => 'id']],
             [['language_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['language_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['created_at', 'modified_at'], 'default', 'value' => function ($model, $attribute) {
+                $now = new \DateTime();
+                return $now->format('Y-m-d H:i:s');
+            }],
+            ['ip', 'default', 'value' => function ($model, $attribute) {
+                return Yii::$app->request->userIP;
+            }],
+            ['user_agent', 'default', 'value' => function ($model, $attribute) {
+                return Yii::$app->request->userAgent;
+            }],
+            ['accept_language', 'default', 'value' => function ($model, $attribute) {
+                return implode(';', Yii::$app->request->acceptableLanguages);
+            }]
         ];
     }
 
@@ -245,5 +258,23 @@ class Order extends \yii\db\ActiveRecord
         }
 
         return $isValid;
+    }
+
+
+    public function beforeSave($insert) {
+
+        if (parent::beforeSave($insert))
+        {
+            $now = new \DateTime();
+
+            // set Created At
+            if (!$this->isNewRecord) {
+                $this->modified_at = $now->format('Y-m-d H:i:s');
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -33,7 +33,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <td width="30px"><?= Yii::t('app', 'Check'); ?></td>
+                                            <td width="30px"></td>
                                             <td><?= Yii::t('app', 'Product'); ?></td>
                                             <td width="103px"><?= Yii::t('app', 'Quantity');?></td>
                                             <td width="100px">1x <?= Yii::t('app', 'Price');?></td>

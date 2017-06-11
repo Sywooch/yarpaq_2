@@ -25,6 +25,8 @@ $this->beginPage();
     </script>
     <title>Yarpaq.az</title>
     <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/slick/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="/slick/slick/slick-theme.css">
 
     <!--[if IE 8]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -218,25 +220,28 @@ $this->beginPage();
                         <ul class="list-inline  pull-right cart-login">
                             <li>
                                 <div class="dropdown dropdown-bag">
-                                    <a data-toggle="dropdown" class="cart-icon iconBag bag-link">0</a>
+                                    <?php $cart = Yii::$app->cart; ?>
+                                    <a data-toggle="dropdown" class="cart-icon iconBag bag-link"><?= $cart->countProducts(); ?></a>
 
                                     <div class="dropdown-menu bag-drop">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <h3>Səbətinizdə</h3>
+                                            <h3><?= Yii::t('app', 'Cart'); ?></h3>
                                         </div>
                                         <div class="col-lg-12 col-md-12 col-sm-12 bag-scrool padding5">
 
+                                            <?php foreach ($cart->products as $key => $product) { ?>
+
                                             <div class="clearfix"></div>
                                             <div class="row margin-top-10">
                                                 <div class="col-lg-7 col-md-7 col-xs-7 col-sm-7 no-padding-xs">
                                                     <div class="row">
 
                                                         <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 no-padding-xs">
-                                                            <img class="img-rounded" src="/img/basketFile.jpg" width="50"
+                                                            <img class="img-rounded" src="<?= $product['image']; ?>" width="50"
                                                                  alt="">
                                                         </div>
                                                         <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                                                            <p class="g-title bag-text small ">JBL Portable Speaker JBL Portable Speaker</p>
+                                                            <p class="g-title bag-text small "><?= $product['title']; ?></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -250,14 +255,14 @@ $this->beginPage();
                                                             </div>
 
                                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>1</span></p>
+                                                                <p class="g-title"><span><?= $product['quantity']; ?></span></p>
                                                             </div>
                                                         </div>
 
                                                         <div
                                                             class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4 no-padding-xs">
                                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>425</span></p>
+                                                                <p class="g-title"><span><?= $product['total']; ?></span></p>
                                                             </div>
 
                                                             <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
@@ -277,167 +282,11 @@ $this->beginPage();
                                                 </div>
                                             </div>
 
+                                            <?php } ?>
 
-                                            <div class="clearfix"></div>
-                                            <div class="row margin-top-10">
-                                                <div class="col-lg-7 col-md-7 col-xs-7 col-sm-7 no-padding-xs">
-                                                    <div class="row">
-
-                                                        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 no-padding-xs">
-                                                            <img class="img-rounded" src="/img/basketFile.jpg" width="50"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                                                            <p class="g-title bag-text small ">JBL Portable Speaker JBL
-                                                                Portable Speaker</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-5 col-md-5 col-xs-5 col-sm-5 no-padding-xs">
-                                                    <div class="row">
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>x</span></p>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>1</span></p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4 no-padding-xs">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>425</span></p>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span><b
-                                                                            class="manatFont">M</b></span></p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="clearfix"></div>
-                                            <div class="row margin-top-10">
-                                                <div class="col-lg-7 col-md-7 col-xs-7 col-sm-7 no-padding-xs">
-                                                    <div class="row">
-
-                                                        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 no-padding-xs">
-                                                            <img class="img-rounded" src="/img/basketFile.jpg" width="50"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                                                            <p class="g-title bag-text small ">JBL Portable Speaker JBL
-                                                                Portable Speaker</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-5 col-md-5 col-xs-5 col-sm-5 no-padding-xs">
-                                                    <div class="row">
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>x</span></p>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>1</span></p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4 no-padding-xs">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>425</span></p>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span><b
-                                                                            class="manatFont">M</b></span></p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="clearfix"></div>
-                                            <div class="row margin-top-10">
-                                                <div class="col-lg-7 col-md-7 col-xs-7 col-sm-7 no-padding-xs">
-                                                    <div class="row">
-
-                                                        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 no-padding-xs">
-                                                            <img class="img-rounded" src="/img/basketFile.jpg" width="50"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9 col-xs-9 col-sm-9">
-                                                            <p class="g-title bag-text small ">JBL Portable Speaker JBL
-                                                                Portable Speaker</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-5 col-md-5 col-xs-5 col-sm-5 no-padding-xs">
-                                                    <div class="row">
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>x</span></p>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>1</span></p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4 no-padding-xs">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span>425</span></p>
-                                                            </div>
-
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <p class="g-title"><span><b
-                                                                            class="manatFont">M</b></span></p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="left-line no-padding-left no-padding-right col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                                            <div class="col-lg-12 col-md-12 col-sm-12 no-padding-xs">
-                                                                <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- ======================================================================= -->
                                         </div>
-                                        <!-- ======================================================================= -->
+
+
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 checkout-proses padding5">
                                             <hr class="white">
                                             <div class="row">
@@ -445,12 +294,12 @@ $this->beginPage();
                                                     class="col-lg-9 col-md-9 col-sm-9 col-xs-9 no-padding-left no-padding-right">
                                                     <div
                                                         class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-left no-padding-right">
-                                                        <p class="total-price small"><span>Ümumi məbləğ:</span></p>
+                                                        <p class="total-price small"><span><?= Yii::t('app', 'Subtotal'); ?>:</span></p>
                                                     </div>
 
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding-left no-padding-right">
                                                         <p class="total-price small">
-                                                            <span><strong>Yekun məbləğ:</strong></span>
+                                                            <span><strong><?= Yii::t('app', 'Total'); ?>:</strong></span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -458,14 +307,14 @@ $this->beginPage();
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding-xs">
                                                     <div
                                                         class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding no-padding-xs">
-                                                        <span class="g-price small pull-right">425.00  <b
+                                                        <span class="g-price small pull-right"><?= $cart->subtotal; ?>  <b
                                                                 class="manatFont">M</b></span>
                                                     </div>
 
                                                     <div
                                                         class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding no-padding-xs">
                                                         <strong>
-                                                            <span class="g-price small pull-right">459.00 <b
+                                                            <span class="g-price small pull-right"><?= $cart->total; ?> <b
                                                                     class="manatFont">M</b></span>
                                                         </strong>
                                                     </div>
@@ -476,12 +325,13 @@ $this->beginPage();
                                             <hr class="white">
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 no-padding-xs">
-                                                    <a href="<?= \yii\helpers\Url::toRoute(['cart/index']); ?>" type="button" class="btn-grey btn btn-link">Səbətə keç</a>
+                                                    <a href="<?= \yii\helpers\Url::toRoute(['cart/index']); ?>" type="button" class="btn-grey btn btn-link"><?= Yii::t('app', 'Go to cart'); ?></a>
                                                 </div>
 
                                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 no-padding-xs">
-                                                    <input class="button_drop greenBg col-md-12 pull-right"
-                                                           value="Sifarişi yekunlaşdır" type="submit">
+                                                    <a class="button_drop greenBg col-md-12 pull-right" href="<?= \yii\helpers\Url::toRoute(['/checkout']) ?>">
+                                                        <?= Yii::t('app', 'Checkout'); ?>
+                                                    </a>
                                                 </div>
                                             </div>
 
