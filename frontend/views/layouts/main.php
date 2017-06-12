@@ -419,7 +419,7 @@ $this->beginPage();
 
 <?= $this->render('_footer'); ?>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
 <script type="text/javascript" src="/js/common_scripts_min.js"></script>
 <script type="text/javascript" src="/js/functions.js"></script>
