@@ -21,7 +21,7 @@
 
                         </div>
                     </div>
-                    <div class="some-products green categoryProducts" style="margin-right: 20px">
+                    <div class="some-products green categoryProducts hide" style="margin-right: 20px">
                         <div class="box-heading">
                             <h3>Baxılmış məhsullar</h3>
                         </div>
@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class=" clearfix v-margin-20">
-                                    <div class="quantity quantity2 col-md-6 padding-right-2  no-padding-left">
+                                    <div class="quantity quantity2 col-md-6 padding-right-2  no-padding-left hide">
                                         <label><?= Yii::t('app', 'Quantity'); ?></label>
                                         <div class="le-quantity pull-right">
                                             <form>
@@ -164,7 +164,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-md-6 padding-left-2 no-padding-right">
-                                        <button class="btn btn-green"><?= Yii::t('app', 'Add to basket'); ?></button>
+                                        <button class="btn btn-green product-add" data-id="<?= $product->id; ?>"><?= Yii::t('app', 'Add to basket'); ?></button>
                                     </div>
 
                                 </div>
@@ -172,7 +172,7 @@
 
 
                             <div class="clearfix"></div>
-                            <div class="taksit-calculator">
+                            <div class="taksit-calculator hide">
                                 <div class="caption-for-taksit"><?= Yii::t('app', 'Taksit calculator'); ?></div>
                                 <table class="full-width">
                                     <thead>
@@ -226,83 +226,17 @@
                         <div class="product-tab margin-top-30">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li> <a href="#description_product" aria-controls="description_product" role="tab" data-toggle="tab">Təsvir</a> </li>
-
                                 <li><a aria-controls="comment_product" role="tab" data-toggle="tab" href="#comment_product" aria-expanded="true">Rəylər</a>  </li>
-                                <li> <a href="#faq_product" aria-controls="faq_product" role="tab" data-toggle="tab">Yeni məhsullar</a> </li>
                             </ul>
                             <div class="tab-content clearfix">
                                 <div  role="tabpanel" class="tab-pane fade col-md-12"  id="description_product">
-                                    <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                        unknown printer took a galley of type and scrambled it to make a type specimen
-                                        book. It has survived not only five centuries, but also the leap into electronic
-                                        typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                                        with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                                        recently with desktop publishing software like Aldus PageMaker including
-                                        versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-                                        typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                                        ever since the 1500s, when an unknown printer took a galley of type and
-                                        scrambled it to make a type specimen book. It has survived not only five
-                                        centuries, but also the leap into electronic typesetting, remaining essentially
-                                        unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                                        containing Lorem Ipsum passages, and more recently with desktop publishing
-                                        software like Aldus PageMaker including versions of Lorem Ipsum.
-                                    </p>
+                                    <?= \yii\helpers\HtmlPurifier::process($product->description); ?>
                                 </div>
                                 <div  role="tabpanel" class="tab-pane fade in active  col-md-12"  id="comment_product">
 
-                                    <ul class="comment-list">
-                                        <li>
-                                            <div class="clearfix">
-                                                <img src="/img/avatar.jpg">
-                                                <div class="comment-body">
-                                                    <div class="comment-meta">
-                                                        <span class="author"><a class="green" href="#">Ad Soyad</a></span>&nbsp;
-                                                        <span class="date">(12.12.2020)</span>
-                                                    </div>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        It has survived not only five centuries, but also the leap into electronic
-                                                        typesetting, remaining essentially unchanged.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="clearfix">
-                                                <img src="/img/avatar.jpg">
-                                                <div class="comment-body">
-                                                    <div class="comment-meta">
-                                                        <span class="author"><a class="green" href="#">Ad Soyad</a></span>&nbsp;
-                                                        <span class="date">(12.12.2020)</span>
-                                                    </div>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        It has survived not only five centuries, but also the leap into electronic
-                                                        typesetting, remaining essentially unchanged.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="clearfix">
-                                                <img src="/img/avatar.jpg">
-                                                <div class="comment-body">
-                                                    <div class="comment-meta">
-                                                        <span class="author"><a class="green" href="#">Ad Soyad</a></span>&nbsp;
-                                                        <span class="date">(12.12.2020)</span>
-                                                    </div>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                                        Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                                                        unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        It has survived not only five centuries, but also the leap into electronic
-                                                        typesetting, remaining essentially unchanged.</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="comented">
+                                    <p>Rəy bildirən olmayıb</p>
+
+                                    <div class="comented hide">
                                         <h4>Rəyinizi bildirin</h4>
                                         <textarea></textarea>
                                         <button class="btn btn-green pull-right">Göndər</button>
@@ -314,7 +248,7 @@
                             </div>
                         </div>
 
-                        <div class="some-products categoryProducts">
+                        <div class="some-products categoryProducts hide">
                             <div class="margin-bottom-30">
 
                                 <div class="box-heading green">

@@ -62,7 +62,7 @@ class Language extends \yii\db\ActiveRecord
     static function getDefault()
     {
         if( self::$default === null ){
-            self::$default = self::findOne(['id' => 1]);
+            self::$default = self::findOne(['id' => 3]);
         }
 
         return self::$default;

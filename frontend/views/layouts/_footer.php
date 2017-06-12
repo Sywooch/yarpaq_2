@@ -18,8 +18,6 @@
                                         <a href="#">
                                             Satıcılar və Alıcılar üçün
                                         </a>
-
-
                                     </li>
                                     <li>
                                         <a href="#">
@@ -33,43 +31,13 @@
                                         </a>
 
                                     </li>
-                                    <li>
-                                        <a href="#">
-                                            Məxfilik Siyasəti
-                                        </a>
 
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Qaydalar və Şərtlər
-                                        </a>
-
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-md-3 col-xs-6 col-sm-6  v-margin-25">
-                                <h4 class="megabox-group-title">MƏLUMAT</h4>
+                                <h4 class="megabox-group-title">&nbsp;</h4>
                                 <hr>
                                 <ul class="links">
-                                    <li class="">
-                                        <a href="#">
-                                            Satıcılar və Alıcılar üçün
-                                        </a>
-
-
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Bizim haqqımızda
-                                        </a>
-
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Ödəniş və Çatdırılma
-                                        </a>
-
-                                    </li>
                                     <li>
                                         <a href="#">
                                             Məxfilik Siyasəti
@@ -81,41 +49,38 @@
                                             Qaydalar və Şərtlər
                                         </a>
 
+                                    </li>
+                                    <li class="">
+                                        <a href="#">
+                                            Geri qaytarılanlar
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-md-3 col-xs-6 col-sm-6  v-margin-25 account-footer">
-                                <h4 class="megabox-group-title">MƏLUMAT</h4>
+                                <h4 class="megabox-group-title">Şəxsi kabinet</h4>
                                 <hr>
                                 <ul class="links">
                                     <li class="">
                                         <a href="#">
-                                            Satıcılar və Alıcılar üçün
+                                            Şəxsi məlumat
                                         </a>
-
-
                                     </li>
                                     <li>
                                         <a href="#">
-                                            Bizim haqqımızda
-                                        </a>
-
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Ödəniş və Çatdırılma
+                                            Sifariş Tarixçəsi
                                         </a>
 
                                     </li>
                                     <li>
                                         <a href="#">
-                                            Məxfilik Siyasəti
+                                            Ünvanlar
                                         </a>
 
                                     </li>
                                     <li>
                                         <a href="#">
-                                            Qaydalar və Şərtlər
+                                            Səbət
                                         </a>
 
                                     </li>
@@ -128,19 +93,14 @@
                                     <li class="">
                                         <i class="fa fa-mobile " aria-hidden="true"></i>+994 12 310 30 03
                                     </li>
-
                                     <li>
                                         <i class="icons-envelope"></i>support@yarpaq.az
-
                                     </li>
-                                    <li>
+                                    <li class="hide">
                                         <i class="icons-whatsapp"></i> +994 55 555 55 55
-
                                     </li>
                                     <li class="hidden-xs">
-                                            <span>
-                                                Yarpaq.az © 2016-2017
-                                            </span>
+                                        <span>Yarpaq.az © 2016-2017</span>
                                     </li>
                                 </ul>
                             </div>
@@ -152,9 +112,9 @@
                         <ul class="links contact-info">
                             <li class="col-xs-6 col-sm-6  col-md-12 no-padding">
                                 <ul class="socIcons clearfix">
-                                    <li><i class="fa fa-facebook-square" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-twitter-square" aria-hidden="true"></i></li>
+                                    <li><a href="https://www.facebook.com/yarpaq.az/" target="_blank" class="fa fa-facebook-square" aria-hidden="true"></a></li>
+                                    <li><a href="https://www.instagram.com/yarpaq_az/" target="_blank" class="fa fa-instagram" aria-hidden="true"></a></li>
+                                    <li><a href="#" class="hide fa fa-twitter-square" aria-hidden="true"></a></li>
                                 </ul>
                             </li>
 
@@ -163,7 +123,7 @@
                                     <img src="/img/logo.png" alt="yarpaq.az" width="106px">
                                 </a>
 
-                                <div class="hidden-lg hidden-md "> Yarpaq.az © 2016-2017</div>
+                                <div class="hidden-lg hidden-md ">Yarpaq.az © 2016-2017</div>
                             </li>
 
                         </ul>
@@ -177,7 +137,6 @@
         <div class="container">
             <div class="row">
                 <ul class="list-inline payment-methods  text-center">
-
                     <li><a href="#"><img src="/img/payment1.png"></a></li>
                     <li><a href="#"><img src="/img/payment2.png"></a></li>
                     <li><a href="#"><img src="/img/payment3.png"></a></li>

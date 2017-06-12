@@ -1304,9 +1304,7 @@ hr {
     border: 1px solid #c8c8c8;
     padding: 5px;
     width: 100%;
-    margin: 8px 0 1px;
     border-radius: 5px;
-
 }
 .some-products .product-add:hover,
 .some-products .productinfo-wrapper .product-add:hover {background-color: #79b237;color:#fff; border-color: #79b237}
@@ -1379,7 +1377,8 @@ hr {
 footer{
     position: relative;}
 .top-footer  a{color:#fff;font-size:12px}
-.top-footer h4{font-size:14px}
+.top-footer h4{font-size:14px;
+    text-transform: uppercase;}
 .top-footer hr{width:11px;background: #fff;color:#fff}
 .icons-envelope {
     background: rgba(0, 0, 0, 0) url("../img/icons.png") no-repeat scroll -8px 0;
@@ -1431,8 +1430,10 @@ footer{
     text-align: center;
     width: 25px;
 }
-.contact-info .socIcons  i{
-    height: 27px !important;}
+.contact-info .socIcons a {
+    height: 27px !important;
+    font-size: 24px;
+}
 .socIcons li {
     float: left;
     line-height: 1 !important;
@@ -2084,6 +2085,7 @@ background: url("../img/payment.png") no-repeat;
     border-radius: 5px;
     background-color: rgb(121, 178, 55);
     padding: 6px 22px 3px;
+    border: none;
     color: #fff;
     font-size: 12px;
 }
@@ -2144,7 +2146,7 @@ background: url("../img/payment.png") no-repeat;
     background-color: #fff;
     margin: 0 -1px;
 float: left;}
-.quantity2 .quantity-input{width:20px;height:26px}
+.quantity2 .quantity-input{width:20px;height:25px}
 .le-quantity .disabled-sp{background-color:#e5e5e5;}
 .cart-remove-btn{background-color: #ff0048;font-size: 10px;color: #fff;width: 17px;height: 17px;padding: 0px;line-height: 1}
 
@@ -2848,6 +2850,7 @@ margin:3px 0;font-size: 9px;
 .product-tab > .nav-tabs li {
     width: 125px;
     text-align: center;
+    padding: 0 2px;
 }
 .tab-content {padding:15px}
 

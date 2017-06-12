@@ -9,12 +9,11 @@
                     <div class="infoMenuBox light-gray_bg">
                         <div class="list-infoMenu">
                             <div class="v-padding-5">
-                                <div class="title green sizex14"><span>Account</span></div>
+                                <div class="title green sizex14"><span><?= Yii::t('app', 'Account'); ?></span></div>
                                 <ul class="sub-infoMenu" style="display: block;">
-                                    <li><a href="#">Personal information</a></li>
-                                    <li><a href="#">Addresses</a></li>
-                                    <li><a href="#">Orders history</a></li>
-                                    <li class="active"><a href="#">Cart</a></li>
+                                    <li><a href="#"><?= Yii::t('app', 'Personal information'); ?></a></li>
+                                    <li><a href="#"><?= Yii::t('app', 'Addresses'); ?></a></li>
+                                    <li><a href="#"><?= Yii::t('app', 'Orders history'); ?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -30,6 +29,7 @@
 
                         <div class="cart-list basket-list row">
                             <div class="col-md-12">
+                                <?php if ($cart->hasProducts()) { ?>
                                 <table>
                                     <thead>
                                         <tr>
@@ -60,7 +60,7 @@
                                                     <div class="description-backetPr col-md-11 no-padding">
                                                         <?= $product['title']; ?>
                                                     </div>
-                                                    <div class="description-backetPrColor">
+                                                    <div class="description-backetPrColor hide">
                                                         Rəng: Qara
                                                     </div>
 
@@ -89,17 +89,24 @@
                                         <?php } ?>
                                     </tbody>
                                 </table>
-                                <div class=" hmargin-30">
+                                <?php } else { ?>
+                                    <p class="hmargin-30"><?= Yii::t('app', 'Your cart is empty'); ?></p>
+                                <?php } ?>
+                                <div class="hmargin-30">
 
+                                    <?php if ($cart->hasProducts()) { ?>
                                     <div class="text-right size16 v-margin-15">
                                         <p class="margin-0"> <?= Yii::t('app', 'Subtotal'); ?>: <?= $cart->subTotal; ?> <b class="manatFont">M</b></p>
 
                                         <p class="green dejavu-bold margin-0"><?= Yii::t('app', 'Total'); ?>: <?= $cart->subTotal; ?> <b
                                                 class="manatFont">M</b></p>
                                     </div>
+                                    <?php } ?>
                                     <div>
                                         <a class="pull-left btn btn-white" href="<?= \yii\helpers\Url::previous(); ?>"><?= Yii::t('app', 'Continue shopping'); ?></a>
+                                        <?php if ($cart->hasProducts()) { ?>
                                         <a href="<?= \yii\helpers\Url::toRoute('/checkout'); ?>" class="pull-right btn greenBg white"><?= Yii::t('app', 'Checkout'); ?></a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
