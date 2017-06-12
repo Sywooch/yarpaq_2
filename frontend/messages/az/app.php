@@ -2,6 +2,7 @@
 
 return [
     'All sections' => 'Bütün bölmələr',
+    'All categories' => 'Bütün bölmələr',
     'Sign in' => 'Daxil ol',
     'Password' => 'Şifrə',
     'Register' => 'Qeydiyyat',
@@ -11,8 +12,8 @@ return [
     'Bestsellers' => 'Ən çox satılan',
     'Sort' => 'Çeşidlə',
     'Price' => 'Qiymət',
-    'lowest first' => 'Əvvəlcə ucuz',
-    'highest first' => 'Əvvəlcə bahalı',
+    'Price: lowest first' => 'Əvvəlcə ucuz',
+    'Price: highest first' => 'Əvvəlcə bahalı',
     'newest first' => 'Əvvəlcə yenilər',
     'Account' => 'Hesabım',
     'Price range' => 'Qiymət aralığı',
@@ -32,7 +33,7 @@ return [
     'Taksit calculator' => 'Taksit kalkulyatoru',
     'customer rights' => 'Müştəri hüquqları',
     'moneyback' => 'pulun geri qaytarılması',
-    'Cart' => 'Kart',
+    'Cart' => 'Səbət',
     'Check Product' => 'Məhsulun yoxlanışı',
     'Total' => 'Cəmi',
     'Subtotal' => 'Ümumi',
@@ -57,6 +58,7 @@ return [
     'Orqanization' => 'Təşkilat',
     'Confirm password' => 'Şifrəni təsdiqlə',
     'Continue' => 'Davam et',
+    'Product' => 'Məhsul'
 ];
 
 

@@ -50,7 +50,7 @@
                                                 <h5 class="green dejavu-bold"><?= Yii::t('app', 'Shipping method'); ?></h5>
                                                 <ul>
                                                     <li>
-                                                        <input type="radio" class="radio" id="radio1" name="shipping_method" value="1">
+                                                        <input type="radio" class="radio" id="radio1" name="shipping_method" checked value="1">
                                                         <label for="radio1"><?= Yii::t('app', 'Courier'); ?></label>
                                                         <div class="tooltip_styled">
                                                             <span class="tooltip-item green hide">(?)</span>
@@ -62,7 +62,7 @@
                                                         </div>
 
                                                     </li>
-                                                    <li>
+                                                    <li class="hide">
                                                         <input type="radio" class="radio" id="radio2"  name="shipping_method" value="2">
                                                         <label for="radio2"><?= Yii::t('app', 'Post'); ?></label>
                                                         <div class="tooltip_styled">

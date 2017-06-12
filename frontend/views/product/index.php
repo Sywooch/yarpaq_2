@@ -230,7 +230,7 @@
                             </ul>
                             <div class="tab-content clearfix">
                                 <div  role="tabpanel" class="tab-pane fade col-md-12"  id="description_product">
-                                    <?= \yii\helpers\HtmlPurifier::process($product->description); ?>
+                                    <?= \yii\helpers\HtmlPurifier::process( \yii\helpers\Html::decode($product->description)); ?>
                                 </div>
                                 <div  role="tabpanel" class="tab-pane fade in active  col-md-12"  id="comment_product">
 

@@ -1307,6 +1307,9 @@ hr {
     border-radius: 5px;
 }
 .some-products .product-add:hover,
+.some-products .productinfo-wrapper .product-add {
+    margin-top: 10px;
+}
 .some-products .productinfo-wrapper .product-add:hover {background-color: #79b237;color:#fff; border-color: #79b237}
 .some-products .owl-carousel .owl-item {
  padding: 10px;
