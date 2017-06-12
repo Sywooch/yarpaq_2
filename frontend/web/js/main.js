@@ -421,7 +421,7 @@ $(function () {
     addProductBtns.click(function () {
         var self = $(this);
 
-        location.href = '/cart/add?product-id='+self.data('id');
+        location.href = '/cart/add?product_id='+self.data('id');
     });
 
 

@@ -72,6 +72,7 @@ class CartController extends BasicController
         $cart = Yii::$app->cart;
 
         $cart->add($product_id, 1);
+        $cart->save();
 
         $this->redirect( Url::toRoute('index') );
     }

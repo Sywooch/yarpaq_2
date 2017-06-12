@@ -192,7 +192,7 @@ class Order extends \yii\db\ActiveRecord
 
     public function getStatus() {
         return $this->hasOne(OrderStatus::className(), ['order_status_id' => 'order_status_id'])
-            ->andWhere(['language_id' => Language::getCurrent()]);
+            ->andWhere(['language_id' => Language::getCurrent()->id]);
     }
 
     public function getOrderProducts() {
