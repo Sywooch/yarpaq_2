@@ -409,7 +409,11 @@ class Cart extends Component
     public function save() {
         $user = Yii::$app->user->identity;
 
-        $user->cart = serialize(Yii::$app->session->get('cart'));
-        return $user->save();
+        if ($user) {
+            $user->cart = serialize(Yii::$app->session->get('cart'));
+            return $user->save();
+        }
+
+        return false;
     }
 }

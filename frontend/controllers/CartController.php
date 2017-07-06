@@ -15,15 +15,14 @@ class CartController extends BasicController
     {
         if ( parent::beforeAction($action) )
         {
-            if (Yii::$app->user->isGuest) {
-                $this->redirect(Yii::$app->homeUrl);
+            if (!Yii::$app->user->identity) {
+                $this->redirect('/');
             }
 
             return true;
         }
 
         return false;
-
     }
 
     public function actionTest() {
