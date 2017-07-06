@@ -220,7 +220,7 @@
 
                                     </div>
                                     <div class="operations-order">
-                                        <button class="product-add">Səbətə at</button>
+                                        <button class="product-add" data-id="<?= $product->id; ?>"><?= Yii::t('app', 'Add to basket'); ?></button>
                                         <div class="hidden-xs hidden-sm">
                                             <div class=" text-center">
                                                 <ul class="product-icons list-inline">

@@ -12,10 +12,9 @@
                             <div class="v-padding-5">
                                 <div class="title green sizex14"><span>Account</span></div>
                                 <ul class="sub-infoMenu" style="display: block;">
-                                    <li><a href="#">Personal information</a></li>
-                                    <li><a href="#">Addresses</a></li>
-                                    <li><a href="#">Orders history</a></li>
-                                    <li><a href="#">Cart</a></li>
+                                    <li><a href="#"><?= Yii::t('app', 'Personal information'); ?></a></li>
+                                    <li><a href="#"><?= Yii::t('app', 'Addresses'); ?></a></li>
+                                    <li><a href="#"><?= Yii::t('app', 'Orders history'); ?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -100,7 +99,7 @@
                                                         <input type="hidden" name="card_type" id="cardType" value="v">
                                                     </li>
                                                     <li>
-                                                        <input id="radio5" type="radio" class="radio" name="payment_method" value="6">
+                                                        <input id="radio5" type="radio" class="radio" name="payment_method" checked value="6">
                                                         <label for="radio5"><?= Yii::t('app', 'Cash'); ?></label>
 
                                                     </li>

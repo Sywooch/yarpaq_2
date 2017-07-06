@@ -193,6 +193,10 @@
     .header-bottom {
     padding: 0;
 
+    .top-logo {
+        margin-left: 15px;
+    }
+
 }
 .vertical-left-megamenu{
 	top: 0 !important;
