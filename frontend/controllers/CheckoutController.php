@@ -38,6 +38,9 @@ class CheckoutController extends BasicController
         $user       = Yii::$app->user->identity;
         $address    = $user->addresses[0];
 
+        if (!$cart->hasProducts() || !$cart->hasStock()) {
+            $this->redirect(Url::toRoute(['/cart']));
+        }
 
         $payment_address = [];
         $payment_address['firstname']   = $address->firstname;
@@ -92,7 +95,8 @@ class CheckoutController extends BasicController
             if ($payment_method_model) {
                 $payment_method_data = [
                     'title' => $payment_method_model->name,
-                    'code' => $payment_method_model->code
+                    'code'  => $payment_method_model->code,
+                    'class' => $payment_method_model->class
                 ];
                 $session->set('payment_method', $payment_method_data);
             }
@@ -257,6 +261,8 @@ class CheckoutController extends BasicController
 
                 // Redirect to payment page
                 $this->redirect(Url::toRoute('success'));
+                //$payment_class = $payment_method['class'];
+                //$this->redirect(Url::toRoute([$payment_class.'/checkout', 'order_id' => $order->id]));
             } else {
                 // Redirect to checkout page
                 $this->redirect(Url::toRoute('fail'));
