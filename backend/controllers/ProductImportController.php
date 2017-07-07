@@ -121,7 +121,7 @@ WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
          */
 
         $model->title           = $desc_data['d_name'];
-        $model->description     = $desc_data['d_desc'];
+        $model->description     = html_entity_decode($desc_data['d_desc']);
         $model->model           = $desc_data['model'];
         $model->sku             = $desc_data['sku'];
         $model->upc             = $desc_data['upc'];
