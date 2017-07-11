@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 <?php } ?>
 
 <div class="product-update">
-
     <?= $this->render('_options_form', [
         'product' => $model,
     ]) ?>

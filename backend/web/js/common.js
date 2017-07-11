@@ -19,6 +19,22 @@ $(function () {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
     } // add a suffix
 
+
+
+    $('.deleteOptionValueBtn').click(function () {
+        $(this).closest('.value_row').toggleClass('disabled');
+    });
+
+    $('#addOptionValueBtn').click(function () {
+        var tpl = $('#optionValueTpl').clone();
+        var group = $('#values_group');
+
+        group.append(tpl);
+        tpl.fadeIn();
+        tpl.removeClass('hide');
+
+    });
+
 });
 
 

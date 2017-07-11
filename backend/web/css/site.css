@@ -149,3 +149,7 @@ a.desc:after {
 #orderProductAdd {
     margin-top: 10px;
 }
+
+.value_row.disabled {
+    opacity: 0.5;
+}
