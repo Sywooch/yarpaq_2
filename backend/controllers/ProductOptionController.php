@@ -70,6 +70,24 @@ class ProductOptionController extends AdminDefaultController
 
     }
 
+    public function actionAddOption($product_id) {
+
+        $product        = Product::findOne($product_id);
+        $productOption  = new ProductOption();
+
+        $productOption->product_id = $product->id;
+
+        if ($productOption->load(Yii::$app->request->post()) && $productOption->save()) {
+
+            $this->redirect(['update', 'product_id' => $product->id]);
+        }
+
+        return $this->render('add-option', [
+            'productOption' => $productOption,
+            'product' => $product
+        ]);
+    }
+
     public function deleteOptionValues() {
         if (!Yii::$app->request->post('delete_value_id')) return;
 

@@ -25,9 +25,9 @@ $(function () {
         $(this).closest('.value_row').toggleClass('disabled');
     });
 
-    $('#addOptionValueBtn').click(function () {
-        var tpl = $('#optionValueTpl').clone();
-        var group = $('#values_group');
+    $('.addOptionValueBtn').click(function () {
+        var group = $(this).closest('.tab-pane').find('.values_group');
+        var tpl = group.find('.optionValueTpl').clone();
 
         group.append(tpl);
         tpl.fadeIn();

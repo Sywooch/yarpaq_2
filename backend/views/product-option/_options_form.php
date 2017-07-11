@@ -22,24 +22,28 @@ use yii\helpers\ArrayHelper;
             <div class="row">
                 <div class="col-xs-12">
                     <?php
+                    $i=0;
                     foreach ($product->productOptions as $product_option) {
+                        $i++;
                         $option = $product_option->option;
                         ?>
                     <a
                         data-toggle="tab"
-                        href="#collapse<?= $product_option->option_id; ?>"
+                        href="#collapse<?= $product_option->id; ?>"
                         class="btn btn-default"><?= $option->content->name; ?></a>
                     <?php } ?>
 
-                    <a href="#" class="btn btn-success pull-right">Add option</a>
+                    <a href="add-option?product_id=<?= $product->id; ?>" class="btn btn-success pull-right"><?= Yii::t('app', 'Add option'); ?></a>
                 </div>
             </div>
             <br><br>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="tab-content col-xs-12">
                     <!-- Product options -->
                     <?php
+                    $i=0;
                     foreach ($product->productOptions as $product_option) {
+                        $i++;
                         /**
                          * @var $product_option \common\models\option\ProductOption
                          */
@@ -48,11 +52,11 @@ use yii\helpers\ArrayHelper;
                         $option_available_values =  ArrayHelper::map($option->values, 'id', 'name');
                         ?>
 
-                        <div id="collapse<?= $option->id; ?>" class="tab-pane active">
+                        <div id="collapse<?= $product_option->id; ?>" class="tab-pane <?php if ($i==1) { echo 'active';} ?>">
 
                             <?php $form = ActiveForm::begin(['action' => ['product-option/update', 'id' => $product->id], 'options' => ['enctype' => 'multipart/form-data']]); ?>
 
-                            <table class="table table-hover" id="values_group">
+                            <table class="table table-hover values_group">
                                 <tr>
                                     <th><?= Yii::t('app', 'Option Value'); ?></th>
                                     <th><?= Yii::t('app', 'Quantity'); ?></th>
@@ -85,7 +89,7 @@ use yii\helpers\ArrayHelper;
                                     </tr>
                                 <?php } ?>
 
-                                <tr class="hide" id="optionValueTpl">
+                                <tr class="hide optionValueTpl">
                                     <td>
                                         <select name="option_value_id[]" class="form-control">
                                             <?php foreach ($option_available_values as $id => $val) { ?>
@@ -118,7 +122,7 @@ use yii\helpers\ArrayHelper;
                                 </tr>
                             </table>
 
-                            <button type="button" class="btn btn-default col-xs-12" id="addOptionValueBtn">Add Value</button>
+                            <button type="button" class="btn btn-default col-xs-12 addOptionValueBtn">Add Value</button>
                             <br><br>
                             <div class="form-group">
                                 <input type="hidden" name="product_option_id" value="<?=$product_option->id;?>">

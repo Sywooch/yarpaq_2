@@ -3,6 +3,7 @@
 namespace common\models\option;
 
 use common\behaviors\Translation;
+use common\models\Language;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -58,5 +59,12 @@ class Option extends ActiveRecord
 
     public function getValues() {
         return $this->hasMany(OptionValue::className(), ['option_id' => 'id']);
+    }
+
+    public function getName() {
+        return $this
+            ->hasOne(OptionDescription::className(), ['option_id' => 'id'])
+            ->andWhere(['language_id' => Language::getCurrent()->id])
+            ->one()->name;
     }
 }
