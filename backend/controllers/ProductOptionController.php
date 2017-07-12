@@ -79,7 +79,7 @@ class ProductOptionController extends AdminDefaultController
 
         if ($productOption->load(Yii::$app->request->post()) && $productOption->save()) {
 
-            $this->redirect(['update', 'product_id' => $product->id]);
+            $this->redirect(['index', 'id' => $product->id]);
         }
 
         return $this->render('add-option', [

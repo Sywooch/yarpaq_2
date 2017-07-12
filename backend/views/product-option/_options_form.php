@@ -85,11 +85,12 @@ use yii\helpers\ArrayHelper;
                                                 <i class="fa fa-times" aria-hidden="true"></i>
                                             </label>
                                             <input type="checkbox" name="delete_value_id[]" value="<?=$value->id;?>" id="deleteValue<?=$value->id;?>" class="hide">
+                                            <?= $form->field($product_option, 'id')->hiddenInput(['name' => 'ProductOptionValue['.$value->id.'][product_option_id]'])->label(false); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
 
-                                <tr class="hide optionValueTpl">
+                                <tr class="hide optionValueTpl value_row">
                                     <td>
                                         <select name="option_value_id[]" class="form-control">
                                             <?php foreach ($option_available_values as $id => $val) { ?>
@@ -114,19 +115,18 @@ use yii\helpers\ArrayHelper;
                                         <input name="price[]" type="text" value="" class="form-control">
                                     </td>
                                     <td>
-                                        <label class="btn btn-warning deleteOptionValueBtn immediate" for="deleteValue<?=$value->id;?>">
+                                        <div class="btn btn-warning deleteOptionValueBtn immediate">
                                             <i class="fa fa-times" aria-hidden="true"></i>
-                                        </label>
-                                        <input type="checkbox" name="delete_value_id[]" value="<?=$value->id;?>" id="deleteValue<?=$value->id;?>" class="hide">
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
 
-                            <button type="button" class="btn btn-default col-xs-12 addOptionValueBtn">Add Value</button>
+                            <button type="button" class="btn btn-default col-xs-12 addOptionValueBtn"><?= Yii::t('app', 'Add value'); ?></button>
                             <br><br>
                             <div class="form-group">
                                 <input type="hidden" name="product_option_id" value="<?=$product_option->id;?>">
-                                <?= $form->field($product_option, 'id')->hiddenInput(['name' => 'ProductOptionValue['.$value->id.'][product_option_id]'])->label(false); ?>
+
                                 <?= Html::submitButton($product->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $product->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                             </div>
 

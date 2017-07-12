@@ -21,14 +21,20 @@ $(function () {
 
 
 
-    $('.deleteOptionValueBtn').click(function () {
-        $(this).closest('.value_row').toggleClass('disabled');
+    $('.values_group').delegate('.deleteOptionValueBtn', 'click', function () {
+
+        if ($(this).hasClass('immediate')) {
+            $(this).closest('.value_row').remove();
+        } else {
+            $(this).closest('.value_row').toggleClass('disabled');
+        }
     });
 
     $('.addOptionValueBtn').click(function () {
         var group = $(this).closest('.tab-pane').find('.values_group');
         var tpl = group.find('.optionValueTpl').clone();
 
+        tpl.removeClass('optionValueTpl');
         group.append(tpl);
         tpl.fadeIn();
         tpl.removeClass('hide');
