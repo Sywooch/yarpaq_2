@@ -98,7 +98,10 @@ class ProductOptionController extends AdminDefaultController
 
         foreach ($valueIDs as $valueID) {
             $value = ProductOptionValue::findOne($valueID);
-            $value->delete();
+
+            if ($value) {
+                $value->delete();
+            }
         }
     }
 
