@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\option\Option;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
 use common\models\Product;
@@ -99,5 +100,31 @@ class ProductOptionController extends AdminDefaultController
             $value = ProductOptionValue::findOne($valueID);
             $value->delete();
         }
+    }
+
+    public function actionDelete($product_id, $option_id) {
+        $product = Product::findOne($product_id);
+        $option = Option::findOne($option_id);
+
+        if (Yii::$app->request->post()) {
+            $product_id = (int) Yii::$app->request->post('product_id');
+            $option_id  = (int) Yii::$app->request->post('option_id');
+
+            $productOption = ProductOption::findOne([
+                'product_id'    => $product_id,
+                'option_id'     => $option_id
+            ]);
+
+            if ($productOption->delete()) {
+                $this->redirect(['index', 'id' => $product_id]);
+            }
+        }
+
+
+
+        return $this->render('delete', [
+            'product'   => $product,
+            'option'    => $option
+        ]);
     }
 }

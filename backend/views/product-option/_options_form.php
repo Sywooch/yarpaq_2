@@ -128,6 +128,11 @@ use yii\helpers\ArrayHelper;
                                 <input type="hidden" name="product_option_id" value="<?=$product_option->id;?>">
 
                                 <?= Html::submitButton($product->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $product->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                                <?= Html::a(
+                                        Yii::t('app', 'Delete'),
+                                        ['delete', 'product_id' => $product->id, 'option_id' => $option->id],
+                                        ['class' => 'btn btn-danger pull-right']);
+                                ?>
                             </div>
 
                             <?php ActiveForm::end(); ?>
