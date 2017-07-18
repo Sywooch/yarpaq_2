@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'attribute' => 'id',
-                'contentOptions' => ['width' => 80]
+                'headerOptions' => ['width' => '5%'],
             ],
             [
                 'format' => 'html',
@@ -36,8 +36,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img($url, ['width'=>'50']);
                 },
             ],
-            'title',
-            'model',
+            [
+                'attribute' => 'title',
+                'headerOptions' => ['width' => '20%'],
+            ],
+            [
+                'attribute' => 'model',
+                'headerOptions' => ['width' => '10%'],
+            ],
+
 //            'sku',
 //            'upc',
 //            'ean',
@@ -48,12 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'condition_id',
             [
                 'attribute' => 'price',
-                'contentOptions' => ['width' => 100]
+                'headerOptions' => ['width' => '5%'],
             ],
             // 'currency_id',
             [
                 'attribute' => 'quantity',
-                'contentOptions' => ['width' => 50]
+                'headerOptions' => ['width' => '5%'],
             ],
             // 'stock_status_id',
             // 'weight',
@@ -62,17 +69,38 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'width',
             // 'height',
             // 'length_class_id',
-            'status.name',
-            'seller.email',
+            [
+                'attribute' => 'status_id',
+                'label'     => Yii::t('app', 'Status'),
+                'value'     => 'status.name',
+                'filter'    => \yii\helpers\ArrayHelper::map(\common\models\Status::find()->all(), 'id', function ($status) {
+                    return Yii::t('app', $status->name);
+                }),
+                'headerOptions' => ['width' => '5%'],
+            ],
+            [
+                'attribute' => 'seller_email',
+                'label'     => Yii::t('app', 'E-mail'),
+                'value' => 'seller.email',
+                'enableSorting' => true
+            ],
+
             // 'user_id',
             // 'manufacturer_id',
             // 'viewed',
-            // 'moderated',
+            [
+                'attribute' => 'moderated',
+                'filter'    => [Yii::t('app', 'No'), Yii::t('app', 'Yes')],
+                'headerOptions' => ['width' => '5%'],
+            ],
             // 'moderated_at',
             // 'created_at',
             // 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}'
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

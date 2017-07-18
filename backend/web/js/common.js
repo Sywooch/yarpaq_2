@@ -40,6 +40,17 @@ $(function () {
         tpl.removeClass('hide');
 
     });
+});
+
+$(window).scroll(function(){
+
+    var top_pos = document.documentElement.scrollTop||document.body.scrollTop;
+
+    if (top_pos > $("header#header_new").height()) {
+        top_pos = $("header#header_new").height();
+    }
+
+    $("#aside_basket").css("margin-top", -top_pos+"px")
 
 });
 
