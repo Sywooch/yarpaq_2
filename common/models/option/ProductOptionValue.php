@@ -16,7 +16,9 @@ class ProductOptionValue extends ActiveRecord
     public function rules() {
         return [
             [['product_option_id', 'option_value_id', 'quantity', 'price_prefix', 'price'], 'required'],
-            [['product_option_id', 'option_value_id'], 'integer']
+            ['price_prefix', 'in', 'range' => ['-', '+']],
+            ['price', 'number'],
+            [['quantity', 'product_option_id', 'option_value_id'], 'integer']
         ];
     }
 
