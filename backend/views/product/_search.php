@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use common\models\Product;
 use common\models\category\Category;
 use kartik\daterange\DateRangePicker;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ProductSearch */
@@ -55,9 +56,11 @@ use kartik\daterange\DateRangePicker;
             ]) ?>
         </div>
 
+        <?php if (User::hasPermission('view_all_products')) { ?>
         <div class="col-md-2">
             <?= $form->field($model, 'seller_email') ?>
         </div>
+        <?php } ?>
 
         <div class="col-md-2">
             <?= $form->field($model, 'moderated')->dropDownList([

@@ -53,6 +53,7 @@ class Product extends \yii\db\ActiveRecord
 
     const SCENARIO_IMPORT   = 'import';
     const SCENARIO_DEFAULT  = 'default';
+    const SCENARIO_SELLER   = 'seller';
 
     protected $conditions = [
         '1' => 'new',
@@ -75,28 +76,69 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'model', 'condition_id', 'price', 'currency_id', 'quantity', 'location_id', 'weight'], 'required'],
+            [['title', 'description', 'model', 'condition_id', 'price', 'currency_id', 'quantity', 'location_id', 'weight', 'user_id'], 'required'],
             [['condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'location_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
+            ['status_id',       'default', 'value' => self::STATUS_ACTIVE],
+            ['viewed',          'default', 'value' => 0],
             ['weight_class_id', 'default', 'value' => 1],
             ['length_class_id', 'default', 'value' => 1],
-            ['moderated', 'default', 'value' => 1],
+            ['moderated',       'default', 'value' => 0],
             ['galleryFiles', 'image', 'skipOnEmpty' => false, 'maxFiles' => 10,
                 // не пропускать пустое значение, если:
                 'when' => function ($model) {
-                    // в галерее 0 картинок или сценарий НЕ ИМПОРТ
-                    return count($model->gallery) == 0 || $model->scenario != 'import';
+                    if ($model->scenario == 'import') {
+                        return true;
+                    } else if (count($model->gallery) == 0) {
+                        return false;
+                    }
                 },
                 'whenClient' => "function (attribute, value) {
                     return $('input[name=\"gallery_sort\"]').val() == '';
-                }"
+                }",
             ],
 
             [['price'], 'number'],
             [['weight', 'length', 'width', 'height'], 'number'],
-            [['moderated_at', 'created_at', 'updated_at'], 'safe'],
             [['title', 'model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn'], 'string', 'max' => 255],
-            ['categoryIDs', 'each', 'rule' => ['integer']]
+            ['categoryIDs', 'each', 'rule' => ['integer']],
+
         ];
+    }
+
+    public function scenarios() {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_IMPORT] = [];
+        $scenarios[self::SCENARIO_SELLER] = [
+            'title',
+            'description',
+            'model',
+            'sku',
+            'upc',
+            'ean',
+            'jan',
+            'isbn',
+            'mpn',
+            'location_id',
+            'condition_id',
+            'price',
+            'currency_id',
+            'quantity',
+            'stock_status_id',
+            'weight',
+            '!weight_class_id',
+            'length', 'width', 'height',
+            '!length_class_id',
+            '!status_id',
+            '!user_id',
+            'manufacturer_id',
+            '!viewed',
+            '!moderated',
+
+            'categoryIDs',
+            'galleryFiles'
+        ];
+
+        return $scenarios;
     }
 
     /**
@@ -181,13 +223,6 @@ class Product extends \yii\db\ActiveRecord
     public function getCategories() {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])
             ->viaTable('{{%product_category}}', ['product_id' => 'id']);
-    }
-
-    public function scenarios() {
-        $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_IMPORT] = [];
-
-        return $scenarios;
     }
 
     public function getOptions() {
@@ -284,4 +319,23 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Zone::className(), ['id' => 'location_id']);
     }
 
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $now = new \DateTime();
+
+            // set Created At
+            if ($this->isNewRecord) {
+                $this->created_at = $now->format('Y-m-d H:i:s');
+            } else {
+                // set Updated At
+                $this->updated_at = $now->format('Y-m-d H:i:s');
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }

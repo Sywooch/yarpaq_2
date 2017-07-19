@@ -9,6 +9,7 @@ use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
 use kartik\file\FileInput;
 use yii\helpers\FileHelper;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -262,17 +263,24 @@ use yii\helpers\FileHelper;
                     </div>
                 </div>
 
+                <?php if (User::hasPermission('set_product_status')) { ?>
                 <?= $form->field($model, 'status_id')->dropDownList([
                     0 => 'Hidden',
                     1 => 'Active'
                 ]); ?>
+                <?php } ?>
+
+                <?php if (User::hasPermission('set_product_owner')) { ?>
 
                 <?php
                 $users_list_url = \yii\helpers\Url::to(['user/user-list']);
+                $seller = empty($model->user_id) ? '' : $model->seller->fullname . ' (' . $model->seller->email . ')';
 
                 echo $form->field($model, 'user_id')->widget(Select2::classname(), [
-                    'data' => [],
-                    'options' => ['placeholder' => 'Select an user ...'],
+                    'initValueText' => $seller,
+                    'options' => [
+                        'placeholder' => 'Select an user ...',
+                    ],
                     'pluginOptions' => [
                         'allowClear' => true,
 
@@ -294,6 +302,8 @@ use yii\helpers\FileHelper;
 
                 ]);
                 ?>
+
+                <?php } ?>
 
             </div>
 

@@ -15,6 +15,8 @@ class ProductSearch extends Product
     public $seller_email;
     public $category;
 
+    const SCENARIO_OWN = 'own';
+
     /**
      * @inheritdoc
      */
@@ -22,7 +24,8 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
-            [['model', 'title',  'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at', 'seller_email', 'category'], 'safe'],
+            [['model', 'title',  'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at', 'seller_email', 'category'], 'safe', 'on' => 'default'],
+            [['model', 'title',  'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at', 'category'], 'safe', 'on' => 'own'],
             [['price', 'weight', 'length', 'width', 'height'], 'number'],
         ];
     }

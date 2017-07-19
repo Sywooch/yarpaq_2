@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use common\models\User;
+
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -11,9 +14,16 @@ $this->title = Yii::t('app', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div>
+
+        <p class="pull-right">
+            <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;'.Yii::t('app', 'Add Product'), ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+
+        <h2><?= $this->title; ?></h2>
+
+    </div>
+
 
 
     <?= $this->render('_search.php', [
@@ -87,10 +97,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['width' => '5%'],
             ],
             [
-                'attribute' => 'seller_email',
-                'label'     => Yii::t('app', 'E-mail'),
-                'value' => 'seller.email',
-                'enableSorting' => true
+                'attribute'     => 'seller_email',
+                'label'         => Yii::t('app', 'E-mail'),
+                'value'         => 'seller.email',
+                'enableSorting' => true,
+                'visible'       => User::hasRole('view_all_products')
             ],
 
             // 'user_id',

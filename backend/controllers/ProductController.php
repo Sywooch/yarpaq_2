@@ -12,22 +12,49 @@ use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
 use yii\helpers\ArrayHelper;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
 
+use common\models\User;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
 class ProductController extends AdminDefaultController
 {
 
+    public function behaviors() {
+        $b = parent::behaviors();
+
+        $b = ArrayHelper::merge($b, [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ]);
+
+        return $b;
+    }
+
     /**
      * Lists all Product models.
-     * @return mixed
+     *
+     * @return string
+     * @throws ForbiddenHttpException
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel            = new ProductSearch();
+
+        if (!User::hasPermission('view_all_products')) {
+            $searchModel->user_id   = User::getCurrentUser()->id;
+            $searchModel->scenario  = ProductSearch::SCENARIO_OWN;
+        }
+
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +70,14 @@ class ProductController extends AdminDefaultController
      */
     public function actionCreate()
     {
+
         $model = new Product();
+
+        if (User::hasRole('seller', false)) {
+            $model->user_id   = User::getCurrentUser()->id;
+            $model->scenario  = Product::SCENARIO_SELLER;
+        }
+
 
         if ($model->load(Yii::$app->request->post())) {
             $this->uploadGalleryFiles($model);
@@ -66,12 +100,25 @@ class ProductController extends AdminDefaultController
     /**
      * Updates an existing Product model.
      * If update is successful, the browser will be redirected to the 'update' page.
-     * @param integer $id
-     * @return mixed
+     *
+     * @param int $id
+     * @return string|\yii\web\Response
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        // проверка на авторство
+        if ($model->user_id != User::getCurrentUser()->id && !Yii::$app->user->isSuperadmin) {
+            throw new ForbiddenHttpException('You don\'t have permissions to access this product');
+        }
+
+        if (User::hasRole('seller', false)) {
+            $model->user_id   = User::getCurrentUser()->id;
+            $model->scenario  = Product::SCENARIO_SELLER;
+        }
 
         if ($model->load(Yii::$app->request->post())) {
             $this->uploadGalleryFiles($model);
@@ -127,12 +174,24 @@ class ProductController extends AdminDefaultController
     /**
      * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     *
+     * @param int $id
+     * @return \yii\web\Response
+     * @throws ForbiddenHttpException
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        // проверка на авторство
+        if ($model->user_id != User::getCurrentUser()->id && !Yii::$app->user->isSuperadmin) {
+            throw new ForbiddenHttpException('You don\'t have permissions to access this product');
+        }
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }
