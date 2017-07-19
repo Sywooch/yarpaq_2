@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Product;
+use common\models\category\Category;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ProductSearch */
@@ -15,15 +19,90 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <div class="row">
+        <div class="col-md-2">
+            <?= $form->field($model, 'id'); ?>
+        </div>
 
-    <?= $form->field($model, 'model') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'title') ?>
+        </div>
 
-    <?= $form->field($model, 'sku') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'model') ?>
+        </div>
 
-    <?= $form->field($model, 'upc') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'price') ?>
+        </div>
 
-    <?= $form->field($model, 'ean') ?>
+        <div class="col-md-2">
+            <?= $form->field($model, 'quantity') ?>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <?= $form->field($model, 'status_id')->dropDownList([
+                ''  => Yii::t('app', 'All'),
+                Product::STATUS_ACTIVE   => Yii::t('app', 'Active'),
+                Product::STATUS_INACTIVE => Yii::t('app', 'Inactive'),
+            ]) ?>
+        </div>
+
+        <div class="col-md-2">
+            <?= $form->field($model, 'seller_email') ?>
+        </div>
+
+        <div class="col-md-2">
+            <?= $form->field($model, 'moderated')->dropDownList([
+                ''  => Yii::t('app', 'All'),
+                '0' => Yii::t('app', 'No'),
+                '1' => Yii::t('app', 'Yes')
+            ]) ?>
+        </div>
+
+        <div class="col-md-2">
+            <?= $form->field($model, 'created_at')->widget(DateRangePicker::className(), [
+                'model' => $model,
+                'attribute' => 'created_at',
+                'convertFormat' => true,
+                'pluginOptions' => [
+                    'timePicker' => false,
+                    'timePickerIncrement' => 30,
+                    'locale'=>[
+                        'format'=>'Y-m-d'
+                    ]
+                ],
+                'autoUpdateOnInit' => false
+            ]) ?>
+        </div>
+
+        <div class="col-md-2">
+            <?php
+            $categories = ArrayHelper::map( Category::find()->andWhere(['>','depth', 1])->all(), 'id', function ($category) {
+                return str_repeat(' - ', $category->depth-1).$category->title;
+            });
+
+            $categories[''] = Yii::t('app', 'All');
+            ksort($categories);
+            ?>
+            <?= $form->field($model, 'category')->dropDownList($categories); ?>
+        </div>
+    </div>
+
+
+
+    <?php // echo $form->field($model, 'sku') ?>
+
+    <?php // echo $form->field($model, 'upc') ?>
+
+    <?php // echo $form->field($model, 'ean') ?>
 
     <?php // echo $form->field($model, 'jan') ?>
 
@@ -73,7 +152,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?php //= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

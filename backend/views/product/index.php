@@ -14,15 +14,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+
+
+    <?= $this->render('_search.php', [
+        'model' => $searchModel
+    ]); ?>
+
+    <?php Pjax::begin(); ?>    <?= GridView::widget([
+        'dataProvider'  => $dataProvider,
+        //'filterModel' => $searchModel,
+        'layout'        => '{items}{summary}{pager}',
+        'columns'       => [
             [
                 'attribute' => 'id',
                 'headerOptions' => ['width' => '5%'],
             ],
             [
+                'label' => Yii::t('app', 'Image'),
                 'format' => 'html',
                 'value' => function($product) {
                     $gallery = $product->gallery;
@@ -103,4 +111,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+    <?php Pjax::end(); ?></div>

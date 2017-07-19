@@ -13,6 +13,7 @@ use common\models\Product;
 class ProductSearch extends Product
 {
     public $seller_email;
+    public $category;
 
     /**
      * @inheritdoc
@@ -21,7 +22,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
-            [['model', 'title',  'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at', 'seller_email'], 'safe'],
+            [['model', 'title',  'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn', 'location_id', 'moderated_at', 'created_at', 'updated_at', 'seller_email', 'category'], 'safe'],
             [['price', 'weight', 'length', 'width', 'height'], 'number'],
         ];
     }
@@ -62,7 +63,7 @@ class ProductSearch extends Product
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            $this->tableName().'.id' => $this->id,
             'condition_id' => $this->condition_id,
             'price' => $this->price,
             'currency_id' => $this->currency_id,
@@ -80,13 +81,25 @@ class ProductSearch extends Product
             'viewed' => $this->viewed,
             'moderated' => $this->moderated,
             'moderated_at' => $this->moderated_at,
-            'created_at' => $this->created_at,
+            //'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
+
+        if ($this->created_at != '') {
+            list($created_start, $created_end) = explode(' - ', $this->created_at);
+
+            $query->andFilterWhere(['>=', 'created_at', $created_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'created_at', $created_end . ' 23:59:59']);
+        }
 
         if ($this->seller_email != '') {
             $query->joinWith(['seller s']);
             $query->andFilterWhere(['like', 's.email', $this->seller_email]);
+        }
+
+        if ($this->category != '') {
+            $query->joinWith(['categories c']);
+            $query->andFilterWhere(['c.id' => $this->category]);
         }
 
 
