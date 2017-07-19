@@ -266,7 +266,7 @@ class Product extends \yii\db\ActiveRecord
     public function getPrice($considerOptions = false) {
         $price = $this->price;
 
-        if ($considerOptions) {
+        if ($considerOptions && $this->appliedOptions) {
             foreach ($this->appliedOptions as $appliedOption) {
                 $productOptionValue = $appliedOption['product_option_value'];
 
@@ -284,14 +284,16 @@ class Product extends \yii\db\ActiveRecord
     public function getTitleWithOptions() {
         $title = $this->title;
 
-        foreach ($this->appliedOptions as $appliedOption) {
-            $productOption = $appliedOption['product_option'];
-            $productOptionValue = $appliedOption['product_option_value'];
+        if ($this->appliedOptions) {
+            foreach ($this->appliedOptions as $appliedOption) {
+                $productOption = $appliedOption['product_option'];
+                $productOptionValue = $appliedOption['product_option_value'];
 
-            $name = $productOption->option->content->name;
-            $value = $productOptionValue->optionValue->content->name;
+                $name = $productOption->option->content->name;
+                $value = $productOptionValue->optionValue->content->name;
 
-            $title .= ' &mdash; <small>'.$name.': '.$value.'</small>';
+                $title .= ' &mdash; <small>'.$name.': '.$value.'</small>';
+            }
         }
 
         return $title;

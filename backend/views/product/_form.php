@@ -26,9 +26,11 @@ use common\models\User;
 
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_basic" data-toggle="tab" aria-expanded="true">Basic</a></li>
-            <li><a href="#tab_advanced" data-toggle="tab" aria-expanded="false">Advanced</a></li>
-            <li><a href="<?php echo Url::to(['product-option/index', 'id' => $model->id]); ?>">Options</a></li>
+            <li class="active"><a href="#tab_basic" data-toggle="tab" aria-expanded="true"><?= Yii::t('app', 'Basic')?></a></li>
+            <li><a href="#tab_advanced" data-toggle="tab" aria-expanded="false"><?= Yii::t('app', 'Advanced')?></a></li>
+            <?php if (!$model->isNewRecord) { ?>
+            <li><a href="<?php echo Url::to(['product-option/index', 'id' => $model->id]); ?>"><?= Yii::t('app', 'Options')?></a></li>
+            <?php } ?>
         </ul>
         <div class="tab-content">
 

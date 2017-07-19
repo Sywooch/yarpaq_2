@@ -71,6 +71,10 @@ class ProductImage extends \yii\db\ActiveRecord
         return Yii::$app->params['product.uploads.path'] . $this->web_name;
     }
 
+    public function getProduct() {
+        return $this->hasOne(Product::className(), ['id' => 'model_id']);
+    }
+
     /**
      * Удаляет файл с диска
      *

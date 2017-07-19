@@ -149,3 +149,16 @@ a.desc:after {
 .value_row.disabled {
     opacity: 0.5;
 }
+
+.user-panel>.info {
+    position: relative;
+    left: 0;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header {
+    height: auto;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu {
+    width: 240px;
+}

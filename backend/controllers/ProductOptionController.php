@@ -3,22 +3,59 @@
 namespace backend\controllers;
 
 use common\models\option\Option;
+use common\models\option\OptionValue;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
 use common\models\Product;
+use common\models\User;
 use Yii;
 use webvimark\components\AdminDefaultController;
 use yii\base\Model;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use yii\web\ForbiddenHttpException;
 
 /**
  * ProductOptionController implements the CRUD actions for Product model.
  */
 class ProductOptionController extends AdminDefaultController
 {
+    public $enableOnlyActions = ['index', 'add-option', 'update', 'delete', 'check-for-options'];
+
+    public function behaviors() {
+        $b = parent::behaviors();
+
+        $b = ArrayHelper::merge($b, [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ]);
+
+        return $b;
+    }
+
+    /**
+     * проверка на авторство
+     *
+     * @param $model
+     * @return bool
+     * @throws ForbiddenHttpException
+     */
+    protected function denyIfNotOwner($model) {
+        if ($model->user_id != User::getCurrentUser()->id && !User::hasPermission('crud_option_to_any_product')) {
+            throw new ForbiddenHttpException('You don\'t have permissions to access this product');
+        }
+        return true;
+    }
+
     public function actionIndex($id)
     {
         $product = Product::findOne($id);
+        $this->denyIfNotOwner($product);
+
 
         return $this->render('index', [
             'model' => $product
@@ -27,7 +64,7 @@ class ProductOptionController extends AdminDefaultController
 
     public function actionUpdate($id) {
         $product = Product::findOne($id);
-
+        $this->denyIfNotOwner($product);
 
         if (Yii::$app->request->post('option_value_id')) {
             $option_value_id    = Yii::$app->request->post('option_value_id');
@@ -71,9 +108,55 @@ class ProductOptionController extends AdminDefaultController
 
     }
 
+
+    public function actionCheckForOptions($product_id) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $product                = Product::findOne($product_id);
+        $productOptions         = $product->getProductOptions()->with('option')->all();
+
+        return [
+            'status' => 1,
+            'data' => [
+                'product_options' => ArrayHelper::toArray($productOptions, [
+                    'common\models\option\ProductOption' => [
+                        'id',
+                        'option' => function ($product_option) {
+                            $option = $product_option->option;
+
+                            return [
+                                'id' => $option->id,
+                                'type' => $option->type,
+                                'name' => $option->content->name
+                            ];
+                        },
+                        'values' => function ($product_option) {
+                            $values = $product_option->values;
+                            return ArrayHelper::toArray($values, [
+                                'common\models\option\ProductOptionValue' => [
+                                    'id',
+                                    'option_value_id',
+                                    'quantity',
+                                    'price',
+                                    'price_prefix',
+                                    'name' => function ($value) {
+                                        $option_value_id = $value->option_value_id;
+                                        return OptionValue::findOne($option_value_id)->content->name;
+                                    }
+                                ]
+                            ]);
+                        }
+                    ]
+                ])
+            ]
+        ];
+    }
+
     public function actionAddOption($product_id) {
 
         $product        = Product::findOne($product_id);
+        $this->denyIfNotOwner($product);
+
         $productOption  = new ProductOption();
 
         $productOption->product_id = $product->id;
@@ -107,6 +190,8 @@ class ProductOptionController extends AdminDefaultController
 
     public function actionDelete($product_id, $option_id) {
         $product = Product::findOne($product_id);
+        $this->denyIfNotOwner($product);
+
         $option = Option::findOne($option_id);
 
         if (Yii::$app->request->post()) {

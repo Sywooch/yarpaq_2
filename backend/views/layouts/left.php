@@ -9,11 +9,7 @@ use common\models\User;
 
         <!-- Sidebar user panel -->
         <div class="user-panel">
-            <div class="pull-left image">
-                <img src="/img/user-icon.png" class="img-circle" alt="User Image"/>
-            </div>
-
-            <div class="pull-left info">
+            <div class="info">
                 <p><?php echo Yii::$app->user->identity->profile->firstname.' '.Yii::$app->user->identity->profile->lastname; ?></p>
                 <span><?php echo Yii::$app->user->identity->email; ?></span>
             </div>

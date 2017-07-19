@@ -233,15 +233,11 @@ use yii\helpers\Html;
                 <?php } ?>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/img/user-icon.png" class="user-image" alt="User Image"/>
                         <span class="hidden-xs"><?php echo Yii::$app->user->identity->profile->firstname.' '.Yii::$app->user->identity->profile->lastname; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="/img/user-icon.png" class="img-circle"
-                                 alt="User Image"/>
-
                             <p>
                                 <?php echo Yii::$app->user->identity->profile->firstname.' '.Yii::$app->user->identity->profile->lastname; ?>
                                 <small><?php echo Yii::$app->user->identity->email; ?></small>

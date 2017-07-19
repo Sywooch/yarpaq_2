@@ -192,7 +192,7 @@ $(function () {
      * @param product_id
      */
     function checkForOptions(product_id) {
-        getJSON('/product/check-for-options', {product_id: product_id}, function (response) {
+        getJSON('/product-option/check-for-options', {product_id: product_id}, function (response) {
             if (response.status) {
                 if (response.data.product_options != undefined) {
                     $.each(response.data.product_options, function (index, product_option) {

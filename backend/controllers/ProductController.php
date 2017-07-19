@@ -2,13 +2,12 @@
 
 namespace backend\controllers;
 
+use Yii;
+use common\models\User;
 use common\models\Country;
-use common\models\option\OptionValue;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
 use common\models\ProductImage;
-use webvimark\components\AdminDefaultController;
-use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
 use yii\helpers\ArrayHelper;
@@ -16,13 +15,15 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
+use webvimark\components\AdminDefaultController;
 
-use common\models\User;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
 class ProductController extends AdminDefaultController
 {
+
+    public $enableOnlyActions = ['index', 'create', 'update', 'delete', 'list', 'info'];
 
     public function behaviors() {
         $b = parent::behaviors();
@@ -31,7 +32,8 @@ class ProductController extends AdminDefaultController
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete'        => ['POST'],
+                    'image-delete'  => ['POST'],
                 ],
             ],
         ]);
@@ -110,10 +112,7 @@ class ProductController extends AdminDefaultController
     {
         $model = $this->findModel($id);
 
-        // проверка на авторство
-        if ($model->user_id != User::getCurrentUser()->id && !Yii::$app->user->isSuperadmin) {
-            throw new ForbiddenHttpException('You don\'t have permissions to access this product');
-        }
+        $this->denyIfNotOwner($model);
 
         if (User::hasRole('seller', false)) {
             $model->user_id   = User::getCurrentUser()->id;
@@ -136,26 +135,6 @@ class ProductController extends AdminDefaultController
         return $this->render('update', [
             'model' => $model,
             'zones' => $zonesData,
-        ]);
-    }
-
-    /**
-     * Updates options of existing Product model.
-     * If update is successful, the browser will be redirected to the 'options' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionOptions($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            return $this->redirect(['options', 'id' => $model->id, 'alert' => 'success']);
-        }
-
-        return $this->render('options', [
-            'model' => $model
         ]);
     }
 
@@ -186,15 +165,14 @@ class ProductController extends AdminDefaultController
     {
         $model = $this->findModel($id);
 
-        // проверка на авторство
-        if ($model->user_id != User::getCurrentUser()->id && !Yii::$app->user->isSuperadmin) {
-            throw new ForbiddenHttpException('You don\'t have permissions to access this product');
-        }
+        $this->denyIfNotOwner($model);
 
         $model->delete();
 
         return $this->redirect(['index']);
     }
+
+
 
     /**
      * Finds the Product model based on its primary key value.
@@ -258,16 +236,42 @@ class ProductController extends AdminDefaultController
         }
     }
 
+    /**
+     * проверка на авторство
+     *
+     * @param $model
+     * @return bool
+     * @throws ForbiddenHttpException
+     */
+    protected function denyIfNotOwner($model) {
+        if ($model->user_id != User::getCurrentUser()->id && !User::hasPermission('crud_any_product')) {
+            throw new ForbiddenHttpException('You don\'t have permissions to access this product');
+        }
+        return true;
+    }
+
     public function actionImageDelete() {
 
         $key = (int) Yii::$app->request->post('key');
 
         $image = ProductImage::findOne($key);
-        $image->delete();
+        if ($image) {
+            $product = $image->product;
+
+            $this->denyIfNotOwner($product);
+            $image->delete();
+        }
 
         return json_encode(['success' => 1]);
     }
 
+    /**
+     * Ищет по названию и выдает список товаров (Ajax)
+     *
+     * @param null $q
+     * @param null $id
+     * @return array
+     */
     public function actionList($q = null, $id = null) {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $out = ['results' => ['id' => '', 'text' => '']];
@@ -287,49 +291,12 @@ class ProductController extends AdminDefaultController
         return $out;
     }
 
-    public function actionCheckForOptions($product_id) {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
-        $product                = Product::findOne($product_id);
-        $productOptions         = $product->getProductOptions()->with('option')->all();
-
-        return [
-            'status' => 1,
-            'data' => [
-                'product_options' => ArrayHelper::toArray($productOptions, [
-                    'common\models\option\ProductOption' => [
-                        'id',
-                        'option' => function ($product_option) {
-                            $option = $product_option->option;
-
-                            return [
-                                'id' => $option->id,
-                                'type' => $option->type,
-                                'name' => $option->content->name
-                            ];
-                        },
-                        'values' => function ($product_option) {
-                            $values = $product_option->values;
-                            return ArrayHelper::toArray($values, [
-                                'common\models\option\ProductOptionValue' => [
-                                    'id',
-                                    'option_value_id',
-                                    'quantity',
-                                    'price',
-                                    'price_prefix',
-                                    'name' => function ($value) {
-                                        $option_value_id = $value->option_value_id;
-                                        return OptionValue::findOne($option_value_id)->content->name;
-                                    }
-                                ]
-                            ]);
-                        }
-                    ]
-                ])
-            ]
-        ];
-    }
-
+    /**
+     * Выдает информацию о конкретном товаре (Ajax)
+     *
+     * @param $product_id
+     * @return array
+     */
     public function actionInfo($product_id) {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
