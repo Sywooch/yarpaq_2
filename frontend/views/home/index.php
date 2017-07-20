@@ -1,51 +1,72 @@
-<div class="widgets-content">
+<!-- INDEX SLIDER BEGINS -->
 
-    <div class="overlap-content"></div>
-
-    <!-- Slider -->
-    <div id="home-slider">
-        <div class="header-top-right">
-            <div id="displayKSSlider" class="col-sm-12 homeslider-style2 no-padding">
-
-                <!-- Module HomeSlider -->
-                <div id="homepage-slider" class="homeslider">
-                    <div class="content-slide">
-                        <ul id="homeslider" class="contenhomeslider" style="max-height:337px;"
-                            data-infiniteloop="1" data-auto="0"
-                            data-speed="500" data-pause="3000" data-mode="horizontal"
-                            data-usecss="0" data-minslide="1" data-maxslide="1"
-                            data-hidecontrolonend="1" data-pager="0" data-autohover="1"
-                            data-startslide="0" data-controls="0" data-slidemargin="0">
-
-                            <li class="homeslider-container">
-                                <div class="container" style="position:relative;">
-                                    <a href="#">
-                                        <img src="/img/front1.png" alt="">
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /Module HomeSlider -->
-
-            </div>
-        </div>
+<div id="index_slider">
+    <div class="image">
+        <div><a href="#!one"><img src="/upload/Images/slider1-aze.jpg" alt=""></a></div>
     </div>
-    <!-- Slider END -->
-    <div class="clearfix"></div>
+    <div class="arrows">
+        <a href="#" class="prev"></a>
+        <a href="#" class="next"></a>
+    </div>
+    <div class="bullets">
+        <a href="/upload/Images/slider1-aze.jpg" data-link="#!one" class="active"></a>
+        <a href="/upload/Images/slider2-aze.jpg" data-link="#!two"></a>
+    </div>
+</div>
 
+<!-- INDEX SLIDER END -->
 
-    <!-- New Tape -->
-    <?php echo \frontend\components\NewTape::widget(); ?>
-    <!-- New Tape END -->
+<div class="mobile_categories">
+    <ul>
+        <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
+        <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
+        <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
+        <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
+        <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
+        <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
+    </ul>
+</div>
 
+<!-- TOP PRODUCTS BEGINS -->
+
+<div class="top_products">
+    <h2>TOP 20 PRODUCTS</h2>
     <!-- Bestsellers Tape -->
     <?php echo \frontend\components\BestSellersTape::widget(); ?>
     <!-- Bestsellers Tape END -->
-
-    <?php if (!Yii::$app->user->isGuest) {
-        echo \frontend\components\RecentlyViewedTape::widget();
-    } ?>
-
 </div>
+
+<!-- TOP PRODUCTS END -->
+
+
+<!-- BANNER END -->
+
+<div class="banner_long">
+    <a href="#"><img src="/img/banner_1.png" alt=""><img src="/img/banner_1_mobile.png" alt=""></a>
+</div>
+
+<!-- BANNER END -->
+
+
+<!-- LAST VIEWED END -->
+
+<div class="last_viewed">
+    <div>
+        <h2>MƏSLƏHƏT GÖRÜLƏN MƏHSULLAR</h2>
+        <!-- Bestsellers Tape -->
+        <?php echo \frontend\components\BestSellersTape::widget(); ?>
+        <!-- Bestsellers Tape END -->
+    </div>
+</div>
+
+<!-- LAST VIEWED END -->
+
+<!-- New Tape -->
+<?php //echo \frontend\components\NewTape::widget(); ?>
+<!-- New Tape END -->
+
+
+
+<?php if (!Yii::$app->user->isGuest) {
+    //echo \frontend\components\RecentlyViewedTape::widget();
+} ?>
