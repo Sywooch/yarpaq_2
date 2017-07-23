@@ -486,3 +486,20 @@ _window.resize(function(){
         }
     });
 /* Scroll up end */
+
+
+/* Sort by begin */
+
+    $(".sort_by ul a").click(function(){
+        var _this = $(this),
+        _this_index = _this.parent().index(),
+        _this_text = _this.text();
+        $(".sort_by > a span").text(_this_text);
+        $(".sort_by ul a").removeClass("active");
+        _this.addClass("active");
+        //reload_emulation();
+
+        return false;
+    });
+
+/* Sort by end */

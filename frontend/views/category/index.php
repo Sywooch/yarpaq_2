@@ -1,267 +1,339 @@
-<div class="widgets-content">
-    <div class="overlap-content"></div>
-    <div class="v-padding-30 no-padding-xs">
+<div class="product_block">
+    <header>
 
-        <div class="container no-padding">
-            <div class="row">
+        <!-- Breadcrumbs -->
+        <?= $this->render('_breadcrumb', [
+            'category' => $category,
+            'productsCount' => $pages->totalCount
+        ]); ?>
+        <!-- Breadcrumbs END -->
 
+        <div class="trend_searches">
+            <p>Trend axtarışlar:</p>
+            <ul>
+                <li><a href="#">adidas</a></li>
+                <li><a href="#">nike</a></li>
+                <li><a href="#">puma</a></li>
+                <li><a href="#">klassik kişi ayaqqabıları</a></li>
+                <li><a href="#">nike airmax</a></li>
+                <li><a href="#">puma rihanna</a></li>
+                <li><a href="#">tərliklər</a></li>
+                <li><a href="#">bot ayakkabı</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="product_header_mobile">
+        <h3>Ayyaqqabılar: İdman</h3>
+        <ul>
+            <li><a href="#" class="sort"><span>Çeşİdlə</span></a></li>
+            <li><a href="#" class="filtre"><span>Fİlter</span></a></li>
+        </ul>
+        <p>Tapılan məhsullar   1 026</p>
+    </div>
+    <div class="product_list_wrapper">
 
-                <aside class="col-sm-4 col-md-3 hidden-xs">
+        <aside class="aside_filter">
 
-                    <div class="infoMenuBox light-gray_bg filterProductBox">
-                        <div class="filter-btn">
-                            <?= Yii::t('app', 'Filter'); ?>
-                            <i class="fa fa-angle-up pull-right"> </i>
-                        </div>
-                        <div class="list-infoMenu">
+            <?php
+            $children = $category->getChildren()->all();
 
-                            <!-- Breadcrumbs -->
-                            <?= $this->render('_breadcrumb', [
-                                'category' => $category,
-                                'productsCount' => $pages->totalCount
-                            ]); ?>
-                            <!-- Breadcrumbs END -->
+            if (count($children)) { ?>
+            <div class="aside_categories">
+                <h3>Alt bolmeler</h3>
+                <ul>
 
+                <?php foreach ($category->getChildren()->all() as $childCategory) { ?>
+                    <li>
+                        <a href="<?= $childCategory->url; ?>">
+                            <span><?= $childCategory->title; ?></span><em>300 //TODO</em>
+                        </a>
+                    </li>
+                <?php } ?>
 
-
-                            <ul class="sub-infoMenu" style="display: block;">
-
-
-                                <li>
-                                    <span class="title-filter"><?= Yii::t('app', 'Price range'); ?></span>
-                                    <input type="text" id="range_02" name="ProductFilter[price]" value=""
-                                           data-min="<?=$productFilter->price_min?>"
-                                           data-max="<?=$productFilter->price_max?>"
-                                           data-from="<?= $productFilter->price_from ? $productFilter->price_from : $productFilter->price_min; ?>"
-                                           data-to="<?= $productFilter->price_to ? $productFilter->price_to : $productFilter->price_max; ?>"
-                                        >
-                                </li>
-
-                                <li>
-                                    <span class="title-filter"> <?= Yii::t('app', 'Condition');?></span>
-                                    <ul>
-                                        <li>
-                                            <input class="radio condition_filter" id="radio1" name="ProductFilter[condition]" type="radio" value="1" <?php if ($productFilter->condition == 1) echo 'checked'; ?>>
-                                            <label for="radio1"> <?= Yii::t('app', 'New');?></label>
-                                        </li>
-                                        <li>
-                                            <input class="radio condition_filter" id="radio2" name="ProductFilter[condition]" type="radio" value="2" <?php if ($productFilter->condition == 2) echo 'checked'; ?>>
-                                            <label for="radio2"> <?= Yii::t('app', 'Used');?></label>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <?php if (count($filterBrands)) { ?>
-
-                                <li>
-                                    <span class="title-filter"><?= Yii::t('app', 'Brand'); ?></span>
-
-                                    <ul>
-                                        <?php foreach ($filterBrands as $brand) { ?>
-                                        <li>
-                                            <input class="radio" id="radio<?= $brand->id; ?>" name="ProductFilter[brand]" type="radio" value="<?= $brand->id; ?>" <?php if ($productFilter->brand == $brand-id) echo 'checked'; ?>>
-                                            <label for="radio5"> <?= $brand->title; ?></label>
-                                        </li>
-                                        <?php } ?>
-                                    </ul>
-                                </li>
-
-                                <?php } ?>
-
-
-                                <li>
-                                    <button class="btn btn-green reset_filter"><?= Yii::t('app', 'Reset filter'); ?></button>
-                                </li>
-                            </ul>
-
-
-                        </div>
-                    </div>
-
-                    <!-- Recently viewed -->
-                    <?php if (!Yii::$app->user->isGuest) { ?>
-                    <div class="some-products  green  categoryProducts hidden-xs hidden-sm" style="margin-right: 20px">
-                        <div class="box-heading">
-                            <h4><?= Yii::t('app', 'Recently viewed'); ?></h4>
-                        </div>
-                        <div>
-                            <div class="col-md-12">
-                                <div class="productinfo-wrapper">
-
-                                    <div class="product_image">
-                                        <a href="#">
-                                            <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                        </a>
-
-                                        <div class="hover-info">
-                                            <ul class="product-icons list-inline">
-                                                <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                            </ul>
-                                            <div class="hover_text"> </div>
-                                        </div>
-                                    </div>
-
-                                    <p class="g-title">JBL Portable Speaker</p>
-                                    <span class="g-price">425.00  <b class="manatFont">M</b></span>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <!-- Recently viewed END -->
-                </aside>
-                <div class="col-sm-8 col-md-9">
-                    <div class="row margin-right-0">
-
-                        <div class="content-box-heading3 light-gray_bg clearfix">
-
-                            <h6 class="pull-left hide"><?= Yii::t('app', 'View mode'); ?></h6>
-                            <div class="pull-right filter-btn">
-                                <?= Yii::t('app', 'Filter'); ?>
-                                <i class="fa fa-angle-down pull-right"> </i>
-                            </div>
-                            <div class="product-filter_elem pull-left hide">
-                                <div class="button-view">
-                                    <button type="button" id="grid-view" class="active"><i class="fa fa-th"></i></button>
-                                    <button type="button" id="list-view"><i class="fa fa-th-list"></i></button>
-                                </div>
-                            </div>
-
-                            <div class="pull-right no-padding hidden-xs">
-                                <div class="limit-product">
-                                    <?= Yii::t('app', 'Items per page'); ?>
-                                    <div class="form-group">
-                                        <label class="select">
-                                            <select class="form-control" id="ProductFilterPerPage">
-                                                <?php foreach ($productFilter->perPageOptions as $perPageOption) { ?>
-                                                <option <?= $productFilter->per_page == $perPageOption ? 'selected' : '';?> ><?=$perPageOption?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="sort-product">
-                                    <?= Yii::t('app', 'Sort'); ?>
-                                    <div class="form-group">
-                                        <label class="select">
-                                            <select class="form-control" id="ProductFilterSort">
-                                                <?php foreach ($productFilter->sortOptions as $sortOptionValue => $sortOptionLabel) { ?>
-                                                <option <?= $productFilter->sort == $sortOptionValue ? 'selected' : '';?> value="<?=$sortOptionValue?>"><?= $sortOptionLabel ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="product-compare hide">
-                                    <a href="#" class="btn  green">Məhsulun Müqaisəsi - 9</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row some-products categoryProducts categoryProductsAll">
-
-                            <?php if (count($products)) { ?>
-
-
-                                <?php foreach ($products as $product) { ?>
-                                <div class="productinfo-wrapper col-lg-3 col-md-3 col-sm-4 col-xs-4">
-
-                                    <div class="product_image">
-
-                                        <a href="<?= $product->url; ?>" style="background-image: url('<?= @$product->gallery[0]->url ?>')">
-                                            <?php if ($product->isNew()) { ?>
-                                            <div class="new-product">
-                                                <span class="dejavu-bold"><?= Yii::t('app', 'New'); ?></span>
-                                            </div>
-                                            <?php } ?>
-                                            <!--
-                                            <div class="discount">
-                                                <span class="dejavu-bold">%</span>
-                                            </div>
-                                            -->
-                                            <img src="<?= @$product->gallery[0]->url ?>" alt="Favourable unreserved nay" title=" Favourable unreserved nay " class="hide">
-                                        </a>
-
-                                        <div class="hover-info hide">
-                                            <ul class="product-icons list-inline">
-                                                <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                            </ul>
-                                            <div class="hover_text"> </div>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-
-                                        <p class="g-title"><a href="<?= $product->url ?>"><?= $product->title; ?></a></p>
-                                        <span class="g-price"><?= $product->price; ?> <b class="manatFont">M</b></span>
-                                        <div class="g-description"><?= html_entity_decode($product->description); ?></div>
-
-                                        <div>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o "></i>
-                                            <i class="fa fa-star-o "></i>
-                                            <i class="fa fa-star-o "></i>
-                                            <i class="fa fa-star-o "></i>
-                                        </div>
-
-                                        <div class="product-colors">
-                                            <div><span class="yellowBg"></span></div>
-                                            <div><span class="greenBg"></span></div>
-                                            <div><span class="brownBg"></span></div>
-                                            <div><span class="blackBg"></span></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="operations-order">
-                                        <button class="product-add" data-id="<?= $product->id; ?>"><?= Yii::t('app', 'Add to basket'); ?></button>
-                                        <div class="hidden-xs hidden-sm">
-                                            <div class=" text-center">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <?php } ?>
-
-                            <?php } else { ?>
-
-                                <div class="col-xs-12">
-                                    <p><?= Yii::t('app', 'No results'); ?></p>
-                                </div>
-
-                            <?php } ?>
-
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="row">
-                            <?php
-                            echo \frontend\components\CustomLinkPager::widget([
-                                'pagination'    => $pages,
-                                'options'       => [
-                                    'class' => 'yrpq pagination pagination pagination-sm'
-                                ]
-                            ]);
-                            ?>
-                        </div>
-
-                    </div>
-                </div>
+                </ul>
             </div>
+            <?php } ?>
+
+            <div class="filters_block">
+                <section>
+                    <h3><span>Qiymət aralığı</span></h3>
+                    <div>
+                        <input type="text" id="price_slider" name="" value="" />
+                        <div class="price_form">
+                            <input type="text" value="0">
+                            <input type="text" value="5000">
+                            <button type="submit">AXTAR</button>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3><span>Marka</span><a href="#">təmİzlə</a></h3>
+                    <div>
+                        <ul class="checkboxes">
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Puma</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Adidas</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Reebok</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Nike</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Asics</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h3><span>Rəng</span><a href="#">təmİzlə</a></h3>
+                    <div>
+                        <ul class="checkboxes colored">
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <i style="background: #ff5656"></i>
+                                    <span>Qırmızı</span>
+                                    <strong>12</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <i style="background: #20ad63"></i>
+                                    <span>Yaşıl</span>
+                                    <strong>354</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <i style="background: #ffd800"></i>
+                                    <span>Sarı</span>
+                                    <strong>33</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <i style="background: #393939"></i>
+                                    <span>Qara</span>
+                                    <strong>4</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <i style="background: #567fff"></i>
+                                    <span>Göy</span>
+                                    <strong>421</strong>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h3><span>Ölçü</span><a href="#">təmİzlə</a></h3>
+                    <div>
+                        <ul class="checkboxes">
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>35</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>36</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>37</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>38</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>39</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>40</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>41</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>42</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h3><span>İstahsalçı ölkə</span><a href="#">təmİzlə</a></h3>
+                    <div>
+                        <ul class="checkboxes">
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Türkiyə</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Tayland</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Çin</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="checkbox">
+                                    <em></em>
+                                    <span>Kitay</span>
+                                    <strong>234</strong>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </aside>
+        <div class="product_list">
+            <header>
+                <div class="first">
+                    <h2>Kişi ayaqqabıları <span>(1200 məhsul)</span></h2>
+                    <div class="sort_by">
+                        <a href="#">Çeşidlə: <span>Əvvəlcə yenilər</span></a>
+                        <ul>
+                            <li><a href="inner_list.html" class="active">Əvvəlcə yenilər</a></li>
+                            <li><a href="inner_list.html">Əvvəlcə kohnelar</a></li>
+                            <li><a href="inner_list.html">Əvvəlcə bahalar</a></li>
+                            <li><a href="inner_list.html">Əvvəlcə kohnelar</a></li>
+                        </ul>
+                    </div>
+                    <div class="cb"></div>
+                </div>
+                <div class="second">
+                    <div class="applied_filters">
+                        <ul>
+                            <li>
+                                <span>Qiymət:</span>
+                                <strong>120 azn — 300 azn<a href="#"></a></strong>
+                            </li>
+                            <li>
+                                <span>Brand:</span>
+                                <strong>Adidas<a href="#"></a></strong>
+                            </li>
+                            <li>
+                                <span>Rəng:</span>
+                                <strong>Qırmızı<a href="#"></a></strong>
+                            </li>
+                            <li>
+                                <span>Ölçü:</span>
+                                <strong>40<a href="#"></a></strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="clear_filtre">Fİlterİ təmİzlə</a>
+                </div>
+            </header>
+            <div class="product_result_list">
+                <?php
+                if (isset($products)) {
+                    foreach ($products as $product) {
+                        echo $this->render('_product', [
+                            'product' => $product
+                        ]);
+                    }
+                }
+                ?>
+            </div>
+            <div class="more_products"><a href="#">Daha çox göstər</a></div>
+            <footer>
+                <span>Axtardığızı tapa bildinizmi?</span>
+                <a href="#">Bəli</a>
+                <a href="#">Xeyir</a>
+            </footer>
         </div>
     </div>
+
 </div>
