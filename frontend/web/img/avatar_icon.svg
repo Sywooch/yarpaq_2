@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19"><path fill="#fff" d="M5 4.5a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0zM.05 18.19h18.56s-1.28-6.99-10.26-7.18c-8.97-.2-8.3 7.18-8.3 7.18z"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="41px" height="41px" viewBox="0 0 41 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>sign in</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SEARCH" transform="translate(-1342.000000, -109.000000)" fill-rule="nonzero">
+            <g id="Group-42">
+                <g id="sign-in" transform="translate(1342.000000, 109.000000)">
+                    <circle id="Oval-2" fill="#6DA52A" cx="20.5" cy="20.5" r="20.5"></circle>
+                    <g id="Group" transform="translate(11.000000, 11.000000)" fill="#FFFFFF">
+                        <circle id="Oval-3" cx="9.4" cy="4.5" r="4.5"></circle>
+                        <path d="M0.2,18.3 L18.9,18.3 C18.9,18.3 19.1,11 9.3,11 C-0.5,11 0.2,18.3 0.2,18.3 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -16,9 +16,7 @@ $this->beginPage();
     <meta name="description" content="Yarpaq site - Full description">
     <meta name="Keywords" content="Yarpaq, Almag, Telefonlar, Shop">
 
-
-
-    <title>Yarpaq - Index</title>
+    <title><?= @$page->title; ?> &mdash; Yarpaq online mağaza</title>
 
     <meta property="og:title" content="The Rock" />
     <meta property="og:type" content="video.movie" />
@@ -30,10 +28,14 @@ $this->beginPage();
     <![endif]-->
 
     <link rel="icon" type="image/png" href="img/favicon.png"/>
+
     <link href="/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/css/font/stylesheet.css" rel="stylesheet" type="text/css" />
-    <link href="/css/main.css" rel="stylesheet" type="text/css" />
     <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="/css/rangeSlider.css" rel="stylesheet" type="text/css" />
+    <link href="/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/css/common.css" rel="stylesheet" type="text/css" />
+
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -103,7 +105,110 @@ $this->beginPage();
                             <div class="top_categories">
                                 <h2><?= Yii::t('app', 'Top Categories'); ?><span></span></h2>
                                 <ul>
-                                    <li><a href="#"><img src="/img/icon_10.png" alt="">Bütün təkliflər</a></li>
+                                    <li>
+                                        <a href="#"><img src="/img/icon_10.png" alt="">Bütün təkliflər</a>
+                                        <div>
+                                            <nav>
+                                                <div>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Gündəlik</a></li>
+                                                            <li><a href="#">Klassik</a></li>
+                                                            <li><a href="#">Makasin</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Corablar</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                        </ul>
+                                                    </article>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Gündəlik</a></li>
+                                                            <li><a href="#">Klassik</a></li>
+                                                            <li><a href="#">Makasin</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Sandal və tərliklər</a></li>
+                                                            <li><a href="#">Makasin</a></li>
+                                                            <li><a href="#">Corablar</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                        </ul>
+                                                    </article>
+                                                </div>
+                                                <div>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                                                            <li><a href="#">Makasin</a></li>
+                                                            <li><a href="#">İdman</a></li>
+                                                            <li><a href="#">Botlar</a></li>
+                                                            <li><a href="#">Corablar</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                        </ul>
+                                                    </article>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                                                            <li><a href="#">Gündəlik</a></li>
+                                                            <li><a href="#">Klassik</a></li>
+                                                            <li><a href="#">Makasin</a></li>
+                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                                                            <li><a href="#">Botlar</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Sandal və tərliklər</a></li>
+                                                            <li><a href="#">Corablar</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                        </ul>
+                                                    </article>
+                                                </div>
+                                                <div>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                                                            <li><a href="#">Gündəlik</a></li>
+                                                            <li><a href="#">Klassik</a></li>
+                                                            <li><a href="#">İdman</a></li>
+                                                            <li><a href="#">Botlar</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                        </ul>
+                                                    </article>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Klassik</a></li>
+                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                                                            <li><a href="#">Gündəlik</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Makasin</a></li>
+                                                            <li><a href="#">İdman</a></li>
+                                                            <li><a href="#">Botlar</a></li>
+                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
+                                                            <li><a href="#">Sandal və tərliklər</a></li>
+                                                            <li><a href="#">Corablar</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                        </ul>
+                                                    </article>
+                                                    <article>
+                                                        <h3><a href="#">Womens Fashion</a></h3>
+                                                        <ul>
+                                                            <li><a href="#">Gündəlik</a></li>
+                                                            <li><a href="#">Klassik</a></li>
+                                                            <li><a href="#">Sandal və tərliklər</a></li>
+                                                            <li><a href="#">Corablar</a></li>
+                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                        </ul>
+                                                    </article>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                    </li>
                                     <li><a href="#"><img src="/img/icon_11.png" alt="">Telefonlar, Planşetlər</a></li>
                                     <li><a href="#"><img src="/img/icon_11.png" alt="">Elektronika</a></li>
                                 </ul>
@@ -246,7 +351,16 @@ $this->beginPage();
                                 </ul>
                             </div>
                         </div>
-                        <div class="right_side"></div>
+                        <div class="right_side">
+                            <nav></nav>
+                            <div class="nav_banners">
+                                <ul>
+                                    <li><a href="#"><img src="/upload/Images/40.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="/upload/Images/41.jpg" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="head_search">
@@ -256,6 +370,13 @@ $this->beginPage();
                                name="q" autocomplete="off"
                                value="<?= @htmlentities($this->params['q']); ?>">
                         <button type="submit">Search</button>
+                        <ul>
+                            <li><a href="#">Womens fashion</a></li>
+                            <li><a href="#">Mens fashion</a></li>
+                            <li><a href="#">Corablar</a></li>
+                            <li><a href="#">Kişi ayaqqabıları</a></li>
+                            <li><a href="#">Sandal və tərliklər</a></li>
+                        </ul>
                     </form>
                     <a href="#" class="close">Cancel</a>
                     <div class="last_searched_list">
@@ -384,7 +505,9 @@ $this->beginPage();
 <script type="text/javascript" src="/js/jquery-latest.js"></script>
 <script type="text/javascript" src="/js/jquery.mobile.custom.min.js"></script>
 <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/product-filter.js"></script>
 
 
 </body>

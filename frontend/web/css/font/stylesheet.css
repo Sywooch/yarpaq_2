@@ -276,3 +276,29 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+
+
+@font-face {
+	font-family: 'JIS AZN';
+	src: url('hinted-JISAZNRegular.eot');
+	src: local('JIS AZN Regular'), local('JISAZNRegular'),
+		url('hinted-JISAZNRegular.eot?#iefix') format('embedded-opentype'),
+		url('hinted-JISAZNRegular.woff') format('woff'),
+		url('hinted-JISAZNRegular.ttf') format('truetype'),
+		url('hinted-JISAZNRegular.svg#JISAZNRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'JIS AZN';
+	src: url('hinted-JISAZNBold.eot');
+	src: local('JIS AZN Bold'), local('JISAZNBold'),
+		url('hinted-JISAZNBold.eot?#iefix') format('embedded-opentype'),
+		url('hinted-JISAZNBold.woff') format('woff'),
+		url('hinted-JISAZNBold.ttf') format('truetype'),
+		url('hinted-JISAZNBold.svg#JISAZNBold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}

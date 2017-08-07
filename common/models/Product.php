@@ -55,6 +55,9 @@ class Product extends \yii\db\ActiveRecord
     const SCENARIO_DEFAULT  = 'default';
     const SCENARIO_SELLER   = 'seller';
 
+    const CONDITION_NEW     = 1;
+    const CONDITION_USED    = 2;
+
     protected $conditions = [
         '1' => 'new',
         '2' => 'used'
@@ -321,6 +324,29 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Zone::className(), ['id' => 'location_id']);
     }
 
+    public function hasDiscount() { // TODO
+        return true;
+    }
+
+    public function getDiscount() { // TODO
+        return 3;
+    }
+
+    public function getRating() { // TODO
+        return 2;
+    }
+
+    public function getOldPrice() { // TODO
+        return $this->price + 3;
+    }
+
+    public function getPreview() {
+        if (count($this->gallery)) {
+            return $this->gallery[0]->url;
+        } else {
+            return '#';
+        }
+    }
 
     public function beforeSave($insert)
     {

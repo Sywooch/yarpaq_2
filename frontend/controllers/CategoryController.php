@@ -24,7 +24,7 @@ class CategoryController extends BasicController
 
         // Параметры фильтра
         $productFilter = new ProductFilter();
-        $productFilter->attributes = $r->get();
+        $productFilter->load($r->get());
 
         if (!$productFilter->validate()) {
             throw new Exception('Wrong filter');
@@ -83,9 +83,12 @@ class CategoryController extends BasicController
 
         // GET Brands
         $brands = Manufacturer::find()
-            ->leftJoin('{{%product}} p', '`manufacturer_id` = p.`id`')
+            ->alias('m')
+            ->leftJoin('{{%product}} p', 'p.manufacturer_id = m.id')
             ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.id')
-            ->where(['category_id' => $childrenCategoriesIDs])->all();
+            ->where(['category_id' => $childrenCategoriesIDs])
+            ->groupBy('m.id')
+            ->all();
         // GET Brands END
 
 

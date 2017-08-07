@@ -1,19 +1,20 @@
 <?php $parents = $category->getParents(true)->all(); ?>
 
 <div class="breadcrumbs">
-    <p>
-        <?php if (count($parents)) { ?>
+    <ul>
+        <li>
+            <a href="<?= $parents[0]->url; ?>"><?= Yii::t('app', 'Home'); ?></a>
+        </li>
 
-            <a href="<?= $parents[0]->url; ?>">
-                <?= Yii::t('app', 'Home'); ?>
-            </a>
-
+        <?php if (count($parents) > 1) { ?>
             <?php foreach (array_slice($parents, 1) as $parent) { ?>
-                / <a href="<?= $parent->url; ?>"><?= $parent->title; ?></a>
+        <li>
+            <a href="<?= $parent->url; ?>"><?= $parent->title; ?></a>
+        </li>
             <?php } ?>
-
-            / <span><?= $category->title; ?></span>
-
         <?php } ?>
-    </p>
+        <li>
+            <span><?= $category->title; ?></span>
+        </li>
+    </ul>
 </div>

@@ -2,13 +2,17 @@
 
 namespace frontend\models;
 
+use common\models\Product;
 use Yii;
 use yii\base\Model;
 
 class ProductFilter extends Model
 {
-    public $condition;
-    public $brand;
+
+    const SORT_PRICE_LOWEST = 'price_lowest';
+
+    public $condition = Product::CONDITION_NEW;
+    public $brand = [];
     public $price_from;
     public $price_to;
 
@@ -16,11 +20,13 @@ class ProductFilter extends Model
     public $price_max;
 
     public $per_page;
-    public $sort;
+    public $sort = self::SORT_PRICE_LOWEST;
 
     public function rules() {
         return [
-            [['condition', 'brand', 'price_from', 'price_to', 'per_page'], 'integer'],
+            [['condition', 'per_page'], 'integer'],
+            [['price_from', 'price_to'], 'number'],
+            ['brand', 'each', 'rule' => ['integer']],
             ['sort', 'sortOptionValidator']
         ];
     }
@@ -31,8 +37,6 @@ class ProductFilter extends Model
             $this->addError($attribute, 'Unknown sort');
         }
     }
-
-
 
     public function getSortOptions() {
         return [
@@ -52,5 +56,9 @@ class ProductFilter extends Model
 
     public function getPerPageOptions() {
         return [24, 48];
+    }
+
+    public function hasBrand($brand_id) {
+        return in_array($brand_id, $this->brand);
     }
 }

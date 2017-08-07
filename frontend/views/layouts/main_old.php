@@ -27,6 +27,7 @@ $this->beginPage();
         <link rel="stylesheet" type="text/css" href="/css/base.css">
         <link rel="stylesheet" type="text/css" href="/slick/slick/slick.css">
         <link rel="stylesheet" type="text/css" href="/slick/slick/slick-theme.css">
+        <link rel="stylesheet" type="text/css" href="/css/rangeSlider.css" />
 
         <!--[if IE 8]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

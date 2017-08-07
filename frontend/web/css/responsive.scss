@@ -40,6 +40,10 @@
       .second {
         height: 43px;
         padding: 0 0 0 0;
+        > div {
+          height: 43px;
+          padding: 0 0 0 15px;
+        }
       }
     }
     h1.logo {
@@ -326,7 +330,56 @@
       padding: 0;
     }
     aside.aside_filter {
+      margin: 0;
+      float: none;
+      background: #fff;
+      position: fixed;
+      right: -100%;
+      top: 0;
+      z-index: 2;
+      @include animate_go(0.6s);
+      &.show_me {
+        right: 0;
+      }
+      footer {
+        display: block;
+      }
+      section {
+        margin: 0 0 9px;
+        padding: 0 0 9px;
+        border-bottom: 2px solid #e5e5e5;
+        h3 {
+          margin: 0;
+          padding: 0;
+          border: none;
+          span {
+            color: #363636;
+            font-family: 'Roboto';
+            font-size: 16px;
+            font-weight: 400;
+          }
+          a {
+            display: none;
+          }
+        }
+        > div {
+          padding: 15px 0 0;
+          > span {
+            display: none;
+          }
+        }     
+      }
+    }
+    header.mobile_header {
+      display: block;
+    }
+    .aside_categories {
       display: none;
+    }
+    .filters_block {
+      margin: 0;
+      padding: 15px 10px 10px;
+      overflow-y: auto;
     }
     .product_list {
       header {
@@ -341,9 +394,14 @@
       width: 50%;
       border: 1px solid #f2f2f2;
       margin: 0;
+      padding: 0 15px;
       .image {
         height: 180px;
         line-height: 180px;
+      }
+      .old_price > span {
+        display: block;
+        padding: 0 0 5px;
       }
     }
     .more_products {
@@ -351,6 +409,469 @@
       padding: 25px 0 0;
     }
   /* Peoduct result end */
+
+  /* Current product begin */
+    .current_product {
+      padding: 0;
+    }
+    .priduct_gallery {
+      width: 100%;
+      height: 450px;
+      position: static;
+      .image {
+        height: 450px;
+        width: 100%;
+        line-height: 450px;
+      }
+    }
+    .product_first_info {
+      .left_info {
+        width: 100%;
+        float: none;
+        padding: 0 0 30px;
+      }
+    }
+    .cards_dicsount {
+      width: 100%;
+      float: none;
+    }
+    .product_buy_last {
+      .buttons {
+        padding: 0 0 20px;
+        a.add {
+          width: 100%;
+          text-align: center;
+          float: none;
+        }
+        a.buy {
+          width: 100%;
+          margin: 10px 0 0;
+          text-align: center;
+          float: none;
+        }
+      }
+      .delivery {
+        p {
+          width: auto;
+          float: none;
+        }
+      }
+    }
+    .product_second_info {
+      padding: 15px;
+    }
+    .product_size {
+      p {
+        width: auto;
+      }
+    }
+    .product_color {
+      p {
+        width: auto;
+      }
+    }
+    .product_additional {
+      padding: 0;
+    }
+    aside.aside_products {
+      display: none;
+    }
+    .product_infos {
+      .tabs {
+        padding: 5px 0px 0;
+        ul {
+          li {
+            width: 50%;
+            padding: 0;
+            text-align: center;
+          }
+        }
+      }
+      .inner {
+        padding: 15px 20px;
+      }
+    }
+    .product_parameters > div dl {
+      dt {
+        width: 100%;
+      }
+      dd {
+        width: 100%;
+        padding: 0 0 25px;
+      }
+    }
+    .reviews_list {
+      article {
+        padding: 0 0 50px;
+        .left_info {
+          position: static;
+          padding: 0 0 15px;
+          h4 {
+            padding: 10px 0 10px;
+          }
+          .rating {
+            position: absolute;
+            top: 11px;
+            right: 0;
+          }
+        }
+      }
+    }
+    .add_review_button a {
+      width: 100%;
+      text-align: center;
+    }
+    .comment_modal  {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: -100%;
+      margin: 0;
+      &.show_me {
+        top: 0;
+      }
+      > div {
+        padding: 55px 20px;
+        form .submit button {
+          float: none;
+          width: 100%;
+        }
+      }
+    }
+  /* Current product end */
+
+  /* Basket begin */
+    .basket_wrapper {
+      padding: 0 !important;
+      > h2 {
+        padding: 15px 15px;
+        font-size: 21px;
+      }
+      .right_side {
+        width: 100%;
+      }
+      .main_side {
+        width: 100%;
+      }  
+    }
+    .basket_total {
+      h3 {
+        display: none;
+      }
+    }
+    .basket_items {
+      padding: 15px;
+    }
+    .basket_list {
+      article {
+        padding: 25px 0 25px 115px;
+        .image {
+          a {
+            width: 100px;
+            height: 100px;
+            line-height: 98px;
+          }
+        }
+      }      
+    }
+    .color_select {
+      span {
+        display: none;
+      }
+    }
+    .size_select {
+      span {
+        display: none;
+      }
+    }
+    .count_select {
+      clear: both;
+      padding: 10px 0 0;
+    }
+    .basket_total {
+      padding: 15px;
+    }
+    .shipping_address_edit {
+      padding: 15px;
+      .list ul li label {
+        padding: 0 50px 0 0;
+      }
+      footer {
+        .add_new {
+          float: none;
+          text-align: center;
+        }
+        .cancel {
+          float: none;
+          text-align: center;
+        }
+      }
+    }
+    .address_form {
+      padding: 15px;
+    }
+    .delivery_methods {
+      padding: 15px;
+    }
+    .payment_methods {
+      header {
+        padding: 20px 15px 0;
+      }
+      footer {
+        padding: 25px 15px;
+      } 
+    }
+    .methods_list {
+      padding: 15px 15px 0;
+    }
+    .payment_checkout {
+      padding: 30px 15px;
+    }
+    .right_basket {
+      padding: 15px;
+    }
+    .right_basket_list {
+      article {
+        padding: 0 5px 30px 115px;
+        .image {
+          a {
+            width: 100px;
+            height: 100px;
+            line-height: 98px;
+          }
+        }
+      }      
+    }
+    .methods_list ul li > div {
+      float: none;
+      clear: both;
+      padding: 5px 0 0;
+    }
+  /* Basket end */
+
+  /* Account edit begin */
+    .account_edit {
+      width: 100%;
+      padding: 0;
+      > div {
+        padding: 25px 20px 50px;
+        h2 {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li {
+            span {
+              float: none;
+              width: auto;
+              padding: 0 0 5px !important;
+              text-align: left;
+              line-height: 24px;
+              br {
+                display: none;
+              }
+            }
+            em {
+              width: 100%;
+              padding: 0;
+              font-size: 13px;
+            }
+            > div {
+              width: 100%;
+              &.date {
+                select {
+                  width: 100% !important;
+                  margin: 10px 0 0 !important;
+                  &:first-child {
+                    margin: 0;
+                  }
+                }
+              }
+            }            
+          }
+          .submit {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }        
+        }
+      }
+    }
+  /* Account edit end */
+
+  /* Address edit begin */
+    .address_edit {
+      width: 100%;
+      padding: 0;
+      > div {
+        padding: 25px 20px 50px;
+        header {
+          padding: 0 0 30px;
+          h2 {
+            padding: 0 0 10px;
+            float: none;
+          }
+          .link {
+            float: none;
+          }
+        }
+        .form form {
+          ul li label {
+            span {
+              float: none;
+              width: auto;
+              padding: 0 0 5px !important;
+              text-align: left;
+              line-height: 24px;
+            }
+            em {
+              width: 100%;
+              padding: 0;
+              font-size: 13px;
+              line-height: 21px;
+            }
+            input {
+              width: 100%;
+            }           
+          }
+          .submit {
+            width: 100%;
+            padding: 0;
+            button {
+              width: 100%;
+            }
+          }       
+        }
+      }
+    }
+  /* Address edit end */
+
+
+  /* My account begin */
+    .my_account {
+      padding: 0;
+      > div {
+        padding: 20px 20px 50px;
+        section .button a {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  /* My account end */
+
+  /* Wallet edit begin */
+    .wallet_edit {
+      padding: 0;
+      > div {
+        padding: 25px 20px 50px;
+        header {
+          padding: 0 0 30px;
+          h2 {
+            padding: 0 0 10px;
+            float: none;
+          }
+          .link {
+            float: none;
+          }
+        }
+      }
+    }
+  /* Wallet edit end */
+
+  /* Order history begin */
+    .order_history {
+      padding: 0;
+      > div {
+        padding: 25px 20px 50px;
+      }
+    }
+  /* Order history end */
+
+  /* Add payment begin */
+    .add_payment_method {
+      width: 100%;
+      padding: 0;
+      > div {
+        padding: 25px 20px 50px;
+        h2 {
+          padding: 0 0 60px;
+        }
+        .form form {
+          ul li {
+            span {
+              width: 100%;
+              float: none;
+              text-align: left;
+              line-height: 21px;
+            }
+            > div {
+              width: 100%;
+            }
+          }
+          .submit {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }        
+        }
+      }
+    }
+    .cards_select {
+      width: 100%;
+      margin: 0;
+      label img {
+        width: 80%;
+      }
+    }
+  /* Add payment end */
+
+  /* Favorites block begin */
+    .favorites_block h2 {
+      padding: 0 0 40px;
+    }
+    .favorites_list {
+      padding: 0;
+      article {
+        width: 100%;
+        height: auto;
+        padding: 20px 15px;
+      }      
+    }
+  /* Favorites block end */
+
+  /* Page 404 begin */
+    .page_404 {
+      padding: 0;
+      > div {
+        h2 {
+          font-size: 72px;
+          letter-spacing: -1px;
+        }
+        h3 {
+          font-size: 24px;
+          letter-spacing: 0;
+        }
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  /* Page 404 end */
+
+  /* Page success begin */
+    .page_success {
+      padding: 40px 20px;
+      > div .links a {
+        width: 100%;
+        margin: 0;
+        &.continue {
+          margin: 0 0 10px;
+        }
+      }
+    }
+  /* Page success end */
 }
 
 // Mobile
@@ -369,6 +890,9 @@
       }
       .second {
         padding: 0 0 0 15px;
+        > div {
+          padding: 0 0 0 15px;
+        }
       }
     }
     h1.logo {
@@ -573,7 +1097,56 @@
       padding: 0;
     }
     aside.aside_filter {
+      margin: 0;
+      float: none;
+      background: #fff;
+      position: fixed;
+      right: -100%;
+      top: 0;
+      z-index: 2;
+      @include animate_go(0.6s);
+      &.show_me {
+        right: 0;
+      }
+      footer {
+        display: block;
+      }
+      section {
+        margin: 0 0 9px;
+        padding: 0 0 9px;
+        border-bottom: 2px solid #e5e5e5;
+        h3 {
+          margin: 0;
+          padding: 0;
+          border: none;
+          span {
+            color: #363636;
+            font-family: 'Roboto';
+            font-size: 16px;
+            font-weight: 400;
+          }
+          a {
+            display: none;
+          }
+        }
+        > div {
+          padding: 15px 0 0;
+          > span {
+            display: none;
+          }
+        }     
+      }
+    }
+    .aside_categories {
       display: none;
+    }
+    .filters_block {
+      margin: 0;
+      padding: 15px 10px 10px;
+      overflow-y: auto;
+    }
+    header.mobile_header {
+      display: block;
     }
     .product_list header {
       display: none;
@@ -588,6 +1161,237 @@
       padding: 25px 0 0;
     }
   /* Peoduct result end */
+
+  /* Current product begin */
+    .current_product {
+      padding: 0;
+    }
+    .priduct_gallery {
+      width: 100%;
+      position: static;
+      .image {
+        width: 100%;
+      }
+    }
+    .product_buy_last {
+      .buttons {
+        padding: 0 0 20px;
+      }
+    }
+    .product_additional {
+      padding: 0;
+    }
+    aside.aside_products {
+      display: none;
+    }
+    .reviews_list {
+      article {
+        padding: 0 0 50px 160px;
+      }
+    }
+    .comment_modal  {
+      width: 440px;
+      margin: -270px 0 0 -220px;
+    }
+  /* Current product end */
+
+  /* Basket begin */
+    .basket_wrapper {
+      padding: 0;
+      .right_side {
+        width: 100%;
+      }
+      .main_side {
+        width: 100%;
+      }  
+    }
+    .basket_total {
+      h3 {
+        display: none;
+      }
+    }
+    .basket_items {
+      padding: 15px;
+    }
+    .basket_list {
+      article {
+        padding: 25px 0 25px 115px;
+        .image {
+          a {
+            width: 100px;
+            height: 100px;
+            line-height: 98px;
+          }
+        }
+      }      
+    }
+    .count_select {
+      clear: both;
+      padding: 10px 0 0;
+    }
+    .basket_total {
+      padding: 15px;
+    }
+    .methods_list ul li > div {
+      float: none;
+      clear: both;
+      padding: 5px 0 0;
+    }
+  /* Basket end */
+
+  /* Account edit begin */
+    .account_edit {
+      width: 100%;
+      padding: 0;
+      > div {
+        padding: 25px 20px 50px;
+        h2 {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li {
+            span {
+              float: none;
+              width: auto;
+              padding: 0 0 5px !important;
+              text-align: left;
+              line-height: 24px;
+              br {
+                display: none;
+              }
+            }
+            em {
+              width: 100%;
+              padding: 0;
+              font-size: 13px;
+            }
+            > div {
+              width: 100%;
+            }            
+          }
+          .submit {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }        
+        }
+      }
+    }
+  /* Account edit end */
+
+  /* Address edit begin */
+    .address_edit {
+      width: 100%;
+      > div {
+        header {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li label {
+            span {
+              float: none;
+              width: auto;
+              padding: 0 0 5px !important;
+              text-align: left;
+              line-height: 24px;
+            }
+            em {
+              width: 100%;
+              padding: 0;
+              font-size: 13px;
+              line-height: 21px;
+            }
+            input {
+              width: 100%;
+            }           
+          }
+          .submit {
+            width: 100%;
+            padding: 0;
+            button {
+              width: 100%;
+            }
+          }       
+        }
+      }
+    }
+  /* Address edit end */
+
+  /* My account begin */
+    .my_account {
+      > div {
+        padding: 20px 20px 50px;
+      }
+    }
+  /* My account end */
+
+  /* Wallet edit begin */
+    .wallet_edit {
+      > div {
+        padding: 20px 20px 50px;
+      }
+    }
+  /* Wallet edit end */
+
+  /* Order history begin */
+    .order_history {
+      > div {
+        padding: 20px 20px 50px;
+      }
+    }
+  /* Order history end */
+
+  /* Add payment begin */
+    .add_payment_method {
+      width: 100%;
+      > div {
+        padding: 25px 20px 50px;
+        h2 {
+          padding: 0 0 60px;
+        }
+        .form form {
+          ul li {
+            span {
+              width: 100%;
+              float: none;
+              text-align: left;
+              line-height: 21px;
+            }
+            > div {
+              width: 100%;
+            }
+          }
+          .submit {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }        
+        }
+      }
+    }
+    .cards_select {
+      width: 100%;
+      margin: 0;
+      label img {
+        width: 80%;
+      }
+    }
+  /* Add payment end */
+
+  /* Favorites block begin */
+    .favorites_block h2 {
+      padding: 0 0 40px;
+    }
+    .favorites_list {
+      padding: 0;
+      article {
+        width: 50%;
+        padding: 0 15px;
+      }      
+    }
+  /* Favorites block end */
 }
 
 // Tablet
@@ -740,6 +1544,168 @@
       width: 50%;
     }
   /* Peoduct result end */
+
+  /* Current product begin */
+    .current_product {
+      padding: 0;
+    }
+    .priduct_gallery {
+      width: 100%;
+      position: static;
+      .image {
+        width: 100%;
+      }
+    }
+    .product_buy_last {
+      .buttons {
+        padding: 0 0 20px;
+      }
+    }
+    .reviews_list {
+      article {
+        padding: 0 0 50px 150px;
+      }
+    }
+    .comment_modal {
+      width: 700px;
+      margin: -270px 0 0 -350px;
+    }
+  /* Current product end */
+
+  /* Basket begin */
+    .basket_wrapper {
+      .right_side {
+        width: 100%;
+      }
+      .main_side {
+        width: 100%;
+      }  
+    }
+  /* Basket end */
+
+  /* Account edit begin */
+    .account_edit {
+      width: 100%;
+      > div {
+        h2 {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li {
+            span {
+              float: none;
+              width: auto;
+              padding: 0 0 5px !important;
+              text-align: left;
+              line-height: 24px;
+              br {
+                display: none;
+              }
+            }
+            em {
+              width: 100%;
+              padding: 0;
+              font-size: 13px;
+            }
+            > div {
+              width: 100%;
+            }            
+          }
+          .submit {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }        
+        }
+      }
+    }
+  /* Account edit end */
+
+  /* Address edit begin */
+    .address_edit {
+      width: 100%;
+      > div {
+        header {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li label {
+            span {
+              float: none;
+              width: auto;
+              padding: 0 0 5px !important;
+              text-align: left;
+              line-height: 24px;
+            }
+            em {
+              width: 100%;
+              padding: 0;
+              font-size: 13px;
+              line-height: 21px;
+            }
+            input {
+              width: 100%;
+            }           
+          }
+          .submit {
+            width: 100%;
+            padding: 0;
+            button {
+              width: 100%;
+            }
+          }       
+        }
+      }
+    }
+  /* Address edit end */
+
+  /* Add payment begin */
+    .add_payment_method {
+      width: 100%;
+      > div {
+        h2 {
+          padding: 0 0 60px;
+        }
+        .form form {
+          ul li {
+            span {
+              width: 100%;
+              float: none;
+              text-align: left;
+              line-height: 21px;
+            }
+            > div {
+              width: 100%;
+            }
+          }
+          .submit {
+            width: 100%;
+            button {
+              width: 100%;
+            }
+          }        
+        }
+      }
+    }
+    .cards_select {
+      width: 100%;
+      margin: 0;
+    }
+  /* Add payment end */
+
+  /* Favorites block begin */
+    .favorites_block h2 {
+      padding: 0 0 40px;
+    }
+    .favorites_list {
+      padding: 0;
+      article {
+        width: 25%;
+        padding: 0 15px;
+      }      
+    }
+  /* Favorites block end */
 }
 
 // Medium
@@ -816,6 +1782,124 @@
       width: 33.333333%;
     }
   /* Peoduct result end */
+
+  /* Current product begin */
+    .current_product {
+      padding: 0 0 0 450px;
+    }
+    .priduct_gallery {
+      width: 450px;
+      .image {
+        width: 450px;
+      }
+    }
+    .product_buy_last {
+      .buttons {
+        padding: 0 0 20px;
+      }
+    }
+    .comment_modal  {
+      width: 900px;
+      margin: -270px 0 0 -450px;
+    }
+  /* Current product end */
+
+  /* Basket begin */
+    .basket_wrapper {
+      .right_side {
+        width: 45%;
+      }
+      .main_side {
+        width: 54%;
+      }  
+    }
+    .count_select {
+      padding: 10px 0 0;
+      clear: both;
+    }
+    .methods_list ul li > div {
+      float: none;
+      clear: both;
+      padding: 5px 0 0;
+    }
+  /* Basket end */
+  
+  /* Account edit begin */
+    .account_edit {
+      max-width: 880px;
+      > div {
+        h2 {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li > div {
+            width: 390px;
+            &.date select:first-child {
+              width: 20%;
+              & + select {
+                width: 50%;
+                & + select {
+                  width: 26%;
+                }
+              }
+            }
+          }
+          .submit {
+            width: 560px;
+          }        
+        }
+      }
+    }
+  /* Account edit end */
+
+  /* Address edit begin */
+    .address_edit {
+      max-width: 880px;
+      > div {
+        header {
+          padding: 0 0 40px;
+        }
+        .form form ul li label input {
+          width: 450px;
+        } 
+      }
+    }
+  /* Address edit end */
+
+  /* Add payment begin */
+    .add_payment_method {
+      max-width: 880px;
+      > div {
+        h2 {
+          padding: 0 0 40px;
+        }
+        .form form {
+          ul li {
+            span {
+              width: 230px;
+            }
+            > div {
+              width: 520px;
+            }            
+          }
+          .submit {
+            width: 750px;
+          }        
+        }
+      }
+    }
+    .cards_select {
+      width: 100%;
+      margin: 0;
+    }
+  /* Add payment end */
+
+  /* Favorites block begin */
+    .favorites_list article {
+      width: 20%;
+      padding: 0 15px;
+    }
+  /* Favorites block end */
 }
 
 // Medium
