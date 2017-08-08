@@ -29,7 +29,10 @@
                     </div>
                     <div class="second_info">
                         <div class="mega_seller"><img src="/img/mega_seller.png" alt=""></div>
-                        <div class="wrap_store"><?= Yii::t('app', 'Seller'); ?>: <strong><?= $product->seller->fullname; ?></strong> (<a href="#"><?= Yii::t('app', 'See other products'); ?></a>)</div>
+                        <div class="wrap_store">
+                            <?= Yii::t('app', 'Seller'); ?>: <strong><?= $product->seller->fullname; ?></strong>
+                            (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', 'See other products'); ?></a>)
+                        </div>
                     </div>
                 </header>
                 <div class="product_first_info">
