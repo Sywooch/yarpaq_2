@@ -223,9 +223,16 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductCategory::className(), ['product_id' => 'id']);
     }
 
+    /**
+     * @return $this ActiveQuery
+     */
     public function getCategories() {
         return $this->hasMany(Category::className(), ['id' => 'category_id'])
             ->viaTable('{{%product_category}}', ['product_id' => 'id']);
+    }
+
+    public function getCategory() {
+        return $this->getCategories()->limit(1);
     }
 
     public function getOptions() {

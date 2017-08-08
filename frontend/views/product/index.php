@@ -1,682 +1,259 @@
-<div class="widgets-content">
-    <div class="overlap-content"></div>
-    <div class="v-padding-30 no-padding-xs">
-
-        <div class="container no-padding">
-            <div class="row">
-                <aside class="col-sm-4 col-md-3 col-sm-3 hidden-xs">
-                    <div class="infoMenuBox light-gray_bg filterProductBox">
-                        <div class="list-infoMenu">
-
-                            <!-- Breadcrumbs -->
-                            <?php
-
-                            if (count($product->categories)) {
-                                echo $this->render('_breadcrumb', [
-                                    'category' => $product->categories[0]
-                                ]);
-                            }
-                            ?>
-                            <!-- Breadcrumbs END -->
-
+<div class="product_block">
+    <header>
+        <!-- Breadcrumbs -->
+        <?= $this->render('_breadcrumb', [
+            'product'       => $product
+        ]); ?>
+        <!-- Breadcrumbs END -->
+    </header>
+    <div class="current_product">
+        <div class="priduct_gallery">
+            <div class="image"><div><img src="<?= $product->gallery[0]->url; ?>" alt=""></div></div>
+            <div class="thumbnails">
+                <ul>
+                    <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
+                    <li><a href="<?= $image->url; ?>" <?= $i===1 ? 'class="active"' : ''; ?>><img src="<?= $image->url; ?>" alt=""></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+        <div class="right_side">
+            <div class="product_first">
+                <header>
+                    <h3><?= $product->title; ?></h3>
+                    <div class="first_info">
+                        <div class="rating">
+                            <span class="star_<?= $product->rating; ?>"></span>
                         </div>
+                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product id'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
                     </div>
-                    <div class="some-products green categoryProducts hide" style="margin-right: 20px">
-                        <div class="box-heading">
-                            <h3>Baxılmış məhsullar</h3>
+                    <div class="second_info">
+                        <div class="mega_seller"><img src="/img/mega_seller.png" alt=""></div>
+                        <div class="wrap_store"><?= Yii::t('app', 'Seller'); ?>: <strong><?= $product->seller->fullname; ?></strong> (<a href="#"><?= Yii::t('app', 'See other products'); ?></a>)</div>
+                    </div>
+                </header>
+                <div class="product_first_info">
+                    <div class="left_info">
+                        <div class="price">
+                            <span><?= Yii::t('app', 'Price'); ?>:</span>
+                            <strong><?= $product->price; ?><em>m</em></strong>
+                        </div>
+                        <ul>
+                            <li>İstehsalçı ölkə:  <strong>Türkiyə</strong></li>
+                            <li>Original:  <strong>Xeyr</strong></li>
+                            <li>Zəmanət:  <strong>Xeyr</strong></li>
+                            <li>Material:  <strong>Pambıq</strong></li>
+                            <li>Etiketlər:  <strong>Telefon, Smartphone, Samsung S8</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cards_dicsount">
+                        <div>
+                            <h4>Albalı</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>1 AY</td>
+                                    <td>3 AY</td>
+                                    <td>6 AY</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Aylıq ödəniş</td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ümumi ödəniş</td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div>
-                            <div class="col-md-12">
-                                <div class="productinfo-wrapper">
-
-                                    <div class="product_image">
-                                        <a href="#">
-                                            <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                        </a>
-
-                                        <div class="hover-info">
-                                            <ul class="product-icons list-inline">
-                                                <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                            </ul>
-                                            <div class="hover_text"> </div>
-                                        </div>
-                                    </div>
-
-                                    <p class="g-title">JBL Portable Speaker</p>
-                                    <span class="g-price">425.00  <b class="manatFont">M</b></span>
-
-
-                                </div>
-                            </div>
+                            <h4>Bolkart</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>1 AY</td>
+                                    <td>3 AY</td>
+                                    <td>6 AY</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Aylıq ödəniş</td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Ümumi ödəniş</td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                    <td>38.50 <span>m</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </aside>
-                <div class="col-sm-12 col-md-9">
-                    <div class="row margin-right-0">
-                        <div class="name-pr2">
-                            <h3 class="green name-pr"><?= $product->title; ?></h3>
-                            <p class="type-pr">Portativ Səs Sistemləri</p>
+                </div>
+                <div class="product_second_info">
+                    <div class="product_size">
+                        <p>Ölçü:</p>
+                        <ul>
+                            <li><a href="#">S</a></li>
+                            <li><a href="#" class="active">M</a></li>
+                            <li><a href="#">L</a></li>
+                            <li><a href="#">XL</a></li>
+                        </ul>
+                    </div>
+                    <div class="product_color">
+                        <p>Rəng:</p>
+                        <ul>
+                            <li><a href="#" style="background: #ff5656"></a></li>
+                            <li><a href="#" style="background: #20ad63" class="active"></a></li>
+                            <li><a href="#" style="background: #ffd800"></a></li>
+                            <li><a href="#" style="background: #393939"></a></li>
+                        </ul>
+                    </div>
+                    <div class="product_buy_last">
+                        <div class="buttons">
+                            <a href="#" class="add">SƏBƏTƏ ƏLAVƏ ET</a>
+                            <a href="#" class="buy">İNDİ ƏLDƏ ET</a>
+                            <a href="#" class="add_to_favorites"></a>
+                            <a href="#" class="compare">Məhsulu müqayisə et</a>
                         </div>
-                        <div class="col-md-6 col-sm-12 no-padding zoomsArea">
-
-                            <section class="center slider hidden-lg hidden-sm hidden-md">
-                                <?php foreach ($product->gallery as $image) { ?>
-                                <div>
-                                    <img src="<?= $image->url ?>" class="img-responsive">
-                                </div>
-                                <?php } ?>
-                            </section>
-
-                            <div class="row padding-right-20 hidden-xs">
-                                <a href="<?= $product->gallery[0]->url ?>" class="cloud-zoom" id="cloudZoom">
-                                    <img src="<?= $product->gallery[0]->url ?>" class="img-responsive">
-                                </a>
-
-                                <ul class="recent_list">
-
-                                    <?php foreach ($product->gallery as $image) { ?>
-                                    <li class="photo_container col-xs-3 no-padding">
-                                        <a href="<?= $image->url ?>" rel="useZoom: 'cloudZoom', smallImage: '<?= $image->url ?>'" class="cloud-zoom-gallery">
-                                            <img itemprop="image" src="<?= $image->url ?>" class="img-responsive">
-                                        </a>
-                                    </li>
-                                    <?php } ?>
-                                </ul>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 description-product  one-product-descript no-padding">
-
-
-                            <div class="name-pr1">
-                                <h3 class="green name-pr"><?= $product->title; ?></h3>
-                                <?php if (count($product->categories)) { ?>
-                                <p class="type-pr"><?= $product->categories[0]->title; ?></p>
-                                <?php } ?>
-                            </div>
-                            <div class="info-pr">
-                                <div class="row">
-                                    <div class="col-md-8 col-xs-7">
-                                        <p><?= Yii::t('app', 'Product code'); ?>: <span><?= $product->id; ?></span></p>
-                                        <p><?= Yii::t('app', 'Store');?>:
-                                            <a class="green" href="#" title="<?= Yii::t('app', 'see other products'); ?>">
-                                                <span class="green dejavu-bold"><?= $product->seller->fullname; ?></span><br>
-                                            </a>
-                                        </p>
-                                    </div>
-                                    <div class="col-md-4 col-xs-5 no-padding hide">
-                                        <p>Baxışların sayı: <span>1507</span></p>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="stars-area">
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                <i class="fa fa-star-o "></i>
-                                <i class="fa fa-star-o "></i>
-                                <i class="fa fa-star-o "></i>
-                                <i class="fa fa-star-o "></i>
-                            </div>
-
-                            <div>
-                                <del class="del-price green hide">1090.99 <span class="manatFont">M</span></del>
-                                <span class="g-price sizex26"><?= $product->price; ?> <b class="manatFont">M</b></span>
-                            </div>
-
-                            <div class="col-md-8 no-padding">
-                                <div class="v-margin-15 product-colors  col-md-6 no-padding hide">
-                                    <div><span class="yellowBg"></span></div>
-                                    <div><span class="greenBg"></span></div>
-                                    <div><span class="brownBg"></span></div>
-                                    <div><span class="blackBg"></span></div>
-                                </div>
-
-                                <div class="col-md-6 no-padding-right hidden-xs hidden-sm hide">
-                                    <span class="light-gray2">Mövcutluğu: 99</span>
-                                </div>
-
-
-                                <div class="clearfix"></div>
-                                <div class="col-xs-6  padding-right-2  no-padding-left hide">
-                                    <button class="simple_gray_btn ">
-                                        <i class="cart-icon iconBag"> </i>
-                                        <span><?= Yii::t('app', 'Add to basket'); ?></span>
-                                    </button>
-                                </div>
-                                <div class=" col-xs-6 padding-left-2  no-padding-right hide">
-                                    <button class="simple_gray_btn">
-                                        <i class="fa fa-heart"></i>
-                                        <span><?= Yii::t('app', 'Add to wishlist'); ?></span>
-                                    </button>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class=" clearfix v-margin-20">
-                                    <div class="quantity quantity2 col-md-6 padding-right-2  no-padding-left hide">
-                                        <label><?= Yii::t('app', 'Quantity'); ?></label>
-                                        <div class="le-quantity pull-right">
-                                            <form>
-                                                <a class="sp-minus" href="#reduce">-</a>
-                                                <input class="quantity-input" name="quantity-input" readonly="readonly" value="1" type="text">
-                                                <a class="sp-plus" href="#add">+</a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class=" col-md-6 padding-left-2 no-padding-right">
-                                        <button class="btn btn-green product-add" data-id="<?= $product->id; ?>"><?= Yii::t('app', 'Add to basket'); ?></button>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                            <div class="clearfix"></div>
-                            <div class="taksit-calculator hide">
-                                <div class="caption-for-taksit"><?= Yii::t('app', 'Taksit calculator'); ?></div>
-                                <table class="full-width">
-                                    <thead>
-                                    <tr>
-                                        <td></td>
-                                        <td>1 AY</td>
-                                        <td>6 AY</td>
-                                        <td>12 AY</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>Aylıq ödəniş	</td>
-                                        <td>32.83 ₼</td>
-                                        <td>11.21 ₼ </td>
-                                        <td>5.81 ₼</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ümumi qiymə</td>
-                                        <td>32.83 ₼</td>
-                                        <td>11.21 ₼ </td>
-                                        <td>5.81 ₼</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="otherInfoProduct">
-                                <div class="clearfix">
-
-                                    <div class="col-xs-4 gray_light-gray ">
-                                        <p><?= Yii::t('app', 'Condition'); ?>: <span><?= Yii::t('app', $product->condition); ?></span></p>
-                                        <p><?= Yii::t('app', 'Location'); ?>: <span><?= $product->location->name; ?></span></p>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <img src="/img/security.png">
-                                        <div class="sizex10  v-margin-10 gray2">
-                                            <?= Yii::t('app', 'customer rights'); ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-
-                                        <img src="/img/moneyback.png">
-                                        <div class="sizex10 v-margin-10 gray2">
-                                            <?= Yii::t('app', 'moneyback'); ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="product-tab margin-top-30">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li> <a href="#description_product" aria-controls="description_product" role="tab" data-toggle="tab">Təsvir</a> </li>
-                                <li><a aria-controls="comment_product" role="tab" data-toggle="tab" href="#comment_product" aria-expanded="true">Rəylər</a>  </li>
-                            </ul>
-                            <div class="tab-content clearfix">
-                                <div  role="tabpanel" class="tab-pane fade col-md-12"  id="description_product">
-                                    <?= \yii\helpers\HtmlPurifier::process( \yii\helpers\Html::decode($product->description)); ?>
-                                </div>
-                                <div  role="tabpanel" class="tab-pane fade in active  col-md-12"  id="comment_product">
-
-                                    <p>Rəy bildirən olmayıb</p>
-
-                                    <div class="comented hide">
-                                        <h4>Rəyinizi bildirin</h4>
-                                        <textarea></textarea>
-                                        <button class="btn btn-green pull-right">Göndər</button>
-                                    </div>
-                                </div>
-                                <div  role="tabpanel" class="tab-pane fade  col-md-12"  id="faq_product">
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="some-products categoryProducts hide">
-                            <div class="margin-bottom-30">
-
-                                <div class="box-heading green">
-                                    <h3>Oxşar Məhsullar</h3>
-                                </div>
-                            </div>
-                            <div class="row categoryProductsAll">
-
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-
-                                        <div class="product_image">
-                                            <div class="new-product">
-                                                <span class="dejavu-bold">Yeni</span>
-                                            </div>
-                                            <div class="discount">
-                                                <span class="dejavu-bold">%</span>
-                                            </div>
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class=" text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="productNum">5 rənqdə mövcutdur</div>
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="product_info">
-
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="not_items">
-                                                <div>
-                                                    <div>
-                                                        Mövcut deil
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
-                                    <div class="productinfo-wrapper clearfix">
-                                        <div class="product_image">
-                                            <a href="#">
-                                                <img src="/img/last-whatch1.png" alt="Favourable unreserved nay" title=" Favourable unreserved nay " width="100%">
-                                            </a>
-                                            <div class="hover-info">
-                                                <ul class="product-icons list-inline">
-                                                    <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                    <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                    <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                </ul>
-                                                <div class="hover_text"> </div>
-                                            </div>
-                                        </div>
-                                        <div class="product_info">
-                                            <p class="g-title">JBL Portable Speaker</p>
-                                            <p class="g-description">JBL Portable Speaker with powerful subwoofer
-                                                genuine original usb bluetooth aux clock alarm
-                                                table comfort premium</p>
-                                            <span class="g-price">425.00  <b class="manatFont">M</b></span>
-                                            <div>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                                <i class="fa fa-star-o "></i>
-                                            </div>
-                                            <div class="product-colors">
-                                                <div><span class="yellowBg"></span></div>
-                                                <div><span class="greenBg"></span></div>
-                                                <div><span class="brownBg"></span></div>
-                                                <div><span class="blackBg"></span></div>
-                                            </div>
-                                        </div>
-                                        <div class="operations-order">
-                                            <button class="product-add">Səbətə at</button>
-                                            <div >
-                                                <div class="text-center">
-                                                    <ul class="product-icons list-inline">
-                                                        <li><a> <i class="wishes-icon" data-text="add to wishes"></i></a></li>
-                                                        <li><a> <i class="views-icon" data-text="sürətli baxış"></i></a></li>
-                                                        <li><a> <i class="plus-icon" data-text="unknown"></i></a></li>
-                                                    </ul>
-                                                    <div class="hover_text"> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="delivery">
+                            <p>Çatdırılma:</p>
+                            <span>1 - 3 iş günü ərzində <a href="#">Ətraflı</a></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="product_additional">
+        <div class="product_infos">
+            <div class="tabs">
+                <ul>
+                    <li><a href="#" class="active">Məhsulun təsviri</a></li>
+                    <li><a href="#">Rəylər</a></li>
+                </ul>
+            </div>
+            <div class="inner">
+                <div class="active">
+                    <?= $product->description; ?>
+                </div>
+                <div>
+                    <div class="reviews_block">
+                        <div class="reviews_list">
+                            <article>
+                                <div class="left_info">
+                                    <div class="rating">
+                                        <span class="star_2"></span>
+                                    </div>
+                                    <h4>Aygün Qarayeva</h4>
+                                    <time>03/12/2014</time>
+                                </div>
+                                <div class="text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
+                                </div>
+                            </article>
+                            <article>
+                                <div class="left_info">
+                                    <div class="rating">
+                                        <span class="star_2"></span>
+                                    </div>
+                                    <h4>Aygün Qarayeva</h4>
+                                    <time>03/12/2014</time>
+                                </div>
+                                <div class="text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
+                                </div>
+                            </article>
+                            <article>
+                                <div class="left_info">
+                                    <div class="rating">
+                                        <span class="star_2"></span>
+                                    </div>
+                                    <h4>Aygün Qarayeva</h4>
+                                    <time>03/12/2014</time>
+                                </div>
+                                <div class="text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
+                                </div>
+                            </article>
+                            <article>
+                                <div class="left_info">
+                                    <div class="rating">
+                                        <span class="star_2"></span>
+                                    </div>
+                                    <h4>Aygün Qarayeva</h4>
+                                    <time>03/12/2014</time>
+                                </div>
+                                <div class="text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="add_review_button"><a href="#" class="open_comment_modal">RƏY BİLDİR</a></div>
+                    </div>
+                </div>
 
+            </div>
+        </div>
+        <aside class="aside_products">
+            <article itemscope="" itemtype="http://schema.org/Product">
+                <div>
+                    <div class="image"><img src="upload/Images/10.jpg" alt="" itemprop="image"></div>
+                    <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
+                    <div class="price"><span itemprop="price">48 <strong>m</strong></span></div>
+                    <div class="old_price">
+                        <span>Qiymət: <em>58<strong>m</strong></em></span>
+                        <strong>73% OFF</strong>
+                    </div>
+                    <div class="rating">
+                        <span class="star_2"></span>
+                    </div>
+                </div>
+                <a href="#"></a>
+            </article>
+            <article itemscope="" itemtype="http://schema.org/Product">
+                <div>
+                    <div class="image"><img src="upload/Images/11.jpg" alt="" itemprop="image"></div>
+                    <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
+                    <div class="price"><span itemprop="price">48 <strong>m</strong></span></div>
+                    <div class="old_price">
+                        <span>Qiymət: <em>58<strong>m</strong></em></span>
+                        <strong>73% OFF</strong>
+                    </div>
+                    <div class="rating">
+                        <span class="star_2"></span>
+                    </div>
+                </div>
+                <a href="#"></a>
+            </article>
+            <article itemscope="" itemtype="http://schema.org/Product">
+                <div>
+                    <div class="image"><img src="upload/Images/12.jpg" alt="" itemprop="image"></div>
+                    <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
+                    <div class="price"><span itemprop="price">48 <strong>m</strong></span></div>
+                    <div class="old_price">
+                        <span>Qiymət: <em>58<strong>m</strong></em></span>
+                        <strong>73% OFF</strong>
+                    </div>
+                    <div class="rating">
+                        <span class="star_2"></span>
+                    </div>
+                </div>
+                <a href="#"></a>
+            </article>
+        </aside>
+    </div>
 </div>

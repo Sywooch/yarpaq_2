@@ -1,37 +1,21 @@
 <?php
-$parents = $category->getParents(true)->all();
-?>
-<div class="selected-product">
+$parents = $product->category[0]->getParents(true)->all(); ?>
 
-    <?php if (count($parents)) { ?>
+<div class="breadcrumbs">
+    <ul>
+        <li>
+            <a href="<?= $parents[0]->url; ?>"><?= Yii::t('app', 'Home'); ?></a>
+        </li>
 
-        <a href="<?= $parents[0]->url; ?>" class="title-filter">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-            <?= $parents[0]->title; ?>
-        </a>
-
-        <?php foreach (array_slice($parents, 1) as $parent) { ?>
-
-        <a href="<?= $parent->url; ?>" class="name-product"
-           style="margin-left: <?= ($parent->depth - 2) * 12 ?>px; margin-top: 4px;">
-            <span><?= $parent->title; ?></span>
-        </a>
-
+        <?php if (count($parents) > 1) { ?>
+            <?php foreach (array_slice($parents, 1) as $parent) { ?>
+                <li>
+                    <a href="<?= $parent->url; ?>"><?= $parent->title; ?></a>
+                </li>
+            <?php } ?>
         <?php } ?>
-
-    <?php } ?>
-
-    <div style="margin-left: <?= $category->depth * 12 ?>px; margin-top: 4px;">
-        <?= $category->title; ?>
-    </div>
-
-    <?php foreach ($category->getChildren()->all() as $childCategory) { ?>
-        <a href="<?= $childCategory->url; ?>" class="name-product"
-           style="margin-left: <?= ($childCategory->depth - 2) * 12 ?>px; margin-top: 4px;">
-            <span><?= $childCategory->title; ?></span>
-        </a>
-    <?php } ?>
-
-
-
+        <li>
+            <span><?= $product->title; ?></span>
+        </li>
+    </ul>
 </div>

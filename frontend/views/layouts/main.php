@@ -446,7 +446,9 @@ $this->beginPage();
 
 <div class="main_wrapper">
 
-    <?= $content ?>
+    <main>
+        <?= $content ?>
+    </main>
 
     <?= $this->render('_footer'); ?>
 
