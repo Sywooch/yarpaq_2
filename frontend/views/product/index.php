@@ -30,7 +30,7 @@
                     <div class="second_info">
                         <div class="mega_seller"><img src="/img/mega_seller.png" alt=""></div>
                         <div class="wrap_store">
-                            <?= Yii::t('app', 'Seller'); ?>: <strong><?= $product->seller->fullname; ?></strong>
+                            <?= Yii::t('app', 'Seller'); ?>: <b><?= $product->seller->fullname; ?></b>
                             (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', 'See other products'); ?></a>)
                         </div>
                     </div>
@@ -39,14 +39,14 @@
                     <div class="left_info">
                         <div class="price">
                             <span><?= Yii::t('app', 'Price'); ?>:</span>
-                            <strong><?= $product->price; ?><em>m</em></strong>
+                            <b><?= $product->price; ?><i class="currency_icon">m</i></b>
                         </div>
                         <ul>
-                            <li>İstehsalçı ölkə:  <strong>Türkiyə</strong></li>
-                            <li>Original:  <strong>Xeyr</strong></li>
-                            <li>Zəmanət:  <strong>Xeyr</strong></li>
-                            <li>Material:  <strong>Pambıq</strong></li>
-                            <li>Etiketlər:  <strong>Telefon, Smartphone, Samsung S8</strong></li>
+                            <li>İstehsalçı ölkə:  <b>Türkiyə</b></li>
+                            <li>Original:  <b>Xeyr</b></li>
+                            <li>Zəmanət:  <b>Xeyr</b></li>
+                            <li>Material:  <b>Pambıq</b></li>
+                            <li>Etiketlər:  <b>Telefon, Smartphone, Samsung S8</b></li>
                         </ul>
                     </div>
                     <div class="cards_dicsount">
@@ -216,39 +216,9 @@
                 <div>
                     <div class="image"><img src="upload/Images/10.jpg" alt="" itemprop="image"></div>
                     <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
-                    <div class="price"><span itemprop="price">48 <strong>m</strong></span></div>
+                    <div class="price"><span itemprop="price">48 <b class="currency_icon">m</b></span></div>
                     <div class="old_price">
-                        <span>Qiymət: <em>58<strong>m</strong></em></span>
-                        <strong>73% OFF</strong>
-                    </div>
-                    <div class="rating">
-                        <span class="star_2"></span>
-                    </div>
-                </div>
-                <a href="#"></a>
-            </article>
-            <article itemscope="" itemtype="http://schema.org/Product">
-                <div>
-                    <div class="image"><img src="upload/Images/11.jpg" alt="" itemprop="image"></div>
-                    <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
-                    <div class="price"><span itemprop="price">48 <strong>m</strong></span></div>
-                    <div class="old_price">
-                        <span>Qiymət: <em>58<strong>m</strong></em></span>
-                        <strong>73% OFF</strong>
-                    </div>
-                    <div class="rating">
-                        <span class="star_2"></span>
-                    </div>
-                </div>
-                <a href="#"></a>
-            </article>
-            <article itemscope="" itemtype="http://schema.org/Product">
-                <div>
-                    <div class="image"><img src="upload/Images/12.jpg" alt="" itemprop="image"></div>
-                    <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
-                    <div class="price"><span itemprop="price">48 <strong>m</strong></span></div>
-                    <div class="old_price">
-                        <span>Qiymət: <em>58<strong>m</strong></em></span>
+                        <span>Qiymət: <em>58<b class="currency_icon">m</b></em></span>
                         <strong>73% OFF</strong>
                     </div>
                     <div class="rating">
