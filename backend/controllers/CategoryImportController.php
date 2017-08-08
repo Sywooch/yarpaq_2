@@ -91,12 +91,12 @@ class CategoryImportController extends AdminDefaultController
         }
     }
 
-    private function saveModel($model, $old_id, $parent) {
+    private function saveModel($model, $old_id, $parent_id) {
         $tr = Yii::$app->db->beginTransaction();
 
         try {
             // сохраняем модель
-            $parent = Category::findOne($this->catAssoc[$parent]);
+            $parent = Category::findOne($this->catAssoc[$parent_id]);
             $model->parent_id = $parent->id;
 
             if ($this->hasAssoc($old_id)) {

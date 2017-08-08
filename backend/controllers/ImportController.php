@@ -12,8 +12,16 @@ class ImportController extends AdminDefaultController
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
 
-        $this->cleanProducts();
-        $this->cleanUsers();
+        $this->cleanCategories();
+        //$this->cleanProducts();
+        //$this->cleanUsers();
+    }
+
+    protected function cleanCategories() {
+        $db = Yii::$app->db;
+
+        $db->createCommand('DELETE FROM {{%category}} WHERE parent_id > 0')->execute();
+        $db->createCommand('DELETE FROM cat_assoc')->execute();
     }
 
     protected function cleanProducts() {

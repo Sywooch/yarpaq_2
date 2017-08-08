@@ -24,8 +24,8 @@ class ProductImportController extends AdminDefaultController
 
         $this->userAssoc = $this->getUserAssoc();
 
-        $this->importProducts();
-        //$this->importImages();
+//        $this->importProducts();
+        $this->importImages();
     }
 
     private function getProductAssoc() {
