@@ -31,9 +31,9 @@ $this->beginPage();
 
     <link href="/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/css/font/stylesheet.css" rel="stylesheet" type="text/css" />
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="/css/rangeSlider.css" rel="stylesheet" type="text/css" />
     <link href="/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="/css/common.css" rel="stylesheet" type="text/css" />
 
 

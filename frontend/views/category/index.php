@@ -308,19 +308,19 @@
                         <ul>
                             <li>
                                 <span>Qiymət:</span>
-                                <strong>120 azn — 300 azn<a href="#"></a></strong>
+                                <b>120 azn — 300 azn<a href="#"></a></b>
                             </li>
                             <li>
                                 <span>Brand:</span>
-                                <strong>Adidas<a href="#"></a></strong>
+                                <b>Adidas<a href="#"></a></b>
                             </li>
                             <li>
                                 <span>Rəng:</span>
-                                <strong>Qırmızı<a href="#"></a></strong>
+                                <b>Qırmızı<a href="#"></a></b>
                             </li>
                             <li>
                                 <span>Ölçü:</span>
-                                <strong>40<a href="#"></a></strong>
+                                <b>40<a href="#"></a></b>
                             </li>
                         </ul>
                     </div>
