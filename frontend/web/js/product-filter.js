@@ -80,11 +80,6 @@ $(function () {
 
     var form = $('#productFilterForm');
 
-    //$('.condition_filter').change(function () {
-    //    productFilter.setCondition($(this).val());
-    //});
-    //
-
     $('.brand-reset-btn').click(function (e) {
         e.preventDefault();
 
@@ -120,16 +115,20 @@ $(function () {
     });
 
 
-    //
-    //$('#ProductFilterPerPage').change(function () {
-    //    productFilter.setPerPage($(this).val());
-    //});
-    //
-    //$('#ProductFilterSort').change(function () {
-    //    productFilter.setSort($(this).val());
-    //});
-    //
-    //$('.reset_filter').click(function () {
-    //    productFilter.reset();
-    //});
+    $('.selected-filter').click(function () {
+        var id = $(this).data('id');
+
+
+        if ($(this).hasClass('selected-filter-checkbox')) {
+            $('#'+id).removeAttr('checked')
+                .change();
+        }
+
+        if ($(this).hasClass('selected-filter-price')) {
+            $('.price_filter').val('');
+            form.submit();
+        }
+
+        return false;
+    });
 });

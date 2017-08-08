@@ -100,6 +100,7 @@
                                 <li>
                                     <label>
                                         <input
+                                            id="condition-1"
                                             type="radio"
                                             class="condition_filter"
                                             name="ProductFilter[condition]"
@@ -113,6 +114,7 @@
                                 <li>
                                     <label>
                                         <input
+                                            id="condition-2"
                                             type="radio"
                                             name="ProductFilter[condition]"
                                             class="condition_filter"
@@ -286,7 +288,7 @@
         <div class="product_list">
             <header>
                 <div class="first">
-                    <h2><?= $category->title; ?> <span>(1200 məhsul)</span></h2>
+                    <h2><?= $category->title; ?> <span>(<?=$pages->totalCount?> <?= Yii::t('app', 'product'); ?>)</span></h2>
                     <div class="sort_by">
                         <a href="#"><?= Yii::t('app', 'Sort'); ?>: <span><?= $productFilter->sortOptions[ $productFilter->sort ] ?></span></a>
                         <ul>
@@ -306,22 +308,23 @@
                 <div class="second">
                     <div class="applied_filters">
                         <ul>
+                            <?php if ($productFilter->price_from || $productFilter->price_to) { ?>
                             <li>
-                                <span>Qiymət:</span>
-                                <b>120 azn — 300 azn<a href="#"></a></b>
+                                <span><?= Yii::t('app', 'Price'); ?>:</span>
+                                <b><?=$productFilter->price_from?> <span class="currency_icon">M</span> — <?=$productFilter->price_to?> <span class="currency_icon">M</span>
+                                    <a href="#" class="selected-filter selected-filter-price"></a></b>
                             </li>
+                            <?php } ?>
+
+                            <?php if ($productFilter->brand) { ?>
                             <li>
-                                <span>Brand:</span>
-                                <b>Adidas<a href="#"></a></b>
+                                <span><?= Yii::t('app', 'Brand'); ?>:</span>
+
+                                <?php foreach ($filterBrands as $brand) { if (!$productFilter->hasBrand($brand->id)) continue; ?>
+                                <b><?= $brand->title; ?> <a href="#" class="selected-filter selected-filter-checkbox" data-id="brand-<?=$brand->id;?>"></a></b>
+                                <?php } ?>
                             </li>
-                            <li>
-                                <span>Rəng:</span>
-                                <b>Qırmızı<a href="#"></a></b>
-                            </li>
-                            <li>
-                                <span>Ölçü:</span>
-                                <b>40<a href="#"></a></b>
-                            </li>
+                            <?php } ?>
                         </ul>
                     </div>
                     <a href="#" class="clear_filtre"><?= Yii::t('app', 'Clear filter'); ?></a>
@@ -331,7 +334,7 @@
                 <?php
                 if (isset($products) && count($products)) {
                     foreach ($products as $product) {
-                        echo $this->render('_product', [
+                        echo $this->render('@app/views/blocks/product', [
                             'product' => $product
                         ]);
                     }
