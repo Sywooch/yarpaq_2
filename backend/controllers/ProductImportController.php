@@ -16,16 +16,18 @@ class ProductImportController extends AdminDefaultController
     private $products;
     private $errorModels = [];
     private $userAssoc;
+    private $manAssoc;
 
 
     public function actionIndex() {
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
 
-        $this->userAssoc = $this->getUserAssoc();
+        $this->userAssoc    = $this->getUserAssoc();
+        $this->manAssoc     = $this->getManAssoc();
 
-//        $this->importProducts();
-        $this->importImages();
+        $this->importProducts();
+        //$this->importImages();
     }
 
     private function getProductAssoc() {
@@ -57,6 +59,20 @@ class ProductImportController extends AdminDefaultController
         return $ids;
     }
 
+    private function getManAssoc() {
+
+        $sql = 'SELECT `old_id`, `new_id` FROM `man_assoc`';
+
+        $assocs = Yii::$app->db->createCommand($sql)->queryAll();
+
+        $ids = [];
+        foreach ($assocs as $assoc) {
+            $ids[ $assoc['old_id'] ] = $assoc['new_id'];
+        }
+
+        return $ids;
+    }
+
     private function importProducts() {
         // достаем ассоциации Products
         $this->productAssoc = $this->getProductAssoc();
@@ -66,7 +82,7 @@ class ProductImportController extends AdminDefaultController
 SELECT `p`.*, `pd`.`name` as `d_name`, `pd`.`description` as `d_desc`
 FROM `oc_product` `p` LEFT JOIN `oc_product_description` `pd` ON `p`.`product_id` = `pd`.`product_id`
 WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
-        $product_sql .= ' LIMIT 0, 2000';
+        $product_sql .= ' LIMIT 10000, 2000';
 
         // выполняем запрос
         $this->products = Yii::$app->db_old->createCommand($product_sql)->queryAll();
@@ -145,7 +161,11 @@ WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
         $model->length_class_id = $desc_data['length_class_id'];
 
 
-        $model->manufacturer_id = $desc_data['manufacturer_id'];
+        $manufacturer_id = null;
+        if (isset($this->manAssoc[$desc_data['manufacturer_id']])) {
+            $manufacturer_id = $this->manAssoc[$desc_data['manufacturer_id']];
+        }
+        $model->manufacturer_id         = $manufacturer_id;
 
         $user_id = null;
         if (isset($this->userAssoc[$desc_data['user_id']])) {
