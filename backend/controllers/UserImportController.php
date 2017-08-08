@@ -17,8 +17,6 @@ class UserImportController extends AdminDefaultController
 
         $this->importUsers();
         $this->importCustomers();
-        $this->deleteDeletedCustomers();
-        $this->deleteDeletedUsers();
     }
 
     // МЕТОДЫ ДЛЯ СИНХРОНИЗАЦИИ ДАННЫХ СО СТАРОГО САЙТА
@@ -366,33 +364,6 @@ class UserImportController extends AdminDefaultController
         $role = $roles[$role_id];
 
         Yii::$app->db->createCommand('REPLACE INTO {{%auth_assignment}} VALUES ("'.$role.'", '.$user_id.', '.time().')')->execute();
-    }
-
-    public function deleteDeletedUsers() {
-        $sql = '
-            DELETE FROM y2_user WHERE id IN (
-
-            SELECT new_id FROM `user_assoc`
-            WHERE `type` = "user" AND old_id NOT IN ( SELECT `user_id` FROM `yarpaq`.`oc_user` )
-            ORDER BY old_id
-
-        )';
-
-        Yii::$app->db->createCommand($sql)->execute();
-    }
-
-
-    public function deleteDeletedCustomers() {
-        $sql = '
-            DELETE FROM y2_user WHERE id IN (
-
-            SELECT new_id FROM `user_assoc`
-            WHERE `type` = "customer" AND old_id NOT IN ( SELECT `customer_id` FROM `yarpaq`.`oc_customer` )
-            ORDER BY old_id
-
-        )';
-
-        Yii::$app->db->createCommand($sql)->execute();
     }
 
 }
