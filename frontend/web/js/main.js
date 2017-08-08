@@ -631,6 +631,12 @@ $(".priduct_gallery .thumbnails li a").click(function(){
 		$(this).parent().parent().prev().find("em").html(_this_name);
 		return false;
 	});
+
+	$(".product_size ul li a").click(function(){
+		$(".product_size a").removeClass("active");
+		$(this).addClass("active");
+		return false;
+	});
 /* Size select end */
 
 /* Color select begin */
@@ -639,6 +645,12 @@ $(".priduct_gallery .thumbnails li a").click(function(){
 		$(this).parent().parent().find("a").removeClass("active");
 		$(this).addClass("active");
 		$(this).parent().parent().prev().find("em").attr("style", _this_style);
+		return false;
+	});
+
+	$(".product_color ul li a").click(function(){
+		$(".product_color a").removeClass("active");
+		$(this).addClass("active");
 		return false;
 	});
 /* Color select end */

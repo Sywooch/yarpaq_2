@@ -332,7 +332,7 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function hasDiscount() { // TODO
-        return true;
+        return false;
     }
 
     public function getDiscount() { // TODO

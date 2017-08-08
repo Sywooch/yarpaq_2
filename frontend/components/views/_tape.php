@@ -11,15 +11,15 @@
                              title="<?= $product->title; ?>">
                     </div>
                     <h3><?= $product->title; ?></h3>
-                    <div class="price"><span><?= $product->price; ?> AZN</span></div>
+                    <div class="price"><span class="currency_icon"><?= $product->price; ?> M</span></div>
                     <?php if (false) { // if hasDiscount() ?>
                     <div class="old_price">
-                        <span><?= Yii::t('app', 'Qiymət');?>: <em><?= $product->price; ?> AZN</em></span>
-                        <strong>73% OFF</strong>
+                        <span><?= Yii::t('app', 'Qiymət');?>: <em class="currency_icon"><?= $product->price; ?> M</em></span>
+                        <strong><?= $product->discount; ?> <i class="currency_icon">m</i> <?= Yii::t('app', 'OFF'); ?></strong>
                     </div>
                     <?php } ?>
                     <div class="rating">
-                        <span class="star_3"></span>
+                        <span class="star_<?= $product->rating; ?>"></span>
                     </div>
                 </div>
                 <a href="<?= $product->url; ?>"></a>
