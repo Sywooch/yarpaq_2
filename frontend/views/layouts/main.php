@@ -220,130 +220,22 @@ $this->beginPage();
                                         <a href="<?= $category->url; ?>"><?= $category->title; ?></a>
                                         <div>
                                             <nav>
-                                                <div>
+
+                                                <div> <!-- Column -->
+
+                                                    <?php
+                                                    foreach ($category->getChildren()->all() as $subcategory) { ?>
                                                     <article>
-                                                        <h3><a href="#"></a></h3>
+                                                        <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                         <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
+                                                            <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                            <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                            <?php } ?>
                                                         </ul>
                                                     </article>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                        </ul>
-                                                    </article>
+                                                    <?php } ?>
                                                 </div>
-                                                <div>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Mens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                </div>
+
                                             </nav>
                                         </div>
                                     </li>
