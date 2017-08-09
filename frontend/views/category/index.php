@@ -23,12 +23,12 @@
         </div>
     </header>
     <div class="product_header_mobile">
-        <h3>Ayyaqqabılar: İdman</h3>
+        <h3><?= $category->name; ?></h3>
         <ul>
-            <li><a href="#" class="sort"><span>Çeşİdlə</span></a></li>
-            <li><a href="#" class="filtre"><span>Fİlter</span></a></li>
+            <li><a href="#" class="sort"><span><?= Yii::t('app', 'Sort'); ?></span></a></li>
+            <li><a href="#" class="filtre"><span><?= Yii::t('app', 'Filter'); ?></span></a></li>
         </ul>
-        <p>Tapılan məhsullar   1 026</p>
+        <p><?= Yii::t('app', 'Products found'); ?> - <?= $pages->totalCount; ?></p>
     </div>
     <div class="product_list_wrapper">
 
