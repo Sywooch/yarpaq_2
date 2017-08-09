@@ -10,6 +10,7 @@ use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
 use common\models\Product;
 use common\models\category\Category;
+use common\models\search\SearchLogger;
 
 
 class SearchController extends BasicController
@@ -35,10 +36,14 @@ class SearchController extends BasicController
         // GET Products
         $products = Product::find();
 
+        $q = '';
         if ($r->get('q')) {
             $q = htmlentities(strip_tags($r->get('q')));
-            $products->andWhere(['like', 'title', $q]);
+
+            SearchLogger::log($q);
         }
+
+        $products->andWhere(['like', 'title', $q]);
 
         // если указана категория, то находим все ее дочерние и ищем по этим категориям
         if ($r->get('category_id')) {
