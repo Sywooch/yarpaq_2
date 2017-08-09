@@ -13,8 +13,8 @@ class ImportController extends AdminDefaultController
         ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
 
         $this->cleanCategories();
-        //$this->cleanProducts();
-        //$this->cleanUsers();
+        $this->cleanProducts();
+        $this->cleanUsers();
     }
 
     protected function cleanCategories() {
