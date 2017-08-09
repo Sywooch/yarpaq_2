@@ -261,7 +261,7 @@ $this->beginPage();
                                placeholder="<?= Yii::t('app', 'Enter product name'); ?>"
                                name="q" autocomplete="off"
                                value="<?= @htmlentities($this->params['q']); ?>">
-                        <button type="submit">Search</button>
+                        <button type="submit"><?= Yii::t('app', 'Search'); ?></button>
                         <ul>
                             <li><a href="#">Womens fashion</a></li>
                             <li><a href="#">Mens fashion</a></li>
@@ -270,7 +270,7 @@ $this->beginPage();
                             <li><a href="#">Sandal və tərliklər</a></li>
                         </ul>
                     </form>
-                    <a href="#" class="close">Cancel</a>
+                    <a href="#" class="close"><?= Yii::t('app', 'Cancel'); ?></a>
                     <div class="last_searched_list">
                         <h3>Recently searches</h3>
                         <ul>

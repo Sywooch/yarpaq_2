@@ -36,7 +36,7 @@ class SearchController extends BasicController
         $products = Product::find();
 
         if ($r->get('q')) {
-            $q = $r->get('q');
+            $q = htmlentities(strip_tags($r->get('q')));
             $products->andWhere(['like', 'title', $q]);
         }
 
@@ -106,6 +106,7 @@ class SearchController extends BasicController
         $this->view->params['q'] = $q;
 
         return $this->render('index', [
+            'search_q'          => $q,
             'category'          => $category,
             'products'          => $models,
             'pages'             => $pages,
