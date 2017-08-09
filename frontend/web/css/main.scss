@@ -3342,6 +3342,50 @@ a.back_to_top {
     li {
       float: left;
       padding: 0 0 0 15px;
+      label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        input {
+          display: none;
+          &:checked + span {
+            color: #fff;
+            background: #707070;
+            &::after {
+              display: block;
+            }
+          }
+          & + span {
+            display: block;
+            width: 36px;
+            height: 36px;
+            background: #ebebeb;
+            text-align: center;
+            line-height: 36px;
+            color: #808080;
+            font-family: 'Roboto';
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: -0.7px;
+            text-transform: uppercase;
+            position: relative;
+            @include border_radius(4px);
+            &::after {
+              content: "";
+              display: none;
+              box-sizing: border-box;
+              width: 34px;
+              height: 34px;
+              border: 1px solid #fff;
+              position: absolute;
+              top: 1px;
+              left: 1px;
+              @include border_radius(4px);
+            }
+          }
+        }
+      }
       a {
         display: block;
         width: 36px;
@@ -3400,6 +3444,50 @@ a.back_to_top {
     li {
       float: left;
       padding: 0 0 0 15px;
+      label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        input {
+          display: none;
+          &:checked + span {
+            color: #fff;
+            background: #707070;
+            &::after {
+              display: block;
+            }
+          }
+          & + span {
+            display: block;
+            width: 36px;
+            height: 36px;
+            background: #ebebeb;
+            text-align: center;
+            line-height: 36px;
+            color: #808080;
+            font-family: 'Roboto';
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: -0.7px;
+            text-transform: uppercase;
+            position: relative;
+            @include border_radius(4px);
+            &::after {
+              content: "";
+              display: none;
+              box-sizing: border-box;
+              width: 34px;
+              height: 34px;
+              border: 1px solid #fff;
+              position: absolute;
+              top: 1px;
+              left: 1px;
+              @include border_radius(4px);
+            }
+          }
+        }
+      }
       a {
         display: block;
         width: 36px;
@@ -4139,6 +4227,16 @@ aside.aside_products {
     li {
       display: inline-block;
       width: 50%;
+      position: relative;
+      select {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
       a {
         display: block;
         color: #4a4a4a;
@@ -5151,7 +5249,7 @@ header.mobile_header {
 }
 
 .aside_categories {
-  padding: 15px 20px 0px;
+  padding: 20px 20px 0px;
   background: #fff;
   @include border_radius(1px);
   h3 {
@@ -5161,19 +5259,19 @@ header.mobile_header {
     span {
       padding: 0 20px 0 0;
       color: #5a5a59;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.02px;
     }
   }
   > ul {
     > li {
-      padding: 0 0 12px;
+      padding: 0 0 15px;
       > a {
         display: block;
         padding: 0 40px 0 0;
         color: #191919;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 400;
         letter-spacing: 0.02px;
         text-decoration: none;
@@ -5194,12 +5292,12 @@ header.mobile_header {
       > ul {
         padding: 12px 0 0 0;
         > li {
-          padding: 0 0 12px;
+          padding: 0 0 14px;
           > a {
             display: block;
             padding: 0 40px 0 0;
             color: #191919;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 400;
             letter-spacing: 0.02px;
             text-decoration: none;
@@ -5336,8 +5434,9 @@ ul.checkboxes {
   background: #fff;
   header {
     padding: 20px 15px 5px;
+    overflow: visible;
     .first {
-      padding: 0 0 30px;
+      padding: 0 0 20px;
       border-bottom: 2px solid #efefef;
       &::after {
         content: "";
@@ -5492,6 +5591,9 @@ ul.checkboxes {
           &:hover {
 
           }
+        }
+        span {
+          color: #878787;
         }
       }
     }
