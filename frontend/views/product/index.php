@@ -110,10 +110,30 @@
                     <div class="product_size">
                         <p>Ölçü:</p>
                         <ul>
-                            <li><a href="#">S</a></li>
-                            <li><a href="#" class="active">M</a></li>
-                            <li><a href="#">L</a></li>
-                            <li><a href="#">XL</a></li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="size_name" checked>
+                                    <span>S</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="size_name">
+                                    <span>M</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="size_name">
+                                    <span>L</span>
+                                </label>
+                            </li>
+                            <li>
+                                <label>
+                                    <input type="radio" name="size_name">
+                                    <span>XL</span>
+                                </label>
+                            </li>
                         </ul>
                     </div>
                     <div class="product_color">
