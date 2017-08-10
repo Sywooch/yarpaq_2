@@ -94,6 +94,7 @@ class CategoryController extends BasicController
 
 
         return $this->render('index', [
+            'count'             => $pages->totalCount,
             'category'          => $category,
             'products'          => $models,
             'pages'             => $pages,

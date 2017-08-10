@@ -96,6 +96,7 @@ class SellerProductsController extends BasicController
 
 
         return $this->render('index', [
+            'count'             => $pages->totalCount,
             'seller'            => $seller,
             'products'          => $models,
             'pages'             => $pages,

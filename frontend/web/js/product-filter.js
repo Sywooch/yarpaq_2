@@ -99,13 +99,15 @@ $(function () {
         form.submit();
     });
 
-    $(".sort_by > a").click(function (e) {
-        e.preventDefault();
-    });
-
     $(".sort_by ul a").click(function () {
         var value = $(this).data('value');
         $('.sort_filter').val(value);
+
+        form.submit();
+    });
+
+    $('.mobile-sort-by').change(function () {
+        $('.sort_filter').val($(this).val());
 
         form.submit();
     });

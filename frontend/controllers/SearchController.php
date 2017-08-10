@@ -27,7 +27,7 @@ class SearchController extends BasicController
 
         // Параметры фильтра
         $productFilter = new ProductFilter();
-        $productFilter->attributes = $r->get();
+        $productFilter->load($r->get());
 
         if (!$productFilter->validate()) {
             throw new Exception('Wrong filter');
@@ -36,7 +36,6 @@ class SearchController extends BasicController
         // GET Products
         $products = Product::find();
 
-        $q = '';
         if ($r->get('q')) {
             $q = htmlentities(strip_tags($r->get('q')));
 
@@ -111,6 +110,7 @@ class SearchController extends BasicController
         $this->view->params['q'] = $q;
 
         return $this->render('index', [
+            'count'             => $pages->totalCount,
             'search_q'          => $q,
             'category'          => $category,
             'products'          => $models,
