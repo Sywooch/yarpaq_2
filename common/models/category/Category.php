@@ -64,6 +64,7 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         return [
             ['settings', 'safe'],
             ['status', 'default', 'value' => self::STATUS_HIDDEN],
+            ['isTop',  'default', 'value' => 0],
             [['parent_id', 'status', 'template_id'], 'required'],
             [['parent_id', 'status', 'template_id'], 'integer'],
 

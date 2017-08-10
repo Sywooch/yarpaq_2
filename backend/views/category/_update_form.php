@@ -23,8 +23,7 @@ use yii\helpers\ArrayHelper;
         <ul class="nav nav-tabs">
             <?php $i=1; foreach ($languages as $language) { ?>
                 <li class="<?php echo $i==1 ? 'active' : '' ?>"><a href="#tab_<?php echo $i; ?>" data-toggle="tab" aria-expanded="<?php echo $i==1 ? 'true' : 'false' ?>"><?php echo $language->label; ?></a></li>
-                <?php $i++; } ?>
-            <li><a href="#tab_global" data-toggle="tab" aria-expanded="false">Global</a></li>
+            <?php $i++; } ?>
         </ul>
         <div class="tab-content">
             <?php
@@ -54,32 +53,37 @@ use yii\helpers\ArrayHelper;
                 </div>
                 <!-- /.tab-pane -->
                 <?php $i++; } ?>
-
-            <div class="tab-pane" id="tab_global">
-
-                <?= $form->field($model, 'status')->dropDownList([
-                    0 => 'Hidden',
-                    1 => 'Active'
-                ]); ?>
-
-                <?php
-                $templates = \common\models\Template::find()->all();
-                $templates_data = [];
-
-                foreach ($templates as $template) {
-                    $templates_data[ $template->id ] = $template->name;
-                }
-                echo $form->field($model, 'template_id')->dropDownList($templates_data);
-
-                $categories_data = ArrayHelper::map(Category::find()->orderBy('lft')->all(), 'id', function ($category) {
-                    return str_repeat('—', $category->depth - 1) .' '. $category->content->title;
-                });
-
-                echo $form->field($model, 'parent_id')->dropDownList($categories_data);
-                ?>
-            </div>
         </div>
         <!-- /.tab-content -->
+
+    </div>
+
+    <div class="box box-solid">
+
+        <div class="box-body">
+            <?= $form->field($model, 'status')->dropDownList([
+                0 => 'Hidden',
+                1 => 'Active'
+            ]); ?>
+
+            <?php
+            $templates = \common\models\Template::find()->all();
+            $templates_data = [];
+
+            foreach ($templates as $template) {
+                $templates_data[ $template->id ] = $template->name;
+            }
+            echo $form->field($model, 'template_id')->dropDownList($templates_data);
+
+            echo $form->field($model, 'isTop')->checkbox();
+
+            $categories_data = ArrayHelper::map(Category::find()->orderBy('lft')->all(), 'id', function ($category) {
+                return str_repeat('—', $category->depth - 1) .' '. $category->content->title;
+            });
+
+            echo $form->field($model, 'parent_id')->dropDownList($categories_data);
+            ?>
+        </div>
     </div>
 
     <div class="form-group">

@@ -2,9 +2,7 @@
 
 use common\models\Language;
 use common\models\category\Category;
-use yii\helpers\Html;
-
-$main_categories = Category::find()->andWhere(['depth' => 2])->orderBy('lft')->all();
+use common\models\category\TopCategoryList;
 
 $this->beginPage();
 ?>
@@ -102,117 +100,47 @@ $this->beginPage();
                     <a href="#"><?= Yii::t('app', 'Categories'); ?><span></span></a>
                     <div class="full_nav">
                         <div class="left_side">
+                            <?php
+                            $topCategoryList = TopCategoryList::getCategories()->all();
+                            $main_categories = Category::find()->andWhere(['depth' => 2])->orderBy('lft')->all();
+
+                            if (count($topCategoryList)) {
+                            ?>
                             <div class="top_categories">
+
                                 <h2><?= Yii::t('app', 'Top Categories'); ?><span></span></h2>
                                 <ul>
-                                    <li>
-                                        <a href="#"><img src="/img/icon_10.png" alt="">Bütün təkliflər</a>
-                                        <div>
-                                            <nav>
-                                                <div>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                        </ul>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                </div>
-                                                <div>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Makasin</a></li>
-                                                            <li><a href="#">İdman</a></li>
-                                                            <li><a href="#">Botlar</a></li>
-                                                            <li><a href="#">Qaçış ayaqqabıları</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                    <article>
-                                                        <h3><a href="#">Womens Fashion</a></h3>
-                                                        <ul>
-                                                            <li><a href="#">Gündəlik</a></li>
-                                                            <li><a href="#">Klassik</a></li>
-                                                            <li><a href="#">Sandal və tərliklər</a></li>
-                                                            <li><a href="#">Corablar</a></li>
-                                                            <li><a href="#">Hamısına Bax ></a></li>
-                                                        </ul>
-                                                    </article>
-                                                </div>
-                                            </nav>
-                                        </div>
-                                    </li>
-                                    <li><a href="#"><img src="/img/icon_11.png" alt="">Telefonlar, Planşetlər</a></li>
-                                    <li><a href="#"><img src="/img/icon_11.png" alt="">Elektronika</a></li>
+                                    <?php foreach ($topCategoryList as $category) { ?>
+                                        <li>
+                                            <a href="<?= $category->url; ?>">
+                                                <img src="/category_icons/<?= $category->id; ?>.png" alt="<?= $category->title; ?>"><?= $category->title; ?>
+                                            </a>
+
+                                            <div>
+                                                <nav>
+
+                                                    <div> <!-- Column -->
+
+                                                        <?php
+                                                        foreach ($category->getChildren()->all() as $subcategory) { ?>
+                                                            <article>
+                                                                <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
+                                                                <ul>
+                                                                    <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                                        <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                                    <?php } ?>
+                                                                </ul>
+                                                            </article>
+                                                        <?php } ?>
+                                                    </div>
+
+                                                </nav>
+                                            </div>
+                                        </li>
+                                    <?php } ?>
                                 </ul>
                             </div>
+                            <?php } ?>
                             <div class="categories_list">
                                 <ul>
                                     <?php foreach ($main_categories as $category) { ?>
