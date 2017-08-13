@@ -130,10 +130,12 @@ class Currency extends Component
                 $currency = CurrencyModel::findOne($session->get('currency_id'));
                 if ($currency) {
                     $this->setUserCurrency($currency);
-                } else {
-                    $this->setDefaultCurrency();
                 }
             }
+        }
+
+        if (!$this->userCurrency) {
+            $this->setDefaultCurrency();
         }
 
         return $this->userCurrency;
