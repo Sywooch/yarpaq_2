@@ -10,6 +10,7 @@ use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
 use common\models\Product;
 use common\models\category\Category;
+use yii\web\NotFoundHttpException;
 
 
 class CategoryController extends BasicController
@@ -32,6 +33,12 @@ class CategoryController extends BasicController
 
         // Поиск среди категорий
         $category = Category::findByUrl($url);
+        if (!$category) {
+            throw new NotFoundHttpException();
+        }
+
+
+        $this->view->params['page'] = $category;
 
         $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
 

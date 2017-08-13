@@ -72,12 +72,7 @@ $this->beginPage();
             <div class="lang">
                 <a href="#"><?= Language::getCurrent()->label; ?></a>
                 <ul>
-                    <?php foreach (Language::find()->all() as $language) {
-                        if ($language == Language::getCurrent()) {
-                            continue;
-                        } ?>
-                        <li><a href="<?= $language->urlPrefix; ?>/"><?= $language->label; ?></a></li>
-                    <?php } ?>
+                    <?php echo \frontend\components\LanguageSwitcher::widget(['page' => @$this->params['page']]); ?>
                 </ul>
             </div>
             <div class="links">

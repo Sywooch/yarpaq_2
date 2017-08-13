@@ -127,5 +127,8 @@ if (count($children)) { ?>
             </section>
         <?php } ?>
 
+        <footer>
+            <a href="#"><?= Yii::t('app', 'Close'); ?></a>
+        </footer>
     </form>
 </div>
