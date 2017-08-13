@@ -1,3 +1,9 @@
+<?php
+
+use frontend\components\taksit\Albali;
+use frontend\components\taksit\Bolkart;
+
+?>
 <div class="product_block">
     <header>
 
@@ -53,56 +59,61 @@
                         </ul>
                     </div>
                     <div class="cards_dicsount">
+
+                        <?php $albali = new Albali($product->price); ?>
                         <div>
                             <h4>Albalı</h4>
                             <table>
                                 <thead>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>1 AY</td>
-                                    <td>3 AY</td>
-                                    <td>6 AY</td>
-                                </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <?php foreach ($albali->getMonths() as $month) { ?>
+                                        <td><?= $month; ?> <?= Yii::t('app', 'AY'); ?></td>
+                                        <?php } ?>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Aylıq ödəniş</td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Ümumi ödəniş</td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
-                                </tr>
+                                    <tr>
+                                        <td><?= Yii::t('app', 'Aylıq ödəniş'); ?></td>
+                                        <?php foreach ($albali->getMonths() as $month) { ?>
+                                            <td><?= $albali->getMonthlyAmount($month); ?> <span class="currency_icon">m</span></td>
+                                        <?php } ?>
+                                    </tr>
+                                    <tr>
+                                        <td><?= Yii::t('app', 'Ümumi ödəniş'); ?></td>
+                                        <?php foreach ($albali->getMonths() as $month) { ?>
+                                            <td><?= $albali->getTotalAmount($month); ?> <span class="currency_icon">m</span></td>
+                                        <?php } ?>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+
+
+                        <?php $bolkart = new Bolkart($product->price); ?>
                         <div>
                             <h4>Bolkart</h4>
                             <table>
                                 <thead>
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td>1 AY</td>
-                                    <td>3 AY</td>
-                                    <td>6 AY</td>
+                                    <?php foreach ($bolkart->getMonths() as $month) { ?>
+                                        <td><?= $month; ?> <?= Yii::t('app', 'AY'); ?></td>
+                                    <?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Aylıq ödəniş</td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
+                                    <td><?= Yii::t('app', 'Aylıq ödəniş'); ?></td>
+                                    <?php foreach ($bolkart->getMonths() as $month) { ?>
+                                        <td><?= $bolkart->getMonthlyAmount($month); ?> <span class="currency_icon">m</span></td>
+                                    <?php } ?>
                                 </tr>
                                 <tr>
-                                    <td>Ümumi ödəniş</td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
-                                    <td>38.50 <span>m</span></td>
+                                    <td><?= Yii::t('app', 'Ümumi ödəniş'); ?></td>
+                                    <?php foreach ($bolkart->getMonths() as $month) { ?>
+                                        <td><?= $bolkart->getTotalAmount($month); ?> <span class="currency_icon">m</span></td>
+                                    <?php } ?>
                                 </tr>
                                 </tbody>
                             </table>
