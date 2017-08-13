@@ -2,7 +2,7 @@
 
 namespace frontend\components;
 
-
+use Yii;
 use common\models\Language;
 use yii\jui\Widget;
 
@@ -11,8 +11,7 @@ use yii\jui\Widget;
  * В каждом view должен быть переменная page, которая является ссылкой на текущую страницу.
  * Из нее берется ссылка на другие языки данной страницы.
  *
- * Если переменной page нет, например страница не найдена, то ссылка языка будет вести на главную страницу
- * на соответствующем языке.
+ * Если переменной page нет, например страница не найдена, то меняется префикс.
  *
  * Class LanguageSwitcher
  * @package frontend\components
@@ -37,7 +36,8 @@ class LanguageSwitcher extends Widget
     private function buildLink($language) {
 
         if (!$this->page) {
-            return $language->urlPrefix.'/';
+
+            return $language->urlPrefix.Yii::$app->request->langUrl;;
         } else {
             return $this->page->getUrlByLanguage($language);
         }

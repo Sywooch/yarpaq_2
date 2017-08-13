@@ -37,9 +37,8 @@ class CategoryController extends BasicController
         if (!$category) {
             throw new NotFoundHttpException();
         }
+        $this->setViewPage($category);
 
-
-        $this->view->params['page'] = $category;
 
         $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
 

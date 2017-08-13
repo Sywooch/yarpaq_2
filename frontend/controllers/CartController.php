@@ -52,13 +52,16 @@ class CartController extends BasicController
      *
      */
     public function actionAdd() {
+
         $addToCartForm = new AddToCartForm();
 
-        $addToCartForm->load(Yii::$app->request->post('Product'));
+        $addToCartForm->load(Yii::$app->request->post());
         $addToCartForm->quantity = 1;
 
         if ($addToCartForm->validate()) {
             $cart = Yii::$app->cart;
+            $cart->clear();
+
 
             $cart->add($addToCartForm->productId, $addToCartForm->quantity);
             $cart->save();

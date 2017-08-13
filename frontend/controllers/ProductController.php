@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\models\ViewedProduct;
 use Yii;
 use common\models\Product;
+use yii\web\NotFoundHttpException;
 
 
 class ProductController extends BasicController
@@ -14,21 +15,18 @@ class ProductController extends BasicController
 
 
     public function actionIndex($id) {
-        $r = Yii::$app->request;
 
         // Поиск продукта
         $product = Product::findOne($id);
-
-        if ($product) {
-
-            ViewedProduct::log($product->id);
-
-            return $this->render('index', [
-                'product'      => $product
-            ]);
-        } else {
-
+        if (!$product) {
+            throw new NotFoundHttpException();
         }
+
+        ViewedProduct::log($product->id);
+
+        return $this->render('index', [
+            'product'      => $product
+        ]);
 
     }
 }

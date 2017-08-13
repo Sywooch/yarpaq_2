@@ -3,6 +3,8 @@
 use frontend\components\taksit\Albali;
 use frontend\components\taksit\Bolkart;
 
+$currency = Yii::$app->currency;
+
 ?>
 <div class="product_block">
     <header>
@@ -48,7 +50,9 @@ use frontend\components\taksit\Bolkart;
                     <div class="left_info">
                         <div class="price">
                             <span><?= Yii::t('app', 'Price'); ?>:</span>
-                            <b><?= $product->price; ?><i class="currency_icon">m</i></b>
+                            <b>
+                                <?= $currency->convertAndFormat($product->price, $product->currency); ?>
+                            </b>
                         </div>
                         <ul>
                             <li><?= Yii::t('app', 'Condition'); ?>:  <b>Türkiyə</b></li>

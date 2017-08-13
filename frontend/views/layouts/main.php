@@ -3,6 +3,7 @@
 use common\models\Language;
 use common\models\category\Category;
 use common\models\category\TopCategoryList;
+use yii\helpers\Url;
 
 $this->beginPage();
 ?>
@@ -249,7 +250,7 @@ $this->beginPage();
                         </div>
                     </div>
                 </div>
-                <div class="basket_link"><a href="#">Cart<em>3</em></a></div>
+                <div class="basket_link"><a href="<?= Url::to(['cart/index']) ?>">Cart<em>3</em></a></div>
             </div>
         </div>
     </div>

@@ -14,6 +14,7 @@ class AddToCartForm extends Model
 
     public function rules() {
         return [
+            [['productId', 'quantity'], 'required'],
             ['productId', 'validateProduct'],
         ];
     }
