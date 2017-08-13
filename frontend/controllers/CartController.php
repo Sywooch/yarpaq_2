@@ -2,28 +2,14 @@
 
 namespace frontend\controllers;
 
+use frontend\models\AddToCartForm;
 use Yii;
 use yii\helpers\Url;
-use yii\web\Response;
 use common\models\User;
 
 class CartController extends BasicController
 {
-    public $freeAccessActions = ['test', 'index', 'add-to-cart'];
-
-    public function beforeAction($action)
-    {
-        if ( parent::beforeAction($action) )
-        {
-            if (!Yii::$app->user->identity) {
-                $this->redirect('/');
-            }
-
-            return true;
-        }
-
-        return false;
-    }
+    public $freeAccessActions = ['test', 'index', 'add'];
 
     public function actionTest() {
 
@@ -55,6 +41,7 @@ class CartController extends BasicController
     public function actionIndex() {
         $cart = Yii::$app->cart;
 
+
         return $this->render('index', [
             'cart' => $cart
         ]);
@@ -62,18 +49,23 @@ class CartController extends BasicController
 
     /**
      * Добавляет товар в корзину (1 шт)
+     *
      */
-    public function actionAddToCart() {
-        $r = Yii::$app->request;
+    public function actionAdd() {
+        $addToCartForm = new AddToCartForm();
 
-        $product_id = (int)$r->get('product_id');
+        $addToCartForm->load(Yii::$app->request->post('Product'));
+        $addToCartForm->quantity = 1;
 
-        $cart = Yii::$app->cart;
+        if ($addToCartForm->validate()) {
+            $cart = Yii::$app->cart;
 
-        $cart->add($product_id, 1);
-        $cart->save();
+            $cart->add($addToCartForm->productId, $addToCartForm->quantity);
+            $cart->save();
 
-        $this->redirect( Url::toRoute('index') );
+            $this->redirect( Url::toRoute('index') );
+        }
+
     }
 
     public function actionPlus() {

@@ -56,7 +56,7 @@ return [
                 'product-<id:\d+>' => 'product/index',
                 'seller-products-<id:\d+>' => 'seller-products/index',
                 'cart'          => 'cart/index',
-                'cart/add'      => 'cart/add-to-cart',
+                'cart/add'      => 'cart/add',
                 '<controller:checkout>/<action:.+>' => '<controller>/<action>',
                 'checkout/'      => 'checkout/index',
                 'login'         => 'user/login',

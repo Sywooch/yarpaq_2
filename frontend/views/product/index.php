@@ -51,11 +51,9 @@ use frontend\components\taksit\Bolkart;
                             <b><?= $product->price; ?><i class="currency_icon">m</i></b>
                         </div>
                         <ul>
-                            <li>İstehsalçı ölkə:  <b>Türkiyə</b></li>
-                            <li>Original:  <b>Xeyr</b></li>
-                            <li>Zəmanət:  <b>Xeyr</b></li>
-                            <li>Material:  <b>Pambıq</b></li>
-                            <li>Etiketlər:  <b>Telefon, Smartphone, Samsung S8</b></li>
+                            <li><?= Yii::t('app', 'Condition'); ?>:  <b>Türkiyə</b></li>
+                            <li><?= Yii::t('app', 'Brand'); ?>:  <b>Xeyr</b></li>
+                            <li><?= Yii::t('app', 'Warranty'); ?>:  <b>Xeyr</b></li>
                         </ul>
                     </div>
                     <div class="cards_dicsount">
@@ -121,56 +119,41 @@ use frontend\components\taksit\Bolkart;
                     </div>
                 </div>
                 <div class="product_second_info">
-                    <div class="product_size">
-                        <p>Ölçü:</p>
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="radio" name="size_name" checked>
-                                    <span>S</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="size_name">
-                                    <span>M</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="size_name">
-                                    <span>L</span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="radio" name="size_name">
-                                    <span>XL</span>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="product_color">
-                        <p>Rəng:</p>
-                        <ul>
-                            <li><a href="#" style="background: #ff5656"></a></li>
-                            <li><a href="#" style="background: #20ad63" class="active"></a></li>
-                            <li><a href="#" style="background: #ffd800"></a></li>
-                            <li><a href="#" style="background: #393939"></a></li>
-                        </ul>
-                    </div>
-                    <div class="product_buy_last">
-                        <div class="buttons">
-                            <a href="#" class="add">SƏBƏTƏ ƏLAVƏ ET</a>
-                            <a href="#" class="buy">İNDİ ƏLDƏ ET</a>
-                            <a href="#" class="add_to_favorites"></a>
-                            <a href="#" class="compare">Məhsulu müqayisə et</a>
+                    <form action="/cart/add" method="post">
+
+                        <input class="form-token" type="hidden"
+                               name="<?=Yii::$app->request->csrfParam?>"
+                               value="<?=Yii::$app->request->csrfToken?>"/>
+
+                        <input type="hidden" name="AddToCartForm[productId]" value="<?=$product->id;?>">
+
+                        <?php foreach ($product->productOptions as $productOption) { ?>
+                        <div class="product_size">
+                            <p><?= $productOption->option->name;?>:</p>
+                            <ul>
+                                <?php foreach ($productOption->values as $value) { ?>
+                                <li>
+                                    <label>
+                                        <input type="radio" name="AddToCartForm[option][<?=$productOption->id;?>]" value="<?=$value->id;?>">
+                                        <span><?=$value->optionValue->name;?></span>
+                                    </label>
+                                </li>
+                                <?php } ?>
+                            </ul>
                         </div>
-                        <div class="delivery">
-                            <p>Çatdırılma:</p>
-                            <span>1 - 3 iş günü ərzində <a href="#">Ətraflı</a></span>
+                        <?php } ?>
+
+                        <div class="product_buy_last">
+                            <div class="buttons">
+                                <button type="submit" class="add"><?= Yii::t('app', 'Add to basket'); ?></button>
+                            </div>
+                            <div class="delivery">
+                                <p>Çatdırılma:</p>
+                                <span>1 - 3 iş günü ərzində <a href="#">Ətraflı</a></span>
+                            </div>
                         </div>
-                    </div>
+
+                    </form>
                 </div>
             </div>
         </div>

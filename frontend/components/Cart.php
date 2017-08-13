@@ -33,18 +33,11 @@ class Cart extends Component
 
         $user = Yii::$app->user->identity;
 
-        // init
-        $cart_data = [];
-
         // if user cart has value
         if ($user && $user->cart != '') {
             $cart_data = unserialize($user->cart);
-        }
-
-        // set to session
-        //if (!$session->has('cart')) {
             $session->set('cart', $cart_data);
-        //}
+        }
 
         parent::__construct($config);
     }
