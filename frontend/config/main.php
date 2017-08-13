@@ -61,6 +61,7 @@ return [
                 'checkout/'      => 'checkout/index',
                 'login'         => 'user/login',
                 'search'        => 'search/index',
+                'currency/switch'        => 'currency/switch',
                 'registration'  => 'user/registration',
                 'logout'        => 'user-management/auth/logout',
                 'profile'       => 'user-management/user/profile',

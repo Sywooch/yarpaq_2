@@ -1,3 +1,4 @@
+<?php $currency = Yii::$app->currency; ?>
 <article itemscope itemtype="http://schema.org/Product">
     <div class="image">
         <a href="<?= $product->url; ?>">
@@ -9,7 +10,9 @@
     <meta itemprop="priceCurrency" content="AZN" />
 
     <div class="price">
-        <span itemprop="price"><?= $product->price; ?> <b class="currency_icon">m</b></span>
+        <span itemprop="price">
+            <?= $currency->convertAndFormat($product->price, $product->currency); ?>
+        </span>
     </div>
 
     <?php if ($product->hasDiscount()) { ?>

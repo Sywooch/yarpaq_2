@@ -70,4 +70,14 @@ class Currency extends \yii\db\ActiveRecord
 
          return $data;
     }
+
+    public function getFormat() {
+        if ($this->code == 'AZN') {
+            return '%s <span class="currency_icon">m</span>';
+        } else if ($this->code == 'EUR') {
+            return '<span class="currency_icon">€</span> %s';
+        } else if ($this->code == 'USD') {
+            return '<span class="currency_icon">$</span> %s';
+        }
+    }
 }

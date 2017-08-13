@@ -1,10 +1,13 @@
 <div class="product_block">
     <header>
+
         <!-- Breadcrumbs -->
-        <?= $this->render('_breadcrumb', [
-            'product'       => $product
+        <?= $this->render('@app/views/blocks/breadcrumb', [
+            'parents' => $product->category[0]->getParents(true)->all(),
+            'currentPageTitle' => $product->title
         ]); ?>
         <!-- Breadcrumbs END -->
+
     </header>
     <div class="current_product">
         <div class="priduct_gallery">

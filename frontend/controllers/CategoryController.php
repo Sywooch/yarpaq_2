@@ -19,6 +19,7 @@ class CategoryController extends BasicController
     public $freeAccessActions = ['index'];
 
     public function actionIndex() {
+
         $r = Yii::$app->request;
 
         $url = preg_match('/^[\w_\-\d\/]+$/', $r->get('url')) ? $r->get('url') : '';

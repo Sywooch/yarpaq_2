@@ -33,8 +33,6 @@ class Currency extends Component
 
     public function init() {
         parent::init();
-
-        $this->setDefaultCurrency();
     }
 
     /**
@@ -56,6 +54,12 @@ class Currency extends Component
         // округляем в соответствии с количеством цифр после запятой
         $cleanPrice = $this->ceil($convertedPrice, $this->getUserCurrency()->decimal_place);
         return $cleanPrice;
+    }
+
+    public function convertAndFormat($price, CurrencyModel $sourceCurrency) {
+        $price = $this->convert($price, $sourceCurrency);
+
+        return sprintf($this->getUserCurrency()->format, $price);
     }
 
     /**
@@ -107,7 +111,13 @@ class Currency extends Component
     }
 
     public function setUserCurrency(CurrencyModel $currency) {
+        // прописываем свойство
         $this->userCurrency = $currency;
+
+
+        // и прописываем переменную сессии, чтоб после перезагрузки страницы значение сохранялось
+        $session = Yii::$app->session;
+        $session->set('currency_id', $currency->id);
     }
 
     public function getUserCurrency() {
@@ -120,6 +130,8 @@ class Currency extends Component
                 $currency = CurrencyModel::findOne($session->get('currency_id'));
                 if ($currency) {
                     $this->setUserCurrency($currency);
+                } else {
+                    $this->setDefaultCurrency();
                 }
             }
         }

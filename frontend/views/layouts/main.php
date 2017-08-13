@@ -65,7 +65,7 @@ $this->beginPage();
                         if ($currency == Yii::$app->currency->userCurrency) {
                             continue;
                         } ?>
-                        <li><a href="#" data-cur="<?= mb_strtolower($currency->code); ?>"><?= $currency->code; ?></a></li>
+                        <li><a href="/currency/switch?id=<?= $currency->id; ?>" data-cur="<?= mb_strtolower($currency->code); ?>"><?= $currency->code; ?></a></li>
                     <?php } ?>
                 </ul>
             </div>
