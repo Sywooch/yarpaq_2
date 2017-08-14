@@ -233,6 +233,7 @@ $currency = Yii::$app->currency;
             </div>
         </div>
         <aside class="aside_products">
+            <h2><?= Yii::t('app', 'Satıcının digər məhsulları'); ?></h2>
             <article itemscope="" itemtype="http://schema.org/Product">
                 <div>
                     <div class="image"><img src="upload/Images/10.jpg" alt="" itemprop="image"></div>

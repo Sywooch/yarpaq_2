@@ -584,7 +584,15 @@ a.search_toggler {
 }
 
 .sign_link:hover > a {
-  background: #7fbe36;
+  background: #79b237;
+}
+
+.sign_link:hover > a::before {
+  opacity: 1;
+}
+
+.sign_link:hover > a::after {
+  background: #2e2e2e url(../img/avatar_icon.svg) no-repeat 50%;
 }
 
 .sign_link:hover > a + div {
@@ -1876,10 +1884,6 @@ a.search_toggler {
   padding: 0 0 6px;
 }
 
-.full_nav .right_side nav > div article ul li:last-child a {
-  color: #25a8ed;
-}
-
 .full_nav .right_side nav > div article ul li a {
   text-decoration: none;
   color: #666;
@@ -1890,6 +1894,10 @@ a.search_toggler {
 
 .full_nav .right_side nav > div article ul li a:hover {
   text-decoration: underline;
+}
+
+.full_nav .right_side nav > div article ul li a.see_all {
+  color: #25a8ed;
 }
 
 .nav_banners {
@@ -2508,6 +2516,8 @@ a.back_to_top.show_me {
 .priduct_gallery .thumbnails ul li a img {
   display: inline-block;
   vertical-align: middle;
+  max-height: 55px;
+  max-width: 55px;
 }
 
 .product_first header {
@@ -2598,7 +2608,7 @@ a.back_to_top.show_me {
 }
 
 .product_first_info .left_info {
-  width: 50%;
+  width: 40%;
   float: left;
 }
 
@@ -3373,6 +3383,16 @@ a.back_to_top.show_me {
   position: relative;
 }
 
+.basket_list article a.close {
+  display: block;
+  width: 17px;
+  height: 19px;
+  background: url(../img/big_close_icon.png) no-repeat 0 0;
+  position: absolute;
+  top: 25px;
+  right: 0;
+}
+
 .basket_list article .image {
   background: #fff;
   position: absolute;
@@ -3884,7 +3904,7 @@ a.back_to_top.show_me {
 }
 
 .cards_dicsount {
-  width: 45%;
+  width: 55%;
   float: right;
 }
 
@@ -3935,13 +3955,27 @@ a.back_to_top.show_me {
   text-transform: uppercase;
 }
 
+.cards_dicsount > div table tbody tr:first-child td {
+  padding: 7px 0 4px;
+}
+
 .cards_dicsount > div table tbody tr td {
-  padding: 3px 0;
-  color: #808080;
+  padding: 4px 0;
+  color: #b1b1b1;
   font-family: 'Roboto';
   font-size: 13px;
   font-weight: 400;
   letter-spacing: -0.61px;
+}
+
+.cards_dicsount > div table tbody tr td:first-child {
+  color: #808080;
+}
+
+.cards_dicsount > div table tbody tr td span {
+  font-size: 23px;
+  vertical-align: bottom;
+  line-height: 6px;
 }
 
 .product_second_info {
@@ -4565,7 +4599,7 @@ a.back_to_top.show_me {
 
 .product_infos .tabs {
   padding: 5px 40px 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 2px solid #e5e5e5;
 }
 
 .product_infos .tabs ul {
@@ -4880,6 +4914,20 @@ aside.aside_products {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+aside.aside_products h2 {
+  padding: 21px 8px 14px;
+  color: #363636;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.01px;
+  background: #fff;
+  border-bottom: 2px solid #dddddd;
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+  -khtml-border-radius: 3px 3px 0 0;
+  border-radius: 3px 3px 0 0;
 }
 
 aside.aside_products article {
@@ -6134,6 +6182,7 @@ header.mobile_header a {
 
 .aside_categories {
   padding: 20px 20px 0px;
+  margin: 0 0 4px;
   background: #fff;
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
@@ -6220,7 +6269,7 @@ header.mobile_header a {
 .filters_block {
   background: #fff;
   padding: 20px;
-  margin: 4px 0 0;
+  margin: 0 0 0;
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
   -khtml-border-radius: 1px;
@@ -6509,7 +6558,7 @@ ul.checkboxes li label strong {
 .applied_filters ul li b {
   display: inline-block;
   height: 23px;
-  padding: 0 38px 0 9px;
+  padding: 0 28px 0 8px;
   border: 1px solid #dbdbdb;
   color: #878787;
   font-size: 13px;
@@ -6517,21 +6566,21 @@ ul.checkboxes li label strong {
   font-weight: 400;
   letter-spacing: 0.01px;
   position: relative;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  border-radius: 3px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
 }
 
 .applied_filters ul li b a {
   display: block;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   background: url(../img/remove_small_icon.svg) no-repeat 0 0;
   position: absolute;
   top: 50%;
-  right: 9px;
-  margin: -3px 0 0;
+  right: 8px;
+  margin: -4px 0 0;
 }
 
 .applied_filters ul li b span {

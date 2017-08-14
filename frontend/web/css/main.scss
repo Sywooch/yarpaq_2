@@ -518,7 +518,13 @@ a.search_toggler {
   position: relative;
   &:hover {
     > a {
-      background: #7fbe36;
+      background: #79b237;
+      &::before {
+        opacity: 1;
+      }
+      &::after {
+        background: #2e2e2e url(../img/avatar_icon.svg) no-repeat 50%;
+      }
       & + div {
         -webkit-transform: scale3d(1,1,1);
         transform: scale3d(1,1,1);
@@ -1566,11 +1572,6 @@ a.search_toggler {
           ul {
             li {
               padding: 0 0 6px;
-              &:last-child {
-                a {
-                  color: #25a8ed;
-                }
-              }
               a {
                 text-decoration: none;
                 color: #666;
@@ -1579,6 +1580,9 @@ a.search_toggler {
                 letter-spacing: 0.02px;
                 &:hover {
                   text-decoration: underline;
+                }
+                &.see_all {
+                  color: #25a8ed;
                 }
               }
             }
@@ -2049,6 +2053,8 @@ a.back_to_top {
           img {
             display: inline-block;
             vertical-align: middle;
+            max-height: 55px;
+            max-width: 55px;
           }
         }
       }
@@ -2132,7 +2138,7 @@ a.back_to_top {
   padding: 10px 30px 0;
   overflow: hidden;
   .left_info {
-    width: 50%;
+    width: 40%;
     float: left;
     .price {
       padding: 0 0 35px;
@@ -2806,6 +2812,15 @@ a.back_to_top {
     padding: 25px 0 25px 195px;
     border-bottom: 2px solid #eee;
     position: relative;
+    a.close {
+      display: block;
+      width: 17px;
+      height: 19px;
+      background: url(../img/big_close_icon.png) no-repeat 0 0;
+      position: absolute;
+      top: 25px;
+      right: 0;
+    }
     .image {
       background: #fff;
       position: absolute;
@@ -3262,7 +3277,7 @@ a.back_to_top {
 }
 
 .cards_dicsount {
-  width: 45%;
+  width: 55%;
   float: right;
   > div {
     margin: 10px 0 30px;
@@ -3305,13 +3320,24 @@ a.back_to_top {
       }
       tbody {
         tr {
+          &:first-child td {
+            padding: 7px 0 4px;
+          }
           td {
-            padding: 3px 0;
-            color: #808080;
+            padding: 4px 0;
+            color: #b1b1b1;
             font-family: 'Roboto';
             font-size: 13px;
             font-weight: 400;
             letter-spacing: -0.61px;
+            &:first-child {
+              color: #808080;
+            }
+            span {
+              font-size: 23px;
+              vertical-align: bottom;
+              line-height: 6px;
+            }
           }
         }
       }
@@ -3843,7 +3869,7 @@ a.back_to_top {
   background: #fff;
   .tabs {
     padding: 5px 40px 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 2px solid #e5e5e5;
     ul {
       overflow: hidden;
       li {
@@ -4122,6 +4148,16 @@ aside.aside_products {
   position: absolute;
   top: 0;
   right: 0;
+  h2 {
+    padding: 21px 8px 14px;
+    color: #363636;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.01px;
+    background: #fff;
+    border-bottom: 2px solid #dddddd;
+    @include border_radius(3px 3px 0 0);
+  }
   article {
     width: 100%;
     height: 370px;
@@ -5250,6 +5286,7 @@ header.mobile_header {
 
 .aside_categories {
   padding: 20px 20px 0px;
+  margin: 0 0 4px;
   background: #fff;
   @include border_radius(1px);
   h3 {
@@ -5324,7 +5361,7 @@ header.mobile_header {
 .filters_block {
   background: #fff;
   padding: 20px;
-  margin: 4px 0 0;
+  margin: 0 0 0;
   @include border_radius(1px);
   section {
     padding: 0 0 40px;
@@ -5570,7 +5607,7 @@ ul.checkboxes {
       b {
         display: inline-block;
         height: 23px;
-        padding: 0 38px 0 9px;
+        padding: 0 28px 0 8px;
         border: 1px solid #dbdbdb;
         color: #878787;
         font-size: 13px;
@@ -5578,16 +5615,16 @@ ul.checkboxes {
         font-weight: 400;
         letter-spacing: 0.01px;
         position: relative;
-        @include border_radius(3px);
+        @include border_radius(4px);
         a {
           display: block;
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
           background: url(../img/remove_small_icon.svg) no-repeat 0 0;
           position: absolute;
           top: 50%;
-          right: 9px;
-          margin: -3px 0 0;
+          right: 8px;
+          margin: -4px 0 0;
           &:hover {
 
           }

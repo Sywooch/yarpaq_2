@@ -284,11 +284,11 @@ $this->beginPage();
 <div class="signin_modal">
     <div class="sign_back">
         <ul>
-            <li><img src="/img/icon_10.svg" alt=""><span>SƏRFƏLİ QİYMƏTLƏR</span></li>
-            <li><img src="/img/icon_11.svg" alt=""><span>GÜVƏNİLİR ALIŞ-VERİŞ</span></li>
-            <li><img src="/img/icon_12.svg" alt=""><span>100% QAYTARILMA</span></li>
-            <li><img src="/img/icon_13.svg" alt=""><span>RAHAT ÖDƏNİŞ</span></li>
-            <li><img src="/img/icon_14.svg" alt=""><span>PULSUZ ÇATDIRILMA</span></li>
+            <li><img src="/img/icon_10.svg" alt=""><span><?= Yii::t('app', 'SƏRFƏLİ QİYMƏTLƏR'); ?></span></li>
+            <li><img src="/img/icon_11.svg" alt=""><span><?= Yii::t('app', 'GÜVƏNİLİR ALIŞ-VERİŞ'); ?></span></li>
+            <li><img src="/img/icon_12.svg" alt=""><span><?= Yii::t('app', '100% QAYTARILMA'); ?></span></li>
+            <li><img src="/img/icon_13.svg" alt=""><span><?= Yii::t('app', 'RAHAT ÖDƏNİŞ'); ?></span></li>
+            <li><img src="/img/icon_14.svg" alt=""><span><?= Yii::t('app', 'PULSUZ ÇATDIRILMA'); ?></span></li>
         </ul>
     </div>
     <div>
