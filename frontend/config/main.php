@@ -55,14 +55,21 @@ return [
                 '' => 'home/index',
                 'product-<id:\d+>' => 'product/index',
                 'seller-products-<id:\d+>' => 'seller-products/index',
+
                 'cart'          => 'cart/index',
                 'cart/add'      => 'cart/add',
+
+                'info/<url:.+>' => 'info/index',
+
                 '<controller:checkout>/<action:.+>' => '<controller>/<action>',
                 'checkout/'      => 'checkout/index',
-                'login'         => 'user/login',
+
                 'search'        => 'search/index',
+
                 'currency/switch'        => 'currency/switch',
+
                 'registration'  => 'user/registration',
+                'login'         => 'user/login',
                 'logout'        => 'user-management/auth/logout',
                 'profile'       => 'user-management/user/profile',
 

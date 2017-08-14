@@ -166,8 +166,8 @@ $currency = Yii::$app->currency;
         <div class="product_infos">
             <div class="tabs">
                 <ul>
-                    <li><a href="#" class="active">Məhsulun təsviri</a></li>
-                    <li><a href="#">Rəylər</a></li>
+                    <li><a href="#" class="active"><?= Yii::t('app', 'Product description'); ?></a></li>
+                    <li><a href="#"><?= Yii::t('app', 'Reviews'); ?></a></li>
                 </ul>
             </div>
             <div class="inner">

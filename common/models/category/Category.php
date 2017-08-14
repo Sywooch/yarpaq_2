@@ -4,7 +4,6 @@ namespace common\models\category;
 
 use common\models\Language;
 use common\models\Product;
-use common\models\ProductCategory;
 use common\models\Template;
 use common\models\User;
 use Yii;

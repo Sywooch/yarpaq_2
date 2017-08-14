@@ -79,7 +79,9 @@ $this->beginPage();
             <div class="links">
                 <ul>
                     <li><a href="#">Sell On Yarpaq</a></li>
-                    <li><a href="#">Help Center</a></li>
+
+                    <?php $help_center = \common\models\info\Info::findOne(4); ?>
+                    <li><a href="<?= $help_center->url; ?>"><?= $help_center->title; ?></a></li>
                 </ul>
             </div>
             <div class="phone">

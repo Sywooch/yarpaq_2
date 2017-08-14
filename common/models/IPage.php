@@ -2,9 +2,6 @@
 
 namespace common\models;
 
-
-use common\models\Language;
-
 interface IPage
 {
     public function getUrl();
