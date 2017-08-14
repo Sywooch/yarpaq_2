@@ -68,12 +68,6 @@ $currency = Yii::$app->currency;
                         </article>
                     <?php } ?>
                 </div>
-                <footer>
-                    <div class="price">
-                        <?= $currency->convertAndFormat($cart->subTotal, $product_object->currency); ?>
-                    </div>
-                    <p><?= Yii::t('app', 'Subtotal'); ?></p>
-                </footer>
             <?php } else { ?>
                 <p style="margin-top: 20px;"><?= Yii::t('app', 'Basket is empty'); ?></p>
             <?php } ?>
@@ -94,38 +88,28 @@ $currency = Yii::$app->currency;
     <?php if ($cart->hasProducts()) { ?>
     <div class="right_side">
         <div class="basket_total">
-            <h3><?= Yii::t('app', 'Total'); ?></h3>
+            <h3><?= Yii::t('app', 'Checkout'); ?></h3>
             <div class="prices">
                 <dl>
-                    <dt>Toplam</dt>
-                    <dd>48<span>m</span></dd>
-                    <dt>Yekun məbləğ</dt>
-                    <dd>48<span>m</span></dd>
+                    <dt><?= Yii::t('app', 'Total'); ?></dt>
+                    <dd>
+                        <?= $currency->convertAndFormat($cart->subTotal, $product_object->currency); ?>
+                    </dd>
                 </dl>
             </div>
-            <div class="delivery_select">
-                <select name="" id="">
-                    <option value="0">Çatdırılma üsulu</option>
-                    <option value="0">Çatdırılma 2</option>
-                </select>
+            <div class="submit">
+                <a href="#"><?= Yii::t('app', 'Checkout'); ?></a>
             </div>
-            <div class="submit"><a href="#">CHECKOUT</a></div>
             <div class="payment_ways">
-                <p>QƏBUL EDİRİK:</p>
+                <p><?= Yii::t('app', 'We accept'); ?>:</p>
                 <div class="credit_cards">
                     <a href="#"><img src="/img/card_paypal.svg" alt="PayPal"></a>
                     <a href="#"><img src="/img/card_bolcard.svg" alt="Bolkart"></a>
                     <a href="#"><img src="/img/card_albali.svg" alt="Albalı"></a>
-                    <a href="#"><img src="/img/card_master.svg" alt=""></a>
-                    <a href="#"><img src="/img/card_visa.svg" alt=""></a>
+                    <a href="#"><img src="/img/card_master.svg" alt="Master Card"></a>
+                    <a href="#"><img src="/img/card_visa.svg" alt="Visa"></a>
                 </div>
             </div>
-        </div>
-        <div class="basket_info">
-            <ul>
-                <li>Kuyer ilə (Bakidaxili pulsuz)</li>
-                <li>Poçt vasitəsi ilə</li>
-            </ul>
         </div>
     </div>
     <?php } ?>
