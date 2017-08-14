@@ -41,7 +41,6 @@ class CartController extends BasicController
     public function actionIndex() {
         $cart = Yii::$app->cart;
 
-
         return $this->render('index', [
             'cart' => $cart
         ]);
@@ -60,8 +59,6 @@ class CartController extends BasicController
 
         if ($addToCartForm->validate()) {
             $cart = Yii::$app->cart;
-            $cart->clear();
-
 
             $cart->add($addToCartForm->productId, $addToCartForm->quantity, $addToCartForm->option);
             $cart->save();
