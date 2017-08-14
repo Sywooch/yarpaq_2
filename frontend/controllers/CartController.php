@@ -63,7 +63,7 @@ class CartController extends BasicController
             $cart->clear();
 
 
-            $cart->add($addToCartForm->productId, $addToCartForm->quantity);
+            $cart->add($addToCartForm->productId, $addToCartForm->quantity, $addToCartForm->option);
             $cart->save();
 
             $this->redirect( Url::toRoute('index') );

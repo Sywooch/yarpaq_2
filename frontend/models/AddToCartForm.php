@@ -11,10 +11,12 @@ class AddToCartForm extends Model
     public $productId;
     public $quantity;
     public $productOptionValues;
+    public $option = [];
 
     public function rules() {
         return [
             [['productId', 'quantity'], 'required'],
+            ['option', 'safe'],
             ['productId', 'validateProduct'],
         ];
     }
