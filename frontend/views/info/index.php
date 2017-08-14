@@ -23,7 +23,7 @@ $currency = Yii::$app->currency;
             </div>
             <div class="inner">
                 <div class="active">
-                    <?= $info->title; ?>
+                    <?= $info->content->body; ?>
                 </div>
             </div>
         </div>

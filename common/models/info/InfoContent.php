@@ -41,6 +41,7 @@ class InfoContent extends \yii\db\ActiveRecord
             [['lang_id', 'info_id'], 'integer'],
             [['seo_keywords', 'seo_description'], 'string'],
             [['title', 'name'], 'string', 'max' => 255],
+            [['body'], 'string', 'max' => 16777215],
             [['info_id'], 'exist', 'skipOnError' => true, 'targetClass' => Info::className(), 'targetAttribute' => ['info_id' => 'id']],
             [['lang_id'], 'exist', 'skipOnError' => true, 'targetClass' => Language::className(), 'targetAttribute' => ['lang_id' => 'id']],
         ];

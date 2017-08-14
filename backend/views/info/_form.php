@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\info\Info */
@@ -36,6 +38,17 @@ use yii\widgets\ActiveForm;
 
                     <?= $form->field($content, 'title')->textInput(['name' => 'InfoContent_'.$language->id.'[title]', 'data-name-link' => 'name_'.$language->id, 'maxlength' => true, 'class' => 'form-control titleField', 'id' => 'content_'.$language->id.'_title']) ?>
                     <?= $form->field($content, 'name')->textInput(['name' => 'InfoContent_'.$language->id.'[name]', 'data-name' => 'name_'.$language->id, 'maxlength' => true, 'class' => 'form-control nameField', 'id' => 'content_'.$language->id.'_name']) ?>
+                    <?= $form->field($content, 'body')->widget(CKEditor::className(), [
+                        'options' => [
+                            'name' => 'InfoContent_'.$language->id.'[body]',
+                            'maxlength' => true,
+                            'id' => 'content_'.$language->id.'_body'
+                        ],
+                        'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
+                            'preset' => 'basic',
+                            'height' => 280
+                        ]),
+                    ]) ?>
                     <?= $form->field($content, 'seo_keywords')->textarea(['name' => 'InfoContent_'.$language->id.'[seo_keywords]', 'id' => 'content_'.$language->id.'_seo_keywords']) ?>
                     <?= $form->field($content, 'seo_description')->textarea(['name' => 'InfoContent_'.$language->id.'[seo_description]', 'id' => 'content_'.$language->id.'_seo_description']) ?>
                 </div>
