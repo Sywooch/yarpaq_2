@@ -243,6 +243,10 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductOption::className(), ['product_id' => 'id']);
     }
 
+    public function getManufacturer() {
+        return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id']);
+    }
+
     /**
      * Применить опцию (со значением) к товару
      *

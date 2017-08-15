@@ -23,6 +23,8 @@ class ProductController extends BasicController
         }
 
         ViewedProduct::log($product->id);
+        $product->viewed++;
+        $product->save();
 
         return $this->render('index', [
             'product'      => $product

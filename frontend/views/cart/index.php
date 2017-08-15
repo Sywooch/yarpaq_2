@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Product;
+use common\models\info\Info;
 
 $currency = Yii::$app->currency;
 ?>
@@ -76,12 +77,12 @@ $currency = Yii::$app->currency;
         <div class="delivery_info">
             <h3><?= Yii::t('app', 'Free shipping'); ?></h3>
             <p><?= Yii::t('app', 'Delivery to all regions of the country is possible'); ?></p>
-            <div class="link"><a href="#"><?= Yii::t('app', 'More info'); ?></a></div>
+            <div class="link"><a href="<?= Info::findOne(5)->url; ?>"><?= Yii::t('app', 'More info'); ?></a></div>
         </div>
         <div class="return_info">
             <h3><?= Yii::t('app', 'Easy refund'); ?></h3>
             <p><?= Yii::t('app', 'Ability to refund the product within 14 days'); ?></p>
-            <div class="link"><a href="#"><?= Yii::t('app', 'More info'); ?></a></div>
+            <div class="link"><a href="<?= Info::findOne(6)->url; ?>"><?= Yii::t('app', 'More info'); ?></a></div>
         </div>
     </div>
 

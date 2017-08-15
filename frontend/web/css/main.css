@@ -2574,8 +2574,8 @@ a.back_to_top.show_me {
 
 .product_first header .second_info .wrap_store {
   float: left;
-  padding: 0 0 0 12px;
-  margin: 0 0 0 15px;
+  /*padding: 0 0 0 12px;*/
+  /*margin: 0 0 0 15px;*/
   font-size: 15px;
   line-height: 36px;
   letter-spacing: 0.02px;
@@ -2586,7 +2586,7 @@ a.back_to_top.show_me {
 
 .product_first header .second_info .wrap_store::before {
   content: "|";
-  display: block;
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -4029,11 +4029,9 @@ a.back_to_top.show_me {
 
 .product_size ul li label input + span {
   display: block;
-  width: 36px;
-  height: 36px;
+  padding: 8px 12px 6px;
   background: #ebebeb;
   text-align: center;
-  line-height: 36px;
   color: #808080;
   font-family: 'Roboto';
   text-decoration: none;
@@ -4048,12 +4046,21 @@ a.back_to_top.show_me {
   border-radius: 4px;
 }
 
+.product_size ul li label input + span.icon {
+  width: 30px;
+  height: 30px;
+  content: '';
+  display: block;
+  background: white no-repeat center;
+}
+
+
 .product_size ul li label input + span::after {
   content: "";
   display: none;
   box-sizing: border-box;
-  width: 34px;
-  height: 34px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
   border: 1px solid #fff;
   position: absolute;
   top: 1px;
@@ -4480,8 +4487,11 @@ a.back_to_top.show_me {
   overflow: hidden;
 }
 
-.product_buy_last .buttons a.add {
+.product_buy_last .buttons a.add,
+.product_buy_last .buttons button.add{
   display: block;
+  cursor: pointer;
+  border: none;
   height: 44px;
   float: left;
   padding: 0 17px;

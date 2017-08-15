@@ -2,6 +2,7 @@
 
 use frontend\components\taksit\Albali;
 use frontend\components\taksit\Bolkart;
+use common\models\info\Info;
 
 $currency = Yii::$app->currency;
 
@@ -39,7 +40,6 @@ $currency = Yii::$app->currency;
                         <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product id'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
                     </div>
                     <div class="second_info">
-                        <div class="mega_seller"><img src="/img/mega_seller.png" alt=""></div>
                         <div class="wrap_store">
                             <?= Yii::t('app', 'Seller'); ?>: <b><?= $product->seller->fullname; ?></b>
                             (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', 'See other products'); ?></a>)
@@ -55,9 +55,12 @@ $currency = Yii::$app->currency;
                             </b>
                         </div>
                         <ul>
-                            <li><?= Yii::t('app', 'Condition'); ?>:  <b>Türkiyə</b></li>
-                            <li><?= Yii::t('app', 'Brand'); ?>:  <b>Xeyr</b></li>
-                            <li><?= Yii::t('app', 'Warranty'); ?>:  <b>Xeyr</b></li>
+                            <li><?= Yii::t('app', 'Condition'); ?>:  <b><?= Yii::t('app', $product->condition);?></b></li>
+
+                            <?php if ($product->manufacturer) { ?>
+                            <li><?= Yii::t('app', 'Brand'); ?>:  <b><?= $product->manufacturer->name; ?></b></li>
+                            <?php } ?>
+
                         </ul>
                     </div>
                     <div class="cards_dicsount">
@@ -135,11 +138,16 @@ $currency = Yii::$app->currency;
                         <div class="product_size">
                             <p><?= $productOption->option->name;?>:</p>
                             <ul>
-                                <?php foreach ($productOption->values as $value) { ?>
+                                <?php $i=0; foreach ($productOption->values as $value) { $i++; ?>
                                 <li>
                                     <label>
-                                        <input type="radio" name="AddToCartForm[option][<?=$productOption->id;?>]" value="<?=$value->id;?>">
-                                        <span><?=$value->optionValue->name;?></span>
+                                        <input type="radio" <?php if ($i===1) { echo 'checked'; } ?> name="AddToCartForm[option][<?=$productOption->id;?>]" value="<?=$value->id;?>">
+
+                                        <?php if ($value->optionValue->image) { ?>
+                                            <span class="icon" style="background-image: url('/uploads/options/16/red.png');"></span>
+                                        <?php } else { ?>
+                                            <span><?=$value->optionValue->name;?></span>
+                                        <?php } ?>
                                     </label>
                                 </li>
                                 <?php } ?>
@@ -152,8 +160,8 @@ $currency = Yii::$app->currency;
                                 <button type="submit" class="add"><?= Yii::t('app', 'Add to basket'); ?></button>
                             </div>
                             <div class="delivery">
-                                <p>Çatdırılma:</p>
-                                <span>1 - 3 iş günü ərzində <a href="#">Ətraflı</a></span>
+                                <p><?= Yii::t('app', 'Shipping'); ?>:</p>
+                                <span><?= Yii::t('app', '1-3 days'); ?> <a href="<?= Info::findOne(5)->url; ?>"><?= Yii::t('app', 'More info'); ?></a></span>
                             </div>
                         </div>
 
@@ -233,22 +241,14 @@ $currency = Yii::$app->currency;
             </div>
         </div>
         <aside class="aside_products">
+
             <h2><?= Yii::t('app', 'Satıcının digər məhsulları'); ?></h2>
-            <article itemscope="" itemtype="http://schema.org/Product">
-                <div>
-                    <div class="image"><img src="upload/Images/10.jpg" alt="" itemprop="image"></div>
-                    <h3 itemprop="name">Puma Epoch Black Lifestyle Casual Shoes</h3>
-                    <div class="price"><span itemprop="price">48 <b class="currency_icon">m</b></span></div>
-                    <div class="old_price">
-                        <span>Qiymət: <em>58<b class="currency_icon">m</b></em></span>
-                        <strong>73% OFF</strong>
-                    </div>
-                    <div class="rating">
-                        <span class="star_2"></span>
-                    </div>
-                </div>
-                <a href="#"></a>
-            </article>
+
+            <?= $this->render('@app/views/blocks/seller_products_column', [
+                'seller'    => $product->seller,
+                'limit'     => 2
+            ]); ?>
+
         </aside>
     </div>
 </div>

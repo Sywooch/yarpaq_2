@@ -1,3 +1,6 @@
+<?php
+use common\models\info\Info;
+?>
 <!-- FOOTER BEGINS -->
 
 <footer id="footer">
@@ -36,26 +39,37 @@
         </ul>
     </div>
     <div class="second_footer">
-        <a href="#" class="up">BAŞA QAYIT</a>
+        <a href="#" class="up"><?= Yii::t('app', 'Back to top'); ?></a>
         <div>
+
+            <?php
+            $pages = [
+                '5' => Info::findOne(5),
+                '6' => Info::findOne(6),
+                '7' => Info::findOne(7),
+                '8' => Info::findOne(8),
+                '9' => Info::findOne(9),
+                '10' => Info::findOne(10),
+            ];
+            ?>
             <article>
-                <h3>MƏLUMAT</h3>
+                <h3><?= Yii::t('app', 'Information'); ?></h3>
                 <ul>
-                    <li><a href="#">Satıcılat və alıcılar ücün</a></li>
-                    <li><a href="#">Bizim haqqımızda</a></li>
-                    <li><a href="#">Ödəniş və Çatdırılma</a></li>
+                    <li><a href="<?= $pages[5]->url; ?>"><?= $pages[5]->title; ?></a></li>
+                    <li><a href="<?= $pages[6]->url; ?>"><?= $pages[6]->title; ?></a></li>
+                    <li><a href="<?= $pages[7]->url; ?>"><?= $pages[7]->title; ?></a></li>
                 </ul>
             </article>
             <article>
                 <h3>&nbsp;</h3>
                 <ul>
-                    <li><a href="#">Məxfilik siyəsəti</a></li>
-                    <li><a href="#">Qaydalar və şərtlər</a></li>
-                    <li><a href="#">Geri qaytarılanlar</a></li>
+                    <li><a href="<?= $pages[8]->url; ?>"><?= $pages[8]->title; ?></a></li>
+                    <li><a href="<?= $pages[9]->url; ?>"><?= $pages[9]->title; ?></a></li>
+                    <li><a href="<?= $pages[10]->url; ?>"><?= $pages[10]->title; ?></a></li>
                 </ul>
             </article>
             <article>
-                <h3>ŞƏXSİ KABİNET</h3>
+                <h3><?= Yii::t('app', 'Account'); ?></h3>
                 <ul>
                     <li><a href="#">Şəxsi məlumat</a></li>
                     <li><a href="#">Sifariş Tarixçəsi</a></li>
@@ -64,7 +78,7 @@
                 </ul>
             </article>
             <article>
-                <h3>BİZİMLƏ ƏLAQƏ</h3>
+                <h3><?= Yii::t('app', 'Contact us'); ?></h3>
                 <ul>
                     <li><a href="tel:+994 12 310 30 03" class="phone">+994 12 310 30 03</a></li>
                     <li><a href="mailto:support@yarpaq.az" class="email">support@yarpaq.az</a></li>
@@ -72,10 +86,10 @@
                 </ul>
             </article>
             <article>
-                <h3>BİZİ İZLƏİN</h3>
+                <h3><?= Yii::t('app', 'Follow us'); ?></h3>
                 <div class="social">
-                    <a href="#" class="facebook"></a>
-                    <a href="#" class="instagram"></a>
+                    <a href="https://www.facebook.com/yarpaq.az/" target="_blank" class="facebook"></a>
+                    <a href="https://www.instagram.com/yarpaq_az/" target="_blank" class="instagram"></a>
                 </div>
             </article>
         </div>
@@ -83,29 +97,19 @@
     <div class="last_footer">
         <div>
             <div class="left_side">
-                <p>PAYMENT</p>
+                <p><?= Yii::t('app', 'Payment'); ?></p>
                 <img src="/img/credit_cards.png" alt="">
             </div>
-            <div class="right_side">
-                <p>BİZİ İZLƏYİN</p>
-                <div class="social_icons">
-                    <a href="#" class="facebook"></a>
-                    <a href="#" class="twitter"></a>
-                    <a href="#" class="google"></a>
-                    <a href="#" class="youtube"></a>
-                    <a href="#" class="instagram"></a>
-                    <a href="#" class="pinterest"></a>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class="last_footer_mobile">
         <div class="first">
-            <p>Sell on yarpaq.az</p>
+            <p><?= Yii::t('app', 'Sell on {yarpaq}', ['yarpaq' => 'yarpaq.az']); ?></p>
             <select name="" id="">
-                <option value="0">$ USD</option>
-                <option value="1">M AZN</option>
-                <option value="2">R RUR</option>
+                <?php foreach (Yii::$app->currency->currencies as $currency) { ?>
+                    <option value="<?= $currency->id; ?>"><?= $currency->code; ?></option>
+                <?php } ?>
             </select>
             <select name="" id="">
                 <option value="0">Azərbaycan</option>
@@ -114,8 +118,12 @@
             </select>
         </div>
         <div class="last">
-            <p><a href="#">Qaydalar və Şərtlər</a> | <a href="#">Məxfilik Siyasəti</a></p>
-            <p>2017 yarpaq.az | Bütün hüquqlar qorunur</p>
+            <?php
+            $qayda = Info::findOne(9);
+            $policy = Info::findOne(8);
+            ?>
+            <p><a href="<?= $qayda->url; ?>"><?= $qayda->title; ?></a> | <a href="<?= $policy->url; ?>"><?= $policy->title; ?></a></p>
+            <p>2017 yarpaq.az | <?= Yii::t('app', 'All right reserved'); ?></p>
         </div>
     </div>
 </footer>
