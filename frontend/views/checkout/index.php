@@ -1,188 +1,347 @@
-<div class="widgets-content">
-    <div class="overlap-content"></div>
-    <div class="v-padding-30 no-padding-xs">
+<?php
+use yii\helpers\Url;
+use common\models\option\ProductOption;
+use common\models\option\ProductOptionValue;
+use common\models\Zone;
+use common\models\Country;
 
-        <div class="container no-padding">
-            <div class="row">
+$currency = Yii::$app->currency;
+?>
 
-                <aside class="col-sm-4 col-md-3 hidden-xs ">
-
-                    <div class="infoMenuBox light-gray_bg">
-                        <div class="list-infoMenu">
-                            <div class="v-padding-5">
-                                <div class="title green sizex14"><span>Account</span></div>
-                                <ul class="sub-infoMenu" style="display: block;">
-                                    <li><a href="#"><?= Yii::t('app', 'Personal information'); ?></a></li>
-                                    <li><a href="#"><?= Yii::t('app', 'Addresses'); ?></a></li>
-                                    <li><a href="#"><?= Yii::t('app', 'Orders history'); ?></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-                <div class="col-sm-8 col-md-9 inner-content">
-                    <div class="row margin-right-0">
-                        <div class="content-box-heading light-gray_bg ">
-                            <h4><?= Yii::t('app', 'Checkout'); ?></h4>
-                        </div>
-
-                        <form action="<?= \yii\helpers\Url::toRoute(['checkout/confirm']); ?>" method="post">
-                            <input type="hidden"
-                                   name="<?= Yii::$app->request->csrfParam ?>"
-                                   value="<?= Yii::$app->request->getCsrfToken()?>">
-                            <div class="order-registration row">
-                                <div class=" hmargin-30">
-
-                                    <div class="col-md-8">
-                                        <div class="col-md-6  col-sm-6 no-padding padding-xs-0 padding-sm-0">
-                                            <div class="delivery-address">
-                                                <h5 class="green dejavu-bold"><?= Yii::t('app', 'Shipping address'); ?></h5>
-                                                <ul>
-                                                    <li><?= $address->firstname; ?> <?= $address->lastname; ?><?= $address->company ? ' ('.$address->company.')' : ''; ?></li>
-                                                    <li><?= $address->address_1; ?></li>
-                                                    <li><?= $address->city; ?>, <?= $address->country->name; ?></li>
-                                                    <li><?= $user->profile->phone1; ?></li>
-                                                    <li class="hide"><a href="#" class="underline-link green"> > Catdırma ünvanı dəyiş < </a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="delivery-method">
-                                                <h5 class="green dejavu-bold"><?= Yii::t('app', 'Shipping method'); ?></h5>
-                                                <ul>
-                                                    <li>
-                                                        <input type="radio" class="radio" id="radio1" name="shipping_method" checked value="1">
-                                                        <label for="radio1"><?= Yii::t('app', 'Courier'); ?></label>
-                                                        <div class="tooltip_styled">
-                                                            <span class="tooltip-item green hide">(?)</span>
-                                                            <div class="tooltip-content">
-                                                                <h4 class="dejavu-bold">Transport</h4>
-                                                                <p>yalnız Bakıdaxılı və Bakıətrafı, 3 iş günü ərzində çatdırılma).
-                                                                    Ödənişin dəyəri: Bakıdaxili - Ödənişsizdir, Bakıətrafı - 2AZN.</p>
-                                                            </div>
-                                                        </div>
-
-                                                    </li>
-                                                    <li class="hide">
-                                                        <input type="radio" class="radio" id="radio2"  name="shipping_method" value="2">
-                                                        <label for="radio2"><?= Yii::t('app', 'Post'); ?></label>
-                                                        <div class="tooltip_styled">
-                                                            <span class="tooltip-item green hide">(?)</span>
-                                                            <div class="tooltip-content">
-                                                                <h4 class="dejavu-bold">Transport</h4>
-                                                                <p>yalnız Bakıdaxılı və Bakıətrafı, 3 iş günü ərzində çatdırılma).
-                                                                    Ödənişin dəyəri: Bakıdaxili - Ödənişsizdir, Bakıətrafı - 2AZN.</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6  col-sm-6 padding-xs-0  padding-sm-0">
-                                            <div class="payment-method">
-                                                <h5 class="green dejavu-bold"><?= Yii::t('app', 'Payment method'); ?></h5>
-                                                <ul>
-                                                    <li>
-                                                        <input type="radio" class="radio" id="radio3" name="payment_method" value="5">
-                                                        <label for="radio3"><div class="payPal"></div></label>
-                                                    </li>
-                                                    <li>
-                                                        <input type="radio" class="radio" id="radio4" name="payment_method" value="3">
-                                                        <label for="radio4" style="margin-bottom: 2px"><?= Yii::t('app', 'Plastic card'); ?></label>
-
-                                                        <ul class="list-inline payment-list">
-                                                            <li>
-                                                                <i class="card_type visa-icon" id="visaType"></i>
-                                                            </li>
-                                                            <li>
-                                                                <i class="card_type masterCard-icon" id="masterCardType"></i>
-                                                            </li>
-                                                        </ul>
-                                                        <input type="hidden" name="card_type" id="cardType" value="v">
-                                                    </li>
-                                                    <li>
-                                                        <input id="radio5" type="radio" class="radio" name="payment_method" checked value="6">
-                                                        <label for="radio5"><?= Yii::t('app', 'Cash'); ?></label>
-
-                                                    </li>
-                                                    <li>
-                                                        <input id="radio6" type="radio" class="radio" name="payment_method" value="7">
-                                                        <label for="radio6"><?= Yii::t('app', 'Post'); ?></label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="radio7" type="radio" class="radio" name="payment_method" value="2">
-                                                        <label for="radio7"><?= Yii::t('app', 'Albali'); ?></label>
-
-                                                        <div class="smallSelects inline-block">
-                                                            <div class="select-month">
-                                                                <select class="form-control" name="millikart_taksit">
-                                                                    <option value="1">1 ay</option>
-                                                                    <option value="3">3 ay</option>
-                                                                    <option value="6">6 ay</option>
-                                                                    <option value="9">9 ay</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <input id="radio8" type="radio" class="radio" name="payment_method" value="bolkart">
-                                                        <label for="radio8"><?= Yii::t('app', 'Bolkart'); ?></label>
-
-                                                        <div class="smallSelects inline-block">
-                                                            <div class="select-month">
-                                                                <select class="form-control" name="bolkarttaksit">
-                                                                    <option value="1">1 ay</option>
-                                                                    <option value="3">3 ay</option>
-                                                                    <option value="6">6 ay</option>
-                                                                    <option value="9">9 ay</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-md-12 padding-xs-0 hide">
-                                            <hr class="gray-hr">
-                                            <div class="col-md-5 no-padding-xs">Kuponlar, Hədiyyə kartları</div>
-                                            <div class="col-md-7 no-padding  no-padding-xs">
-                                                <div class="fileform middle-upload-input">
-                                                    <div class="fileformlabel"></div>
-                                                    <div class="selectbutton">İSTİFADƏ ET</div>
-                                                    <input name="upload" class="upload" onchange="getName(this.value);" type="file">
-                                                </div>
-                                                <p class="sizex10 v-padding-5 margin-0"><?= Yii::t('app', 'Active coupons'); ?>:</p>
-                                                <p class="sizex10">
-                                                    <span class="green">AZN YARPAQ YY555 </span>
-                                                    kuponu - 10 AZN
-                                                    <a href="#" class="green pull-right underline-text"> <?= Yii::t('app', 'remove coupon'); ?></a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="box-payMethods">
-                                            <div class="box-payMethods2 text-center hide">
-                                                <div class="dejavu-bold sizex10"><?= Yii::t('app', 'Payment method'); ?></div>
-                                                <div class="payPal center-block"></div>
-                                                <div class="dejavu-bold sizex10">name.surname@gmail.com</div>
-                                            </div>
-                                            <div class="v-margin-10">
-                                                <div class="sizex10 green text-uppercase hide">AZN YARPAQ YY555 kuponu: -10 M</div>
-                                                <div>
-                                                    <span class="dejavu-bold sizex14"><?= Yii::t('app', 'Total'); ?>:</span>
-                                                    <span class="dejavu-bold sizex24"><?= $cart->total; ?><b class="manatFont">M</b> </span>
-                                                </div>
-                                            </div>
-
-                                            <button class="text-uppercase btn btn-green display-block"><?= Yii::t('app', 'Confirm and Pay'); ?></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+<div class="basket_wrapper no_toppadding">
+    <h2><?= Yii::t('app', 'Checkout'); ?></h2>
+    <div class="main_side">
+        <?php if ($user) { ?>
+        <div class="shipping_address_edit">
+            <h3><?= Yii::t('app', 'Shipping address'); ?></h3>
+            <div class="list">
+                <ul>
+                    <li>
+                        <label>
+                            <span>Orkhan Haciev <br>
+                            General Sixlinski 42, mənsiz 113<br>
+                            Baku<br>
+                            Azerbaijan<br>
+                            AZ1129<br>
+                            Azerbaijan<br>
+                            +944558555644</span>
+                            <input type="radio" name="adress_name">
+                            <em></em>
+                            <strong>Bu sizin hal-hazırki çatdırılma ünvanınızdır</strong>
+                            <a href="#">ünvana düzəlİş et</a>
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span>Orkhan Haciev <br>
+                            General Sixlinski 42, mənsiz 113<br>
+                            Baku<br>
+                            Azerbaijan<br>
+                            AZ1129<br>
+                            Azerbaijan<br>
+                            +944558555644</span>
+                            <input type="radio" name="adress_name">
+                            <em></em>
+                            <strong>Bu sizin hal-hazırki çatdırılma ünvanınızdır</strong>
+                            <a href="#">ünvana düzəlİş et</a>
+                        </label>
+                    </li>
+                </ul>
             </div>
+            <footer>
+                <div class="add_new"><a href="#">Yenİ ünvan əlavə et</a></div>
+                <div class="cancel"><a href="#">ləğv etmək</a></div>
+            </footer>
+        </div>
+        <?php } else { ?>
+        <div class="address_form">
+            <h3><?= Yii::t('app', 'Shipping information'); ?></h3>
+
+            <ul>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Name'); ?>:</span>
+                        <em>*</em>
+                    </div>
+                    <input type="text" name="shipping_firstname" value="<?= $shipping_info['firstname']; ?>">
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Surname'); ?> :</span>
+                        <em>*</em>
+                    </div>
+                    <input type="text" name="shipping_lastname" value="<?= $shipping_info['lastname']; ?>">
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Mobile phone'); ?> </span>
+                        <em>*</em>
+                    </div>
+                    <input type="text" name="phone1" value="<?= $user_info['phone1']; ?>">
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Email'); ?> :</span>
+                    </div>
+                    <input type="text" name="email" value="<?= $user_info['email']; ?>">
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Street'); ?> :</span>
+                        <em>*</em>
+                    </div>
+                    <input type="text" name="shipping_address" value="<?= $shipping_info['address']; ?>">
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'City'); ?> :</span>
+                        <em>*</em>
+                    </div>
+                    <input type="text" name="shipping_city" value="<?= $shipping_info['city']; ?>">
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Postal code'); ?> :</span>
+                        <em>*</em>
+                    </div>
+                    <input type="text" value="<?= $shipping_info['postal_code']; ?>">
+                    <strong>Bu xananın doldurulması vacibdir</strong>
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'Country'); ?> :</span>
+                        <em>*</em>
+                    </div>
+                    <select name="shipping_zone_id" id="country_select">
+                        <?php
+                        $countries = Country::find()->all();
+
+                        foreach ($countries as $country) { ?>
+                            <option <?= $country->id == 15 ? 'selected' : ''; ?> value="<?= $country->id; ?>"><?= $country->name; ?></option>
+                        <?php } ?>
+                    </select>
+                </li>
+                <li>
+                    <div>
+                        <span><?= Yii::t('app', 'State'); ?> :</span>
+                        <em>*</em>
+                    </div>
+
+                    <?php
+                    $zones = Zone::find()->all();
+
+                    foreach ($countries as $country) {
+                        ?>
+                        <select name="shipping_zone_id" class="zones_select" id="zones_<?= $country->id; ?>" style="display: none;">
+                            <?php
+
+                            foreach ($zones as $zone) {
+                                if ($zone->country_id != $country->id) {
+                                    continue;
+                                }
+                                ?>
+                                <option value="<?= $zone->id; ?>"><?= $zone->name; ?></option>
+                            <?php } ?>
+                        </select>
+                        <?php
+                    }
+                    ?>
+                </li>
+            </ul>
+        </div>
+        <?php } ?>
+
+        <div class="delivery_methods">
+            <h3><?= Yii::t('app', 'Shipping method'); ?></h3>
+            <ul>
+                <li>
+                    <p>Kuryer vasitəsi ilə</p>
+                    <label>
+                        <span>Bakıdaxili çatdırılma pulsuzdur. Bakıkənarı çatdırılma isə 2 AZN-dir və 3 iş günü ərzində həyata keçirilir.</span>
+                        <input type="radio" name="delivery_type">
+                        <em></em>
+                    </label>
+                </li>
+                <li>
+                    <p>Poçt vasitəsi ilə</p>
+                    <label>
+                        <span>Regionlara çatdırılma 3 AZN-dir, Azərpoçt vasitəsilə maksimum 5-6 iş günü ərzində çatdırılır.</span>
+                        <input type="radio" name="delivery_type">
+                        <em></em>
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="payment_methods">
+            <header>
+                <h3><?= Yii::t('app', 'Payment method'); ?></h3>
+            </header>
+            <div class="methods_list">
+                <ul>
+                    <li>
+                        <label>
+                            <div class="image"><img src="/img/paypal_icon.png" alt=""></div>
+                            <span>PayPall</span>
+                            <input type="radio" name="payment_type">
+                            <em></em>
+                        </label>
+                        <div>
+                            <a href="#">1 AY</a>
+                            <a href="#" class="active">3 AY</a>
+                            <a href="#">6 AY</a>
+                        </div>
+                    </li>
+                    <li>
+                        <label>
+                            <div class="image"><img src="/img/visa_icon.svg" alt=""></div>
+                            <span>Visa Electron</span>
+                            <input type="radio" name="payment_type">
+                            <em></em>
+                        </label>
+                        <div>
+                            <a href="#">1 AY</a>
+                            <a href="#" class="active">3 AY</a>
+                            <a href="#">6 AY</a>
+                        </div>
+                    </li>
+                    <li>
+                        <label>
+                            <div class="image"><img src="/img/mastercaed_icon.svg" alt=""></div>
+                            <span>Master Card</span>
+                            <input type="radio" name="payment_type">
+                            <em></em>
+                        </label>
+                        <div>
+                            <a href="#">1 AY</a>
+                            <a href="#" class="active">3 AY</a>
+                            <a href="#">6 AY</a>
+                        </div>
+                    </li>
+                    <li>
+                        <label>
+                            <div class="image"><img src="/img/albali_icon.png" alt=""></div>
+                            <span>Albalı Kart</span>
+                            <input type="radio" name="payment_type">
+                            <em></em>
+                        </label>
+                        <div>
+                            <a href="#">1 AY</a>
+                            <a href="#" class="active">3 AY</a>
+                            <a href="#">6 AY</a>
+                        </div>
+                    </li>
+                    <li>
+                        <label>
+                            <div class="image"><img src="/img/bolcard_icon.png" alt=""></div>
+                            <span>Bolkart</span>
+                            <input type="radio" name="payment_type">
+                            <em></em>
+                        </label>
+                        <div>
+                            <a href="#">1 AY</a>
+                            <a href="#" class="active">3 AY</a>
+                            <a href="#">6 AY</a>
+                        </div>
+                    </li>
+                    <li>
+                        <label>
+                            <div class="image"><img src="/img/cash_icon.svg" alt=""></div>
+                            <span>Nəğd ödəmə</span>
+                            <input type="radio" name="payment_type">
+                            <em></em>
+                        </label>
+                        <div>
+                            <a href="#">1 AY</a>
+                            <a href="#" class="active">3 AY</a>
+                            <a href="#">6 AY</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <footer>
+                <p><?= Yii::t('app', 'We accept'); ?>:</p>
+                <img src="/img/all_cards.png" alt="">
+            </footer>
+        </div>
+        <div class="payment_checkout">
+            <div class="button"><a href="#">CHECKOUT</a></div>
+            <p>Siz sifariş verərək <a href="#">Şərtlər və Qaydalar</a>, <a href="#">Gizlilik və Geri qaytarma</a> şərtləri ilə razılaşmış olursunuz.</p>
+        </div>
+    </div>
+
+    <!-- Cart -->
+    <div class="right_side">
+        <div class="right_basket">
+            <header>
+                <h3><?= $cart->countProducts(); ?> <?= Yii::t('app', 'product'); ?></h3>
+                <a href="<?= Url::to(['cart/index']); ?>"><?= Yii::t('app', 'Edit'); ?></a>
+            </header>
+            <div class="right_basket_list">
+
+                <?php foreach ($cart->products as $product) {
+                    $product_object = \common\models\Product::findOne($product['product_id']);
+                    ?>
+                <article>
+                    <div class="image">
+                        <a href="<?= $product_object->url; ?>">
+                            <img src="<?= $product_object->preview; ?>" alt="<?= $product_object->title; ?>">
+                        </a>
+                    </div>
+                    <div class="inner">
+                        <div class="price">
+                            <?= $currency->convertAndFormat($product_object->price, $product_object->currency); ?>
+                        </div>
+                        <p><?= $product_object->title; ?></p>
+
+
+                        <?php
+                        if (count($product['option'])) {
+                            foreach ($product['option'] as $option) {
+                                $value = ProductOptionValue::findOne($option['product_option_value_id']);
+                                $product_option = ProductOption::findOne($option['product_option_id']); ?>
+
+                                <div class="size">
+                                    <span><?= $product_option->option->name;?></span>
+
+                                    <?php if ($value->optionValue->image) { ?>
+                                        <em class="icon" style="background-image: url('/uploads/options/<?= $productOption->option->id; ?>/<?= $value->optionValue->image; ?>');"></em>
+                                    <?php } else { ?>
+                                        <em><?=$value->optionValue->name;?></em>
+                                    <?php } ?>
+                                </div>
+
+                            <?php
+                            }
+                        }
+                        ?>
+
+
+                        <div class="count">
+                            <?= Yii::t('app', 'Quantity'); ?> <strong><?= $product['quantity']; ?></strong>
+                        </div>
+                    </div>
+                </article>
+                <?php } ?>
+            </div>
+            <div class="totals">
+                <dl>
+                    <dt><?= Yii::t('app', 'Total'); ?></dt>
+                    <dd>
+                        <?= $currency->format($cart->total); ?>
+                    </dd>
+                    <dt><?= Yii::t('app', 'Shipping'); ?></dt>
+                    <dd><?= Yii::t('app', 'Free'); ?></dd>
+                </dl>
+                <dl>
+                    <dt><?= Yii::t('app', 'Total'); ?></dt>
+                    <dd>
+                        <?= $currency->format($cart->total); ?>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="right_basket_info">
+            <p>Qaytarış yerində hər bir məhsula görə 2 AZN təşkil edir. Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə ödənişsiz qaytarla bilər (<a href="#">ətraflı</a>)</p>
         </div>
     </div>
 </div>

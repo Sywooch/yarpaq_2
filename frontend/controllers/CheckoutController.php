@@ -17,65 +17,63 @@ class CheckoutController extends BasicController
 {
     public $freeAccessActions = ['index', 'confirm', 'success', 'fail'];
 
-    public function beforeAction($action)
-    {
-        if ( parent::beforeAction($action) )
-        {
-            if (Yii::$app->user->isGuest) {
-                $this->redirect(Yii::$app->homeUrl);
-            }
-
-            return true;
-        }
-
-        return false;
-
-    }
-
     public function actionIndex() {
         $session    = Yii::$app->session;
         $cart       = Yii::$app->cart;
         $user       = Yii::$app->user->identity;
-        $address    = $user->addresses[0];
 
         if (!$cart->hasProducts() || !$cart->hasStock()) {
             $this->redirect(Url::toRoute(['/cart']));
+            return;
         }
 
-        $payment_address = [];
-        $payment_address['firstname']   = $address->firstname;
-        $payment_address['lastname']    = $address->lastname;
-        $payment_address['company']     = $address->company;
-        $payment_address['address']     = $address->address_1;
-        $payment_address['city']        = $address->city;
-        $payment_address['postcode']    = $address->postcode;
-        $payment_address['zone']        = $address->zone->name;
-        $payment_address['zone_id']     = $address->zone_id;
-        $payment_address['country']     = $address->country->name;
-        $payment_address['country_id']  = $address->country_id;
+
+        if ($user && count($user->addresses)) {
+            $address = $user->addresses[0];
+
+            $payment_info = [];
+            $payment_info['firstname']   = $address->firstname;
+            $payment_info['lastname']    = $address->lastname;
+            $payment_info['company']     = $address->company;
+            $payment_info['address']     = $address->address_1;
+            $payment_info['city']        = $address->city;
+            $payment_info['postcode']    = $address->postcode;
+            $payment_info['zone']        = $address->zone->name;
+            $payment_info['zone_id']     = $address->zone_id;
+            $payment_info['country']     = $address->country->name;
+            $payment_info['country_id']  = $address->country_id;
+
+            $session->set('payment_info', $payment_info);
 
 
-        $session->set('payment_address', $payment_address);
+            $shipping_info = [];
+            $shipping_info['firstname']   = $address->firstname;
+            $shipping_info['lastname']    = $address->lastname;
+            $shipping_info['company']     = $address->company;
+            $shipping_info['address']     = $address->address_1;
+            $shipping_info['city']        = $address->city;
+            $shipping_info['postcode']    = $address->postcode;
+            $shipping_info['zone']        = $address->zone->name;
+            $shipping_info['zone_id']     = $address->zone_id;
+            $shipping_info['country']     = $address->country->name;
+            $shipping_info['country_id']  = $address->country_id;
+
+            $session->set('shipping_info', $shipping_info);
 
 
-        $shipping_address = [];
-        $shipping_address['firstname']   = $address->firstname;
-        $shipping_address['lastname']    = $address->lastname;
-        $shipping_address['company']     = $address->company;
-        $shipping_address['address']     = $address->address_1;
-        $shipping_address['city']        = $address->city;
-        $shipping_address['postcode']    = $address->postcode;
-        $shipping_address['zone']        = $address->zone->name;
-        $shipping_address['zone_id']     = $address->zone_id;
-        $shipping_address['country']     = $address->country->name;
-        $shipping_address['country_id']  = $address->country_id;
+            $user_info = [];
+            $user_info['phone1']    = $user->profile->phone1;
+            $user_info['email']     = $user->email;
 
-        $session->set('shipping_address', $payment_address);
+            $session->set('user_info', $user_info);
+        }
 
         return $this->render('index', [
-            'cart'      => $cart,
-            'user'      => $user,
-            'address'   => $address
+            'cart'              => $cart,
+            'user'              => $user,
+            'payment_info'      => $session->get('payment_info'),
+            'shipping_info'     => $session->get('shipping_info'),
+            'user_info'         => $session->get('user_info')
         ]);
     }
 
@@ -88,7 +86,7 @@ class CheckoutController extends BasicController
         $currency       = Yii::$app->currency;
 
 
-        // get shipping method
+        // get payment method
         if ($request->post('payment_method')) {
             $payment_method_model = PaymentMethod::findOne($request->post('payment_method'));
 
@@ -102,7 +100,7 @@ class CheckoutController extends BasicController
             }
         }
 
-        // get payment method
+        // get shipping method
         if ($request->post('shipping_method')) {
             $shipping_method_model = ShippingMethod::findOne($request->post('shipping_method'));
 
@@ -119,6 +117,7 @@ class CheckoutController extends BasicController
         // Validate cart has products and has stock.
         if (!$cart->hasProducts() || !$cart->hasStock()) {
             $this->redirect(Url::toRoute(['/cart']));
+            return;
         }
 
 

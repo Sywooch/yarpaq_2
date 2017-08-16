@@ -59,6 +59,10 @@ class Currency extends Component
     public function convertAndFormat($price, CurrencyModel $sourceCurrency) {
         $price = $this->convert($price, $sourceCurrency);
 
+        return $this->format($price);
+    }
+
+    public function format($price) {
         return sprintf($this->getUserCurrency()->format, $price);
     }
 

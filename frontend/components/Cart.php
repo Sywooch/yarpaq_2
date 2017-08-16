@@ -11,6 +11,7 @@ class Cart extends Component
 {
     private $config;
     private $data = [];
+    private $currency;
 
     public function __construct($config = array()) {
 //        $this->config = $registry->get('config');
@@ -28,6 +29,8 @@ class Cart extends Component
         // надо учесть что если чел не авторизован, то данные просто хранятся в сессии
         // а если авторизован, то данные выгружаются из базы и сохраняются опять же в сессию
         // данее работа ведется именно с данными из сессии
+
+        $this->currency = Yii::$app->currency;
 
         $session = Yii::$app->session;
 
@@ -224,6 +227,7 @@ class Cart extends Component
                         'stock'           => $stock,
                         'price'           => ($price + $option_price),
                         'total'           => ($price + $option_price) * $quantity,
+                        'currency_code'   => $product_model->currency->code,
                         'weight'          => ($product_model->weight + $option_weight) * $quantity,
                         'weight_class_id' => $product_model->weight_class_id,
                         'length'          => $product_model->length,
@@ -345,10 +349,12 @@ class Cart extends Component
      * @return int
      */
     public function getTotal() {
+
         $total = 0;
 
         foreach ($this->getProducts() as $product) {
-            $total += $product['price'] * $product['quantity'];
+            $product_currency = $this->currency->getCurrencyByCode($product['currency_code']);
+            $total += $this->currency->convertAndFormat($product['price'] * $product['quantity'], $product_currency);
         }
 
         return $total;

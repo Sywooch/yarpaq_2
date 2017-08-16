@@ -2,6 +2,7 @@
 
 use common\models\Product;
 use common\models\info\Info;
+use yii\helpers\Url;
 
 $currency = Yii::$app->currency;
 ?>
@@ -40,15 +41,21 @@ $currency = Yii::$app->currency;
                                                value="<?=$product_object->id;?>">
 
 
-                                        <?php foreach ($product_object->productOptions as $productOption) { ?>
+                                        <?php
+                                        $mapped_options = \yii\helpers\ArrayHelper::map($product['option'], 'product_option_id', 'option_value_id');
+                                        foreach ($product_object->productOptions as $productOption) { ?>
                                             <div class="size_select">
                                                 <span><?= $productOption->option->name;?></span>
-                                                <a href="#"><em>S</em></a>
+                                                <a href="#"><em><?= \common\models\option\OptionValue::findOne( $mapped_options[ $productOption->id ] )->name; ?></em></a>
                                                 <ul>
                                                     <?php foreach ($productOption->values as $value) { ?>
                                                         <li>
                                                             <label>
-                                                                <input type="radio" name="AddToCartForm[option][<?=$productOption->id;?>]" value="<?=$value->id;?>">
+                                                                <input
+                                                                    type="radio"
+                                                                    <?php if ($mapped_options[$value->product_option_id] == $value->option_value_id) { echo 'checked'; } ?>
+                                                                    name="AddToCartForm[option][<?=$productOption->id;?>]"
+                                                                    value="<?=$value->id;?>">
                                                                 <a href="#"><?=$value->optionValue->name;?></a>
                                                             </label>
                                                         </li>
@@ -99,7 +106,7 @@ $currency = Yii::$app->currency;
                 </dl>
             </div>
             <div class="submit">
-                <a href="#"><?= Yii::t('app', 'Checkout'); ?></a>
+                <a href="<?= Url::to(['checkout/index']);?>"><?= Yii::t('app', 'Checkout'); ?></a>
             </div>
             <div class="payment_ways">
                 <p><?= Yii::t('app', 'We accept'); ?>:</p>

@@ -330,6 +330,7 @@ $this->beginPage();
 <script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 <script type="text/javascript" src="/js/product-filter.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 
 
 </body>
