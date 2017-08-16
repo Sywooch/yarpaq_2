@@ -181,7 +181,7 @@ $currency = Yii::$app->currency;
                     <li>
                         <label>
                             <div class="image"><img src="/img/paypal_icon.png" alt=""></div>
-                            <span>PayPall</span>
+                            <span>PayPal</span>
                             <input type="radio" name="payment_type">
                             <em></em>
                         </label>

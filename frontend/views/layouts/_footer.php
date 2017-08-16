@@ -7,34 +7,34 @@ use common\models\info\Info;
     <div class="quick_links">
         <ul>
             <li>
-                <a href="#">
+                <span>
                     <span><img src="/img/icon_1.svg" alt=""></span>
                     <strong>SƏRFƏLİ QİYMƏTLƏR</strong>
-                </a>
+                </span>
             </li>
             <li>
-                <a href="#">
+                <span>
                     <span><img src="/img/icon_2.svg" alt=""></span>
                     <strong>GÜVƏNİLİR ALIŞ-VERİŞ</strong>
-                </a>
+                </span>
             </li>
             <li>
-                <a href="#">
+                <span>
                     <span><img src="/img/icon_3.svg" alt=""></span>
                     <strong>100% QAYTARILMA</strong>
-                </a>
+                </span>
             </li>
             <li>
-                <a href="#">
+                <span>
                     <span><img src="/img/icon_4.svg" alt=""></span>
                     <strong>RAHAT ÖDƏNİŞ</strong>
-                </a>
+                </span>
             </li>
             <li>
-                <a href="#">
+                <span>
                     <span><img src="/img/icon_5.svg" alt=""></span>
                     <strong>PULSUZ ÇATDIRILMA</strong>
-                </a>
+                </span>
             </li>
         </ul>
     </div>
@@ -98,7 +98,11 @@ use common\models\info\Info;
         <div>
             <div class="left_side">
                 <p><?= Yii::t('app', 'Payment'); ?></p>
-                <img src="/img/credit_cards.png" alt="">
+                <span><img src="/img/card_paypal.svg" alt=""></span>
+                <span><img src="/img/card_bolcard.svg" alt=""></span>
+                <span><img src="/img/card_albali.svg" alt=""></span>
+                <span><img src="/img/card_master.svg" alt=""></span>
+                <span><img src="/img/card_visa.svg" alt=""></span>
             </div>
 
         </div>

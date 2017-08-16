@@ -34,7 +34,7 @@ $currency = Yii::$app->currency;
 
                                         <input class="form-token" type="hidden"
                                                name="<?=Yii::$app->request->csrfParam?>"
-                                               value="<?=Yii::$app->request->csrfToken?>"/>
+                                               value="<?=Yii::$app->request->csrfToken?>">
 
                                         <input type="hidden"
                                                name="AddToCartForm[productId]"
@@ -111,11 +111,11 @@ $currency = Yii::$app->currency;
             <div class="payment_ways">
                 <p><?= Yii::t('app', 'We accept'); ?>:</p>
                 <div class="credit_cards">
-                    <a href="#"><img src="/img/card_paypal.svg" alt="PayPal"></a>
-                    <a href="#"><img src="/img/card_bolcard.svg" alt="Bolkart"></a>
-                    <a href="#"><img src="/img/card_albali.svg" alt="Albalı"></a>
-                    <a href="#"><img src="/img/card_master.svg" alt="Master Card"></a>
-                    <a href="#"><img src="/img/card_visa.svg" alt="Visa"></a>
+                    <span><img src="/img/card_paypal.svg" alt="PayPal"></span>
+                    <span><img src="/img/card_bolcard.svg" alt="Bolkart"></span>
+                    <span><img src="/img/card_albali.svg" alt="Albalı"></span>
+                    <span><img src="/img/card_master.svg" alt="Master Card"></span>
+                    <span><img src="/img/card_visa.svg" alt="Visa"></span>
                 </div>
             </div>
         </div>

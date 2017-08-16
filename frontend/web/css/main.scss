@@ -526,8 +526,8 @@ a.search_toggler {
         background: #2e2e2e url(../img/avatar_icon.svg) no-repeat 50%;
       }
       & + div {
-        -webkit-transform: scale3d(1,1,1);
-        transform: scale3d(1,1,1);
+        visibility: visible;
+        opacity: 1;
       }
     }
   }
@@ -599,8 +599,8 @@ a.search_toggler {
   position: absolute;
   top: 100%;
   right: 0;
-  -webkit-transform: scale3d(0,0,0);
-  transform: scale3d(0,0,0);
+  visibility: hidden;
+  opacity: 0;
   @include border_radius(4px 0 4px 4px);
   @include animate_go(0.3s);
   nav {
@@ -1122,7 +1122,7 @@ a.search_toggler {
       &:last-child {
         border-right: 1px solid #e2e2e2;
       }
-      a {
+      > span {
         display: block;
         height: 188px;
         padding: 0 15px;
@@ -1362,7 +1362,7 @@ a.search_toggler {
 
 .credit_cards {
   overflow: hidden;
-  a {
+  span {
     display: block;
     float: left;
     margin: 0 10px 0 0;
@@ -2023,7 +2023,12 @@ a.back_to_top {
       position: absolute;
       top: 0;
       left: 0;
-      @include animate_go(0.45s);
+      -webkit-animation-duration: 0.45s;
+      -webkit-transition: all 0.45s;
+      -moz-animation-duration:0.45s;
+      -moz-transition:all 0.45s;
+      animation-duration:0.45s;
+      transition:all 0.45s;
     }
     img {
       display: inline-block;
@@ -2640,9 +2645,8 @@ a.back_to_top {
     letter-spacing: 1.1px;
     text-transform: uppercase;
   }
-  form {
-    display: block;
-    max-width: 375px;
+
+
     ul {
       li {
         padding: 0 0 20px;
@@ -2730,7 +2734,7 @@ a.back_to_top {
         }
       }
     }
-  }
+  
 }
 
 .promo_codes {
@@ -2896,6 +2900,7 @@ a.back_to_top {
 .color_select {
   float: left;
   padding: 0 12px 0 0;
+  margin: 0 18px 0 0;
   border-right: 1px solid #dfdfdf;
   position: relative;
   z-index: 1;
@@ -2981,7 +2986,7 @@ a.back_to_top {
 .size_select {
   float: left;
   padding: 0 12px 0 0;
-  margin: 0 0 0 18px;
+  margin: 0 6px 0 0;
   border-right: 1px solid #dfdfdf;
   position: relative;
   z-index: 1;
@@ -3066,7 +3071,7 @@ a.back_to_top {
 
 .count_select {
   float: left;
-  padding: 0 0 0 6px;
+
   span {
     display: block;
     float: left;
@@ -3699,6 +3704,7 @@ a.back_to_top {
       }
       .color {
         float: left;
+        margin: 0 15px 0 0;
         span {
           display: block;
           float: left;
@@ -3718,7 +3724,7 @@ a.back_to_top {
         }
       }
       .size {
-        float: right;
+        float: left;
         span {
           display: block;
           float: left;
@@ -3866,6 +3872,7 @@ a.back_to_top {
 
 .product_infos {
   width: 100%;
+  float: left;
   background: #fff;
   .tabs {
     padding: 5px 40px 0;
@@ -4145,9 +4152,8 @@ a.back_to_top {
 
 aside.aside_products {
   width: 225px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  float: right;
+  margin: 0 -235px 0 0;
   h2 {
     padding: 21px 8px 14px;
     color: #363636;

@@ -88,7 +88,7 @@ run_slider = function(slider_index, _this, direction) {
 		bullet_active = slider_index;
 
 
-		if ($(this).hasClass("next")) {
+		if ($(this).hasClass("prev")) {
 			bullet_active--;
 			if (bullet_active == -1) {
 				bullet_active = slider_length-1;
@@ -569,25 +569,30 @@ $(".priduct_gallery .thumbnails li a").click(function(){
         _this_index = _this.parent().index(),
         previous = $(".priduct_gallery .thumbnails li a.active").parent().index();
         if (_this.hasClass("active")) {} else {
-            $(".priduct_gallery .thumbnails li a").removeClass("active");
-            _this.addClass("active");
-            if (_this_index > previous) {
-                $(".priduct_gallery .image").append("<div style='left: "+$(".priduct_gallery").width()+"px'><img src='"+src+"' alt='' /></div>");
-            } else {
-                $(".priduct_gallery .image").append("<div style='left: -"+$(".priduct_gallery").width()+"px'><img src='"+src+"' alt='' /></div>");
-            }
+        	if($(".priduct_gallery").hasClass("preload")) {} else {
+	        	$(".priduct_gallery").addClass("preload");
+	            $(".priduct_gallery .thumbnails li a").removeClass("active");
+	            _this.addClass("active");
+	            if (_this_index > previous) {
+	                $(".priduct_gallery .image").append("<div style='left: "+$(".priduct_gallery").width()+"px'><img src='"+src+"' alt='' /></div>");
+	            } else {
+	                $(".priduct_gallery .image").append("<div style='left: -"+$(".priduct_gallery").width()+"px'><img src='"+src+"' alt='' /></div>");
+	            }
 
-            $(".priduct_gallery .image > div + div img").load(function(){
-                $(".priduct_gallery .image > div + div").css("left", "0");
-                if (_this_index > previous) {
-                    $(".priduct_gallery .image > div:first-child").css("left", "-100%");
-                } else {
-                    $(".priduct_gallery .image > div:first-child").css("left", "100%");
-                }
-                setTimeout(function(){
-                    $(".priduct_gallery .image > div:first-child").remove();
-                }, 300);
-            });            
+	            $(".priduct_gallery .image > div + div img").load(function(){
+	                $(".priduct_gallery .image > div + div").css("left", "0");
+	                if (_this_index > previous) {
+	                    $(".priduct_gallery .image > div:first-child").css("left", "-100%");
+	                } else {
+	                    $(".priduct_gallery .image > div:first-child").css("left", "100%");
+	                }
+	                setTimeout(function(){
+	                    $(".priduct_gallery .image > div:first-child").remove();
+	        			$(".priduct_gallery").removeClass("preload");
+	                }, 600);
+	            });                 		
+        	}
+   
         }
         return false;
     });
