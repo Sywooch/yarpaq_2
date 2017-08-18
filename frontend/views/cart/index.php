@@ -47,16 +47,16 @@ $currency = Yii::$app->currency;
                                             <div class="size_select">
                                                 <span><?= $productOption->option->name;?></span>
                                                 <a href="#"><em><?= \common\models\option\OptionValue::findOne( $mapped_options[ $productOption->id ] )->name; ?></em></a>
+
                                                 <ul>
                                                     <?php foreach ($productOption->values as $value) { ?>
                                                         <li>
                                                             <label>
-                                                                <input
-                                                                    type="radio"
-                                                                    <?php if ($mapped_options[$value->product_option_id] == $value->option_value_id) { echo 'checked'; } ?>
-                                                                    name="AddToCartForm[option][<?=$productOption->id;?>]"
-                                                                    value="<?=$value->id;?>">
-                                                                <a href="#"><?=$value->optionValue->name;?></a>
+                                                                <a
+                                                                    href="#"
+                                                                    <?php if ($mapped_options[$value->product_option_id] == $value->option_value_id) { echo 'class="active"'; } ?>
+                                                                    data-product-option-id="<?=$productOption->id;?>"
+                                                                    data-value="<?=$value->id;?>"><?=$value->optionValue->name;?></a>
                                                             </label>
                                                         </li>
                                                     <?php } ?>

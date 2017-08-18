@@ -62,7 +62,8 @@ return [
                 'info/<url:.+>' => 'info/index',
 
                 '<controller:checkout>/<action:.+>' => '<controller>/<action>',
-                'checkout/'      => 'checkout/index',
+
+                'shipping/calculate'     => 'shipping/calculate',
 
                 'search'        => 'search/index',
 

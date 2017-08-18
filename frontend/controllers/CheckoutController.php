@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Country;
 use common\models\Language;
 use common\models\notification\NewOrderAdminNotification;
 use common\models\notification\NewOrderUserNotification;
@@ -10,12 +11,15 @@ use common\models\order\OrderProduct;
 use common\models\OrderOption;
 use common\models\payment\PaymentMethod;
 use common\models\shipping\ShippingMethod;
+use common\models\Zone;
 use Yii;
+use yii\web\Response;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 class CheckoutController extends BasicController
 {
-    public $freeAccessActions = ['index', 'confirm', 'success', 'fail'];
+    public $freeAccessActions = ['index', 'confirm', 'success', 'fail', 'zones'];
 
     public function actionIndex() {
         $session    = Yii::$app->session;
@@ -77,10 +81,10 @@ class CheckoutController extends BasicController
         ]);
     }
 
+    // TODO доложно быть POST, передаются данные оплаты и доставки
     public function actionConfirm() {
         $request        = Yii::$app->request;
         $cart           = Yii::$app->cart;
-        $user_component = Yii::$app->user;
         $user           = Yii::$app->user->identity;
         $session        = Yii::$app->session;
         $currency       = Yii::$app->currency;
@@ -100,19 +104,6 @@ class CheckoutController extends BasicController
             }
         }
 
-        // get shipping method
-        if ($request->post('shipping_method')) {
-            $shipping_method_model = ShippingMethod::findOne($request->post('shipping_method'));
-
-            if ($shipping_method_model) {
-                $shipping_method_data = [
-                    'title' => $shipping_method_model->name,
-                    'code' => $shipping_method_model->code
-                ];
-                $session->set('shipping_method', $shipping_method_data);
-            }
-        }
-
 
         // Validate cart has products and has stock.
         if (!$cart->hasProducts() || !$cart->hasStock()) {
@@ -123,7 +114,7 @@ class CheckoutController extends BasicController
 
         $order = new Order();
 
-        if (!$user_component->isGuest) {
+        if ($user) {
 
             $order->user_id    = $user->id;
             $order->firstname  = $user->profile->firstname;
@@ -133,32 +124,27 @@ class CheckoutController extends BasicController
             $order->phone2     = $user->profile->phone2;
             $order->fax        = $user->profile->fax;
 
-        } elseif ($session->has('guest')) {
+        } else {
 
-            $guest = $session->get('guest');
+            $order->firstname  = $request->post('shipping_firstname');
+            $order->lastname   = $request->post('shipping_lastname');
+            $order->email      = $request->post('email');
+            $order->phone1     = $request->post('phone1');
+            $order->phone2     = $request->post('phone2');
+            $order->fax        = $request->post('fax');
 
-            $order->user_id    = 0;
-            $order->firstname  = $guest['firstname'];
-            $order->lastname   = $guest['lastname'];
-            $order->email      = $guest['email'];
-            $order->phone1     = $guest['phone1'];
-            $order->phone2     = $guest['phone2'];
-            $order->fax        = $guest['fax'];
         }
-        $payment_address = $session->get('payment_address');
 
-        $order->payment_firstname       = $payment_address['firstname'];
-        $order->payment_lastname        = $payment_address['lastname'];
-        $order->payment_company         = $payment_address['company'];
-        $order->payment_address         = $payment_address['address'];
-        $order->payment_city            = $payment_address['city'];
-        $order->payment_postcode        = $payment_address['postcode'];
-        $order->payment_zone            = $payment_address['zone'];
-        $order->payment_zone_id         = $payment_address['zone_id'];
-        $order->payment_country         = $payment_address['country'];
-        $order->payment_country_id      = $payment_address['country_id'];
-
-
+        $order->payment_firstname       = $request->post('shipping_firstname');
+        $order->payment_lastname        = $request->post('shipping_lastname');
+        $order->payment_company         = $request->post('shipping_company');
+        $order->payment_address         = $request->post('shipping_address');
+        $order->payment_city            = $request->post('shipping_city');
+        $order->payment_postcode        = $request->post('shipping_postcode');
+        $order->payment_zone_id         = $request->post('shipping_zone_id');
+        $order->payment_zone            = Zone::findOne($request->post('shipping_zone_id'))->name;
+        $order->payment_country_id      = $request->post('shipping_country_id');
+        $order->payment_country         = Country::findOne($request->post('shipping_country_id'))->name;
 
         $payment_method = $session->get('payment_method');
 
@@ -167,25 +153,24 @@ class CheckoutController extends BasicController
 
 
 
-        $shipping_address = $session->get('shipping_address');
-
-        $order->shipping_firstname      = $shipping_address['firstname'];
-        $order->shipping_lastname       = $shipping_address['lastname'];
-        $order->shipping_company        = $shipping_address['company'];
-        $order->shipping_address        = $shipping_address['address'];
-        $order->shipping_city           = $shipping_address['city'];
-        $order->shipping_postcode       = $shipping_address['postcode'];
-        $order->shipping_zone           = $shipping_address['zone'];
-        $order->shipping_zone_id        = $shipping_address['zone_id'];
-        $order->shipping_country        = $shipping_address['country'];
-        $order->shipping_country_id     = $shipping_address['country_id'];
+        $order->shipping_firstname      = $request->post('shipping_firstname');
+        $order->shipping_lastname       = $request->post('shipping_lastname');
+        $order->shipping_company        = $request->post('shipping_company');
+        $order->shipping_address        = $request->post('shipping_address');
+        $order->shipping_city           = $request->post('shipping_city');
+        $order->shipping_postcode       = $request->post('shipping_postcode');
+        $order->shipping_zone_id        = $request->post('shipping_zone_id');
+        $order->shipping_zone           = Zone::findOne($request->post('shipping_zone_id'))->name;
+        $order->shipping_country_id     = $request->post('shipping_country_id');
+        $order->shipping_country        = Country::findOne($request->post('shipping_country_id'))->name;
 
 
 
-        $shipping_method = $session->get('shipping_method');
+        $shipping_method = $request->post('shipping_method');
 
-        $order->shipping_method         = $shipping_method['title'];
-        $order->shipping_code           = $shipping_method['code'];
+        //$order->shipping_method         = $shipping_method['title'];
+        $order->shipping_method         = $shipping_method;
+        $order->shipping_code           = $shipping_method;
 
         $order->comment                 = $session->get('comment');
         $order->total                   = $cart->total;
@@ -225,14 +210,13 @@ class CheckoutController extends BasicController
                 foreach ($product['option'] as $option) {
                     $orderOption = new OrderOption();
 
-                    $orderOption->order_id = $order->id;
-                    $orderOption->product_option_id = $option['product_option_id'];
-                    $orderOption->product_option_value_id = $option['product_option_value_id'];
-                    $orderOption->option_id = $option['option_id'];
-                    $orderOption->option_value_id = $option['option_value_id'];
-                    $orderOption->name = $option['name'];
-                    $orderOption->value = $option['value'];
-                    $orderOption->type = $option['type'];
+                    $orderOption->order_id                  = $order->id;
+                    $orderOption->product_option_id         = $option['product_option_id'];
+                    $orderOption->product_option_value_id   = $option['product_option_value_id'];
+                    $orderOption->order_product_id          = $orderProduct->id;
+                    $orderOption->name                      = $option['name'];
+                    $orderOption->value                     = $option['value'];
+                    $orderOption->type                      = $option['type'];
 
                     if (!$orderOption->save()) {
                         $trans->rollBack();
@@ -269,6 +253,12 @@ class CheckoutController extends BasicController
 
         }
 
+    }
+
+    public function actionZones($country_id) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        return ArrayHelper::map( Zone::find()->andWhere(['country_id' => $country_id])->all(), 'id', 'name' );
     }
 
     public function actionSuccess() {

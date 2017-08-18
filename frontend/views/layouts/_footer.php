@@ -98,11 +98,15 @@ use common\models\info\Info;
         <div>
             <div class="left_side">
                 <p><?= Yii::t('app', 'Payment'); ?></p>
-                <span><img src="/img/card_paypal.svg" alt=""></span>
-                <span><img src="/img/card_bolcard.svg" alt=""></span>
-                <span><img src="/img/card_albali.svg" alt=""></span>
-                <span><img src="/img/card_master.svg" alt=""></span>
-                <span><img src="/img/card_visa.svg" alt=""></span>
+
+                <div class="credit_cards">
+                    <span><img src="/img/card_paypal.svg" alt=""></span>
+                    <span><img src="/img/card_bolcard.svg" alt=""></span>
+                    <span><img src="/img/card_albali.svg" alt=""></span>
+                    <span><img src="/img/card_master.svg" alt=""></span>
+                    <span><img src="/img/card_visa.svg" alt=""></span>
+                </div>
+
             </div>
 
         </div>

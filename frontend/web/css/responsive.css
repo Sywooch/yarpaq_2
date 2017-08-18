@@ -380,6 +380,7 @@
   .priduct_gallery .image {
     height: 450px;
     width: 100%;
+    margin: 0;
     line-height: 450px;
   }
   .product_first_info .left_info {
@@ -1055,7 +1056,8 @@
     position: static;
   }
   .priduct_gallery .image {
-    width: 100%;
+    width: 80%;
+    margin: 0 0 0 20%;
   }
   .product_buy_last .buttons {
     padding: 0 0 20px;
@@ -1388,7 +1390,8 @@
     position: static;
   }
   .priduct_gallery .image {
-    width: 100%;
+    width: 85%;
+    margin: 0 0 0 15%;
   }
   .product_buy_last .buttons {
     padding: 0 0 20px;
@@ -1588,7 +1591,11 @@
     width: 450px;
   }
   .priduct_gallery .image {
-    width: 450px;
+    width: 360px;
+    margin: 0 0 0 80px;
+  }
+  .priduct_gallery .thumbnails {
+    left: 10px;
   }
   .product_buy_last .buttons {
     padding: 0 0 20px;
