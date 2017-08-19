@@ -13,6 +13,7 @@ use common\models\payment\PaymentMethod;
 use common\models\shipping\ShippingMethod;
 use common\models\Zone;
 use Yii;
+use yii\helpers\BaseInflector;
 use yii\web\Response;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -243,9 +244,9 @@ class CheckoutController extends BasicController
 
 
                 // Redirect to payment page
-                $this->redirect(Url::toRoute('success'));
-                //$payment_class = $payment_method['class'];
-                //$this->redirect(Url::toRoute([$payment_class.'/checkout', 'order_id' => $order->id]));
+                $payment_class = BaseInflector::camel2id($payment_method['class']);
+                $this->redirect(Url::toRoute(['payment/'.$payment_class.'/process', 'order_id' => $order->id]));
+
             } else {
                 // Redirect to checkout page
                 $this->redirect(Url::toRoute('fail'));

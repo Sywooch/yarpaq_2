@@ -69,6 +69,8 @@ return [
 
                 'currency/switch'        => 'currency/switch',
 
+                'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
+
                 'registration'  => 'user/registration',
                 'login'         => 'user/login',
                 'logout'        => 'user-management/auth/logout',

@@ -3,7 +3,7 @@
 namespace frontend\models\payment;
 
 
-class CashOnDeliveryPayment extends Payment
+class CodPayment extends Payment
 {
 
 }
