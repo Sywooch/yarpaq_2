@@ -36,4 +36,17 @@ $(function () {
     $('#checkout-submit').click(function () {
         $('#checkout-form').submit();
     });
+
+
+    $('.albali_taksit').click(function (e) {
+        e.preventDefault();
+
+        $('#albali_method').val( '2.'+$(this).data('taksit') );
+    });
+
+    $('.bolkart_taksit').click(function (e) {
+        e.preventDefault();
+
+        $('#bolkart_method').val( '1.'+$(this).data('taksit') );
+    });
 });

@@ -179,7 +179,7 @@ $currency = Yii::$app->currency;
                             <label>
                                 <div class="image"><img src="/img/visa_icon.svg" alt=""></div>
                                 <span>Visa</span>
-                                <input type="radio" name="payment_method" value="3">
+                                <input type="radio" name="payment_method" value="3.v">
                                 <em></em>
                             </label>
                         </li>
@@ -187,7 +187,7 @@ $currency = Yii::$app->currency;
                             <label>
                                 <div class="image"><img src="/img/mastercaed_icon.svg" alt=""></div>
                                 <span>Master Card</span>
-                                <input type="radio" name="payment_method" value="3">
+                                <input type="radio" name="payment_method" value="3.m">
                                 <em></em>
                             </label>
                         </li>
@@ -195,26 +195,26 @@ $currency = Yii::$app->currency;
                             <label>
                                 <div class="image"><img src="/img/albali_icon.png" alt=""></div>
                                 <span>Albalı</span>
-                                <input type="radio" name="payment_method" value="2">
+                                <input type="radio" name="payment_method" value="2.3" id="albali_method">
                                 <em></em>
                             </label>
                             <div>
-                                <a href="#">1 AY</a>
-                                <a href="#" class="active">3 AY</a>
-                                <a href="#">6 AY</a>
+                                <a href="#" data-taksit="1" class="albali_taksit">1 <?= Yii::t('app', 'Ay'); ?></a>
+                                <a href="#" data-taksit="3" class="albali_taksit active">3 <?= Yii::t('app', 'Ay'); ?></a>
+                                <a href="#" data-taksit="6" class="albali_taksit">6 <?= Yii::t('app', 'Ay'); ?></a>
                             </div>
                         </li>
                         <li>
                             <label>
                                 <div class="image"><img src="/img/bolcard_icon.png" alt=""></div>
                                 <span>Bolkart</span>
-                                <input type="radio" name="payment_method" value="">
+                                <input type="radio" name="payment_method" value="1.3" id="bolkart_method">
                                 <em></em>
                             </label>
                             <div>
-                                <a href="#">1 AY</a>
-                                <a href="#" class="active">3 AY</a>
-                                <a href="#">6 AY</a>
+                                <a href="#" data-taksit="1" class="bolkart_taksit">1 <?= Yii::t('app', 'Ay'); ?></a>
+                                <a href="#" data-taksit="3" class="bolkart_taksit active">3 <?= Yii::t('app', 'Ay'); ?></a>
+                                <a href="#" data-taksit="6" class="bolkart_taksit">6 <?= Yii::t('app', 'Ay'); ?></a>
                             </div>
                         </li>
                         <li>

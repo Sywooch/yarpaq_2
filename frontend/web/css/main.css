@@ -4536,6 +4536,7 @@ a.back_to_top.show_me {
   padding: 0 17px;
   line-height: 44px;
   text-decoration: none;
+  border: none;
   color: #fff;
   font-family: "Roboto Condensed";
   font-size: 16px;

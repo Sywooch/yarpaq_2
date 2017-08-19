@@ -5,11 +5,11 @@ namespace frontend\models\payment;
 
 use yii\db\ActiveRecord;
 
-class GoldenPayTransaction extends ActiveRecord
+class AlbaliTransaction extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{%goldenpay_order_transaction}}';
+        return '{{%millikart_order_transaction}}';
     }
 
     public function beforeSave($insert) {

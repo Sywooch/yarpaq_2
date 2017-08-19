@@ -2,11 +2,12 @@
 
 namespace frontend\controllers;
 
-
+use Yii;
 use common\models\Language;
 use common\models\order\Order;
 use frontend\models\payment\GoldenPayPayment;
 use frontend\models\payment\GoldenPayTransaction;
+
 
 class GoldenPayPaymentController extends BasicController
 {
@@ -19,7 +20,7 @@ class GoldenPayPaymentController extends BasicController
 
         // *** Payment object ***
         $goldenPay->amount = $order->total*100;
-        $goldenPay->cardType = 'v';
+        $goldenPay->cardType = Yii::$app->request->get('hint');
         $goldenPay->description = 'Order - '.$order->id;
         $goldenPay->lang = Language::findOne( $order->language_id )->name;
 

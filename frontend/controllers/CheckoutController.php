@@ -93,7 +93,17 @@ class CheckoutController extends BasicController
 
         // get payment method
         if ($request->post('payment_method')) {
-            $payment_method_model = PaymentMethod::findOne($request->post('payment_method'));
+            if (strpos('.', $request->post('payment_method')) !== -1) {
+                $pm = explode('.', $request->post('payment_method'));
+
+                $payment_method_id = $pm[0];
+                $payment_method_hint = $pm[1];
+            } else {
+                $payment_method_id = $request->post('payment_method');
+                $payment_method_hint = '';
+            }
+
+            $payment_method_model = PaymentMethod::findOne($payment_method_id);
 
             if ($payment_method_model) {
                 $payment_method_data = [
@@ -245,7 +255,7 @@ class CheckoutController extends BasicController
 
                 // Redirect to payment page
                 $payment_class = BaseInflector::camel2id($payment_method['class']);
-                $this->redirect(Url::toRoute(['payment/'.$payment_class.'/process', 'order_id' => $order->id]));
+                $this->redirect(Url::toRoute([$payment_class.'/process', 'order_id' => $order->id, 'hint' => $payment_method_hint]));
 
             } else {
                 // Redirect to checkout page
