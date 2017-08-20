@@ -40,19 +40,24 @@ class Currency extends Component
      *
      * @param $price
      * @param CurrencyModel $sourceCurrency
+     * @param CurrencyModel|null $targetCurrency
      * @return float
      * @throws Exception
      */
-    public function convert($price, CurrencyModel $sourceCurrency) {
-        if ($this->getUserCurrency() == null) {
-            throw new Exception('User Currency was not set');
+    public function convert($price, CurrencyModel $sourceCurrency, CurrencyModel $targetCurrency = null) {
+        if (!$targetCurrency) {
+            $targetCurrency = $this->getUserCurrency();
+
+            if ($targetCurrency == null) {
+                throw new Exception('User Currency was not set');
+            }
         }
 
         // конвертируем
-        $convertedPrice = $price * ( $sourceCurrency->value / $this->getUserCurrency()->value );
+        $convertedPrice = $price * ( $sourceCurrency->value / $targetCurrency->value );
 
         // округляем в соответствии с количеством цифр после запятой
-        $cleanPrice = $this->ceil($convertedPrice, $this->getUserCurrency()->decimal_place);
+        $cleanPrice = $this->ceil($convertedPrice, $targetCurrency->decimal_place);
         return $cleanPrice;
     }
 
