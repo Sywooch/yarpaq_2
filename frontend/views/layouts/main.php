@@ -57,7 +57,7 @@ $this->beginPage();
     <div class="first">
         <div>
             <div class="info">
-                <span>Azerbaijan's Fastest Online Shopping Destination</span>
+                <span><?= Yii::t('app', 'Azerbaijan\'s Fastest Online Shopping Destination'); ?></span>
             </div>
             <div class="currency">
                 <a href="#" class="azn"><?= Yii::$app->currency->userCurrency->code; ?></a>
@@ -331,6 +331,7 @@ $this->beginPage();
 <script type="text/javascript" src="/js/main.js"></script>
 <script type="text/javascript" src="/js/product-filter.js"></script>
 <script type="text/javascript" src="/js/checkout.js"></script>
+<script type="text/javascript" src="/js/basket.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 
 

@@ -21,6 +21,7 @@ class ShippingController extends BasicController
         if ($geo) {
             $response['azerpoct'] = [
                 'code' => 'azerpoct.azerpoct_'.$geo['geo_zone_id'],
+                'amount' => $azerpoct
             ];
         }
 
@@ -31,6 +32,7 @@ class ShippingController extends BasicController
         if ($geo) {
             $response['elpost'] = [
                 'code' => 'elpost.elpost_'.$geo['geo_zone_id'],
+                'amount' => ''
             ];
         }
 

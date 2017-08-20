@@ -6,10 +6,12 @@ use frontend\models\AddToCartForm;
 use Yii;
 use yii\helpers\Url;
 use common\models\User;
+use yii\web\BadRequestHttpException;
+use yii\web\Response;
 
 class CartController extends BasicController
 {
-    public $freeAccessActions = ['test', 'index', 'add'];
+    public $freeAccessActions = ['index', 'add', 'update', 'remove'];
 
     public function actionTest() {
 
@@ -68,16 +70,59 @@ class CartController extends BasicController
 
     }
 
-    public function actionPlus() {
+    public function actionUpdate() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
-    }
+        if (!Yii::$app->request->post('product_id') || !Yii::$app->request->post('qty')) {
+            throw new BadRequestHttpException('invalid data');
+        }
 
-    public function actionMinus() {
+        $product_id = (int) Yii::$app->request->post('product_id');
+        $qty = (int) Yii::$app->request->post('qty');
 
+        $cart = Yii::$app->cart;
+        $products = $cart->products;
+
+        foreach ($products as $key => $product) {
+            if ($product['product_id'] == $product_id) {
+                $cart->update($key, $qty);
+                $cart->save();
+
+                return [
+                    'status' => 1,
+                    'total' => Yii::$app->currency->convertAndFormat($cart->subTotal, Yii::$app->currency->getCurrencyByCode($product['currency_code']))
+                ];
+            }
+        }
+
+        return ['status' => 0];
     }
 
     public function actionRemove() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
+        if (!Yii::$app->request->post('product_id')) {
+            throw new BadRequestHttpException('invalid data');
+        }
+
+        $product_id = (int) Yii::$app->request->post('product_id');
+
+        $cart = Yii::$app->cart;
+        $products = $cart->products;
+
+        foreach ($products as $key => $product) {
+            if ($product['product_id'] == $product_id) {
+                $cart->remove($key);
+                $cart->save();
+
+                return [
+                    'status' => 1,
+                    'total' => Yii::$app->currency->convertAndFormat($cart->subTotal, Yii::$app->currency->getCurrencyByCode($product['currency_code']))
+                ];
+            }
+        }
+
+        return ['status' => 0];
     }
 
 

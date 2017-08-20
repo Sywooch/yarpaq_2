@@ -2,17 +2,17 @@
 
 namespace backend\controllers;
 
+use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\payment\PaymentMethod;
 use common\models\payment\PaymentMethodSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PaymentMethodController implements the CRUD actions for PaymentMethod model.
  */
-class PaymentMethodController extends Controller
+class PaymentMethodController extends AdminDefaultController
 {
     /**
      * @inheritdoc

@@ -3656,7 +3656,8 @@ a.back_to_top.show_me {
   letter-spacing: -0.7px;
   text-transform: uppercase;
   text-decoration: none;
-  background: url(../img/select_arrow.png) no-repeat 95% 50%;
+  cursor: default;
+  /*background: url(../img/select_arrow.png) no-repeat 95% 50%;*/
 }
 
 .size_select > a em {

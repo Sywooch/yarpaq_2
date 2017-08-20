@@ -25,15 +25,15 @@ $(function () {
 
             $.each(response, function (type, obj) {
                 $('#'+type+'_shipping_method_block').fadeIn();
-                $('#'+type+'_method').val(obj.code);
-
 
                 $('.shipping_method_block:visible input').attr('checked', 'checked');
             });
         });
     });
 
-    $('#checkout-submit').click(function () {
+    $('#checkout-submit').click(function (e) {
+        e.preventDefault();
+
         $('#checkout-form').submit();
     });
 

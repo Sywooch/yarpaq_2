@@ -58,6 +58,8 @@ return [
 
                 'cart'          => 'cart/index',
                 'cart/add'      => 'cart/add',
+                'cart/update'   => 'cart/update',
+                'cart/remove'   => 'cart/remove',
 
                 'info/<url:.+>' => 'info/index',
 

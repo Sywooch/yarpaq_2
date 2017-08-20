@@ -147,7 +147,7 @@ $currency = Yii::$app->currency;
                         <p><?= Yii::t('app', 'By courier'); ?></p>
                         <label>
                             <span><?= Yii::t('app', 'By courier info'); ?></span>
-                            <input type="radio" name="shipping_method" value="" id="elpost_method">
+                            <input type="radio" name="shipping_method" value="1" id="elpost_method">
                             <em></em>
                         </label>
                     </li>
@@ -155,7 +155,7 @@ $currency = Yii::$app->currency;
                         <p><?= Yii::t('app', 'By post'); ?></p>
                         <label>
                             <span><?= Yii::t('app', 'By post info'); ?></span>
-                            <input type="radio" name="shipping_method" value="" id="azerpoct_method">
+                            <input type="radio" name="shipping_method" value="2" id="azerpoct_method">
                             <em></em>
                         </label>
                     </li>

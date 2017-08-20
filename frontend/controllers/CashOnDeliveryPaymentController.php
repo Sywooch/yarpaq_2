@@ -8,9 +8,9 @@ use yii\helpers\Url;
 
 class CashOnDeliveryPaymentController extends BaseController
 {
-    public $freeAccessActions = ['success'];
+    public $freeAccessActions = ['process'];
 
-    public function actionSuccess() {
+    public function actionProcess() {
         $this->redirect(Url::toRoute(['checkout/success']));
     }
 

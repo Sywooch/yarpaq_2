@@ -291,6 +291,8 @@ class Cart extends Component
         } else {
             $this->remove($key);
         }
+
+        Yii::$app->session->set('cart', $cart);
     }
 
     /**

@@ -14,6 +14,11 @@ $currency = Yii::$app->currency;
             </header>
             <?php if ($cart->hasProducts()) { ?>
                 <div class="basket_list">
+
+                    <input class="form-token" type="hidden"
+                           name="<?=Yii::$app->request->csrfParam?>"
+                           value="<?=Yii::$app->request->csrfToken?>">
+
                     <?php
                     foreach ($cart->getProducts() as $key => $product) {
                         $product_object = Product::findOne($product['product_id']); ?>
@@ -30,49 +35,37 @@ $currency = Yii::$app->currency;
                                 <p><?= $product['title']; ?></p>
                                 <div class="params">
 
-                                    <form action="/cart/add" method="post">
+                                    <?php
+                                    $mapped_options = \yii\helpers\ArrayHelper::map($product['option'], 'product_option_id', 'option_value_id');
+                                    foreach ($product_object->productOptions as $productOption) { ?>
+                                        <div class="size_select">
+                                            <span><?= $productOption->option->name;?></span>
+                                            <a href="javascript:void(0)"><em><?= \common\models\option\OptionValue::findOne( $mapped_options[ $productOption->id ] )->name; ?></em></a>
 
-                                        <input class="form-token" type="hidden"
-                                               name="<?=Yii::$app->request->csrfParam?>"
-                                               value="<?=Yii::$app->request->csrfToken?>">
-
-                                        <input type="hidden"
-                                               name="AddToCartForm[productId]"
-                                               value="<?=$product_object->id;?>">
-
-
-                                        <?php
-                                        $mapped_options = \yii\helpers\ArrayHelper::map($product['option'], 'product_option_id', 'option_value_id');
-                                        foreach ($product_object->productOptions as $productOption) { ?>
-                                            <div class="size_select">
-                                                <span><?= $productOption->option->name;?></span>
-                                                <a href="#"><em><?= \common\models\option\OptionValue::findOne( $mapped_options[ $productOption->id ] )->name; ?></em></a>
-
-                                                <ul>
-                                                    <?php foreach ($productOption->values as $value) { ?>
-                                                        <li>
-                                                            <label>
-                                                                <a
-                                                                    href="#"
-                                                                    <?php if ($mapped_options[$value->product_option_id] == $value->option_value_id) { echo 'class="active"'; } ?>
-                                                                    data-product-option-id="<?=$productOption->id;?>"
-                                                                    data-value="<?=$value->id;?>"><?=$value->optionValue->name;?></a>
-                                                            </label>
-                                                        </li>
-                                                    <?php } ?>
-                                                </ul>
-                                            </div>
-                                        <?php } ?>
-
-                                        <div class="count_select">
-                                            <span><?= Yii::t('app', 'Quantity'); ?></span>
-                                            <input type="text" name="AddToCartForm[quantity]" value="<?= $product['quantity']; ?>">
+                                            <!--<ul>
+                                                <?php foreach ($productOption->values as $value) { ?>
+                                                    <li>
+                                                        <label>
+                                                            <a
+                                                                href="#"
+                                                                <?php if ($mapped_options[$value->product_option_id] == $value->option_value_id) { echo 'class="active"'; } ?>
+                                                                data-product-option-id="<?=$productOption->id;?>"
+                                                                data-value="<?=$value->id;?>"><?=$value->optionValue->name;?></a>
+                                                        </label>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul> -->
                                         </div>
+                                    <?php } ?>
 
-                                    </form>
+                                    <div class="count_select">
+                                        <span><?= Yii::t('app', 'Quantity'); ?></span>
+                                        <input type="text" name="AddToCartForm[quantity]" value="<?= $product['quantity']; ?>" data-product-id="<?=$product_object->id;?>">
+                                    </div>
 
                                 </div>
                             </div>
+                            <a href="javascript:void(0)" class="close" data-product-id="<?=$product_object->id;?>"></a>
                         </article>
                     <?php } ?>
                 </div>
@@ -100,7 +93,7 @@ $currency = Yii::$app->currency;
             <div class="prices">
                 <dl>
                     <dt><?= Yii::t('app', 'Total'); ?></dt>
-                    <dd>
+                    <dd id="cart-total">
                         <?= $currency->convertAndFormat($cart->subTotal, $product_object->currency); ?>
                     </dd>
                 </dl>

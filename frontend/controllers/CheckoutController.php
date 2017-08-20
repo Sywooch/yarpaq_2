@@ -10,10 +10,12 @@ use common\models\order\Order;
 use common\models\order\OrderProduct;
 use common\models\OrderOption;
 use common\models\payment\PaymentMethod;
+use common\models\shipping\Shipping;
 use common\models\shipping\ShippingMethod;
 use common\models\Zone;
 use Yii;
 use yii\helpers\BaseInflector;
+use yii\web\BadRequestHttpException;
 use yii\web\Response;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -93,7 +95,7 @@ class CheckoutController extends BasicController
 
         // get payment method
         if ($request->post('payment_method')) {
-            if (strpos('.', $request->post('payment_method')) !== -1) {
+            if (strpos('.', $request->post('payment_method')) !== false) {
                 $pm = explode('.', $request->post('payment_method'));
 
                 $payment_method_id = $pm[0];
@@ -163,6 +165,9 @@ class CheckoutController extends BasicController
         $order->payment_code            = $payment_method['code'];
 
 
+        $zone = Zone::findOne($request->post('shipping_zone_id'));
+        $geo_zones = $zone->geoZones;
+        $main_geo_zone = $geo_zones[0];
 
         $order->shipping_firstname      = $request->post('shipping_firstname');
         $order->shipping_lastname       = $request->post('shipping_lastname');
@@ -171,20 +176,30 @@ class CheckoutController extends BasicController
         $order->shipping_city           = $request->post('shipping_city');
         $order->shipping_postcode       = $request->post('shipping_postcode');
         $order->shipping_zone_id        = $request->post('shipping_zone_id');
-        $order->shipping_zone           = Zone::findOne($request->post('shipping_zone_id'))->name;
+        $order->shipping_zone           = $zone->name;
         $order->shipping_country_id     = $request->post('shipping_country_id');
         $order->shipping_country        = Country::findOne($request->post('shipping_country_id'))->name;
 
 
 
-        $shipping_method = $request->post('shipping_method');
+        $shipping_method_id = $request->post('shipping_method');
 
-        //$order->shipping_method         = $shipping_method['title'];
-        $order->shipping_method         = $shipping_method;
-        $order->shipping_code           = $shipping_method;
+        $shipping_method = ShippingMethod::findOne($shipping_method_id);
+        if (!$shipping_method) { throw new BadRequestHttpException('Unknown shipping method'); }
+        $shipping_method_obj = Shipping::create($shipping_method->name);
+
+        $order->shipping_method         = $shipping_method->name;
+        $order->shipping_code           = $shipping_method->code;
 
         $order->comment                 = $session->get('comment');
         $order->total                   = $cart->total;
+
+
+
+        // add shipping
+        foreach ($cart->getProducts() as $product) {
+            $order->total += $shipping_method_obj->calculateCost($product['weight'], $main_geo_zone->geo_zone_id);
+        }
 
         $order->currency_id             = $currency->userCurrency->id;
         $order->currency_code           = $currency->userCurrency->code;

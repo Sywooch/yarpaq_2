@@ -153,11 +153,11 @@ class PayPalPaymentController extends BasicController
                     }
 
                     if (!$receiver_match) {
-                        Yii::error('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
+                        Yii::error('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower(Yii::$app->request->post['receiver_email']));
                     }
 
                     if (!$total_paid_match) {
-                        Yii::error('PP_STANDARD :: TOTAL PAID MISMATCH! ' . $this->request->post['mc_gross']);
+                        Yii::error('PP_STANDARD :: TOTAL PAID MISMATCH! ' . Yii::$app->request->post['mc_gross']);
                     }
                 }
             }

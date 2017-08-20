@@ -2,17 +2,17 @@
 
 namespace backend\controllers;
 
+use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\shipping\ShippingMethod;
 use common\models\shipping\ShippingMethodSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * ShippingMethodController implements the CRUD actions for ShippingMethod model.
  */
-class ShippingMethodController extends Controller
+class ShippingMethodController extends AdminDefaultController
 {
     /**
      * @inheritdoc
