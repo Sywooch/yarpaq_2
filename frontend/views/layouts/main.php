@@ -15,7 +15,7 @@ $this->beginPage();
     <meta name="description" content="Yarpaq site - Full description">
     <meta name="Keywords" content="Yarpaq, Almag, Telefonlar, Shop">
 
-    <title><?= @$page->title; ?> &mdash; Yarpaq online mağaza</title>
+    <title><?= @$page->title; ?> &mdash; <?= Yii::t('app', 'Yarpaq online mağaza'); ?></title>
 
     <meta property="og:title" content="The Rock" />
     <meta property="og:type" content="video.movie" />
@@ -147,20 +147,29 @@ $this->beginPage();
                                         <div>
                                             <nav>
 
-                                                <div> <!-- Column -->
 
-                                                    <?php
-                                                    foreach ($category->getChildren()->all() as $subcategory) { ?>
-                                                    <article>
-                                                        <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                        <ul>
-                                                            <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
-                                                            <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
-                                                            <?php } ?>
-                                                        </ul>
-                                                    </article>
-                                                    <?php } ?>
-                                                </div>
+
+                                                <?php
+                                                $menu_cursor = 0;
+                                                foreach ($category->getChildren()->all() as $subcategory) {
+                                                    $menu_cursor++;
+
+                                                    if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
+                                                    ?>
+                                                <article>
+                                                    <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
+                                                    <ul>
+                                                        <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                        <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                        <?php } ?>
+                                                    </ul>
+                                                </article>
+
+                                                <?php
+                                                    if (in_array($menu_cursor, [3,6,9])) { echo '</div>'; }
+                                                }
+                                                ?>
+
 
                                             </nav>
                                         </div>
@@ -171,7 +180,7 @@ $this->beginPage();
                         </div>
                         <div class="right_side">
                             <nav></nav>
-                            <div class="nav_banners">
+                            <div class="nav_banners" style="display: none">
                                 <ul>
                                     <li><a href="#"><img src="/upload/Images/40.jpg" alt=""></a></li>
                                     <li><a href="#"><img src="/upload/Images/41.jpg" alt=""></a></li>
@@ -303,8 +312,8 @@ $this->beginPage();
     </div>
     <div>
         <header>
-            <h2>Login On Yarpaq.az</h2>
-            <p>Please provide your Email to Login</p>
+            <h2><?= Yii::t('app', 'Login On Yarpaq.az'); ?></h2>
+            <p><?= Yii::t('app', 'Please provide your Email to Login'); ?></p>
             <a href="#" class="close"></a>
         </header>
         <div class="form">
@@ -317,7 +326,7 @@ $this->beginPage();
             </form>
         </div>
         <div class="social_login" style="display: none;">
-            <p>or Login using</p>
+            <p><?= Yii::t('app', 'or Login using'); ?></p>
             <ul>
                 <li><a href="#"><img src="/img/facebook_login.png" alt=""></a></li>
                 <li><a href="#"><img src="/img/google_login.png" alt=""></a></li>
