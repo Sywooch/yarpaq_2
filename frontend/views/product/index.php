@@ -185,56 +185,23 @@ $currency = Yii::$app->currency;
                 <div>
                     <div class="reviews_block">
                         <div class="reviews_list">
+
+                            <?php foreach ($product->reviews as $review) { ?>
                             <article>
                                 <div class="left_info">
                                     <div class="rating">
                                         <span class="star_2"></span>
                                     </div>
-                                    <h4>Aygün Qarayeva</h4>
-                                    <time>03/12/2014</time>
+                                    <h4><?= $review->customer->fullname; ?></h4>
+                                    <time><?= $review->post_date ?></time>
                                 </div>
                                 <div class="text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
+                                    <p><?= $review->review; ?></p>
                                 </div>
                             </article>
-                            <article>
-                                <div class="left_info">
-                                    <div class="rating">
-                                        <span class="star_2"></span>
-                                    </div>
-                                    <h4>Aygün Qarayeva</h4>
-                                    <time>03/12/2014</time>
-                                </div>
-                                <div class="text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
-                                </div>
-                            </article>
-                            <article>
-                                <div class="left_info">
-                                    <div class="rating">
-                                        <span class="star_2"></span>
-                                    </div>
-                                    <h4>Aygün Qarayeva</h4>
-                                    <time>03/12/2014</time>
-                                </div>
-                                <div class="text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
-                                </div>
-                            </article>
-                            <article>
-                                <div class="left_info">
-                                    <div class="rating">
-                                        <span class="star_2"></span>
-                                    </div>
-                                    <h4>Aygün Qarayeva</h4>
-                                    <time>03/12/2014</time>
-                                </div>
-                                <div class="text">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, dignissimos quia nesciunt voluptatum officiis. Quis sint delectus nostrum totam, nisi veniam fugit. Nam alias ducimus consectetur similique beatae fugit inventore. Reprehenderit cum quibusdam non expedita sit, ad tempore doloribus illum sint, nam quis commodi, ea nulla eaque, odit assumenda velit?</p>
-                                </div>
-                            </article>
+                            <?php } ?>
+
                         </div>
-                        <div class="add_review_button"><a href="#" class="open_comment_modal">RƏY BİLDİR</a></div>
                     </div>
                 </div>
 
