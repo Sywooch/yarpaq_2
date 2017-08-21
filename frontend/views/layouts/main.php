@@ -117,20 +117,26 @@ $this->beginPage();
                                             <div>
                                                 <nav>
 
-                                                    <div> <!-- Column -->
+                                                    <?php
+                                                    $menu_cursor = 0;
+                                                    foreach ($category->getChildren()->all() as $subcategory) {
+                                                        $menu_cursor++;
+
+                                                        if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
+                                                        ?>
+                                                        <article>
+                                                            <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
+                                                            <ul>
+                                                                <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                                    <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                                <?php } ?>
+                                                            </ul>
+                                                        </article>
 
                                                         <?php
-                                                        foreach ($category->getChildren()->all() as $subcategory) { ?>
-                                                            <article>
-                                                                <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                                <ul>
-                                                                    <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
-                                                                        <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
-                                                                    <?php } ?>
-                                                                </ul>
-                                                            </article>
-                                                        <?php } ?>
-                                                    </div>
+                                                        if (in_array($menu_cursor, [3,6,9])) { echo '</div>'; }
+                                                    }
+                                                    ?>
 
                                                 </nav>
                                             </div>
@@ -156,14 +162,14 @@ $this->beginPage();
 
                                                     if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
                                                     ?>
-                                                <article>
-                                                    <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                    <ul>
-                                                        <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
-                                                        <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
-                                                        <?php } ?>
-                                                    </ul>
-                                                </article>
+                                                    <article>
+                                                        <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
+                                                        <ul>
+                                                            <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                            <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </article>
 
                                                 <?php
                                                     if (in_array($menu_cursor, [3,6,9])) { echo '</div>'; }
