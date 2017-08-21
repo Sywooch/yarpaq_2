@@ -71,13 +71,14 @@ return [
 
                 'currency/switch'        => 'currency/switch',
 
-                'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
+
 
                 'registration'  => 'user/registration',
                 'login'         => 'user/login',
                 'logout'        => 'user-management/auth/logout',
                 'profile'       => 'user-management/user/profile',
 
+                'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
                 '<url:.+>'      => 'category/index'
             ],
         ],

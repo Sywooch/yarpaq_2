@@ -737,7 +737,8 @@ a.search_toggler {
 }
 
 .sign_in_dropdown nav p {
-  padding: 0 0 0 25px;
+  /*padding: 0 0 0 25px;*/
+  padding: 5px 0 15px 25px;
   color: #fff;
   font-size: 18px;
   font-weight: 400;
@@ -770,7 +771,8 @@ a.search_toggler {
   text-decoration: none;
 }
 
-.sign_in_dropdown > div .login a {
+.sign_in_dropdown > div .login a,
+.sign_in_dropdown > div .logout a{
   display: block;
   height: 40px;
   line-height: 40px;
@@ -5443,8 +5445,8 @@ aside.aside_products article .old_price b.discount {
   display: block;
   width: 170px;
   float: left;
-  padding: 0 20px 0 0;
-  line-height: 70px;
+  padding: 16px 20px 0 0;
+  line-height: 120%;
   text-align: right;
   color: #999;
   font-family: 'Roboto';

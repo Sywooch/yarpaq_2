@@ -188,7 +188,7 @@ $this->beginPage();
                                name="q" autocomplete="off"
                                value="<?= @htmlentities($this->params['q']); ?>">
                         <button type="submit"><?= Yii::t('app', 'Search'); ?></button>
-                        <ul>
+                        <ul style="display: none">
                             <li><a href="#">Womens fashion</a></li>
                             <li><a href="#">Mens fashion</a></li>
                             <li><a href="#">Corablar</a></li>
@@ -197,14 +197,14 @@ $this->beginPage();
                         </ul>
                     </form>
                     <a href="#" class="close"><?= Yii::t('app', 'Cancel'); ?></a>
-                    <div class="last_searched_list">
+                    <div class="last_searched_list" style="display: none !important;">
                         <h3>Recently searches</h3>
                         <ul>
                             <li><a href="#">Mens fashion</a></li>
                             <li><a href="#">Womens fashion</a></li>
                         </ul>
                     </div>
-                    <div class="tending_searches">
+                    <div class="tending_searches" style="display: none !important;">
                         <h3>Trendİng searches</h3>
                         <ul>
                             <li><a href="#">Womens fashion</a></li>
@@ -231,25 +231,35 @@ $this->beginPage();
                     </div>
                 </div>
                 <div class="sign_link">
-                    <a href="#"><span>Sign in</span></a>
+                    <a href="#">
+                        <span><?= Yii::$app->user->isGuest ? Yii::t('app', 'Sign in') : Yii::t('app', 'Account'); ?></span>
+                    </a>
                     <div class="sign_in_dropdown">
-                        <nav>
-                            <ul>
-                                <li><a href="#" class="account">Your account</a></li>
-                                <li><a href="#" class="orders">Your Orders</a></li>
-                                <li><a href="#" class="wishlist">Wishlist</a></li>
-                            </ul>
-                            <p>Your text here</p>
-                        </nav>
+                        <?php if (Yii::$app->user->isGuest) { ?>
                         <div>
-                            <p>If you are a new user</p>
+                            <p><?= Yii::t('app', 'If you are a new user'); ?></p>
                             <div class="register">
-                                <a href="#">Register</a>
+                                <a href="<?= Url::toRoute(['/registration']); ?>"><?= Yii::t('app', 'Register'); ?></a>
                             </div>
                             <div class="login">
-                                <a href="#">LOGIN</a>
+                                <a href="#"><?= Yii::t('app', 'Login'); ?></a>
                             </div>
                         </div>
+                        <?php } else { ?>
+                        <nav>
+                            <p>t-moor@test.ru</p>
+                            <ul>
+                                <li><a href="<?= Url::to(['user/account']); ?>" class="account"><?= Yii::t('app', 'My account'); ?></a></li>
+                                <li><a href="<?= Url::to(['user/orders-history']); ?>" class="orders"><?= Yii::t('app', 'Orders history'); ?></a></li>
+                                <li style="display: none;"><a href="#" class="wishlist">Wishlist</a></li>
+                            </ul>
+                        </nav>
+                        <div>
+                            <div class="logout">
+                                <a href="<?= Url::toRoute(['/logout']); ?>"><?= Yii::t('app', 'Logout'); ?></a>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="basket_link">
@@ -293,22 +303,20 @@ $this->beginPage();
     </div>
     <div>
         <header>
-            <h2>Login/Sign Up On Yarpaq.az</h2>
-            <p>Please provide your Mobile Number or Email to Login/ Sign Up on Snapdeal</p>
+            <h2>Login On Yarpaq.az</h2>
+            <p>Please provide your Email to Login</p>
             <a href="#" class="close"></a>
         </header>
         <div class="form">
-            <form action="simple.php">
+            <form action="/user/login" id="signin-popup-form">
                 <ul>
-                    <li><input type="text" placeholder="Name / Surname"></li>
-                    <li><input type="text" placeholder="Email"></li>
-                    <li><input type="password" placeholder="Password"></li>
-                    <li><input type="password" placeholder="Re-enter password"></li>
-                    <li><button type="submit">davam et</button></li>
+                    <li><input type="text" name="LoginForm[email]" placeholder="<?= Yii::t('app', 'Email'); ?>"></li>
+                    <li><input type="password" name="LoginForm[password]" placeholder="<?= Yii::t('app', 'Password'); ?>"></li>
+                    <li><button type="submit"><?= Yii::t('app', 'Login'); ?></button></li>
                 </ul>
             </form>
         </div>
-        <div class="social_login">
+        <div class="social_login" style="display: none;">
             <p>or Login using</p>
             <ul>
                 <li><a href="#"><img src="/img/facebook_login.png" alt=""></a></li>

@@ -41,6 +41,10 @@ $(function () {
             if (response.status) {
                 self.closest('article').fadeOut(function () {
                     $(this).remove();
+
+                    if (!$('.basket_list article').size()) {
+                        location.reload()
+                    }
                 });
 
                 if (response.status) {
@@ -48,10 +52,6 @@ $(function () {
                 }
             }
 
-
-            if (!$('.basket_list article').size()) {
-                location.reload()
-            }
         }, 'json');
 
     });

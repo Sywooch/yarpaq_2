@@ -5,9 +5,17 @@ $(function () {
             var zone_select = $('#zone_select');
             zone_select.html('');
 
+            var default_zone_id = zone_select.data('default');
+
             $.each(response, function (id, name) {
-                zone_select.append( $('<option value="'+id+'">'+name+'</option>') );
+                if (default_zone_id != id) {
+                    zone_select.append( $('<option value="'+id+'">'+name+'</option>') );
+                } else {
+                    zone_select.append( $('<option selected value="'+id+'">'+name+'</option>') );
+                }
             });
+
+            zone_select.change();
         });
     });
 

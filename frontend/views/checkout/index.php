@@ -17,128 +17,86 @@ $currency = Yii::$app->currency;
                    name="<?=Yii::$app->request->csrfParam?>"
                    value="<?=Yii::$app->request->csrfToken?>">
 
-            <?php if ($user) { ?>
-                <div class="shipping_address_edit">
-                    <h3><?= Yii::t('app', 'Shipping address'); ?></h3>
-                    <div class="list">
-                        <ul>
-                            <li>
-                                <label>
-                                    <span>Orkhan Haciev <br>
-                                    General Sixlinski 42, mənsiz 113<br>
-                                    Baku<br>
-                                    Azerbaijan<br>
-                                    AZ1129<br>
-                                    Azerbaijan<br>
-                                    +944558555644</span>
-                                    <input type="radio" name="adress_name">
-                                    <em></em>
-                                    <strong>Bu sizin hal-hazırki çatdırılma ünvanınızdır</strong>
-                                    <a href="#">ünvana düzəlİş et</a>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <span>Orkhan Haciev <br>
-                                    General Sixlinski 42, mənsiz 113<br>
-                                    Baku<br>
-                                    Azerbaijan<br>
-                                    AZ1129<br>
-                                    Azerbaijan<br>
-                                    +944558555644</span>
-                                    <input type="radio" name="adress_name">
-                                    <em></em>
-                                    <strong>Bu sizin hal-hazırki çatdırılma ünvanınızdır</strong>
-                                    <a href="#">ünvana düzəlİş et</a>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>
-                    <footer>
-                        <div class="add_new"><a href="#">Yenİ ünvan əlavə et</a></div>
-                        <div class="cancel"><a href="#">ləğv etmək</a></div>
-                    </footer>
-                </div>
-            <?php } else { ?>
-                <div class="address_form">
-                    <h3><?= Yii::t('app', 'Shipping information'); ?></h3>
+            <div class="address_form">
+                <h3><?= Yii::t('app', 'Shipping information'); ?></h3>
 
-                    <ul>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Name'); ?>:</span>
-                                <em>*</em>
-                            </div>
-                            <input type="text" required name="shipping_firstname" value="<?= $shipping_info['firstname']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Surname'); ?> :</span>
-                                <em>*</em>
-                            </div>
-                            <input type="text" required name="shipping_lastname" value="<?= $shipping_info['lastname']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Mobile phone'); ?> </span>
-                                <em>*</em>
-                            </div>
-                            <input type="text" required name="phone1" value="<?= $user_info['phone1']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Email'); ?> :</span>
-                            </div>
-                            <input type="text" required name="email" value="<?= $user_info['email']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Street'); ?> :</span>
-                                <em>*</em>
-                            </div>
-                            <input type="text" required name="shipping_address" value="<?= $shipping_info['address']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'City'); ?> :</span>
-                                <em>*</em>
-                            </div>
-                            <input type="text" required name="shipping_city" value="<?= $shipping_info['city']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Postal code'); ?> :</span>
-                                <em>*</em>
-                            </div>
-                            <input type="text" name="shipping_postcode" required value="<?= $shipping_info['postal_code']; ?>">
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'Country'); ?> :</span>
-                                <em>*</em>
-                            </div>
-                            <select name="shipping_country_id" id="country_select">
-                                <?php
-                                $countries = Country::find()->all();
+                <ul>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'Name'); ?>:</span>
+                            <em>*</em>
+                        </div>
+                        <input type="text" required name="shipping_firstname" value="<?= $shipping_info['firstname']; ?>">
+                    </li>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'Surname'); ?> :</span>
+                            <em>*</em>
+                        </div>
+                        <input type="text" required name="shipping_lastname" value="<?= $shipping_info['lastname']; ?>">
+                    </li>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'Mobile phone'); ?> </span>
+                            <em>*</em>
+                        </div>
+                        <input type="text" required name="phone1" value="<?= $user_info['phone1']; ?>">
+                    </li>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'Email'); ?> :</span>
+                        </div>
+                        <input type="text" required name="email" value="<?= $user_info['email']; ?>">
+                    </li>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'Street'); ?> :</span>
+                            <em>*</em>
+                        </div>
+                        <input type="text" required name="shipping_address" value="<?= $shipping_info['address']; ?>">
+                    </li>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'City'); ?> :</span>
+                            <em>*</em>
+                        </div>
+                        <input type="text" required name="shipping_city" value="<?= $shipping_info['city']; ?>">
+                    </li>
+                    <li>
+                        <div>
+                            <span><?= Yii::t('app', 'Postal code'); ?> :</span>
+                            <em>*</em>
+                        </div>
+                        <input type="text" name="shipping_postcode" required value="<?= $shipping_info['postcode']; ?>">
+                    </li>
+                    <li>
+                        <?php $default_country_id = $shipping_info['country_id'] ? $shipping_info['country_id'] : 15 ?>
+                        <div>
+                            <span><?= Yii::t('app', 'Country'); ?> :</span>
+                            <em>*</em>
+                        </div>
+                        <select name="shipping_country_id" id="country_select">
+                            <?php
+                            $countries = Country::find()->all();
 
-                                foreach ($countries as $country) { ?>
-                                    <option <?= $country->id == 15 ? 'selected' : ''; ?> value="<?= $country->id; ?>"><?= $country->name; ?></option>
-                                <?php } ?>
-                            </select>
-                        </li>
-                        <li>
-                            <div>
-                                <span><?= Yii::t('app', 'State'); ?> :</span>
-                                <em>*</em>
-                            </div>
+                            foreach ($countries as $country) { ?>
+                                <option <?= $country->id == $default_country_id ? 'selected' : ''; ?> value="<?= $country->id; ?>"><?= $country->name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </li>
+                    <li>
+                        <?php $default_zone_id = $shipping_info['zone_id'] ? $shipping_info['zone_id'] : 216 ?>
+                        <div>
+                            <span><?= Yii::t('app', 'State'); ?> :</span>
+                            <em>*</em>
+                        </div>
 
-                            <select name="shipping_zone_id" class="zones_select" id="zone_select">
+                        <select name="shipping_zone_id" class="zones_select" id="zone_select" data-default="<?= $default_zone_id; ?>">
 
-                            </select>
-                        </li>
-                    </ul>
-                </div>
-            <?php } ?>
+                        </select>
+                    </li>
+                </ul>
+            </div>
 
             <div class="delivery_methods">
                 <h3><?= Yii::t('app', 'Shipping method'); ?></h3>
