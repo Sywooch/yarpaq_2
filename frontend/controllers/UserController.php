@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\address\Address;
 use common\models\Country;
 use common\models\Language;
+use common\models\order\Order;
 use common\models\Profile;
 use common\models\Zone;
 use frontend\models\LoginForm;
@@ -13,6 +14,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\User;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -20,7 +22,7 @@ use yii\widgets\ActiveForm;
 class UserController extends BasicController
 {
 
-    public $freeAccessActions = ['registration', 'login'];
+    public $freeAccessActions = ['registration', 'login', 'orders', 'profile'];
 
     public function actionRegistration()
     {
@@ -119,5 +121,17 @@ class UserController extends BasicController
         return $this->redirect(Yii::$app->homeUrl);
     }
 
+    public function actionProfile() {
 
+    }
+
+    public function actionOrders() {
+        $user = User::getCurrentUser();
+        if (!$user) { throw new ForbiddenHttpException(); }
+
+
+        return $this->render('orders', [
+            'orders' => Order::find()->andWhere(['user_id' => $user->id])->all()
+        ]);
+    }
 }

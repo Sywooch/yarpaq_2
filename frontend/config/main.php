@@ -76,7 +76,9 @@ return [
                 'registration'  => 'user/registration',
                 'login'         => 'user/login',
                 'logout'        => 'user-management/auth/logout',
-                'profile'       => 'user-management/user/profile',
+
+                'user/profile'       => 'user/profile',
+                'user/orders'        => 'user/orders',
 
                 'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
                 '<url:.+>'      => 'category/index'

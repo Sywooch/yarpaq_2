@@ -247,10 +247,10 @@ $this->beginPage();
                         </div>
                         <?php } else { ?>
                         <nav>
-                            <p>t-moor@test.ru</p>
+                            <p><?= \common\models\User::getCurrentUser()->email; ?></p>
                             <ul>
-                                <li><a href="<?= Url::to(['user/account']); ?>" class="account"><?= Yii::t('app', 'My account'); ?></a></li>
-                                <li><a href="<?= Url::to(['user/orders-history']); ?>" class="orders"><?= Yii::t('app', 'Orders history'); ?></a></li>
+                                <li><a href="<?= Url::toRoute(['user/profile']); ?>" class="account"><?= Yii::t('app', 'My account'); ?></a></li>
+                                <li><a href="<?= Url::toRoute(['user/orders']); ?>" class="orders"><?= Yii::t('app', 'Orders history'); ?></a></li>
                                 <li style="display: none;"><a href="#" class="wishlist">Wishlist</a></li>
                             </ul>
                         </nav>
