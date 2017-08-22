@@ -1,5 +1,6 @@
 <?php
 use common\models\info\Info;
+use yii\helpers\Url;
 ?>
 <!-- FOOTER BEGINS -->
 
@@ -9,31 +10,31 @@ use common\models\info\Info;
             <li>
                 <span>
                     <span><img src="/img/icon_1.svg" alt=""></span>
-                    <strong>SƏRFƏLİ QİYMƏTLƏR</strong>
+                    <strong><?= Yii::t('app', 'SƏRFƏLİ QİYMƏTLƏR'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_2.svg" alt=""></span>
-                    <strong>GÜVƏNİLİR ALIŞ-VERİŞ</strong>
+                    <strong><?= Yii::t('app', 'GÜVƏNİLİR ALIŞ-VERİŞ'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_3.svg" alt=""></span>
-                    <strong>100% QAYTARILMA</strong>
+                    <strong><?= Yii::t('app', '100% QAYTARILMA'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_4.svg" alt=""></span>
-                    <strong>RAHAT ÖDƏNİŞ</strong>
+                    <strong><?= Yii::t('app', 'RAHAT ÖDƏNİŞ'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_5.svg" alt=""></span>
-                    <strong>PULSUZ ÇATDIRILMA</strong>
+                    <strong><?= Yii::t('app', 'PULSUZ ÇATDIRILMA'); ?></strong>
                 </span>
             </li>
         </ul>
@@ -71,10 +72,9 @@ use common\models\info\Info;
             <article>
                 <h3><?= Yii::t('app', 'Account'); ?></h3>
                 <ul>
-                    <li><a href="#">Şəxsi məlumat</a></li>
-                    <li><a href="#">Sifariş Tarixçəsi</a></li>
-                    <li><a href="#">Ünvanlar</a></li>
-                    <li><a href="#">Səbət</a></li>
+                    <li><a href="<?= Url::toRoute(['user/profile']); ?>"><?= Yii::t('app', 'My account'); ?></a></li>
+                    <li><a href="<?= Url::toRoute(['user/profile']); ?>"><?= Yii::t('app', 'Orders history'); ?></a></li>
+                    <li><a href="<?= Url::toRoute(['/cart']); ?>"><?= Yii::t('app', 'Cart'); ?></a></li>
                 </ul>
             </article>
             <article>
