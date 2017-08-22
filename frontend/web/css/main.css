@@ -6880,3 +6880,24 @@ a.clear_filtre {
   -khtml-border-radius: 4px;
   border-radius: 4px;
 }
+
+
+.info-block {
+  background: #fff;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.info-block h1 {
+  font-size: 25px;
+  color: #000;
+  font-weight: bold;
+  border-bottom: 1px solid #DDDDDD;
+  padding-bottom: 26px;
+}
+
+.info-block p {
+  padding: 20px 0;
+  font-size: 18px;
+  color: #808080;
+}
