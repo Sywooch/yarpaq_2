@@ -52,12 +52,11 @@ class ProductController extends AdminDefaultController
         $searchModel            = new ProductSearch();
 
         if (!User::hasPermission('view_all_products')) {
+            $searchModel->load(Yii::$app->request->queryParams);
             $searchModel->user_id   = User::getCurrentUser()->id;
-            $searchModel->scenario  = ProductSearch::SCENARIO_OWN;
         }
 
-
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search();
 
         return $this->render('index', [
             'searchModel' => $searchModel,

@@ -14,9 +14,11 @@ $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
+    <?php if (\common\models\User::hasPermission('create_order')) { ?>
     <p>
         <?= Html::a(Yii::t('app', 'Create Order'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?php } ?>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

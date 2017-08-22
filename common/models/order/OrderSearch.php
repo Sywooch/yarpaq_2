@@ -12,6 +12,8 @@ use yii\data\ActiveDataProvider;
 class OrderSearch extends Order
 {
 
+    const SCENARIO_OWN = 'own';
+
     /**
      * @inheritdoc
      */
@@ -36,11 +38,9 @@ class OrderSearch extends Order
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
-     *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search()
     {
         $query = Order::find()->orderBy(['created_at' => SORT_DESC]);
 
@@ -50,7 +50,6 @@ class OrderSearch extends Order
             'query' => $query,
         ]);
 
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

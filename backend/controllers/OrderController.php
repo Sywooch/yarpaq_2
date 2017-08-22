@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use backend\models\OrderProductAddForm;
 use common\models\Country;
@@ -49,7 +50,14 @@ class OrderController extends AdminDefaultController
     public function actionIndex()
     {
         $searchModel = new OrderSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+
+        if (!User::hasPermission('view_all_orders')) {
+            $searchModel->load(Yii::$app->request->queryParams);
+            $searchModel->user_id   = User::getCurrentUser()->id;
+        }
+        $dataProvider = $searchModel->search();
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
