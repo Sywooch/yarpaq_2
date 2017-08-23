@@ -1031,8 +1031,10 @@ a.search_toggler {
 }
 
 .product_carusel .swipe ul li .image {
-  height: 215px;
-  line-height: 215px;
+  height: 200px;
+  line-height: 200px;
+  margin: 0 0 15px;
+  overflow: hidden;
 }
 
 .product_carusel .swipe ul li .image img {

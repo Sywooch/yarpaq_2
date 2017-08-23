@@ -16,7 +16,7 @@
 
 <!-- INDEX SLIDER END -->
 
-<div class="mobile_categories">
+<div class="mobile_categories" style="display: none;">
     <ul>
         <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
         <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
@@ -42,7 +42,7 @@
 <!-- BANNER END -->
 
 <div class="banner_long">
-    <a href="#"><img src="/img/banner_1.png" alt=""><img src="/img/banner_1_mobile.png" alt=""></a>
+    <a href="#"><img src="/upload/Images/school.jpg" alt=""><img src="/upload/Images/mobile-school.jpg" alt=""></a>
 </div>
 
 <!-- BANNER END -->

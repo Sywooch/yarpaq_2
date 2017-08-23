@@ -6,10 +6,9 @@
             <li>
                 <div>
                     <div class="image">
-                        <img src="<?= @$product->gallery[0]->url; ?>"
-                             alt="<?= $product->title; ?>"
-                             title="<?= $product->title; ?>">
+                        <img src="<?= @$product->gallery[0]->url; ?>" alt="<?= $product->title; ?>" itemprop="image">
                     </div>
+                    
                     <h3><?= $product->title; ?></h3>
                     <div class="price"><span><?= $product->price; ?> <b class="currency_icon">m</b></span></div>
                     <?php if ($product->hasDiscount()) { ?>

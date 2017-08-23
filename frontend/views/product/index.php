@@ -58,7 +58,7 @@ $currency = Yii::$app->currency;
                             <li><?= Yii::t('app', 'Condition'); ?>:  <b><?= Yii::t('app', $product->condition);?></b></li>
 
                             <?php if ($product->manufacturer) { ?>
-                            <li><?= Yii::t('app', 'Brand'); ?>:  <b><?= $product->manufacturer->name; ?></b></li>
+                            <li><?= Yii::t('app', 'Brand'); ?>:  <b><?= $product->manufacturer->title; ?></b></li>
                             <?php } ?>
 
                         </ul>
