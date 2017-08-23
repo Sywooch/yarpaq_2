@@ -12,5 +12,5 @@
         <li><a href="#" class="filtre"><span><?= Yii::t('app', 'Filter'); ?></span></a></li>
     </ul>
 
-    <p><?= Yii::t('app', 'Products found'); ?> - <?= $count; ?></p>
+    <p><?= Yii::t('app', 'Products found - {count}', ['count' => $count]); ?></p>
 </div>

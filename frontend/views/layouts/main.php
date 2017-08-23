@@ -11,7 +11,7 @@ $this->beginPage();
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no">
     <meta name="description" content="Yarpaq site - Full description">
     <meta name="Keywords" content="Yarpaq, Almag, Telefonlar, Shop">
 
@@ -257,7 +257,7 @@ $this->beginPage();
                                 <a href="<?= Url::toRoute(['/registration']); ?>"><?= Yii::t('app', 'Register'); ?></a>
                             </div>
                             <div class="login">
-                                <a href="#"><?= Yii::t('app', 'Login'); ?></a>
+                                <a href="#"><?= Yii::t('app', 'Sign in'); ?></a>
                             </div>
                         </div>
                         <?php } else { ?>
@@ -309,17 +309,17 @@ $this->beginPage();
 <div class="signin_modal">
     <div class="sign_back">
         <ul>
-            <li><img src="/img/icon_10.svg" alt=""><span><?= Yii::t('app', 'SƏRFƏLİ QİYMƏTLƏR'); ?></span></li>
-            <li><img src="/img/icon_11.svg" alt=""><span><?= Yii::t('app', 'GÜVƏNİLİR ALIŞ-VERİŞ'); ?></span></li>
-            <li><img src="/img/icon_12.svg" alt=""><span><?= Yii::t('app', '100% QAYTARILMA'); ?></span></li>
-            <li><img src="/img/icon_13.svg" alt=""><span><?= Yii::t('app', 'RAHAT ÖDƏNİŞ'); ?></span></li>
-            <li><img src="/img/icon_14.svg" alt=""><span><?= Yii::t('app', 'PULSUZ ÇATDIRILMA'); ?></span></li>
+            <li><img src="/img/icon_10.svg" alt=""><span><?= Yii::t('app', 'Reasonable prices'); ?></span></li>
+            <li><img src="/img/icon_11.svg" alt=""><span><?= Yii::t('app', 'Safe shopping'); ?></span></li>
+            <li><img src="/img/icon_12.svg" alt=""><span><?= Yii::t('app', '100% return'); ?></span></li>
+            <li><img src="/img/icon_13.svg" alt=""><span><?= Yii::t('app', 'Convenient payment'); ?></span></li>
+            <li><img src="/img/icon_14.svg" alt=""><span><?= Yii::t('app', 'Free delivery'); ?></span></li>
         </ul>
     </div>
     <div>
         <header>
-            <h2><?= Yii::t('app', 'Login On Yarpaq.az'); ?></h2>
-            <p><?= Yii::t('app', 'Please provide your Email to Login'); ?></p>
+            <h2><?= Yii::t('app', 'Sign in'); ?></h2>
+            <p><?= Yii::t('app', 'Please provide your Email and Password to Login'); ?></p>
             <a href="#" class="close"></a>
         </header>
         <div class="form">
@@ -327,7 +327,7 @@ $this->beginPage();
                 <ul>
                     <li><input type="text" name="LoginForm[email]" placeholder="<?= Yii::t('app', 'Email'); ?>"></li>
                     <li><input type="password" name="LoginForm[password]" placeholder="<?= Yii::t('app', 'Password'); ?>"></li>
-                    <li><button type="submit"><?= Yii::t('app', 'Login'); ?></button></li>
+                    <li><button type="submit"><?= Yii::t('app', 'Sign in'); ?></button></li>
                 </ul>
             </form>
         </div>

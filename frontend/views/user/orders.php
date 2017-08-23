@@ -7,11 +7,11 @@
                 <thead>
                     <tr>
                         <td>#</td>
-                        <td><?= Yii::t('app', 'Order Date'); ?></td>
+                        <td><?= Yii::t('app', 'Order date'); ?></td>
                         <td><?= Yii::t('app', 'Price'); ?></td>
                         <td><?= Yii::t('app', 'Status'); ?></td>
-                        <td><?= Yii::t('app', 'Delivered Date'); ?></td>
-                        <td><?= Yii::t('app', 'Details'); ?></td>
+                        <td><?= Yii::t('app', 'Delivered date'); ?></td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +22,7 @@
                         <td><?= $order->total; ?></td>
                         <td><?= $order->status->name; ?></td>
                         <td><?= $order->modified_at; ?></td>
-                        <td><a href="#"><?= Yii::t('app', 'View order'); ?></a></td>
+                        <td><a href="#"><?= Yii::t('app', 'More info'); ?></a></td>
                     </tr>
                     <?php } ?>
                 </tbody>

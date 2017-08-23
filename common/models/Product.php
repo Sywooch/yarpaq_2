@@ -60,8 +60,8 @@ class Product extends \yii\db\ActiveRecord
     const CONDITION_USED    = 2;
 
     protected $conditions = [
-        '1' => 'new',
-        '2' => 'used'
+        '1' => 'New',
+        '2' => 'Used'
     ];
 
     protected $appliedOptions;

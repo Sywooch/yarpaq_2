@@ -133,7 +133,7 @@
                     </li>
 
                     <li <?= isset($addressErrors['postcode']) ? 'class="error"' : ''; ?>>
-                        <span><?= Yii::t('app', 'Postal code'); ?></span>
+                        <span><?= Yii::t('app', 'Postal Code'); ?></span>
                         <div>
                             <input type="text" name="postal_code" value="<?= $address->postcode; ?>">
                             <?php if (isset($addressErrors['postcode'])) { ?>

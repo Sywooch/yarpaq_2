@@ -195,7 +195,7 @@ class Info extends \yii\db\ActiveRecord implements Ipage, IDocument
      * @return string
      */
     public function getUrlByLanguage(Language $language, $includingSelf = true) {
-        $url = $language->getUrlPrefix();
+        $url = $language->getUrlPrefix().'/';
 
         $url .= 'info';
 

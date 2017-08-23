@@ -76,7 +76,7 @@ $currency = Yii::$app->currency;
 
         <div class="delivery_info">
             <h3><?= Yii::t('app', 'Free shipping'); ?></h3>
-            <p><?= Yii::t('app', 'Delivery to all regions of the country is possible'); ?></p>
+            <p><?= Yii::t('app', 'Delivery to all regions of the country is available'); ?></p>
             <div class="link"><a href="<?= Info::findOne(5)->url; ?>"><?= Yii::t('app', 'More info'); ?></a></div>
         </div>
         <div class="return_info">

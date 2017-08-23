@@ -37,7 +37,7 @@ $currency = Yii::$app->currency;
                         <div class="rating">
                             <span class="star_<?= $product->rating; ?>"></span>
                         </div>
-                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product id'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
+                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span># <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
                     </div>
                     <div class="second_info">
                         <div class="wrap_store">
@@ -73,19 +73,19 @@ $currency = Yii::$app->currency;
                                     <tr>
                                         <td>&nbsp;</td>
                                         <?php foreach ($albali->getMonths() as $month) { ?>
-                                        <td><?= $month; ?> <?= Yii::t('app', 'AY'); ?></td>
+                                        <td><?= $month; ?> <?= Yii::t('app', 'Month'); ?></td>
                                         <?php } ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><?= Yii::t('app', 'Aylıq ödəniş'); ?></td>
+                                        <td><?= Yii::t('app', 'Monthly'); ?></td>
                                         <?php foreach ($albali->getMonths() as $month) { ?>
                                             <td><?= $albali->getMonthlyAmount($month); ?> <span class="currency_icon">m</span></td>
                                         <?php } ?>
                                     </tr>
                                     <tr>
-                                        <td><?= Yii::t('app', 'Ümumi ödəniş'); ?></td>
+                                        <td><?= Yii::t('app', 'Total'); ?></td>
                                         <?php foreach ($albali->getMonths() as $month) { ?>
                                             <td><?= $albali->getTotalAmount($month); ?> <span class="currency_icon">m</span></td>
                                         <?php } ?>
@@ -103,19 +103,19 @@ $currency = Yii::$app->currency;
                                 <tr>
                                     <td>&nbsp;</td>
                                     <?php foreach ($bolkart->getMonths() as $month) { ?>
-                                        <td><?= $month; ?> <?= Yii::t('app', 'AY'); ?></td>
+                                        <td><?= $month; ?> <?= Yii::t('app', 'Month'); ?></td>
                                     <?php } ?>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><?= Yii::t('app', 'Aylıq ödəniş'); ?></td>
+                                    <td><?= Yii::t('app', 'Monthly'); ?></td>
                                     <?php foreach ($bolkart->getMonths() as $month) { ?>
                                         <td><?= $bolkart->getMonthlyAmount($month); ?> <span class="currency_icon">m</span></td>
                                     <?php } ?>
                                 </tr>
                                 <tr>
-                                    <td><?= Yii::t('app', 'Ümumi ödəniş'); ?></td>
+                                    <td><?= Yii::t('app', 'Total'); ?></td>
                                     <?php foreach ($bolkart->getMonths() as $month) { ?>
                                         <td><?= $bolkart->getTotalAmount($month); ?> <span class="currency_icon">m</span></td>
                                     <?php } ?>
@@ -174,7 +174,7 @@ $currency = Yii::$app->currency;
         <div class="product_infos">
             <div class="tabs">
                 <ul>
-                    <li><a href="#" class="active"><?= Yii::t('app', 'Product description'); ?></a></li>
+                    <li><a href="#" class="active"><?= Yii::t('app', 'Description'); ?></a></li>
                     <li><a href="#"><?= Yii::t('app', 'Reviews'); ?></a></li>
                 </ul>
             </div>
@@ -209,7 +209,7 @@ $currency = Yii::$app->currency;
         </div>
         <aside class="aside_products">
 
-            <h2><?= Yii::t('app', 'Satıcının digər məhsulları'); ?></h2>
+            <h2><?= Yii::t('app', 'Seller products'); ?></h2>
 
             <?= $this->render('@app/views/blocks/seller_products_column', [
                 'seller'    => $product->seller,

@@ -10,31 +10,31 @@ use yii\helpers\Url;
             <li>
                 <span>
                     <span><img src="/img/icon_1.svg" alt=""></span>
-                    <strong><?= Yii::t('app', 'SƏRFƏLİ QİYMƏTLƏR'); ?></strong>
+                    <strong><?= Yii::t('app', 'Reasonable prices'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_2.svg" alt=""></span>
-                    <strong><?= Yii::t('app', 'GÜVƏNİLİR ALIŞ-VERİŞ'); ?></strong>
+                    <strong><?= Yii::t('app', 'Safe shopping'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_3.svg" alt=""></span>
-                    <strong><?= Yii::t('app', '100% QAYTARILMA'); ?></strong>
+                    <strong><?= Yii::t('app', '100% return'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_4.svg" alt=""></span>
-                    <strong><?= Yii::t('app', 'RAHAT ÖDƏNİŞ'); ?></strong>
+                    <strong><?= Yii::t('app', 'Convenient payment'); ?></strong>
                 </span>
             </li>
             <li>
                 <span>
                     <span><img src="/img/icon_5.svg" alt=""></span>
-                    <strong><?= Yii::t('app', 'PULSUZ ÇATDIRILMA'); ?></strong>
+                    <strong><?= Yii::t('app', 'Free delivery'); ?></strong>
                 </span>
             </li>
         </ul>
@@ -100,11 +100,11 @@ use yii\helpers\Url;
                 <p><?= Yii::t('app', 'Payment'); ?></p>
 
                 <div class="credit_cards">
-                    <span><img src="/img/card_paypal.svg" alt=""></span>
-                    <span><img src="/img/card_bolcard.svg" alt=""></span>
-                    <span><img src="/img/card_albali.svg" alt=""></span>
-                    <span><img src="/img/card_master.svg" alt=""></span>
-                    <span><img src="/img/card_visa.svg" alt=""></span>
+                    <span><img src="/img/card_paypal.svg" alt="PayPal"></span>
+                    <span><img src="/img/card_bolcard.svg" alt="Bolkart"></span>
+                    <span><img src="/img/card_albali.svg" alt="Albalı"></span>
+                    <span><img src="/img/card_master.svg" alt="MasterCard"></span>
+                    <span><img src="/img/card_visa.svg" alt="Visa"></span>
                 </div>
 
             </div>

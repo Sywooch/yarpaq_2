@@ -30,7 +30,7 @@
 <!-- TOP PRODUCTS BEGINS -->
 
 <div class="top_products">
-    <h2>TOP 20 PRODUCTS</h2>
+    <h2><?= Yii::t('app', 'Top 20 products'); ?></h2>
     <!-- Bestsellers Tape -->
     <?php echo \frontend\components\BestSellersTape::widget(); ?>
     <!-- Bestsellers Tape END -->
@@ -52,7 +52,7 @@
 
 <div class="last_viewed">
     <div>
-        <h2>MƏSLƏHƏT GÖRÜLƏN MƏHSULLAR</h2>
+        <h2><?= Yii::t('app', 'Recommended products'); ?></h2>
         <!-- Bestsellers Tape -->
         <?php echo \frontend\components\BestSellersTape::widget(); ?>
         <!-- Bestsellers Tape END -->
