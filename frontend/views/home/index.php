@@ -52,9 +52,9 @@
 
 <div class="last_viewed">
     <div>
-        <h2><?= Yii::t('app', 'Recommended products'); ?></h2>
+        <h2><?= Yii::t('app', 'New products'); ?></h2>
         <!-- Bestsellers Tape -->
-        <?php echo \frontend\components\BestSellersTape::widget(); ?>
+        <?php echo \frontend\components\NewTape::widget(); ?>
         <!-- Bestsellers Tape END -->
     </div>
 </div>
