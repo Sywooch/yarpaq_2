@@ -130,7 +130,11 @@ return [
     'Edit' => 'Düzəliş et',
 
     'We’ll send your order confirmation here' => 'Sifarişinizin təsdiqlənməsini bura göndərəcəyik',
-    'Must be 8 or more letters and contain at least 1 number' => '8 və daha çox hərfdən ibarət olmalı və ən azı 1 rəqəm tərkibində olmalıdır'
+    'Must be 8 or more letters and contain at least 1 number' => '8 və daha çox hərfdən ibarət olmalı və ən azı 1 rəqəm tərkibində olmalıdır',
+
+    'Congratulations' => 'Təbrik edirik',
+    'Your order was accepted' => 'Sifarişiniz qəbul olunub',
+    'Continue shopping' => 'Aliş-verişi davam etmək'
 
 ];
 

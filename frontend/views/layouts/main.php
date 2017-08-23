@@ -78,7 +78,7 @@ $this->beginPage();
             </div>
             <div class="links">
                 <ul>
-                    <li><a href="//sell.yarpaq.az"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
+                    <li><a href="//admin.yarpaq.az"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
 
                     <?php $help_center = \common\models\info\Info::findOne(4); ?>
                     <li><a href="<?= $help_center->url; ?>"><?= $help_center->title; ?></a></li>
@@ -278,7 +278,7 @@ $this->beginPage();
                     </div>
                 </div>
                 <div class="basket_link">
-                    <a href="<?= Url::to(['cart/index']) ?>"><?= Yii::t('app', 'Cart'); ?></a>
+                    <a href="<?= Url::to(['cart/index']) ?>"><?= Yii::t('app', 'Cart'); ?><em><?= Yii::$app->cart->countProducts(); ?></em></a>
                 </div>
             </div>
         </div>

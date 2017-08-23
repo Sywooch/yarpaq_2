@@ -1188,7 +1188,7 @@ a.search_toggler {
 
 .last_viewed {
   max-width: 1410px;
-  padding: 55px 0 110px;
+  padding: 55px 0 0;
   margin: 0 auto 65px;
   background: #fff;
   overflow: hidden;
@@ -6702,6 +6702,7 @@ a.clear_filtre {
   padding: 0 0 20px;
   color: #666;
   font-size: 14px;
+  max-height: 67px;
   line-height: 21px;
   font-weight: 400;
   letter-spacing: 0.01px;

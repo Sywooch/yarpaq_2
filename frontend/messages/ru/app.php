@@ -132,7 +132,10 @@ return [
     'Edit' => 'Отредактировать',
 
     'We’ll send your order confirmation here' => 'Мы вышлем сюда подтверждение вашего заказа',
-    'Must be 8 or more letters and contain at least 1 number' => 'Должен состоять из 8 и более букв и содержать как минимум 1 цифру'
+    'Must be 8 or more letters and contain at least 1 number' => 'Должен состоять из 8 и более букв и содержать как минимум 1 цифру',
+
+    'Congratulations' => 'Поздравляем',
+    'Your order was accepted' => 'Ваш заказ оформлен',
 
 ];
 

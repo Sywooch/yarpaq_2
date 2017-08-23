@@ -62,6 +62,10 @@ class Cart extends Component
         if (!$this->data) {
             $session = Yii::$app->session;
 
+            if (!$session->get('cart')) {
+                return [];
+            }
+
             foreach ($session->get('cart') as $key => $quantity) {
                 $product = unserialize(base64_decode($key));
 
