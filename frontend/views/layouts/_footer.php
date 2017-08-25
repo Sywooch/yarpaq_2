@@ -129,15 +129,13 @@ use yii\helpers\Url;
             <p>
                 <a href="http://admin.yarpaq.az"><?= Yii::t('app', 'Sell on {yarpaq}', ['yarpaq' => 'yarpaq.az']); ?></a>
             </p>
-            <select name="" id="">
+            <select name="" id="footer-currency">
                 <?php foreach (Yii::$app->currency->currencies as $currency) { ?>
                     <option value="<?= $currency->id; ?>"><?= $currency->code; ?></option>
                 <?php } ?>
             </select>
-            <select name="" id="">
-                <option value="0">Azərbaycan</option>
-                <option value="1">English</option>
-                <option value="2">По русски</option>
+            <select name="" id="footer-lang">
+                <?php echo \frontend\components\LanguageSwitcher::widget(['page' => @$this->params['page'], 'select' => true]); ?>
             </select>
         </div>
         <div class="last">

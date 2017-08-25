@@ -34,4 +34,17 @@ $(function () {
 
 
     $('.priduct_gallery .image img').elevateZoom();
+
+
+    $('#footer-currency').change(function () {
+        var currency_id = $(this).val();
+
+        location.href = '/currency/switch?id='+currency_id;
+    });
+
+    $('#footer-lang').change(function () {
+        var lang_url = $(this).val();
+
+        location.href = lang_url;
+    });
 });

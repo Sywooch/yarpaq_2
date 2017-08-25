@@ -18,6 +18,7 @@ use yii\jui\Widget;
  */
 class LanguageSwitcher extends Widget
 {
+    public $select = false;
     public $page;
 
     public function run() {
@@ -27,7 +28,13 @@ class LanguageSwitcher extends Widget
         foreach ($languages as $language) {
             if ($language == Language::getCurrent()) continue;
 
-            $html .= '<li><a href="'.htmlentities($this->buildLink($language)).'">'.$language->label.'</a></li>';
+            if ($this->select) {
+                $html .= '<li><a href="'.htmlentities($this->buildLink($language)).'">'.$language->label.'</a></li>';
+            } else {
+                $html .= '<option value="'.htmlentities($this->buildLink($language)).'">'.$language->label.'</option>';
+            }
+
+
         }
 
         return $html;
