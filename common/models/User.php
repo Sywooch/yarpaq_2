@@ -49,6 +49,18 @@ class User extends BaseUser {
         return static::findOne(['email' => $email, 'status' => User::STATUS_ACTIVE]);
     }
 
+    public static function findByEmailAndUsername($username)
+    {
+        $result = static::find();
+        $result->andWhere(['username' => $username ]);
+        $result->orWhere(['email' => $username]);
+        $result->andWhere(['status' => User::STATUS_ACTIVE]);
+
+        $result = $result->one();
+        
+        return $result;
+    }
+
 
     /**
      * Validates password
