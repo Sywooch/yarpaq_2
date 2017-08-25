@@ -349,6 +349,7 @@ $this->beginPage();
 
 <script type="text/javascript" src="/js/jquery-latest.js"></script>
 <script type="text/javascript" src="/js/jquery.mobile.custom.min.js"></script>
+<script type="text/javascript" src="/js/elevate-zoom/jquery.elevateZoom-3.0.8.min.js"></script>
 <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>

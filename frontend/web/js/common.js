@@ -31,4 +31,7 @@ $(function () {
         countryField.val(15);
         countryField.change();
     }
+
+
+    $('.product_gallery img').elevateZoom();
 });

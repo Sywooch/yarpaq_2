@@ -6,6 +6,8 @@ use common\models\info\Info;
 
 $currency = Yii::$app->currency;
 
+$this->registerJsFile('@web/js/elevate-zoom/jquery.elevateZoom-3.0.8.min.js');
+
 ?>
 <div class="product_block">
     <header>
@@ -20,7 +22,11 @@ $currency = Yii::$app->currency;
     </header>
     <div class="current_product">
         <div class="priduct_gallery">
-            <div class="image"><div><img src="<?= $product->gallery[0]->url; ?>" alt=""></div></div>
+            <div class="image">
+                <div>
+                    <img src="<?= $product->gallery[0]->url; ?>" alt="" data-zoom-image="<?= $product->gallery[0]->url; ?>">
+                </div>
+            </div>
             <div class="thumbnails">
                 <ul>
                     <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>

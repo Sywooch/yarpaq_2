@@ -57,7 +57,7 @@ class User extends BaseUser {
         $result->andWhere(['status' => User::STATUS_ACTIVE]);
 
         $result = $result->one();
-        
+
         return $result;
     }
 
