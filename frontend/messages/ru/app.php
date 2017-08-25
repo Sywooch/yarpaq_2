@@ -137,6 +137,8 @@ return [
     'Congratulations' => 'Поздравляем',
     'Your order was accepted' => 'Ваш заказ оформлен',
 
+    'Sell on {yarpaq}' => 'Продавай на Yarpaq'
+
 ];
 
 

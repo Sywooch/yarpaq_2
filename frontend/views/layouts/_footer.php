@@ -126,7 +126,9 @@ use yii\helpers\Url;
     </div>
     <div class="last_footer_mobile">
         <div class="first">
-            <p><?= Yii::t('app', 'Sell on {yarpaq}', ['yarpaq' => 'yarpaq.az']); ?></p>
+            <p>
+                <a href="http://admin.yarpaq.az"><?= Yii::t('app', 'Sell on {yarpaq}', ['yarpaq' => 'yarpaq.az']); ?></a>
+            </p>
             <select name="" id="">
                 <?php foreach (Yii::$app->currency->currencies as $currency) { ?>
                     <option value="<?= $currency->id; ?>"><?= $currency->code; ?></option>

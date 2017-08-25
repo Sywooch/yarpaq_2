@@ -43,7 +43,7 @@ $this->registerJsFile('@web/js/elevate-zoom/jquery.elevateZoom-3.0.8.min.js');
                         <div class="rating">
                             <span class="star_<?= $product->rating; ?>"></span>
                         </div>
-                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span># <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
+                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
                     </div>
                     <div class="second_info">
                         <div class="wrap_store">

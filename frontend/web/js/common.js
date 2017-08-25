@@ -33,5 +33,5 @@ $(function () {
     }
 
 
-    $('.product_gallery img').elevateZoom();
+    $('.priduct_gallery .image img').elevateZoom();
 });

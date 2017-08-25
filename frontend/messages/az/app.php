@@ -134,7 +134,9 @@ return [
 
     'Congratulations' => 'Təbrik edirik',
     'Your order was accepted' => 'Sifarişiniz qəbul olunub',
-    'Continue shopping' => 'Aliş-verişi davam etmək'
+    'Continue shopping' => 'Aliş-verişi davam etmək',
+
+    'Sell on {yarpaq}' => 'Yarpaq-da sat'
 
 ];
 
