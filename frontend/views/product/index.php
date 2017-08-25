@@ -12,7 +12,7 @@ $currency = Yii::$app->currency;
 
         <!-- Breadcrumbs -->
         <?= $this->render('@app/views/blocks/breadcrumb', [
-            'parents' => $product->category[0]->getParents(true)->all(),
+            'parents' => count($product->category) ? $product->category[0]->getParents(true)->all() : [],
             'currentPageTitle' => $product->title
         ]); ?>
         <!-- Breadcrumbs END -->

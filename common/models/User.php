@@ -85,4 +85,6 @@ class User extends BaseUser {
     public function getFullname() {
         return $this->profile->firstname . ' ' . $this->profile->lastname;
     }
+
+
 }

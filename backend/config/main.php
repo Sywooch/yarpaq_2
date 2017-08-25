@@ -68,7 +68,7 @@ return [
         // после запуска можно уже переделать под общий лад
         'urlManagerProduct' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => '//y2aa-frontend.dev/',
+            'baseUrl' => '//yarpaq.az/image/catalog/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
@@ -85,8 +85,11 @@ return [
                 };
             },
 
+            'useEmailAsLogin' => true,
+
             'controllerMap' => [
-                'user' => 'backend\controllers\UserController'
+                'user' => 'backend\controllers\UserController',
+                'auth' => 'backend\controllers\AuthController'
             ],
             'viewPath' => '@backend/views/user-management',
         ]

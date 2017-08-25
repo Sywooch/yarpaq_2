@@ -56,17 +56,30 @@ use yii\helpers\Url;
             <article>
                 <h3><?= Yii::t('app', 'Information'); ?></h3>
                 <ul>
+                    <?php if ($pages[5]) { ?>
                     <li><a href="<?= $pages[5]->url; ?>"><?= $pages[5]->title; ?></a></li>
+                    <?php } ?>
+
+                    <?php if ($pages[6]) { ?>
                     <li><a href="<?= $pages[6]->url; ?>"><?= $pages[6]->title; ?></a></li>
-                    <li><a href="<?= $pages[7]->url; ?>"><?= $pages[7]->title; ?></a></li>
+                    <?php } ?>
+
                 </ul>
             </article>
             <article>
                 <h3>&nbsp;</h3>
                 <ul>
+                    <?php if ($pages[8]) { ?>
                     <li><a href="<?= $pages[8]->url; ?>"><?= $pages[8]->title; ?></a></li>
+                    <?php } ?>
+
+                    <?php if ($pages[9]) { ?>
                     <li><a href="<?= $pages[9]->url; ?>"><?= $pages[9]->title; ?></a></li>
+                    <?php } ?>
+
+                    <?php if ($pages[10]) { ?>
                     <li><a href="<?= $pages[10]->url; ?>"><?= $pages[10]->title; ?></a></li>
+                    <?php } ?>
                 </ul>
             </article>
             <article>

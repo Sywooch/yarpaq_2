@@ -11,7 +11,7 @@ $this->beginPage();
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="Yarpaq site - Full description">
     <meta name="Keywords" content="Yarpaq, Almag, Telefonlar, Shop">
 
@@ -78,7 +78,7 @@ $this->beginPage();
             </div>
             <div class="links">
                 <ul>
-                    <li><a href="//admin.yarpaq.az"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
+                    <li><a href="http://admin.yarpaq.az"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
 
                     <?php $help_center = \common\models\info\Info::findOne(4); ?>
                     <li><a href="<?= $help_center->url; ?>"><?= $help_center->title; ?></a></li>
@@ -201,7 +201,7 @@ $this->beginPage();
                         <input type="text"
                                placeholder="<?= Yii::t('app', 'Enter product name'); ?>"
                                name="q" autocomplete="off"
-                               value="<?= @htmlentities($this->params['q']); ?>">
+                               value="<?= @$this->params['q']; ?>">
                         <button type="submit"><?= Yii::t('app', 'Search'); ?></button>
                         <ul style="display: none">
                             <li><a href="#">Womens fashion</a></li>
@@ -356,6 +356,38 @@ $this->beginPage();
 <script type="text/javascript" src="/js/checkout.js"></script>
 <script type="text/javascript" src="/js/basket.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+    (function(){ var widget_id = 'SdWZ5yalT3';
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/geo-widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+<!-- {/literal} END JIVOSITE CODE -->
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] ||
+        []).push(function() { try { w.yaCounter41194074 = new Ya.Metrika({
+            id:41194074, clickmap:true, trackLinks:true,
+            accurateTrackBounce:true }); } catch(e) { } }); var n =
+            d.getElementsByTagName("script")[0], s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); }; s.type =
+        "text/javascript"; s.async = true; s.src =
+        "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else
+    { f(); } })(document, window, "yandex_metrika_callbacks");
+</script> <noscript><div><img
+            src="https://mc.yandex.ru/watch/41194074" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-73707886-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 
 
 </body>

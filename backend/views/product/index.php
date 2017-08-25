@@ -111,6 +111,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'moderated',
                 'filter'    => [Yii::t('app', 'No'), Yii::t('app', 'Yes')],
                 'headerOptions' => ['width' => '5%'],
+                'value' => function ($model) {
+                    return $model->moderated ? Yii::t('app', 'Yes') : Yii::t('app', 'No');
+                }
             ],
             // 'moderated_at',
             // 'created_at',

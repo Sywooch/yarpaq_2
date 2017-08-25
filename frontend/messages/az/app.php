@@ -63,7 +63,7 @@ return [
 
     'Information' => 'Məlumat',
     'Reasonable prices' => 'Sərfəli qiymətlər',
-    'Safe shopping' => 'Güvəmilir alış-veriş',
+    'Safe shopping' => 'Güvənli alış-veriş',
     '100% return' => '100% qaytarılma',
     'Convenient payment' => 'Rahat ödəniş',
     'Free delivery' => 'Pulsuz çatdırılma',

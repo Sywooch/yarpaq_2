@@ -15,6 +15,7 @@ class BestSellersTape extends Tape
         $topSellOrderProducts = OrderProduct::find('product_id IS NOT NULL')
             ->select(['COUNT(product_id) AS count, product_id'])
             ->joinWith('product p')
+            ->andWhere(['p.status_id' => Product::STATUS_ACTIVE])
             ->groupBy('product_id')
             ->orderBy(['count' => SORT_DESC])
             ->limit(10)

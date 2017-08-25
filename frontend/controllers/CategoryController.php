@@ -46,6 +46,7 @@ class CategoryController extends BasicController
         // GET Products
         $products = Product::find()
             ->leftJoin('{{%product_category}}', '`product_id` = `id`')
+            ->andWhere(['status_id' => Product::STATUS_ACTIVE])
             ->where(['category_id' => $childrenCategoriesIDs]);
 
         // get min price

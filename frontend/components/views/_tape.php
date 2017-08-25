@@ -1,4 +1,4 @@
-
+<?php $currency = Yii::$app->currency; ?>
 <div class="product_carusel">
     <div class="swipe">
         <ul>
@@ -8,12 +8,19 @@
                     <div class="image">
                         <img src="<?= @$product->gallery[0]->url; ?>" alt="<?= $product->title; ?>" itemprop="image">
                     </div>
-                    
+
                     <h3><?= $product->title; ?></h3>
-                    <div class="price"><span><?= $product->price; ?> <b class="currency_icon">m</b></span></div>
+                    <div class="price">
+                        <span>
+                            <?= $currency->convertAndFormat($product->price, $product->currency); ?>
+                        </span>
+                    </div>
                     <?php if ($product->hasDiscount()) { ?>
                     <div class="old_price">
-                        <span><?= Yii::t('app', 'Qiymət');?>: <em><?= $product->price; ?><b class="currency_icon">m</b></em></span>
+                        <span>
+                            <?= Yii::t('app', 'Qiymət');?>:
+                            <em><?= $currency->convertAndFormat($product->price, $product->currency); ?></em>
+                        </span>
                         <b class="discount"><?= $product->discount; ?> <i class="currency_icon">m</i> <?= Yii::t('app', 'OFF'); ?></b>
                     </div>
                     <?php } ?>

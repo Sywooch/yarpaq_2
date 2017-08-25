@@ -95,7 +95,8 @@ class CheckoutController extends BasicController
 
         // get payment method
         if ($request->post('payment_method')) {
-            if (strpos('.', $request->post('payment_method')) !== false) {
+
+            if (strpos($request->post('payment_method'), '.') !== false) {
                 $pm = explode('.', $request->post('payment_method'));
 
                 $payment_method_id = $pm[0];

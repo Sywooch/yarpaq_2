@@ -2,15 +2,15 @@
 
 <div id="index_slider">
     <div class="image">
-        <div><a href="#!one"><img src="/upload/Images/slider1-aze.jpg" alt=""></a></div>
+        <div><a href="#!one"><img src="/upload/Images/deli.jpg" alt=""></a></div>
     </div>
     <div class="arrows">
         <a href="#" class="prev"></a>
         <a href="#" class="next"></a>
     </div>
     <div class="bullets">
-        <a href="/upload/Images/slider1-aze.jpg" data-link="#!one" class="active"></a>
-        <a href="/upload/Images/slider2-aze.jpg" data-link="#!two"></a>
+        <a href="/upload/Images/watch.jpg" data-link="#!one" class="active"></a>
+        <a href="/upload/Images/deli.jpg" data-link="#!two"></a>
     </div>
 </div>
 

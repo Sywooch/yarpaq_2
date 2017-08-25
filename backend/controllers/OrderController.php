@@ -52,8 +52,8 @@ class OrderController extends AdminDefaultController
         $searchModel = new OrderSearch();
 
 
+        $searchModel->load(Yii::$app->request->queryParams);
         if (!User::hasPermission('view_all_orders')) {
-            $searchModel->load(Yii::$app->request->queryParams);
             $searchModel->user_id   = User::getCurrentUser()->id;
         }
         $dataProvider = $searchModel->search();

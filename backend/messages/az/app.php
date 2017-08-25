@@ -62,6 +62,9 @@ return [
     'OS' => 'Əməliyyat sistemi',
     'Browser' => 'Brauzer',
     'Visit Time' => 'Ziyarət vaxtı',
+
+    'Quantity' => 'Miqdar',
+    'Moderated' => 'Moderasiyanı keçib',
 ];
 
 

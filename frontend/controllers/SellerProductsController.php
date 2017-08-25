@@ -40,7 +40,9 @@ class SellerProductsController extends BasicController
 
 
         // GET Products
-        $products = Product::find()->andWhere(['user_id' => $seller->id]);
+        $products = Product::find()
+            ->andWhere(['user_id' => $seller->id])
+            ->andWhere(['status_id' => Product::STATUS_ACTIVE]);
 
         // man
 

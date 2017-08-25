@@ -163,6 +163,7 @@ use common\models\User;
                         $gallery_sort = [];
 
                         foreach ($model->gallery as $image) {
+
                             if (!is_file($image->path)) continue;
 
                             $pluginOptions['initialPreview'][] = $image->url;
