@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Manufacturer;
 use frontend\models\ProductFilter;
+use frontend\models\ProductRepository;
 use Yii;
 use yii\base\Exception;
 use yii\data\Pagination;
@@ -44,9 +45,9 @@ class CategoryController extends BasicController
 
 
         // GET Products
-        $products = Product::find()
+        $repo = new ProductRepository();
+        $products = $repo->visibleOnTheSite()
             ->leftJoin('{{%product_category}}', '`product_id` = `id`')
-            ->andWhere(['status_id' => Product::STATUS_ACTIVE])
             ->where(['category_id' => $childrenCategoriesIDs]);
 
         // get min price

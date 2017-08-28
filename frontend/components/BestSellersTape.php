@@ -16,6 +16,7 @@ class BestSellersTape extends Tape
             ->select(['COUNT(product_id) AS count, product_id'])
             ->joinWith('product p')
             ->andWhere(['p.status_id' => Product::STATUS_ACTIVE])
+            ->andWhere(['p.moderated' => 1])
             ->groupBy('product_id')
             ->orderBy(['count' => SORT_DESC])
             ->limit(10)

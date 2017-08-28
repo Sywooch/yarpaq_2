@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Manufacturer;
 use frontend\models\ProductFilter;
+use frontend\models\ProductRepository;
 use Yii;
 use yii\base\Exception;
 use yii\data\Pagination;
@@ -34,7 +35,9 @@ class SearchController extends BasicController
         }
 
         // GET Products
-        $products = Product::find();
+        $repo = new ProductRepository();
+        $products = $repo->visibleOnTheSite();
+
 
         if ($r->get('q')) {
             $q = htmlspecialchars(strip_tags($r->get('q')), ENT_QUOTES, 'UTF-8');
@@ -44,9 +47,6 @@ class SearchController extends BasicController
 
         $products->andWhere(['like', 'title', $q]);
         $products->orWhere(['id' => $q]);
-
-
-        $products->andWhere(['status_id' => Product::STATUS_ACTIVE]);
 
         // если указана категория, то находим все ее дочерние и ищем по этим категориям
         if ($r->get('category_id')) {

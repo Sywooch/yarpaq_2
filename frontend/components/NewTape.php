@@ -2,8 +2,7 @@
 
 namespace frontend\components;
 
-
-use common\models\Product;
+use frontend\models\ProductRepository;
 
 class NewTape extends Tape
 {
@@ -11,8 +10,8 @@ class NewTape extends Tape
     public $seeAllLabel = 'See All';
 
     public function loadProducts() {
-        $this->products = Product::find()
-            ->andWhere(['status_id' => Product::STATUS_ACTIVE])
+        $repo = new ProductRepository();
+        $this->products = $repo->visibleOnTheSite()
             ->orderBy(['moderated_at' => SORT_DESC])
             ->limit(10)
             ->all();

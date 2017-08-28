@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Manufacturer;
 use common\models\User;
 use frontend\models\ProductFilter;
+use frontend\models\ProductRepository;
 use Yii;
 use yii\base\Exception;
 use yii\data\Pagination;
@@ -40,9 +41,10 @@ class SellerProductsController extends BasicController
 
 
         // GET Products
-        $products = Product::find()
-            ->andWhere(['user_id' => $seller->id])
-            ->andWhere(['status_id' => Product::STATUS_ACTIVE]);
+        $repo = new ProductRepository();
+        $products = $repo
+            ->visibleOnTheSite()
+            ->andWhere(['user_id' => $seller->id]);
 
         // man
 

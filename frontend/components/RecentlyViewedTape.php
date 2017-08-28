@@ -16,6 +16,7 @@ class RecentlyViewedTape extends Tape
             ->joinWith('product p')
             ->with('product')
             ->andWhere(['p.status_id' => Product::STATUS_ACTIVE])
+            ->andWhere(['p.moderated' => 1])
             ->all();
 
         foreach ($viewed as $viewed_item) {
