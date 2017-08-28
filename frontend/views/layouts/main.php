@@ -81,7 +81,7 @@ $this->beginPage();
                     <li><a href="http://admin.yarpaq.az"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
 
                     <?php $help_center = \common\models\info\Info::findOne(4); ?>
-                    <li><a href="<?= $help_center->url; ?>"><?= $help_center->title; ?></a></li>
+                    <li><a href="<?= @$help_center->url; ?>"><?= @$help_center->title; ?></a></li>
                 </ul>
             </div>
             <div class="phone">
