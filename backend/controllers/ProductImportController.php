@@ -26,8 +26,8 @@ class ProductImportController extends AdminDefaultController
         $this->userAssoc    = $this->getUserAssoc();
         $this->manAssoc     = $this->getManAssoc();
 
-        $this->importProducts();
-        //$this->importImages();
+        //$this->importProducts();
+        $this->importImages();
     }
 
     private function getProductAssoc() {
@@ -255,14 +255,36 @@ WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
         Yii::$app->db->createCommand('TRUNCATE `y2_product_image`')->query();
 
         // выполняем запрос
-        $images_sql = '
-          SELECT `image`, `product_id` FROM `oc_product`
-          UNION
-          SELECT `image`, `product_id` FROM `oc_product_image` ORDER BY `product_id`';
+        $images_sql = 'SELECT `image`, `product_id` FROM `oc_product`';
+        $products = Yii::$app->db_old->createCommand($images_sql)->queryAll();
+
+
+        foreach ($products as $product) {
+            if (!isset($productAssocs[ $product['product_id'] ])) continue;
+            if ($product['image'] == '') continue;
+
+            $src = basename($product['image']);
+            $url = basename($product['image']);
+
+
+            $model = new ProductImage();
+            $model->model_id    = $productAssocs[ $product['product_id'] ];
+            $model->src_name    = $src;
+            $model->web_name    = $url;
+            $model->sort        = 1;
+
+            if (!$model->save() ) {
+                echo $product['product_id'].' '.json_encode( $model->getErrors() ).'<br>';
+            }
+        }
+
+
+        $images_sql = 'SELECT `image`, `product_id` FROM `oc_product_image` ORDER BY `product_id`';
+
         $products = Yii::$app->db_old->createCommand($images_sql)->queryAll();
 
         $currentProduct = null;
-        $sort = 1;
+        $sort = 2;
         foreach ($products as $product) {
             if (!isset($productAssocs[ $product['product_id'] ])) continue;
             if ($product['image'] == '') continue;
@@ -271,7 +293,7 @@ WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
             if ($product['product_id'] == $currentProduct) {
                 $sort++;
             } else {
-                $sort = 1;
+                $sort = 2;
                 $currentProduct = $product['product_id'];
             }
 
@@ -290,7 +312,6 @@ WHERE `pd`.`language_id` = 1 ORDER BY `p`.`product_id`';
                 echo $product['product_id'].' '.json_encode( $model->getErrors() ).'<br>';
             }
         }
-
 
     }
 }
