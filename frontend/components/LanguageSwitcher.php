@@ -29,9 +29,9 @@ class LanguageSwitcher extends Widget
             if ($language == Language::getCurrent()) continue;
 
             if ($this->select) {
-                $html .= '<li><a href="'.htmlentities($this->buildLink($language)).'">'.$language->label.'</a></li>';
-            } else {
                 $html .= '<option value="'.htmlentities($this->buildLink($language)).'">'.$language->label.'</option>';
+            } else {
+                $html .= '<li><a href="'.htmlentities($this->buildLink($language)).'">'.$language->label.'</a></li>';
             }
 
 
