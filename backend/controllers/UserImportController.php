@@ -12,6 +12,14 @@ class UserImportController extends AdminDefaultController
 {
 
 
+    public function actionSetRoles() {
+        $users = User::find()->all();
+
+        foreach ($users as $user) {
+            User::assignRole($user->id, 'seller');
+        }
+    }
+
     public function actionIndex() {
         ini_set('memory_limit', '-1');
 
