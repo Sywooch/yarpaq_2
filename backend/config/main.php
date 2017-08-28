@@ -11,6 +11,7 @@ return [
     'name' => 'Yarpaq',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
+    'defaultRoute' => 'product/index',
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
