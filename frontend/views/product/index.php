@@ -24,7 +24,9 @@ $this->registerJsFile('@web/js/elevate-zoom/jquery.elevateZoom-3.0.8.min.js');
         <div class="priduct_gallery">
             <div class="image">
                 <div>
+                    <?php if (count($product->gallery)) { ?>
                     <img src="<?= $product->gallery[0]->url; ?>" alt="" data-zoom-image="<?= $product->gallery[0]->url; ?>">
+                    <?php } ?>
                 </div>
             </div>
             <div class="thumbnails">
