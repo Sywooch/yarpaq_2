@@ -73,6 +73,8 @@ class UserController extends BasicController
             $isValid = $address->validate(['firstname', 'lastname', 'company', 'address_1', 'city', 'postcode', 'country_id', 'zone_id']) && $isValid;
 
             if ($isValid && $customer->save()) {
+                User::assignRole($customer->id, 'seller');
+
                 $profile->user_id = $customer->id;
                 $address->user_id = $customer->id;
 
