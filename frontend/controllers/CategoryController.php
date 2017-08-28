@@ -48,7 +48,8 @@ class CategoryController extends BasicController
         $repo = new ProductRepository();
         $products = $repo->visibleOnTheSite()
             ->leftJoin('{{%product_category}}', '`product_id` = `id`')
-            ->where(['category_id' => $childrenCategoriesIDs]);
+            ->andWhere(['category_id' => $childrenCategoriesIDs])
+            ->groupBy('id');
 
         // get min price
         $minPriceProducts = clone $products;
@@ -85,9 +86,11 @@ class CategoryController extends BasicController
             'totalCount' => $productsCount->count(),
             'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24
         ]);
+
         $models = $products->offset($pages->offset)
             ->limit($pages->limit)
             ->all();
+
         // GET Products END
 
         // GET Brands
