@@ -139,7 +139,11 @@ return [
     'Sell on {yarpaq}' => 'Yarpaq-da sat',
 
     'Too many attempts' => 'Həddindən artıq cəhd etmisiniz',
-    'Incorrect email or password.' => 'Email və ya şifrə yanlışdır'
+    'Incorrect email or password.' => 'Email və ya şifrə yanlışdır',
+
+    'product1' => 'məhsul',
+    'product2' => 'məhsul',
+    'product3' => 'məhsul',
 
 ];
 

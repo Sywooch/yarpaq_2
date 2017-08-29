@@ -140,7 +140,12 @@ return [
     'Sell on {yarpaq}' => 'Продай на Yarpaq.az',
 
     'Too many attempts' => 'Превышено допустимое количество попыток',
-    'Incorrect email or password.' => 'Неверный адрес эл. почты или пароль'
+    'Incorrect email or password.' => 'Неверный адрес эл. почты или пароль',
+
+    'product1' => 'товар',
+    'product2' => 'товара',
+    'product3' => 'товаров',
+
 ];
 
 

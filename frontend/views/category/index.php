@@ -29,7 +29,7 @@
         <div class="product_list">
             <header>
                 <div class="first">
-                    <h2><?= $category->title; ?> <span>(<?=$pages->totalCount?> <?= Yii::t('app', 'product'); ?>)</span></h2>
+                    <h2><?= $category->title; ?> <span>(<?=$pages->totalCount?> <?php echo Yii::t('app', 'product'.\frontend\components\LanguageHelpers::plural($pages->totalCount)); ?>)</span></h2>
                     <div class="sort_by">
                         <a href="#"><?= Yii::t('app', 'Sort'); ?>: <span><?= $productFilter->sortOptions[ $productFilter->sort ] ?></span></a>
                         <ul>
