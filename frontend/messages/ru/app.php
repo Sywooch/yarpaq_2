@@ -7,8 +7,8 @@ return [
     'Password' => 'Пароль',
     'Register' => 'Регистрация',
     'Join us' => 'Присоединиться к нам',
-    'Enter product name' => 'Введите название продукта',
-    'New products' => 'Новые продукты',
+    'Enter product name' => 'Введите название товара',
+    'New products' => 'Новые товары',
     'Bestsellers' => 'Бестселлеры',
     'Sort' => 'Сортировка',
     'Price' => 'Цена',
@@ -26,7 +26,7 @@ return [
     'Personal information' => 'Личная информация',
     'Logout' => 'Выйти',
     'Location' => 'Местоположение',
-    'Product code' => 'Код продукта',
+    'Product code' => 'Код товара',
     'Store' => 'Магазин',
     'Quantity' => 'Количество',
     'Add to basket' => 'Добавить в корзину',
@@ -76,7 +76,7 @@ return [
     'Search' => 'Поиск',
     'Discount' => 'Скидка',
     'Filter' => 'Фильтр',
-    'Products found - {count}' => 'Найдено продуктов - {count}',
+    'Products found - {count}' => 'Найдено товаров - {count}',
     'Home' => 'Главная',
     'Subcategories' => 'Подкатегории',
     'Reset' => 'Очистить',
@@ -109,7 +109,7 @@ return [
     'Delivery to regions costs 3 AZN, it is carried out maximum during 5-6 days through Azərpoçt'
     => 'Доставка в регионы стоит 3 AZN, доставляется максимум в течении 5-6-ти дней посредством Azərpoçt',
     'Recommended products' => 'Рекомендуемые товары',
-    'Top 20 products' => 'Топ 20 продуктов',
+    'Top 20 products' => 'Топ 20 товаров',
     'Description' => 'Описание',
     'Reviews' => 'Отзывы',
     'Seller products' => 'Другие товары продавца',
@@ -127,7 +127,7 @@ return [
     => 'Делая заказ, вы соглашаетесь с {Terms and Conditions}, и условиями {Confidentiality and Return}.',
 
     'A product can be returned at place for 2 azn. In case of not looking as in description or photos, it can be returned for free.'
-    => 'Продукт может быть возвращен на месте за 2 AZN. Если продукт не подходит под описание или фотографии, то может быть возвращен без оплаты.',
+    => 'Товар может быть возвращен на месте за 2 AZN. Если товар не подходит под описание или фотографии, то может быть возвращен без оплаты.',
 
     'Edit' => 'Отредактировать',
 
@@ -137,8 +137,10 @@ return [
     'Congratulations' => 'Поздравляем',
     'Your order was accepted' => 'Ваш заказ оформлен',
 
-    'Sell on {yarpaq}' => 'Продавай на Yarpaq'
+    'Sell on {yarpaq}' => 'Продай на Yarpaq.az',
 
+    'Too many attempts' => 'Превышено допустимое количество попыток',
+    'Incorrect email or password.' => 'Неверный адрес эл. почты или пароль'
 ];
 
 

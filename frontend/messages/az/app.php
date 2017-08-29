@@ -136,7 +136,10 @@ return [
     'Your order was accepted' => 'Sifarişiniz qəbul olunub',
     'Continue shopping' => 'Aliş-verişi davam etmək',
 
-    'Sell on {yarpaq}' => 'Yarpaq-da sat'
+    'Sell on {yarpaq}' => 'Yarpaq-da sat',
+
+    'Too many attempts' => 'Həddindən artıq cəhd etmisiniz',
+    'Incorrect email or password.' => 'Email və ya şifrə yanlışdır'
 
 ];
 

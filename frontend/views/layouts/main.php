@@ -323,7 +323,7 @@ $this->beginPage();
             <a href="#" class="close"></a>
         </header>
         <div class="form">
-            <form action="/user/login" id="signin-popup-form">
+            <form action="<?= Url::toRoute(['/user/login']); ?>" id="signin-popup-form">
                 <ul>
                     <li><input type="text" name="LoginForm[email]" placeholder="<?= Yii::t('app', 'Email'); ?>"></li>
                     <li><input type="password" name="LoginForm[password]" placeholder="<?= Yii::t('app', 'Password'); ?>"></li>

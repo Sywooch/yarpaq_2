@@ -4,9 +4,13 @@ $(function () {
 
         var form = $(this);
 
-        $.getJSON('/login', form.serialize(), function (response) {
+        form.find('.error').remove();
+
+        $.getJSON(form.attr('action'), form.serialize(), function (response) {
             if (response.status) {
                 location.reload();
+            } else {
+                form.append('<p style="color: red" class="error">'+response.message+'</p>');
             }
         });
 

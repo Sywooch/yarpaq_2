@@ -41,7 +41,7 @@ class LoginForm extends Model
 	{
 		if ( !Yii::$app->getModule('user-management')->checkAttempts() )
 		{
-			$this->addError('password', UserManagementModule::t('front', 'Too many attempts'));
+			$this->addError('password', Yii::t('app', 'Too many attempts'));
 
 			return false;
 		}
@@ -51,7 +51,7 @@ class LoginForm extends Model
 			$user = $this->getUser();
 			if ( !$user || !$user->validatePassword($this->password) )
 			{
-				$this->addError('password', UserManagementModule::t('front', 'Incorrect email or password.'));
+				$this->addError('password', Yii::t('app', 'Incorrect email or password.'));
 			}
 		}
 	}

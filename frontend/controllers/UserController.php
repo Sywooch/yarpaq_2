@@ -196,7 +196,7 @@ class UserController extends BasicController
             return Json::encode(['status' => 1]);
         }
 
-        return Json::encode(['status' => 0]);
+        return Json::encode(['status' => 0, 'message' => array_values($model->getErrors())]);
     }
 
     public function actionLogout() {
