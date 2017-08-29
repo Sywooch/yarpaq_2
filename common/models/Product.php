@@ -345,7 +345,7 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function getRating() { // TODO
-        return 2;
+        return 4;
     }
 
     public function getOldPrice() { // TODO
