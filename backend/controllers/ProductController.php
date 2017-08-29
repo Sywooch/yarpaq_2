@@ -192,6 +192,8 @@ class ProductController extends AdminDefaultController
 
         foreach ($products as $product) {
             if ($action == 'delete') {
+
+                $this->denyIfNotOwner($product);
                 $product->delete();
             }
         }
