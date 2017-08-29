@@ -246,7 +246,7 @@ $this->beginPage();
                     </div>
                 </div>
                 <div class="sign_link">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                         <span><?= Yii::$app->user->isGuest ? Yii::t('app', 'Sign in') : Yii::t('app', 'Account'); ?></span>
                     </a>
                     <div class="sign_in_dropdown">

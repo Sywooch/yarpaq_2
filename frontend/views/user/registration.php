@@ -152,15 +152,18 @@
                         </div>
                     </li>
 
-                    <li>
-                        Mən <a href="" class="green">Məxfilik Siyasəti</a> oxudum və razıyam
-                        <div class="inline-block ">
-                            <input class="radio" id="radio6" name="radio6" type="checkbox">
-                            <label for="radio6"></label>
-                        </div>
-                    </li>
-
                 </ul>
+
+                <div class="confirm">
+                    <label>
+                        <b class="checkbox">
+                            <input id="radio6" name="radio6" type="checkbox">
+                            <em></em>
+                        </b>
+                        <span>Mən <a href="" class="green">Məxfilik Siyasəti</a> oxudum və razıyam</span>
+                    </label>
+                </div>
+
                 <div class="submit">
                     <input type="hidden" name="<?= Yii::$app->request->csrfParam ?>" value="<?= Yii::$app->request->getCsrfToken()?>">
                     <button type="submit"><?= Yii::t('app', 'Register'); ?></button>

@@ -38,7 +38,7 @@ body.overflow .main_wrapper {
 }
 
 header#header {
-  height: auto;
+  height: 110px;
   position: relative;
   z-index: 1;
   -webkit-animation-duration: 0.6s;
@@ -255,6 +255,13 @@ header#header .first > div .phone a:hover {
 
 header#header .second {
   background: #79b237;
+}
+
+header#header .second.fix {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 header#header .second > div {
@@ -1510,6 +1517,15 @@ a.search_toggler {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.26px;
+}
+
+.last_footer_mobile .first p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.last_footer_mobile .first p a:hover {
+  text-decoration: underline;
 }
 
 .last_footer_mobile .first select {
@@ -5541,6 +5557,66 @@ aside.aside_products article .old_price b.discount {
   letter-spacing: 1.1px;
 }
 
+.account_edit > div .form form .confirm {
+  padding: 0 0 20px 170px;
+}
+
+.account_edit > div .form form .confirm label {
+  display: inline-block;
+  position: relative;
+  padding: 0 0 0 28px;
+  cursor: pointer;
+}
+
+.account_edit > div .form form .confirm label b {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.account_edit > div .form form .confirm label b input {
+  display: none;
+}
+
+.account_edit > div .form form .confirm label b input:checked + em::after {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: #363636;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.account_edit > div .form form .confirm label b input + em {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #727272;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.account_edit > div .form form .confirm label span {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+
 .account_edit > div .form form .submit {
   width: 690px;
   overflow: hidden;
@@ -6706,6 +6782,7 @@ a.clear_filtre {
   color: #666;
   font-size: 14px;
   max-height: 67px;
+  overflow: hidden;
   line-height: 21px;
   font-weight: 400;
   letter-spacing: 0.01px;

@@ -29,9 +29,17 @@ run_slider = function(slider_index, _this, direction) {
         $("#index_slider .bullets a").removeClass("active");
         _this.addClass("active");
         if (direction == true) {
-            $("#index_slider .image").prepend("<div style='left:100%'><a href="+arr_link[slider_index]+"><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
+        	if (arr_link[slider_index] == "none") {
+            	$("#index_slider .image").prepend("<div style='left:100%'><img src='"+arr_src[slider_index]+"' alt='' /></div>");
+        	} else {
+            	$("#index_slider .image").prepend("<div style='left:100%'><a href="+arr_link[slider_index]+"><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
+        	}
         } else {
-            $("#index_slider .image").prepend("<div style='left:-100%'><a href="+arr_link[slider_index]+"><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
+        	if (arr_link[slider_index] == "none") {
+            	$("#index_slider .image").prepend("<div style='left:-100%'><img src='"+arr_src[slider_index]+"' alt='' /></div>");
+        	} else {
+            	$("#index_slider .image").prepend("<div style='left:-100%'><a href="+arr_link[slider_index]+"><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
+        	}
         }
 
 
@@ -227,12 +235,14 @@ setTimeout( function() {
 
 			$(".full_nav .right_side").addClass("show_me");
 			$(".full_nav .right_side nav").html(_this_nav);
+			$(".full_nav .right_side nav").css("min-height", ($(".full_nav .left_side").height())+"px");
 		}
 	});
 
 	$(".full_nav").mouseleave(function(){
 		$(".full_nav .right_side").removeClass("show_me");
 		$(".full_nav .right_side nav").html("");
+		$(".full_nav .right_side nav").removeAttr("style");
 	});
 
 	$(document).on('mouseout', '.full_nav, .nav_trigger', function(){
@@ -436,6 +446,7 @@ _window.resize(function(){
 		return false;
 	});
 
+	/*
 	$(".sign_link > a").click(function(){
 		
 		var _this = $(this);
@@ -447,7 +458,7 @@ _window.resize(function(){
 		}
 		
 		return false;
-	});
+	}); */
 
 	$(document).on('mouseout', '.sign_link', function(){
         $("body").on("click",signHide);
@@ -703,3 +714,25 @@ $(".priduct_gallery .thumbnails li a").click(function(){
 		return false;
 	});
 /* Color select end */
+
+
+
+/* Functional fix begin */
+
+    var top_pos = document.documentElement.scrollTop||document.body.scrollTop;
+    if (top_pos > 35) {
+        $("header#header .second").addClass("fix");
+    } else {
+        $("header#header .second").removeClass("fix");
+    }
+
+    $(window).scroll(function() {
+        var top_pos = document.documentElement.scrollTop||document.body.scrollTop;
+        if (top_pos > 35) {
+            $("header#header .second").addClass("fix");
+        } else {
+            $("header#header .second").removeClass("fix");
+        }
+    });
+
+/* Functional fix end */
