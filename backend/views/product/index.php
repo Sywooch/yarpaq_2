@@ -30,11 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $searchModel
     ]); ?>
 
+    <?=Html::beginForm(['product/bulk'], 'post');?>
+
     <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider'  => $dataProvider,
         //'filterModel' => $searchModel,
         'layout'        => '{items}{summary}{pager}',
         'columns'       => [
+            ['class' => \yii\grid\CheckboxColumn::className()],
             [
                 'attribute' => 'id',
                 'headerOptions' => ['width' => '5%'],
@@ -125,4 +128,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
+    <?=Html::dropDownList('action', '', [
+        '' => 'Action: ',
+        'delete' => 'Delete',
+    ],
+        ['class'=>'dropdown'])?>
+    <?=Html::submitButton('Send', ['class' => 'btn btn-info',]);?>
+
     <?php Pjax::end(); ?></div>

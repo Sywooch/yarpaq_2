@@ -34,6 +34,7 @@ class ProductController extends AdminDefaultController
                 'actions' => [
                     'delete'        => ['POST'],
                     'image-delete'  => ['POST'],
+                    'bulk'          => ['POST']
                 ],
             ],
         ]);
@@ -178,7 +179,24 @@ class ProductController extends AdminDefaultController
 
         $model->delete();
 
-        return $this->redirect(['index']);
+        $this->redirect( Yii::$app->request->referrer );
+    }
+
+    public function actionBulk() {
+        $action = Yii::$app->request->post('action');
+        $selection = Yii::$app->request->post('selection');
+
+        $products = Product::find()
+            ->andWhere(['in', 'id', $selection])
+            ->all();
+
+        foreach ($products as $product) {
+            if ($action == 'delete') {
+                $product->delete();
+            }
+        }
+
+        $this->redirect( Yii::$app->request->referrer );
     }
 
 
