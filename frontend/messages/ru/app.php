@@ -143,8 +143,8 @@ return [
     'Incorrect email or password.' => 'Неверный адрес эл. почты или пароль',
 
     'product1' => 'товар',
-    'product2' => 'товара',
-    'product3' => 'товаров',
+    'product2' => 'товар',
+    'product3' => 'товар',
 
 ];
 

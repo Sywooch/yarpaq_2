@@ -113,7 +113,7 @@ return [
     'Reviews' => 'Rəylər',
     'Seller products' => 'Satıcının digər məhsulları',
     'Views count' => 'Baxışların sayı',
-    'See other products' => 'Digər mehsullara baxmaq',
+    'See other products' => 'Digər məhsullara baxmaq',
     'Seller' => 'Satıcı',
     'Monthly' => 'Aylıq',
     'Month' => 'Ay',

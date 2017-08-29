@@ -5,9 +5,6 @@ use frontend\components\taksit\Bolkart;
 use common\models\info\Info;
 
 $currency = Yii::$app->currency;
-
-$this->registerJsFile('@web/js/elevate-zoom/jquery.elevateZoom-3.0.8.min.js');
-
 ?>
 <div class="product_block">
     <header>
