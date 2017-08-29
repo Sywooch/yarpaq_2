@@ -19,6 +19,20 @@ class ProductImportController extends AdminDefaultController
     private $manAssoc;
 
 
+    public function actionClearFakeImages() {
+        $images = ProductImage::find()
+//            ->andWhere(['model_id' => 9866])
+            ->all();
+
+        foreach ($images as $image) {
+
+            if (!is_file($image->path)) {
+                $image->delete();
+            }
+
+        }
+    }
+
     public function actionIndex() {
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
@@ -27,7 +41,7 @@ class ProductImportController extends AdminDefaultController
         $this->manAssoc     = $this->getManAssoc();
 
         //$this->importProducts();
-        $this->importImages();
+        //$this->importImages();
     }
 
     private function getProductAssoc() {
