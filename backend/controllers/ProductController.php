@@ -49,6 +49,8 @@ class ProductController extends AdminDefaultController
      */
     public function actionIndex()
     {
+        Yii::$app->session->set('product_redirect', Yii::$app->request->absoluteUrl);
+
         $searchModel            = new ProductSearch();
 
         $searchModel->load(Yii::$app->request->queryParams);
@@ -124,7 +126,15 @@ class ProductController extends AdminDefaultController
             if ($model->save()) {
                 $this->saveGalleryFiles($model);
                 $this->saveSort();
-                return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
+
+                if (Yii::$app->session->has('product_redirect')) {
+                    $product_redirect = Yii::$app->session->get('product_redirect');
+                    Yii::$app->session->remove('product_redirect');
+
+                    return $this->redirect($product_redirect);
+                } else {
+                    return $this->redirect(['index']);
+                }
             }
         }
 
