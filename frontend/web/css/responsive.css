@@ -5,6 +5,7 @@
   }
   header#header {
     width: 100%;
+    height: 43px;
     position: fixed;
     left: 0;
     top: 0;
@@ -117,13 +118,13 @@
   /* Header end */
   /* Index slider begin */
   #index_slider {
-    height: 120px;
+    height: 160px;
   }
   #index_slider .image {
-    height: 120px;
+    height: 160px;
   }
   #index_slider .image > div {
-    height: 120px;
+    height: 160px;
   }
   #index_slider .image > div img {
     width: 640px;
@@ -624,7 +625,7 @@
   .account_edit > div .form form .submit button {
     width: 100%;
   }
-  .account_edit > div .confirm {
+  .account_edit > div .form form .confirm {
     padding: 0 0 20px;
   }
   /* Account edit end */
@@ -880,13 +881,13 @@
   /* Header end */
   /* Index slider begin */
   #index_slider {
-    height: 240px;
+    height: 320px;
   }
   #index_slider .image {
-    height: 240px;
+    height: 320px;
   }
   #index_slider .image > div {
-    height: 240px;
+    height: 320px;
   }
   #index_slider .image > div img {
     width: 1280px;
@@ -1559,6 +1560,11 @@
     padding: 0 15px;
   }
   /* Favorites block end */
+  /* Head search begin */
+  .head_search {
+    padding: 16px 160px 16px 235px;
+  }
+  /* Head search end */
 }
 
 @media (min-width: 922px) and (max-width: 1200px) {
@@ -1728,4 +1734,9 @@
     padding: 0 15px;
   }
   /* Favorites block end */
+  /* Head search begin */
+  .head_search {
+    padding: 16px 160px 16px 235px;
+  }
+  /* Head search end */
 }

@@ -40,7 +40,7 @@ body.overflow .main_wrapper {
 header#header {
   height: 110px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   -webkit-animation-duration: 0.6s;
   -webkit-transition: all 0.6s ease-in-out;
   -moz-animation-duration: 0.6s;
@@ -383,11 +383,10 @@ a.search_toggler {
 }
 
 .head_search {
-  width: auto;
-  max-width: 670px;
-  float: left;
-  padding: 16px 0 16px 16px;
-  position: relative;
+  width: 100%;
+  height: 0;
+  padding: 16px 300px 0 350px;
+  position: absolute;
 }
 
 .head_search a.close {
@@ -1796,6 +1795,7 @@ a.search_toggler {
   font-weight: 400;
   text-decoration: none;
   letter-spacing: 0.02px;
+  position: relative;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -khtml-border-radius: 2px;
@@ -1809,6 +1809,47 @@ a.search_toggler {
   border-left: 5px solid #669c25;
   background: #fafafa;
 }
+
+.full_nav .left_side .categories_list > ul > li > a:hover::after, .full_nav .left_side .categories_list > ul > li > a.active::after {
+  -moz-transform: rotate(0deg);
+  /* Для Firefox */
+  -ms-transform: rotate(0deg);
+  /* Для IE */
+  -webkit-transform: rotate(0deg);
+  /* Для Safari, Chrome, iOS */
+  -o-transform: rotate(0deg);
+  /* Для Opera */
+  transform: rotate(0deg);
+}
+
+.full_nav .left_side .categories_list > ul > li > a::after {
+  content: "";
+  display: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 5px 0 5px;
+  border-color: #669c25 transparent transparent transparent;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  -moz-transform: rotate(-90deg);
+  /* Для Firefox */
+  -ms-transform: rotate(-90deg);
+  /* Для IE */
+  -webkit-transform: rotate(-90deg);
+  /* Для Safari, Chrome, iOS */
+  -o-transform: rotate(-90deg);
+  /* Для Opera */
+  transform: rotate(-90deg);
+  -webkit-animation-duration: 0.3s;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-animation-duration: 0.3s;
+  -moz-transition: all 0.3s ease-in-out;
+  animation-duration: 0.3s;
+  transition: all 0.3s ease-in-out;
+}
+
 
 .full_nav .left_side .categories_list > ul > li > div {
   display: none;
