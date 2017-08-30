@@ -40,6 +40,18 @@ $(function () {
         tpl.removeClass('hide');
 
     });
+
+
+    $('.status-change-select').change(function () {
+
+        var order_id = $(this).data('order-id');
+        var status_id = $(this).val();
+
+        $.post('/order/change-status-ajax', { order_id: order_id, status_id: status_id }, function (response) {
+
+        }, 'json');
+
+    });
 });
 
 $(window).scroll(function(){

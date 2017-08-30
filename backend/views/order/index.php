@@ -12,9 +12,16 @@ use common\models\order\OrderStatus;
 
 $this->title = Yii::t('app', 'Orders');
 $this->params['breadcrumbs'][] = $this->title;
+
+
+$statuses = OrderStatus::find()
+    ->andWhere(['language_id' => \common\models\Language::getCurrent()->id])
+    ->all();
 ?>
 <div class="order-index">
-    <?php if (\common\models\User::hasPermission('create_order')) { ?>
+    <h2><?= $this->title; ?></h2>
+
+    <?php if (false && \common\models\User::hasPermission('create_order')) { ?>
     <p>
         <?= Html::a(Yii::t('app', 'Create Order'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -31,8 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'width' => '80px'
                 ]
             ],
-            'firstname',
-            'lastname',
+
+            [
+                'attribute' => 'fullname',
+                'value' => function ($order) {
+                    return $order->firstname . ' ' . $order->lastname;
+                }
+            ],
             'email:email',
             // 'phone1',
             // 'phone2',
@@ -66,7 +78,18 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'order_status_id',
                 'filter'    => ArrayHelper::map(OrderStatus::getData(), 'order_status_id', 'name'),
-                'value'     => 'status.name',
+                'format'    => 'raw',
+                'value'     => function ($order) use ($statuses) {
+                    $html = '<select data-order-id="'.$order->id.'" class="status-change-select">';
+
+                    foreach ($statuses as $status) {
+                        $html .= '<option '.($status->order_status_id == $order->order_status_id ? 'selected' : '').' value="'.$status->order_status_id.'">'.$status->name.'</option>';
+                    }
+
+                    $html .= '</select>';
+
+                    return $html;
+                },
                 'contentOptions' => ['style'=>'min-width: 120px;']
             ],
 

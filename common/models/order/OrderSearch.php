@@ -14,6 +14,8 @@ class OrderSearch extends Order
 
     const SCENARIO_OWN = 'own';
 
+    public $fullname;
+
     /**
      * @inheritdoc
      */
@@ -21,7 +23,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
-            [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status'], 'safe'],
+            [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status', 'fullname'], 'safe'],
             [['total', 'currency_value'], 'number']
         ];
     }
@@ -74,8 +76,7 @@ class OrderSearch extends Order
             'modified_at' => $this->modified_at,
         ]);
 
-        $query->andFilterWhere(['like', 'firstname', $this->firstname])
-            ->andFilterWhere(['like', 'lastname', $this->lastname])
+        $query
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'phone1', $this->phone1])
             ->andFilterWhere(['like', 'phone2', $this->phone2])
@@ -106,6 +107,9 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'forwarded_ip', $this->forwarded_ip])
             ->andFilterWhere(['like', 'user_agent', $this->user_agent])
             ->andFilterWhere(['like', 'accept_language', $this->accept_language]);
+
+        $query->andFilterWhere(['like', 'firstname', $this->fullname]);
+        $query->orFilterWhere(['like', 'lastname', $this->fullname]);
 
         return $dataProvider;
     }

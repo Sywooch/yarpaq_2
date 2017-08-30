@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\order\OrderStatus;
 use common\models\User;
 use Yii;
 use backend\models\OrderProductAddForm;
@@ -17,6 +18,7 @@ use common\models\order\OrderProduct;
 use common\models\order\Order;
 use common\models\order\OrderSearch;
 use yii\helpers\ArrayHelper;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -179,6 +181,35 @@ class OrderController extends AdminDefaultController
         return $this->render('delete', [
             'order' => $order
         ]);
+    }
+
+    public function actionChangeStatusAjax() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if (!User::hasPermission('change_order_status')) {
+            throw new ForbiddenHttpException();
+        }
+
+        $order_id = Yii::$app->request->post('order_id');
+        $status_id = Yii::$app->request->post('status_id');
+
+        $order = Order::findOne($order_id);
+        if (!$order) {
+            throw new NotFoundHttpException();
+        }
+
+        $status = OrderStatus::findOne($status_id);
+        if (!$status) {
+            throw new NotFoundHttpException();
+        }
+
+        $order->order_status_id = $status->order_status_id;
+        if ( $order->save() ) {
+            return ['status' => 1];
+        } else {
+            return ['status' => 0];
+        }
+
     }
 
     /**
