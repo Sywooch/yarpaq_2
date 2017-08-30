@@ -62,7 +62,7 @@ use yii\widgets\ActiveForm;
                 </div>
 
                 <?php foreach ($value->contents as $content) { ?>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <?php
                     echo $form->field($content, '['.$content->option_value_id.']name')
                         ->textInput(['class' => 'form-control input-sm'])
@@ -70,6 +70,12 @@ use yii\widgets\ActiveForm;
                     ?>
                 </div>
                 <?php } ?>
+
+                <div class="col-md-3">
+                    <?php if ($value->image) { ?>
+                        <img src="<?= $value->url; ?>" width="30">
+                    <?php } ?>
+                </div>
 
                 <div class="col-md-2">
                     <button type="button" class="btn btn-danger btn-sm pull-right">

@@ -149,7 +149,7 @@ $currency = Yii::$app->currency;
                                         <input type="radio" <?php if ($i===1) { echo 'checked'; } ?> name="AddToCartForm[option][<?=$productOption->id;?>]" value="<?=$value->id;?>">
 
                                         <?php if ($value->optionValue->image) { ?>
-                                            <span class="icon" style="background-image: url('/uploads/options/<?= $productOption->option->id; ?>/<?= $value->optionValue->image; ?>');"></span>
+                                            <span class="icon" style="background-image: url('<?= $value->optionValue->url; ?>');"></span>
                                         <?php } else { ?>
                                             <span><?=$value->optionValue->name;?></span>
                                         <?php } ?>
