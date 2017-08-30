@@ -32,10 +32,10 @@ $(function () {
             $('.shipping_method_block input').removeAttr('checked');
 
             $.each(response, function (type, obj) {
-                $('#'+type+'_shipping_method_block').fadeIn();
-
-                $('.shipping_method_block:visible input').attr('checked', 'checked');
+                $('#'+type+'_shipping_method_block').show();
             });
+
+            $('.shipping_method_block:visible').eq(0).find('input').click();
         });
     });
 

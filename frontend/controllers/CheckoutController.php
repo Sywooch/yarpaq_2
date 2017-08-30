@@ -255,8 +255,6 @@ class CheckoutController extends BasicController
             if ($trans->isActive) {
                 $trans->commit();
 
-                $cart->clear();
-                $cart->save();
                 $session->remove('payment_method');
                 $session->remove('shipping_method');
                 $session->remove('guest');
@@ -289,6 +287,10 @@ class CheckoutController extends BasicController
     }
 
     public function actionSuccess() {
+        $cart           = Yii::$app->cart;
+        $cart->clear();
+        $cart->save();
+
         return $this->render('success');
     }
 
