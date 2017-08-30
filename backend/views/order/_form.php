@@ -126,10 +126,12 @@ $order = $model;
                     <tr>
                         <td><?=$num?>.</td>
                         <td>
-                            <?= $orderProduct->product->title; ?>
+                            <a target="_blank" href="<?= Url::to(['product/update', 'id' => $orderProduct->product->id]); ?>"><?= $orderProduct->product->title; ?></a>
                             <?php foreach ($orderProduct->orderProductOptions as $orderProductOption) { ?>
                                 <small> &mdash; <?= $orderProductOption->name . ': '. $orderProductOption->value; ?></small>
                             <?php } ?>
+
+                            <br>Kod: <?= $orderProduct->product->id; ?>
                         </td>
                         <td><?= $orderProduct->product->model; ?></td>
                         <td><?= $orderProduct->quantity; ?></td>
