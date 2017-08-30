@@ -131,7 +131,7 @@ use yii\helpers\Url;
             </p>
             <select name="" id="footer-currency">
                 <?php foreach (Yii::$app->currency->currencies as $currency) { ?>
-                    <option value="<?= $currency->id; ?>"><?= $currency->code; ?></option>
+                    <option <?php if ($currency->id == Yii::$app->currency->userCurrency->id) { echo 'selected'; } ?> value="<?= $currency->id; ?>"><?= $currency->code; ?></option>
                 <?php } ?>
             </select>
             <select name="" id="footer-lang">
