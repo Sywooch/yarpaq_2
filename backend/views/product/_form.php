@@ -267,10 +267,17 @@ use common\models\User;
                 </div>
 
                 <?php if (User::hasPermission('set_product_status')) { ?>
-                <?= $form->field($model, 'status_id')->dropDownList([
-                    0 => 'Hidden',
-                    1 => 'Active'
-                ]); ?>
+                    <?= $form->field($model, 'status_id')->dropDownList([
+                        0 => 'Hidden',
+                        1 => 'Active'
+                    ]); ?>
+                <?php } ?>
+
+                <?php if (User::hasPermission('moderate_products')) { ?>
+                    <?= $form->field($model, 'moderated')->dropDownList([
+                        0 => 'No',
+                        1 => 'Yes'
+                    ]); ?>
                 <?php } ?>
 
                 <?php if (User::hasPermission('set_product_owner')) { ?>

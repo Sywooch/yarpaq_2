@@ -116,13 +116,25 @@ class ProductController extends AdminDefaultController
 
         $this->denyIfNotOwner($model);
 
-        if (User::hasRole('seller', false)) {
-            $model->user_id   = User::getCurrentUser()->id;
-            $model->scenario  = Product::SCENARIO_SELLER;
-        }
+//      TODO разобраться что делать с констролем владельца, защита от подтасовки
+//        if (User::hasRole('seller', false)) {
+//            $model->user_id   = User::getCurrentUser()->id;
+//            $model->scenario  = Product::SCENARIO_SELLER;
+//        }
+
+        $moderated = $model->moderated;
 
         if ($model->load(Yii::$app->request->post())) {
             $this->uploadGalleryFiles($model);
+
+            if ($model->moderated != $moderated && $model->moderated == 1) {
+
+                if (User::hasPermission('moderate_products')) {
+                    $model->moderated_at = (new \DateTime())->format('Y-m-d H:i:s');
+                } else {
+                    $model->moderated = 0;
+                }
+            }
 
             if ($model->save()) {
                 $this->saveGalleryFiles($model);
