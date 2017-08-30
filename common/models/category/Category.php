@@ -364,7 +364,21 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             ->where(['>', 'parent_id', 0])
             ->andWhere(['status' => Category::STATUS_ACTIVE])
             ->orderBy('lft')
-            ->all(), 'id', 'title'
+            ->all(),
+            'id',
+            function ($category) {
+                $parents = $category->getParents()->all();
+
+                $title = '';
+
+                foreach ($parents as $parent) {
+                    $title .= $parent->title . ' - ';
+                }
+
+                $title .= $category->title;
+
+                return $title;
+            }
         );
     }
 
