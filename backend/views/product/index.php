@@ -102,7 +102,18 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'     => 'seller_email',
                 'label'         => Yii::t('app', 'E-mail'),
-                'value'         => 'seller.email',
+                'format'        => 'raw',
+                'value'         => function ($product) {
+                    return Html::a(
+                        $product->seller->email,
+                        \yii\helpers\Url::to(['user-management/user/view', 'id' => $product->seller->id]),
+                        [
+                            'title' => Yii::t('app', 'Seller'),
+                            'target' => '_blank',
+                            'data-pjax' => '0',
+                        ]
+                    );
+                },
                 'enableSorting' => true,
                 'visible'       => User::hasRole('view_all_products')
             ],
