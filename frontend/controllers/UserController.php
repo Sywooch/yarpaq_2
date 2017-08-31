@@ -109,7 +109,9 @@ class UserController extends BasicController
     {
 
         $user = User::getCurrentUser();
-        if (!$user) { throw new ForbiddenHttpException(); }
+        if (!$user) {
+            return $this->render('forbidden');
+        }
 
 
         $customer   = $user;
@@ -207,7 +209,10 @@ class UserController extends BasicController
 
     public function actionOrders() {
         $user = User::getCurrentUser();
-        if (!$user) { throw new ForbiddenHttpException(); }
+
+        if (!$user) {
+            return $this->render('forbidden');
+        }
 
 
         return $this->render('orders', [

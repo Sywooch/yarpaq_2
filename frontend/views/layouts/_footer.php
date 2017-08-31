@@ -86,7 +86,7 @@ use yii\helpers\Url;
                 <h3><?= Yii::t('app', 'Account'); ?></h3>
                 <ul>
                     <li><a href="<?= Url::toRoute(['user/profile']); ?>"><?= Yii::t('app', 'My account'); ?></a></li>
-                    <li><a href="<?= Url::toRoute(['user/profile']); ?>"><?= Yii::t('app', 'Orders history'); ?></a></li>
+                    <li><a href="<?= Url::toRoute(['user/orders']); ?>"><?= Yii::t('app', 'Orders history'); ?></a></li>
                     <li><a href="<?= Url::toRoute(['/cart']); ?>"><?= Yii::t('app', 'Cart'); ?></a></li>
                 </ul>
             </article>

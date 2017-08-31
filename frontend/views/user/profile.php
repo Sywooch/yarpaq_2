@@ -1,6 +1,6 @@
 <div class="account_edit">
     <div>
-        <h2><?= Yii::t('app', 'Registration');?></h2>
+        <h2><?= Yii::t('app', 'Personal information');?></h2>
         <div class="form">
             <form action="" method="post" id="regForm">
 

@@ -145,6 +145,8 @@ return [
     'product2' => 'məhsul',
     'product3' => 'məhsul',
 
+    'This page is available only for authorized users' => 'Bu səhifə yalnız qeydiyyatdan keçmiş istifadəçilər üçün mövcuddur'
+
 ];
 
 

@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  font-size: 12px;
+  font-size: 16px;
   font-family: 'Roboto Condensed', Arial, Tahoma, sans-serif;
   text-align: left;
   color: #000;
@@ -334,7 +334,7 @@ a.search_toggler {
 .nav_trigger > a {
   display: block;
   height: 75px;
-  padding: 0 36px 0 54px;
+  padding: 0 28px 0 54px;
   font-size: 16px;
   font-weight: 500;
   line-height: 75px;
@@ -385,7 +385,7 @@ a.search_toggler {
 .head_search {
   width: 100%;
   height: 0;
-  padding: 16px 300px 0 350px;
+  padding: 16px 320px 0 330px;
   position: absolute;
 }
 
