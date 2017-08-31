@@ -1,9 +1,13 @@
 <?php
 
 if (isset($category)) {
-$children = $category->getChildren()->all();
+$children = $category->getChildren()->all(); ?>
 
-if (count($children)) { ?>
+    <header class="mobile_header">
+        <h3>FİLTER</h3>
+    </header>
+
+<?php if (count($children)) { ?>
     <div class="aside_categories">
         <h3><span><?= Yii::t('app', 'Subcategories'); ?></span></h3>
         <ul>
@@ -126,9 +130,9 @@ if (count($children)) { ?>
                 </div>
             </section>
         <?php } ?>
-
-        <footer>
-            <a href="#"><?= Yii::t('app', 'Close'); ?></a>
-        </footer>
     </form>
 </div>
+
+<footer>
+    <a href="#"><?= Yii::t('app', 'Close'); ?></a>
+</footer>

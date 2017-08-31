@@ -4733,7 +4733,7 @@ a.back_to_top.show_me {
   display: block;
   height: 50px;
   line-height: 50px;
-  color: #525252;
+  color: #999999;
   font-family: 'Roboto';
   font-size: 20px;
   text-decoration: none;
@@ -4742,7 +4742,9 @@ a.back_to_top.show_me {
 }
 
 .product_infos .tabs ul li a.active, .product_infos .tabs ul li a:hover {
-  border-bottom: 2px solid #ff0000;
+  border-bottom: 3px solid #ff0000;
+  color: #525252;
+  font-weight: 500;
 }
 
 .product_infos .inner {
@@ -5049,6 +5051,7 @@ aside.aside_products article {
   margin: 0 0 10px;
   padding: 0 20px;
   background: #fff;
+  position: relative;
   -webkit-animation-duration: 0.2s;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-animation-duration: 0.2s;
@@ -6934,7 +6937,7 @@ a.clear_filtre {
 }
 
 .more_products {
-  height: 75px;
+  height: auto;
   padding: 15px 0 0;
   text-align: center;
   clear: both;
@@ -7003,6 +7006,14 @@ a.clear_filtre {
   border-radius: 4px;
 }
 
+
+.pagination {
+  padding: 0 0 10px;
+}
+
+.pagination li {
+  padding: 0 0 3px;
+}
 
 .info-block {
   background: #fff;

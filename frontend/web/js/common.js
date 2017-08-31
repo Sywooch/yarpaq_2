@@ -37,7 +37,7 @@ $(function () {
     }
 
 
-    $('.priduct_gallery .image img').elevateZoom();
+    //$('.priduct_gallery .image img').elevateZoom();
 
 
     $('#footer-currency').change(function () {
