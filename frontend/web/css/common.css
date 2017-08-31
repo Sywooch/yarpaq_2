@@ -39,3 +39,14 @@
     padding: 15px;
     font-size: 16px;
 }
+
+.xactive {
+    -webkit-box-shadow: 0 0 3px 0 rgba(121,178,55,1);
+    -moz-box-shadow: 0 0 3px 0 rgba(121,178,55,1);
+    box-shadow: 0 0 3px 0 rgba(121,178,55,1);
+    border: 1px solid #79b237;
+}
+
+#mobile-gallery {
+    display: none;
+}

@@ -37,7 +37,14 @@ $(function () {
     }
 
 
-    //$('.priduct_gallery .image img').elevateZoom();
+    if (!isMobile) {
+        $("._xzoom, .xzoom-gallery").xzoom();
+    } else {
+        $('#desktop-gallery').hide();
+        $('#mobile-gallery').show().slick({
+            dots: true
+        });
+    }
 
 
     $('#footer-currency').change(function () {

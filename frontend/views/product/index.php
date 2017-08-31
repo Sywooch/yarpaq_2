@@ -19,19 +19,36 @@ $currency = Yii::$app->currency;
     </header>
     <div class="current_product">
         <div class="priduct_gallery">
-            <div class="image">
-                <div>
-                    <?php if (count($product->gallery)) { ?>
-                    <img src="<?= $product->gallery[0]->url; ?>" alt="" data-zoom-image="<?= $product->gallery[0]->url; ?>">
-                    <?php } ?>
-                </div>
+
+            <div id="mobile-gallery">
+                <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
+                    <div>
+                        <img width="100%" src="<?= $image->url; ?>" alt="<?= $product->title ?>">
+                    </div>
+                <?php } ?>
             </div>
-            <div class="thumbnails">
-                <ul>
-                    <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
-                    <li><a href="<?= $image->url; ?>" <?= $i===1 ? 'class="active"' : ''; ?>><img src="<?= $image->url; ?>" alt=""></a></li>
-                    <?php } ?>
-                </ul>
+
+            <div id="desktop-gallery">
+                <div class="image">
+                    <div>
+                        <?php if (count($product->gallery)) { ?>
+                            <img class="_xzoom" src="<?= $product->gallery[0]->url; ?>" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
+                        <?php } ?>
+
+                    </div>
+                </div>
+                <div class="thumbnails">
+
+                    <div class="xzoom-thumbs">
+
+                        <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
+                            <a href="<?= $image->url; ?>">
+                                <img class="xzoom-gallery" width="70" src="<?= $image->url; ?>">
+                            </a>
+                        <?php } ?>
+                    </div>
+
+                </div>
             </div>
         </div>
         <div class="right_side">

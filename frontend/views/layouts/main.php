@@ -31,6 +31,9 @@ $this->beginPage();
     <link href="/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/css/font/stylesheet.css" rel="stylesheet" type="text/css" />
     <link href="/css/rangeSlider.css" rel="stylesheet" type="text/css" />
+    <link href="/js/zoom/dist/xzoom.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/js/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/js/slick/slick-theme.css"/>
     <link href="/css/main.css" rel="stylesheet" type="text/css" />
     <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="/css/common.css" rel="stylesheet" type="text/css" />
@@ -349,7 +352,8 @@ $this->beginPage();
 
 <script type="text/javascript" src="/js/jquery-latest.js"></script>
 <script type="text/javascript" src="/js/jquery.mobile.custom.min.js"></script>
-<script type="text/javascript" src="/js/elevate-zoom/jquery.elevateZoom-3.0.8.min.js"></script>
+<script type="text/javascript" src="/js/zoom/dist/xzoom.min.js"></script>
+<script type="text/javascript" src="/js/slick/slick.min.js"></script>
 <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
