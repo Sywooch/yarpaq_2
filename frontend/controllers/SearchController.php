@@ -22,7 +22,7 @@ class SearchController extends BasicController
     public function actionIndex() {
         $r = Yii::$app->request;
 
-        $q = null;
+        $q = '';
         $category = null;
         $childrenCategoriesIDs = [];
 
@@ -35,16 +35,17 @@ class SearchController extends BasicController
         }
 
         // GET Products
-        $repo = new ProductRepository();
-        $products = $repo->visibleOnTheSite();
 
-
-        if ($r->get('q')) {
+        if ($r->get('q') && $r->get('q') != '') {
             $q = htmlspecialchars(strip_tags($r->get('q')), ENT_QUOTES, 'UTF-8');
 
             SearchLogger::log($q);
+        } else {
+            return $this->render('notfound');
         }
 
+        $repo = new ProductRepository();
+        $products = $repo->visibleOnTheSite();
         $products->andWhere(['like', 'title', $q]);
         $products->orWhere(['id' => $q]);
 
