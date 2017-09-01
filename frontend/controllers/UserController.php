@@ -9,20 +9,24 @@ use common\models\order\Order;
 use common\models\Profile;
 use common\models\Zone;
 use frontend\models\LoginForm;
+use webvimark\modules\UserManagement\models\forms\ChangeOwnPasswordForm;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\User;
-use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use frontend\models\PasswordRecoveryForm;
+use webvimark\modules\UserManagement\components\UserAuthEvent;
+use webvimark\modules\UserManagement\UserManagementModule;
 
 
 class UserController extends BasicController
 {
 
-    public $freeAccessActions = ['registration', 'login', 'orders', 'profile'];
+    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password'];
 
     public function actionRegistration()
     {
@@ -218,5 +222,99 @@ class UserController extends BasicController
         return $this->render('orders', [
             'orders' => Order::find()->andWhere(['user_id' => $user->id])->all()
         ]);
+    }
+
+    public function actionRecoveryPassword() {
+        if ( !Yii::$app->user->isGuest )
+        {
+            return $this->goHome();
+        }
+
+        $model = new PasswordRecoveryForm();
+
+        if ( Yii::$app->request->isAjax AND $model->load(Yii::$app->request->post()) )
+        {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            // Ajax validation breaks captcha. See https://github.com/yiisoft/yii2/issues/6115
+            // Thanks to TomskDiver
+            $validateAttributes = $model->attributes;
+            unset($validateAttributes['captcha']);
+
+            return ActiveForm::validate($model, $validateAttributes);
+        }
+
+        if ( $model->load(Yii::$app->request->post()) AND $model->validate() )
+        {
+            if ( $this->triggerModuleEvent(UserAuthEvent::BEFORE_PASSWORD_RECOVERY_REQUEST, ['model'=>$model]) )
+            {
+                if ( $model->sendEmail(false) )
+                {
+                    if ( $this->triggerModuleEvent(UserAuthEvent::AFTER_PASSWORD_RECOVERY_REQUEST, ['model'=>$model]) )
+                    {
+                        return $this->renderIsAjax('passwordRecoverySuccess');
+                    }
+                }
+                else
+                {
+                    Yii::$app->session->setFlash('error', UserManagementModule::t('front', "Unable to send message for email provided"));
+                }
+            }
+        }
+
+        return $this->renderIsAjax('passwordRecovery', compact('model'));
+    }
+
+    /**
+     * Universal method for triggering events like "before registration", "after registration" and so on
+     *
+     * @param string $eventName
+     * @param array  $data
+     *
+     * @return bool
+     */
+    protected function triggerModuleEvent($eventName, $data = [])
+    {
+        $event = new UserAuthEvent($data);
+
+        $this->module->trigger($eventName, $event);
+
+        return $event->isValid;
+    }
+
+
+    public function actionPasswordRecoveryReceive($token)
+    {
+        if ( !Yii::$app->user->isGuest )
+        {
+            return $this->goHome();
+        }
+
+        $user = User::findByConfirmationToken($token);
+
+        if ( !$user )
+        {
+            throw new NotFoundHttpException(UserManagementModule::t('front', 'Token not found. It may be expired. Try reset password once more'));
+        }
+
+        $model = new ChangeOwnPasswordForm([
+            'scenario'=>'restoreViaEmail',
+            'user'=>$user,
+        ]);
+
+        if ( $model->load(Yii::$app->request->post()) AND $model->validate() )
+        {
+            if ( $this->triggerModuleEvent(UserAuthEvent::BEFORE_PASSWORD_RECOVERY_COMPLETE, ['model'=>$model]) )
+            {
+                $model->changePassword(false);
+
+                if ( $this->triggerModuleEvent(UserAuthEvent::AFTER_PASSWORD_RECOVERY_COMPLETE, ['model'=>$model]) )
+                {
+                    return $this->renderIsAjax('changeOwnPasswordSuccess');
+                }
+            }
+        }
+
+        return $this->renderIsAjax('changeOwnPassword', compact('model'));
     }
 }

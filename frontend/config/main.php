@@ -73,9 +73,11 @@ return [
 
 
 
-                'registration'  => 'user/registration',
-                'login'         => 'user/login',
-                'logout'        => 'user-management/auth/logout',
+                'registration'          => 'user/registration',
+                'login'                 => 'user/login',
+                'password-recovery'     => 'user/recovery-password',
+                'logout'                => 'user-management/auth/logout',
+                '/user/password-recovery-receive' => '/user/password-recovery-receive',
 
                 'user/profile'       => 'user/profile',
                 'user/orders'        => 'user/orders',

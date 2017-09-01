@@ -78,6 +78,7 @@ return [
     'modules' => [
         'user-management' => [
             'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+            'useEmailAsLogin' => true,
 
             'on beforeAction'=>function(yii\base\ActionEvent $event) {
                 if ( $event->action->uniqueId == 'user-management/auth/login' )
@@ -86,7 +87,7 @@ return [
                 };
             },
 
-            'useEmailAsLogin' => true,
+
 
             'controllerMap' => [
                 'user' => 'backend\controllers\UserController',

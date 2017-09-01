@@ -334,6 +334,9 @@ $this->beginPage();
                         <input type="checkbox" name="LoginForm[rememberMe]" value="1" id="signin_remember_me">
                         <label for="signin_remember_me"><?= Yii::t('app', 'Remember me'); ?></label>
                     </li>
+                    <li>
+                        <a href="<?= Url::to(['user/recovery-password']); ?>" id="forgot_password"><?= \webvimark\modules\UserManagement\UserManagementModule::t('front', 'Forgot password ?'); ?></a>
+                    </li>
                     <li><button type="submit"><?= Yii::t('app', 'Sign in'); ?></button></li>
                 </ul>
             </form>

@@ -23,6 +23,16 @@ return [
                         'app/error' => 'error.php',
                     ],
                 ],
+
+                'modules/user-management/*' => [
+                    'class'          => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en',
+                    'basePath'       => '@common/messages/webvimark',
+                    'fileMap'        => [
+                        'modules/user-management/back' => 'back.php',
+                        'modules/user-management/front' => 'front.php',
+                    ],
+                ]
             ],
         ],
     ],

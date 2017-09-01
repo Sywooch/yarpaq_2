@@ -56,3 +56,7 @@
     width: auto;
     display: inline-block;
 }
+
+#forgot_password {
+    color: #000;
+}

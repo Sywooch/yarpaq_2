@@ -16,6 +16,23 @@ $(function () {
 
     });
 
+    $('#recovery-password-form').submit(function (e) {
+        e.preventDefault();
+
+        var form = $(this);
+
+        form.find('.error').remove();
+
+        $.post(form.attr('action'), form.serialize(), function (response) {
+            if (response.status) {
+
+            } else {
+                form.append('<p style="color: red" class="error">'+response.message+'</p>');
+            }
+        }, 'json');
+
+    });
+
 
     var regForm = $('#regForm');
     if (regForm.size()) {
