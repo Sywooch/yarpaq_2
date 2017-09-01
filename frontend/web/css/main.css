@@ -5560,6 +5560,7 @@ aside.aside_products article .old_price b.discount {
   color: #363636;
   font-family: 'Roboto';
   font-size: 16px;
+  border-radius: 0;
   font-weight: 400;
   letter-spacing: 1.1px;
   background: #fff;

@@ -56,7 +56,7 @@ return [
     'Region' => 'Rayon',
     'City' => 'Şəhər',
     'Postal Code' => 'Poçt indeksi',
-    'Orqanization' => 'Təşkilat',
+    'Organization' => 'Təşkilat',
     'Confirm password' => 'Şifrəni təsdiqlə',
     'Continue' => 'Davam et',
     'Product' => 'Məhsul',
