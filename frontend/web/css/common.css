@@ -50,3 +50,9 @@
 #mobile-gallery {
     display: none;
 }
+
+#signin_remember_me {
+    height: auto;
+    width: auto;
+    display: inline-block;
+}

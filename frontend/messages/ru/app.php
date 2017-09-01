@@ -146,7 +146,9 @@ return [
     'product2' => 'товар',
     'product3' => 'товар',
 
-    'This page is available only for authorized users' => 'Данная страница доступна только зарегистрированным пользователям'
+    'This page is available only for authorized users' => 'Данная страница доступна только зарегистрированным пользователям',
+
+    'Remember me' => 'Запомнить меня'
 
 ];
 

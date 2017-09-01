@@ -312,11 +312,11 @@ $this->beginPage();
 <div class="signin_modal">
     <div class="sign_back">
         <ul>
-            <li><img src="/img/icon_10.svg" alt=""><span><?= Yii::t('app', 'Reasonable prices'); ?></span></li>
-            <li><img src="/img/icon_11.svg" alt=""><span><?= Yii::t('app', 'Safe shopping'); ?></span></li>
-            <li><img src="/img/icon_12.svg" alt=""><span><?= Yii::t('app', '100% return'); ?></span></li>
-            <li><img src="/img/icon_13.svg" alt=""><span><?= Yii::t('app', 'Convenient payment'); ?></span></li>
-            <li><img src="/img/icon_14.svg" alt=""><span><?= Yii::t('app', 'Free delivery'); ?></span></li>
+            <li><img src="/img/icon_10.svg" alt="<?= Yii::t('app', 'Reasonable prices'); ?>"><span><?= Yii::t('app', 'Reasonable prices'); ?></span></li>
+            <li><img src="/img/icon_11.svg" alt="<?= Yii::t('app', 'Safe shopping'); ?>"><span><?= Yii::t('app', 'Safe shopping'); ?></span></li>
+            <li><img src="/img/icon_12.svg" alt="<?= Yii::t('app', '100% return'); ?>"><span><?= Yii::t('app', '100% return'); ?></span></li>
+            <li><img src="/img/icon_13.svg" alt="<?= Yii::t('app', 'Convenient payment'); ?>"><span><?= Yii::t('app', 'Convenient payment'); ?></span></li>
+            <li><img src="/img/icon_14.svg" alt="<?= Yii::t('app', 'Free delivery'); ?>"><span><?= Yii::t('app', 'Free delivery'); ?></span></li>
         </ul>
     </div>
     <div>
@@ -330,6 +330,10 @@ $this->beginPage();
                 <ul>
                     <li><input type="text" name="LoginForm[email]" placeholder="<?= Yii::t('app', 'Email'); ?>"></li>
                     <li><input type="password" name="LoginForm[password]" placeholder="<?= Yii::t('app', 'Password'); ?>"></li>
+                    <li>
+                        <input type="checkbox" name="LoginForm[rememberMe]" value="1" id="signin_remember_me">
+                        <label for="signin_remember_me"><?= Yii::t('app', 'Remember me'); ?></label>
+                    </li>
                     <li><button type="submit"><?= Yii::t('app', 'Sign in'); ?></button></li>
                 </ul>
             </form>

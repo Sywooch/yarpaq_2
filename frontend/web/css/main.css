@@ -2137,7 +2137,7 @@ a.toggler em:first-child:first-child + em + em {
   position: fixed;
   top: -400px;
   left: 50%;
-  margin: -220px 0 0 -10px;
+  margin: -150px 0 0 -10px;
   z-index: 1;
   -webkit-animation-duration: 0.9s;
   -webkit-transition: all 0.9s ease-in-out;
