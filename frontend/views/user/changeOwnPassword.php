@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<?php endif; ?>
 
 					<li <?= isset($model->getErrors()['password']) ? 'class="error"' : ''; ?>>
-						<span><?= Yii::t('app', 'Password'); ?></span>
+						<span><?= UserManagementModule::t('back', 'Password'); ?></span>
 						<div>
 							<input type="password" name="ChangeOwnPasswordForm[password]" value="" autocomplete="off">
 							<?php if (isset($model->getErrors()['password'])) { ?>
@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					</li>
 
 					<li <?= isset($model->getErrors()['repeat_password']) ? 'class="error"' : ''; ?>>
-						<span><?= Yii::t('app', 'Repeat password'); ?></span>
+						<span><?= UserManagementModule::t('back', 'Repeat password'); ?></span>
 						<div>
 							<input type="password" name="ChangeOwnPasswordForm[repeat_password]" value="" autocomplete="off">
 							<?php if (isset($model->getErrors()['repeat_password'])) { ?>
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 				<div class="submit">
 					<input type="hidden" name="<?= Yii::$app->request->csrfParam ?>" value="<?= Yii::$app->request->getCsrfToken()?>">
-					<button type="submit"><?= UserManagementModule::t('front', 'Save'); ?></button>
+					<button type="submit"><?= UserManagementModule::t('back', 'Change password'); ?></button>
 				</div>
 			</form>
 		</div>

@@ -66,6 +66,7 @@ return [
     'Registration IP' => 'IP регистрации',
     'Repeat password' => 'Повторите пароль',
     'Reset' => 'Сбросить',
+    'Reset password' => 'Сменить пароль',
     'Role creation' => 'Создание роли',
     'Roles' => 'Роли',
     'Roles and permissions' => 'Роли и права',

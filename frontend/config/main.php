@@ -74,11 +74,11 @@ return [
 
 
 
-                'registration'          => 'user/registration',
-                'login'                 => 'user/login',
-                'password-recovery'     => 'user/recovery-password',
-                'logout'                => 'user-management/auth/logout',
-                '/user/password-recovery-receive' => '/user/password-recovery-receive',
+                'registration'              => 'user/registration',
+                'login'                     => 'user/login',
+                'password-recovery'         => 'user/recovery-password',
+                'password-recovery-receive' => 'user/password-recovery-receive',
+                'logout'                    => 'user-management/auth/logout',
 
                 'user/profile'       => 'user/profile',
                 'user/orders'        => 'user/orders',

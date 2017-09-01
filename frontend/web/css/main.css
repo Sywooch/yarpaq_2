@@ -745,7 +745,7 @@ a.search_toggler {
 
 .sign_in_dropdown nav p {
   /*padding: 0 0 0 25px;*/
-  padding: 5px 0 15px 25px;
+  padding: 5px 0 15px 0px;
   color: #fff;
   font-size: 18px;
   font-weight: 400;
