@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
+    'name' => 'Yarpaq',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
@@ -100,6 +101,12 @@ return [
         'user-management' => [
             'class' => 'webvimark\modules\UserManagement\UserManagementModule',
             'useEmailAsLogin' => true,
+
+            'mailerOptions' => [
+                'from' => [
+                    'support@yarpaq.az' => 'Yarpaq Support'
+                ]
+            ],
 
             'on beforeAction' => function(yii\base\ActionEvent $event) {
                 if ( $event->action->uniqueId == 'user-management/auth/login' )

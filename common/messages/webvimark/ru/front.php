@@ -49,4 +49,7 @@ return [
     'Too many attempts' => 'Лимит попыток превышен',
     'Unable to send message for email provided' => 'Не удалось отправить письмо на указанный email',
     'You could not login from this IP' => 'Вы не можете входить с этого IP',
+
+    'Hello {fullname}, follow this link to reset your password' =>
+    'Уважаемый {fullname}, чтобы восстановить пароль, пройдите по ссылке'
 ];

@@ -9,7 +9,7 @@ use common\models\order\Order;
 use common\models\Profile;
 use common\models\Zone;
 use frontend\models\LoginForm;
-use webvimark\modules\UserManagement\models\forms\ChangeOwnPasswordForm;
+use frontend\models\ChangeOwnPasswordForm;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -26,7 +26,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
 class UserController extends BasicController
 {
 
-    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password'];
+    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password', 'password-recovery-receive'];
 
     public function actionRegistration()
     {

@@ -26,7 +26,7 @@ return [
     'Confirm' => 'təsdiqləmək',
     'Confirm E-mail' => 'E-mailı təsdiqləmək',
     'Continue' => 'Davam etmək',
-    'Could not send confirmation email' => 'Akkauntu aktivləşdirmək üçün məktubu göndərmək mümkün olmadı',
+    'Could not send confirmation email' => 'Akkauntu aktivləşdirmək üçün məktubu göndərmək mümkün deyil',
     'E-mail confirmation for' => 'E-mail təsdiqlənməsi',
     'E-mail confirmed' => 'E-mail təsdiqləndi',
     'E-mail is invalid' => 'E-mail yanlışdır',
@@ -45,8 +45,11 @@ return [
     'Repeat password' => 'Şifrəni təkrarla',
     'This E-mail already exists' => 'Bu E-mail artıq məşğuldur',
     'Token not found. It may be expired' => 'Təhlükəsizlik kodu tapılmadı yə yaxud yenilənməsini tələb edir',
-    'Token not found. It may be expired. Try reset password once more' => 'Təhlükəsizlik kodu tapılmadı yə yaxud yenilənməsini tələb edir. Şifrəni bərpa etmək bir də cəhd edin.',
+    'Token not found. It may be expired. Try reset password once more' => 'Təhlükəsizlik kodu tapılmadı yə yaxud yenilənməsini tələb edir. Şifrəni bərpa etmək üçün bir də cəhd edin.',
     'Too many attempts' => 'Həddindən artıq cəhd etmisiniz',
-    'Unable to send message for email provided' => 'Qeyd olunmuş e-maila məktub göndərmək mümkün olmadı',
+    'Unable to send message for email provided' => 'Qeyd olunmuş e-maila məktub göndərmək mümkün deyil',
     'You could not login from this IP' => 'Siz bu IP-dən daxil ola bilmərsiniz',
+
+    'Hello {fullname}, follow this link to reset your password' =>
+    'Hörmətli {fullname}, şifrəni yeniləmək üçün bu linkə keçin'
 ];
