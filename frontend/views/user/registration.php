@@ -125,7 +125,7 @@
                     <li <?= isset($addressErrors['address_1']) ? 'class="error"' : ''; ?>>
                         <span><?= Yii::t('app', 'Address'); ?></span>
                         <div>
-                            <input type="text" name="address" value="<?= $address->city; ?>">
+                            <input type="text" name="address" value="<?= $address->address_1; ?>">
                             <?php if (isset($addressErrors['address_1'])) { ?>
                                 <strong><?= $addressErrors['address_1'][0]; ?></strong>
                             <?php } ?>
