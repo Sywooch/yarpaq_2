@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
 
         <p class="pull-right">
-            <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;'.Yii::t('app', 'Add Product'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;'.Yii::t('app', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <h2><?= $this->title; ?></h2>
@@ -93,7 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status_id',
                 'label'     => Yii::t('app', 'Status'),
-                'value'     => 'status.name',
+                'value'     => function ($product) {
+                    return Yii::t('app', $product->status->name);
+                },
                 'filter'    => \yii\helpers\ArrayHelper::map(\common\models\Status::find()->all(), 'id', function ($status) {
                     return Yii::t('app', $status->name);
                 }),
@@ -141,10 +143,10 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <?=Html::dropDownList('action', '', [
-        '' => 'Action: ',
+        '' => Yii::t('app', 'Action').': ',
         'delete' => 'Delete',
     ],
         ['class'=>'dropdown'])?>
-    <?=Html::submitButton('Send', ['class' => 'btn btn-info',]);?>
+    <?=Html::submitButton('OK', ['class' => 'btn btn-info',]);?>
 
     <?php Pjax::end(); ?></div>

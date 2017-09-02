@@ -115,4 +115,13 @@ class ProductSearch extends Product
 
         return $dataProvider;
     }
+
+    public function attributeLabels() {
+        $labels = parent::attributeLabels();
+
+        $labels['seller_email'] = Yii::t('app', 'Seller email');
+        $labels['category'] = Yii::t('app', 'Category');
+
+        return $labels;
+    }
 }

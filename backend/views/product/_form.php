@@ -93,7 +93,7 @@ use common\models\User;
                         echo $form->field($model, 'location_id')->widget(Select2::classname(), [
                             'data' => \yii\helpers\ArrayHelper::toArray($zones, ['common\models\Zone' => ['id', 'name']]),
                             'options' => [
-                                'placeholder' => 'Select location  ...'
+                                'placeholder' => Yii::t('app', 'Select location').' ...'
                             ],
                             'pluginOptions' => [
                                 'allowClear' => true
@@ -110,7 +110,7 @@ use common\models\User;
 
                         echo $form->field($model, 'manufacturer_id')->widget(Select2::classname(), [
                             'initValueText' => $manufacturer,
-                            'options' => ['placeholder' => 'Select manufacturer ...'],
+                            'options' => ['placeholder' => Yii::t('app', 'Select manufacturer').' ...'],
                             'pluginOptions' => [
                                 'allowClear' => true,
 
@@ -149,16 +149,22 @@ use common\models\User;
 
                         $pluginOptions = [
                             'allowedFileExtensions' => ['jpg', 'gif', 'png', 'mp4'],
-                            'showUpload' => false,
 
 
                             'initialPreviewAsData' => true,
                             'deleteUrl' => Url::to(['product/image-delete']),
                             'overwriteInitial' => false,
                             'maxFileSize' => 10000,
-                            'initialCaption' => "Upload images",
+                            'initialCaption' => Yii::t('app', "Upload images"),
                             'initialPreview' => [],
-                            'initialPreviewConfig' => []
+                            'initialPreviewConfig' => [],
+
+                            'showCaption' => false,
+                            'showRemove' => false,
+                            'showUpload' => false,
+                            'browseClass' => 'btn btn-primary btn-block',
+                            'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                            'browseLabel' =>  Yii::t('app', 'Select')
                         ];
                         $gallery_sort = [];
 
@@ -204,7 +210,7 @@ use common\models\User;
                         echo $form->field($model, 'categoryIDs')->widget(Select2::classname(), [
                             'data' => $categoriesData,
                             'options' => [
-                                'placeholder' => 'Select category ...',
+                                'placeholder' => Yii::t('app', 'Select category').' ...',
                                 'multiple' => true,
                             ],
                             'pluginOptions' => [
@@ -212,7 +218,7 @@ use common\models\User;
                                 'tokenSeparators' => [',', ' '],
                                 'maximumInputLength' => 10,
                             ],
-                        ])->label('Category');
+                        ])->label(Yii::t('app', 'Category'));
 
                         ?>
                     </div>
@@ -268,15 +274,15 @@ use common\models\User;
 
                 <?php if (User::hasPermission('set_product_status')) { ?>
                     <?= $form->field($model, 'status_id')->dropDownList([
-                        0 => 'Hidden',
-                        1 => 'Active'
+                        0 => Yii::t('app', 'Disabled'),
+                        1 => Yii::t('app', 'Enabled')
                     ]); ?>
                 <?php } ?>
 
                 <?php if (User::hasPermission('moderate_products')) { ?>
                     <?= $form->field($model, 'moderated')->dropDownList([
-                        0 => 'No',
-                        1 => 'Yes'
+                        0 => Yii::t('app', 'No'),
+                        1 => Yii::t('app', 'Yes')
                     ]); ?>
                 <?php } ?>
 
@@ -289,7 +295,7 @@ use common\models\User;
                 echo $form->field($model, 'user_id')->widget(Select2::classname(), [
                     'initValueText' => $seller,
                     'options' => [
-                        'placeholder' => 'Select an user ...',
+                        'placeholder' => Yii::t('app', 'Select seller').' ...',
                     ],
                     'pluginOptions' => [
                         'allowClear' => true,
@@ -310,7 +316,7 @@ use common\models\User;
                         'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                     ],
 
-                ]);
+                ])->label(Yii::t('app', 'Seller'));
                 ?>
 
                 <?php } ?>

@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-create">
 
+    <h2><?= $this->title; ?></h2>
+
     <?= $this->render('_form', [
         'model' => $model,
         'zones' => $zones
