@@ -2,7 +2,7 @@
 <?php if ($testmode) { ?>
     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $text_testmode; ?></div>
 <?php } ?>
-<form action="<?php echo $action; ?>" method="post">
+<form action="<?php echo $action; ?>" method="post" name="payPalForm" id="payPalForm">
     <input type="hidden" name="cmd" value="_cart" />
     <input type="hidden" name="upload" value="1" />
     <input type="hidden" name="business" value="<?php echo $business; ?>" />
@@ -52,3 +52,11 @@
         </div>
     </div>
 </form>
+
+
+<script type="text/javascript">
+    window.onload=function(){
+
+        document.forms["payPalForm"].submit();
+    }
+</script>

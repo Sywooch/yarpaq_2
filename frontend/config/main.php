@@ -83,6 +83,9 @@ return [
                 'user/profile'       => 'user/profile',
                 'user/orders'        => 'user/orders',
 
+                'goldenpay_complete' => 'golden-pay-payment/callback',
+                'millikart_callback' => 'albali-payment/callback',
+
                 'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
                 '<url:.+>'      => 'category/index'
             ],

@@ -48,7 +48,7 @@ class AlbaliPaymentController extends BasicController
     }
 
     public function actionCallback($reference) {
-
+        $success = false;
         $pk = filter_var($reference, FILTER_SANITIZE_STRING);
 
         $tr = AlbaliTransaction::find()->andWhere(['transaction_id' => $pk])->one();
@@ -56,7 +56,11 @@ class AlbaliPaymentController extends BasicController
         if ($tr) {
             $order = Order::findOne($tr->millikart_order_id);
             $order->setAsPaid();
-            $order->save();
+            $success = $order->save();
+        }
+
+        if ($success) {
+            $this->redirect(Url::toRoute(['checkout/success']));
         }
 
     }

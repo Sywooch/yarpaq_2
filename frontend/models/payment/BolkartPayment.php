@@ -14,8 +14,8 @@ class BolkartPayment extends Payment {
     protected $moduleName   = 'bolkart';
     protected $cardType     = 2;
 
-    protected $successUrl = 'https://yarpaq.az/index.php?route=checkout/success';
-    protected $errorUrl = 'https://yarpaq.az/index.php?route=checkout/fail';
+    protected $successUrl = 'https://yarpaq.az/payment/bolkart-payment/callback';
+    protected $errorUrl = 'https://yarpaq.az/payment/checkout/fail';
 
     protected $rates = [
         '1' => 1.8,

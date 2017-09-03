@@ -7,6 +7,7 @@ use common\models\Language;
 use common\models\order\Order;
 use frontend\models\payment\BolkartPayment;
 use frontend\models\payment\BolkartTransaction;
+use yii\helpers\Url;
 
 
 class BolkartPaymentController extends BasicController
@@ -46,7 +47,7 @@ class BolkartPaymentController extends BasicController
     }
 
     public function actionCallback($reference) {
-
+        $success = false;
         $pk = filter_var($reference, FILTER_SANITIZE_STRING);
 
         $tr = BolkartTransaction::find()->andWhere(['transaction_id' => $pk])->one();
@@ -54,7 +55,11 @@ class BolkartPaymentController extends BasicController
         if ($tr) {
             $order = Order::findOne($tr->bolkart_order_id);
             $order->setAsPaid();
-            $order->save();
+            $success = $order->save();
+        }
+
+        if ($success) {
+            $this->redirect(Url::toRoute(['checkout/success']));
         }
 
     }

@@ -7,6 +7,7 @@ use common\models\Language;
 use common\models\order\Order;
 use frontend\models\payment\GoldenPayPayment;
 use frontend\models\payment\GoldenPayTransaction;
+use yii\helpers\Url;
 
 
 class GoldenPayPaymentController extends BasicController
@@ -46,7 +47,7 @@ class GoldenPayPaymentController extends BasicController
     }
 
     public function actionCallback($payment_key) {
-
+        $success = false;
         $pk = filter_var($payment_key, FILTER_SANITIZE_STRING);
 
         $tr = GoldenPayTransaction::find()->andWhere(['transaction_id' => $pk])->one();
@@ -54,7 +55,11 @@ class GoldenPayPaymentController extends BasicController
         if ($tr) {
             $order = Order::findOne($tr->goldenpay_order_id);
             $order->setAsPaid();
-            $order->save();
+            $success = $order->save();
+        }
+
+        if ($success) {
+            $this->redirect(Url::toRoute(['checkout/success']));
         }
 
     }
