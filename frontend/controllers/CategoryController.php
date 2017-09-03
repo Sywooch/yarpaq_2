@@ -9,7 +9,6 @@ use Yii;
 use yii\base\Exception;
 use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
-use common\models\Product;
 use common\models\category\Category;
 use yii\web\NotFoundHttpException;
 
@@ -38,7 +37,8 @@ class CategoryController extends BasicController
         if (!$category) {
             throw new NotFoundHttpException();
         }
-        $this->setViewPage($category);
+
+        $this->seo($category->title);
 
 
         $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
@@ -104,6 +104,7 @@ class CategoryController extends BasicController
         // GET Brands END
 
 
+        $this->seo($category->title);
 
         return $this->render('index', [
             'count'             => $pages->totalCount,

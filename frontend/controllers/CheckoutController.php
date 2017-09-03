@@ -75,6 +75,8 @@ class CheckoutController extends BasicController
             $session->set('user_info', $user_info);
         }
 
+        $this->seo(Yii::t('app', 'Checkout'));
+
         return $this->render('index', [
             'cart'              => $cart,
             'user'              => $user,

@@ -6,6 +6,8 @@ use common\models\category\TopCategoryList;
 use yii\helpers\Url;
 
 $this->beginPage();
+
+$seo = $this->params['seo'];
 ?>
 <!DOCTYPE HTML>
 <html lang="<?= Yii::$app->language ?>">
@@ -15,12 +17,19 @@ $this->beginPage();
     <meta name="description" content="Yarpaq site - Full description">
     <meta name="Keywords" content="Yarpaq, Almag, Telefonlar, Shop">
 
-    <title><?= @$page->title; ?> &mdash; <?= Yii::t('app', 'Yarpaq online mağaza'); ?></title>
+    <title><?= $seo->title; ?></title>
 
-    <meta property="og:title" content="The Rock" />
-    <meta property="og:type" content="video.movie" />
-    <meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
-    <meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
+    <meta property="og:title" content="<?= $seo->title; ?>" />
+
+    <?php if ($seo->type) { ?>
+        <meta property="og:type" content="<?= $seo->type; ?>" />
+    <?php } ?>
+
+    <meta property="og:url" content="<?= $seo->url; ?>" />
+
+    <?php if ($seo->image) { ?>
+        <meta property="og:image" content="<?= $seo->image; ?>" />
+    <?php } ?>
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

@@ -32,6 +32,8 @@ class ProductController extends BasicController
         $product->viewed++;
         $product->save();
 
+        $this->seo($product->title, $product->preview);
+
         return $this->render('index', [
             'product'      => $product
         ]);

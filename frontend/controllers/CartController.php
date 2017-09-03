@@ -43,6 +43,8 @@ class CartController extends BasicController
     public function actionIndex() {
         $cart = Yii::$app->cart;
 
+        $this->seo(Yii::t('app', 'Cart'));
+
         return $this->render('index', [
             'cart' => $cart
         ]);

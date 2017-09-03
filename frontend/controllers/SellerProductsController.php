@@ -97,7 +97,7 @@ class SellerProductsController extends BasicController
             ->all();
         // GET Brands END
 
-
+        $this->seo($seller->fullname);
 
         return $this->render('index', [
             'count'             => $pages->totalCount,

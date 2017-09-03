@@ -95,6 +95,8 @@ class UserController extends BasicController
         $countries  = Country::find()->all();
         $zones      = Zone::find()->all();
 
+        $this->seo(Yii::t('app', 'Registration'));
+
         return $this->render('registration', [
             'customer' => $customer,
             'profile'  => $profile,
@@ -179,6 +181,8 @@ class UserController extends BasicController
         $countries  = Country::find()->all();
         $zones      = Zone::find()->all();
 
+        $this->seo(Yii::t('app', 'Personal information'));
+
         return $this->render('profile', [
             'customer' => $customer,
             'profile'  => $profile,
@@ -218,6 +222,7 @@ class UserController extends BasicController
             return $this->render('forbidden');
         }
 
+        $this->seo(Yii::t('app', 'Orders history'));
 
         return $this->render('orders', [
             'orders' => Order::find()->andWhere(['user_id' => $user->id])->all()
@@ -225,6 +230,8 @@ class UserController extends BasicController
     }
 
     public function actionRecoveryPassword() {
+        $this->seo(UserManagementModule::t('front', 'Password recovery'));
+
         if ( !Yii::$app->user->isGuest )
         {
             return $this->goHome();
@@ -285,6 +292,8 @@ class UserController extends BasicController
 
     public function actionPasswordRecoveryReceive($token)
     {
+        $this->seo(UserManagementModule::t('front', 'Change own password'));
+
         if ( !Yii::$app->user->isGuest )
         {
             return $this->goHome();

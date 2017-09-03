@@ -114,6 +114,8 @@ class SearchController extends BasicController
 
         $this->view->params['q'] = $q;
 
+        $this->seo(Yii::t('app', 'Search'));
+
         return $this->render('index', [
             'count'             => $pages->totalCount,
             'search_q'          => $q,

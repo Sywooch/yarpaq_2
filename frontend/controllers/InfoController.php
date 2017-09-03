@@ -23,6 +23,8 @@ class InfoController extends BasicController
             throw new NotFoundHttpException();
         }
 
+        $this->seo( $info->title );
+
         return $this->render('index', [
             'info'      => $info
         ]);
