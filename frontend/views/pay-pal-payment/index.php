@@ -40,15 +40,16 @@
     <input type="hidden" name="no_note" value="1" />
     <input type="hidden" name="no_shipping" value="1" />
     <input type="hidden" name="charset" value="utf-8" />
-    <input type="hidden" name="return" value="<?php echo $return; ?>" />
+
+    <input type="hidden" name="return" value="<?php echo $return_url; ?>" />
     <input type="hidden" name="notify_url" value="<?php echo $notify_url; ?>" />
-    <input type="hidden" name="cancel_return" value="<?php echo $cancel_return; ?>" />
+    <input type="hidden" name="cancel_return" value="<?php echo $cancel_url; ?>" />
+
     <input type="hidden" name="paymentaction" value="<?php echo $paymentaction; ?>" />
     <input type="hidden" name="custom" value="<?php echo $custom; ?>" />
-    <input type="hidden" name="bn" value="OpenCart_2.0_WPS" />
     <div class="buttons">
         <div class="pull-right">
-            <input type="submit" value="Confirm" class="btn btn-primary" />
+            <input type="submit" style="visibility: hidden;" value="Confirm" class="btn btn-primary" />
         </div>
     </div>
 </form>
@@ -56,7 +57,6 @@
 
 <script type="text/javascript">
     window.onload=function(){
-
         document.forms["payPalForm"].submit();
     }
 </script>

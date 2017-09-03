@@ -82,9 +82,12 @@ class PayPalPaymentController extends BasicController
             'email'                 => html_entity_decode($order->email, ENT_QUOTES, 'UTF-8'),
             'invoice'               => $order->id . ' - ' . html_entity_decode($order->payment_city, ENT_QUOTES, 'UTF-8'),
             'lc'                    => Language::findOne( $order->language_id )->name,
-            'return'                => Url::to(['checkout/success']),
-            'notify_url'            => Url::to(['pay-pal-payment/callback']),
-            'cancel_return'         => Url::to(['checkout/index']),
+
+            'return_url'            => Url::to(['checkout/success'], true),
+            'cancel_url'            => Url::to(['checkout/fail'], true),
+
+            'notify_url'            => Url::to(['pay-pal-payment/callback'], true),
+
             'paymentaction'         => 'sale',
             'custom'                => $order->id
         ];
