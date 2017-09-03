@@ -148,21 +148,13 @@ return [
 
     'This page is available only for authorized users' => 'Данная страница доступна только зарегистрированным пользователям',
 
-    'Remember me' => 'Запомнить меня'
+    'Remember me' => 'Запомнить меня',
+
+    'Firstname' => 'Имя',
+    'Lastname' => 'Фамилия',
+    'Postcode' => 'Почтовый индекс',
+
+    'I have read and agree with the {privacy_policy}' => 'Я прочитал и согласен с {privacy_policy}',
+    'Privacy Policy' => 'Политикой Конфиденциальности'
 
 ];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

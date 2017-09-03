@@ -52,8 +52,8 @@ class Profile extends \yii\db\ActiveRecord
             'firstname' => Yii::t('app', 'Firstname'),
             'lastname' => Yii::t('app', 'Lastname'),
             'org' => Yii::t('app', 'Org'),
-            'phone1' => Yii::t('app', 'Phone1'),
-            'phone2' => Yii::t('app', 'Phone2'),
+            'phone1' => Yii::t('app', 'Phone'),
+            'phone2' => Yii::t('app', 'Alternative Phone'),
             'fax' => Yii::t('app', 'Fax'),
         ];
     }

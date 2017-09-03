@@ -101,9 +101,12 @@
                     <li <?= isset($addressErrors['zone_id']) ? 'class="error"' : ''; ?>>
                         <span><?= Yii::t('app', 'Region'); ?></span>
                         <div>
-                            <select class="form-control" id="zoneField"
-                                    title="<?= Yii::t('app', 'Region'); ?>"
-                                    name="zone_id">
+                            <select
+                                class="form-control"
+                                id="zoneField"
+                                title="<?= Yii::t('app', 'Region'); ?>"
+                                name="zone_id"
+                                data-default-value="<?= $address->zone_id; ?>">
                                 <option value=""><?= Yii::t('app', 'Region'); ?></option>
                             </select>
                             <?php if (isset($addressErrors['zone_id'])) { ?>

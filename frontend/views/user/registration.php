@@ -101,9 +101,12 @@
                     <li <?= isset($addressErrors['zone_id']) ? 'class="error"' : ''; ?>>
                         <span><?= Yii::t('app', 'Region'); ?></span>
                         <div>
-                            <select class="form-control" id="zoneField"
-                                    title="<?= Yii::t('app', 'Region'); ?>"
-                                    name="zone_id">
+                            <select
+                                class="form-control"
+                                id="zoneField"
+                                title="<?= Yii::t('app', 'Region'); ?>"
+                                name="zone_id"
+                                data-default-value="<?= $address->zone_id; ?>">
                                 <option value=""><?= Yii::t('app', 'Region'); ?></option>
                             </select>
                             <?php if (isset($addressErrors['zone_id'])) { ?>
@@ -160,7 +163,19 @@
                             <input id="radio6" name="radio6" type="checkbox">
                             <em></em>
                         </b>
-                        <span>Mən <a href="" class="green">Məxfilik Siyasəti</a> oxudum və razıyam</span>
+                        <span>
+                            <?php
+
+                            $privacy_policy = \common\models\info\Info::findOne(8);
+
+
+                            echo Yii::t('app', 'I have read and agree with the {Privacy Policy}',
+                                [
+                                    'Privacy Policy' => $privacy_policy ? '<a class="green" target="_blank" href="'.$privacy_policy->url.'">'.Yii::t('app', 'Privacy Policy').'</a>' : Yii::t('app', 'Privacy Policy')
+                                ]
+                            );
+                            ?>
+                        </span>
                     </label>
                 </div>
 

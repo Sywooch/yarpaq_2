@@ -47,9 +47,18 @@ $(function () {
                 zoneField.append('<option value="'+id+'">'+name+'</option>');
             });
 
+            // если есть значение по-умолчанию, то прописать его
+            if (zoneField.data('default-value') !== undefined) {
+                zoneField.val(zoneField.data('default-value'));
+            }
+
         });
 
-        countryField.val(15);
+        if (countryField.val() == '') {
+            countryField.val(15);
+        }
+
+
         countryField.change();
     }
 

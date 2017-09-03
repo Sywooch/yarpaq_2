@@ -147,7 +147,11 @@ return [
 
     'This page is available only for authorized users' => 'Bu səhifə yalnız qeydiyyatdan keçmiş istifadəçilər üçün mövcuddur',
 
-    'Remember me' => 'Məni yadda saxla'
+    'Remember me' => 'Məni yadda saxla',
+
+    'Firstname' => 'Ad',
+    'Lastname' => 'Soyad',
+    'Postcode' => 'Poçt indeks',
+    'I have read and agree with the {privacy_policy}' => 'Mən {privacy_policy} oxudum və razıyam',
+    'Privacy Policy' => 'Məxfilik Siyasətini'
 ];
-
-

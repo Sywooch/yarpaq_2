@@ -7031,7 +7031,18 @@ a.clear_filtre {
 }
 
 .info-block p {
+  line-height: 120%;
   padding: 20px 0;
   font-size: 18px;
   color: #808080;
+}
+
+.error .errortext, .error strong {
+  display: inline-block;
+  margin-top: 5px;
+  color: red;
+}
+
+.green {
+  color: #79B237;
 }
