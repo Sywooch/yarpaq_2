@@ -10,6 +10,7 @@ use common\models\option\ProductOptionValue;
 use common\models\ProductImage;
 use common\models\Product;
 use common\models\ProductSearch;
+use yii\web\Response;
 use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -363,5 +364,30 @@ class ProductController extends AdminDefaultController
                 'currency' => $product->currency->code
             ]
         ];
+    }
+
+    public function actionChangeStatusAjax() {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        if (!User::hasPermission('change_product_status')) {
+            throw new ForbiddenHttpException();
+        }
+
+        $product_id = Yii::$app->request->post('product_id');
+        $status_id = Yii::$app->request->post('status_id');
+
+        $product = Product::findOne($product_id);
+        if (!$product) {
+            throw new NotFoundHttpException();
+        }
+
+
+        $product->status_id = $status_id;
+        if ( $product->save() ) {
+            return ['status' => 1];
+        } else {
+            return ['status' => 0];
+        }
+
     }
 }

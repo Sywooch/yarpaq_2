@@ -90,12 +90,22 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'width',
             // 'height',
             // 'length_class_id',
+
             [
                 'attribute' => 'status_id',
                 'label'     => Yii::t('app', 'Status'),
+                'format'    => 'raw',
                 'value'     => function ($product) {
-                    return Yii::t('app', $product->status->name);
+                    $html = '<select data-product-id="'.$product->id.'" class="product-status-change-select">';
+
+                    $html .= '<option '.(0 == $product->status_id ? 'selected' : '').' value="0">'.Yii::t('app', 'Disabled').'</option>';
+                    $html .= '<option '.(1 == $product->status_id ? 'selected' : '').' value="1">'.Yii::t('app', 'Enabled').'</option>';
+
+                    $html .= '</select>';
+
+                    return $html;
                 },
+
                 'filter'    => \yii\helpers\ArrayHelper::map(\common\models\Status::find()->all(), 'id', function ($status) {
                     return Yii::t('app', $status->name);
                 }),

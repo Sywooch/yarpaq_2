@@ -42,12 +42,23 @@ $(function () {
     });
 
 
-    $('.status-change-select').change(function () {
+    $('.order-status-change-select').change(function () {
 
         var order_id = $(this).data('order-id');
         var status_id = $(this).val();
 
         $.post('/order/change-status-ajax', { order_id: order_id, status_id: status_id }, function (response) {
+
+        }, 'json');
+
+    });
+
+    $('.product-status-change-select').change(function () {
+
+        var product_id = $(this).data('product-id');
+        var status_id = $(this).val();
+
+        $.post('/product/change-status-ajax', { product_id: product_id, status_id: status_id }, function (response) {
 
         }, 'json');
 

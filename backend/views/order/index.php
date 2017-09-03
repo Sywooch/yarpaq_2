@@ -80,7 +80,7 @@ $statuses = OrderStatus::find()
                 'filter'    => ArrayHelper::map(OrderStatus::getData(), 'order_status_id', 'name'),
                 'format'    => 'raw',
                 'value'     => function ($order) use ($statuses) {
-                    $html = '<select data-order-id="'.$order->id.'" class="status-change-select">';
+                    $html = '<select data-order-id="'.$order->id.'" class="order-status-change-select">';
 
                     foreach ($statuses as $status) {
                         $html .= '<option '.($status->order_status_id == $order->order_status_id ? 'selected' : '').' value="'.$status->order_status_id.'">'.$status->name.'</option>';

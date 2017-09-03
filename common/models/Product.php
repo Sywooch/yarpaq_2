@@ -83,6 +83,7 @@ class Product extends \yii\db\ActiveRecord
             [['title', 'description', 'model', 'condition_id', 'price', 'currency_id', 'quantity', 'location_id', 'weight', 'user_id'], 'required'],
             [['condition_id', 'currency_id', 'quantity', 'stock_status_id', 'weight_class_id', 'length_class_id', 'status_id', 'user_id', 'location_id', 'manufacturer_id', 'viewed', 'moderated'], 'integer'],
             ['status_id',       'default', 'value' => self::STATUS_ACTIVE],
+            ['status_id',       'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE]],
             ['viewed',          'default', 'value' => 0],
             ['weight_class_id', 'default', 'value' => 1],
             ['length_class_id', 'default', 'value' => 1],
