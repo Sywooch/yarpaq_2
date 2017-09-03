@@ -14,8 +14,8 @@ $seo = $this->params['seo'];
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="Yarpaq site - Full description">
-    <meta name="Keywords" content="Yarpaq, Almag, Telefonlar, Shop">
+    <meta name="keywords" content="<?= $seo->keywords; ?>">
+    <meta name="description" content="<?= $seo->description; ?>">
 
     <title><?= $seo->title; ?></title>
 
@@ -35,7 +35,7 @@ $seo = $this->params['seo'];
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link rel="icon" type="image/png" href="img/favicon.png"/>
+    <link rel="icon" type="image/png" href="/img/favicon.png"/>
 
     <link href="/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="/css/font/stylesheet.css" rel="stylesheet" type="text/css" />

@@ -1,2 +1,21 @@
 User-agent: *
-Disallow: /
+
+Disallow: /payment/
+Disallow: /en/payment/
+Disallow: /ru/payment/
+
+Disallow: /cart/
+Disallow: /en/cart/
+Disallow: /ru/cart/
+
+Disallow: /checkout/
+Disallow: /en/checkout/
+Disallow: /ru/checkout/
+
+Disallow: /user/
+Disallow: /en/user/
+Disallow: /ru/user/
+
+Disallow: /password-recovery
+Disallow: /en/password-recovery
+Disallow: /ru/password-recovery

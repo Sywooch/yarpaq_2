@@ -38,7 +38,7 @@ class CategoryController extends BasicController
             throw new NotFoundHttpException();
         }
 
-        $this->seo($category->title);
+        $this->seo($category->title, null, $category->content->seo_description, $category->content->seo_keywords);
 
 
         $childrenCategoriesIDs = $this->getAllChildrenCategories($category);

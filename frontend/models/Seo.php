@@ -8,6 +8,7 @@ use yii\base\Model;
 class Seo extends Model
 {
     public $title = '';
+    public $keywords = '';
     public $description = '';
     public $image = '';
     public $type = '';
