@@ -45,7 +45,7 @@ use mihaildev\elfinder\ElFinder;
                             'id' => 'content_'.$language->id.'_body'
                         ],
                         'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
-                            'preset' => 'basic',
+                            //'preset' => 'basic',
                             'height' => 280
                         ]),
                     ]) ?>
