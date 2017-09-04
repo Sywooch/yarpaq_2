@@ -23,7 +23,7 @@ $currency = Yii::$app->currency;
             <div id="mobile-gallery">
                 <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
                     <div>
-                        <img width="100%" src="<?= $image->url; ?>" alt="<?= $product->title ?>">
+                        <img src="<?= $image->url; ?>" alt="<?= $product->title ?>">
                     </div>
                 <?php } ?>
             </div>
