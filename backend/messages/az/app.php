@@ -88,6 +88,14 @@ return [
     'Gallery Files' => 'Şəkillər',
     'Upload images' => 'Şəkilləri yüklə',
     'Select' => 'Seçmək',
+
+    'Options' => 'Seçimlər',
+    'Update' => 'Yeniləmək',
+    'Add option' => 'Yeni seçim',
+    'Option Value' => 'Seçimin dəyəri',
+    'Price prefix' => 'Qiymətin dəyişiliyi',
+    'Add value' => 'Dəyəri əlavə et',
+
     'Weight (kg)' => 'Çəkisi (kg)',
     'Length (sm)' => 'Uzunluğu (sm)',
     'Width (sm)' => 'Enliyi (sm)',

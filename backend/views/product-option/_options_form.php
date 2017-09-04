@@ -112,7 +112,7 @@ use yii\helpers\ArrayHelper;
                                         <div class="help-block"></div>
                                     </td>
                                     <td>
-                                        <input name="price[]" type="text" value="" class="form-control">
+                                        <input name="price[]" type="text" value="0.0000" class="form-control">
                                     </td>
                                     <td>
                                         <div class="btn btn-warning deleteOptionValueBtn immediate">

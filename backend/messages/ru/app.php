@@ -88,6 +88,13 @@ return [
     'Gallery Files' => 'Изображения',
     'Upload images' => 'Загрузите изображения',
     'Select' => 'Выбрать',
+    'Update' => 'Обновить',
+
+    'Options' => 'Опции',
+    'Add option' => 'Добавить опцию',
+    'Option Value' => 'Значение опции',
+    'Price prefix' => 'Изменение цены',
+    'Add value' => 'Добавить значение',
 
     'Weight (kg)' => 'Вес (кг)',
     'Length (sm)' => 'Длина (см)',

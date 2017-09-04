@@ -90,7 +90,7 @@ return [
     'More info' => 'Подробнее',
     'Checkout' => 'Оформление',
     'We accept' => 'Мы принимаем',
-    'Sell On Yarpaq' => 'Продавай на Yarpaq',
+    'Sell On Yarpaq' => 'Продай на Yarpaq',
     'No results' => 'Ничего не найдено',
     'If you are a new user' => 'Если вы новый пользователь',
     'Azerbaijan\'s Fastest Online Shopping Destination' => 'Пункт самой быстрой купли-продажи в Азербайджане',

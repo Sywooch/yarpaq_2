@@ -437,9 +437,10 @@
     padding: 0 0 0 10px;
   }
   .product_size ul li label input + span {
+    padding: 10px 6px 6px 6px;
     width: 32px;
     height: 32px;
-    line-height: 32px;
+    line-height: 100%;
   }
   .product_size ul li label input + span::after {
     width: 30px;
