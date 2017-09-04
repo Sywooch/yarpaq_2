@@ -286,34 +286,35 @@ setTimeout( function() {
 
 
 /* Adaptive JS begin */
-	/*
-	var _logo_width = $("header#header .second > div h1.logo").width(),
-	_nav_trigger_width = $(".nav_trigger").width(),
-	_sign_link_width = $(".sign_link").width(),
-	_basket_link_width = $(".basket_link").width(),
 
+	// Search
+	var _sign_link_width = $(".sign_link").width(),
+		_basket_link_width = $(".basket_link").width();
 
-	_search_width = $("header#header .second > div").width() - _logo_width - _nav_trigger_width - _sign_link_width - _basket_link_width - 20;
-	
-	if (_window.width() < 922) {
-		_search_width = _search_width - 50;
-	}
-
-	$(".head_search").css("width", _search_width+"px");
+	$(".head_search").css("padding-right", (_basket_link_width+_sign_link_width+30)+"px");
 
 	_window.resize(function(){
-		var _logo_width = $("header#header .second > div h1.logo").width(),
-		_nav_trigger_width = $(".nav_trigger").width(),
-		_sign_link_width = $(".sign_link").width(),
-		_basket_link_width = $(".basket_link").width(),
-		_search_width = $("header#header .second > div").width() - _logo_width - _nav_trigger_width - _sign_link_width - _basket_link_width - 20;
-		
-		if (_window.width() < 922) {
-			_search_width = _search_width - 50;
-		}
+		var _sign_link_width = $(".sign_link").width(),
+			_basket_link_width = $(".basket_link").width();
 
-		$(".head_search").css("width", _search_width+"px");
-	}); */
+		$(".head_search").css("padding-right", (_basket_link_width+_sign_link_width+20)+"px");
+	});
+
+	// Index slider
+	if (_window.width() < 769) {
+		$("#index_slider .image > div").imagesLoaded(function(){
+			var _index_slider_imahe_height = $("#index_slider .image > div img").height();
+			$("#index_slider .image > div, #index_slider .image, #index_slider").css("height", _index_slider_imahe_height+"px");
+		});
+	}
+	_window.resize(function(){
+		if (_window.width() < 769) {
+			var _index_slider_imahe_height = $("#index_slider .image > div img").height();
+			$("#index_slider .image > div, #index_slider .image, #index_slider").css("height", _index_slider_imahe_height+"px");
+		} else {
+			$("#index_slider .image > div, #index_slider .image, #index_slider").removeAttr("style");
+		}
+	});
 
 /* Adaptive JS end */
 

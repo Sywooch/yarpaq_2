@@ -358,6 +358,12 @@ a.search_toggler {
   position: absolute;
   left: 20px;
   top: 36px;
+  -webkit-animation-duration: 0.3s;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-animation-duration: 0.3s;
+  -moz-transition: all 0.3s ease-in-out;
+  animation-duration: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 .nav_trigger > a span::before {
@@ -369,6 +375,12 @@ a.search_toggler {
   position: absolute;
   top: -6px;
   left: 0;
+  -webkit-animation-duration: 0.3s;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-animation-duration: 0.3s;
+  -moz-transition: all 0.3s ease-in-out;
+  animation-duration: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 .nav_trigger > a span::after {
@@ -380,6 +392,12 @@ a.search_toggler {
   position: absolute;
   top: 6px;
   left: 0;
+  -webkit-animation-duration: 0.3s;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-animation-duration: 0.3s;
+  -moz-transition: all 0.3s ease-in-out;
+  animation-duration: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 .head_search {
@@ -6334,7 +6352,8 @@ aside.aside_filter footer a {
 }
 
 header.mobile_header {
-  padding: 12px 12px 12px 0;
+  display: none;
+  padding: 12px 12px 12px 12px;
   border-bottom: 12px solid #f2f2f2;
   overflow: hidden;
 }
