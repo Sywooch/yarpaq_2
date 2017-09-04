@@ -291,13 +291,21 @@ setTimeout( function() {
 	var _sign_link_width = $(".sign_link").width(),
 		_basket_link_width = $(".basket_link").width();
 
-	$(".head_search").css("padding-right", (_basket_link_width+_sign_link_width+30)+"px");
+	if (_window.width() > 769) {
+		$(".head_search").css("padding-right", (_basket_link_width+_sign_link_width+30)+"px");
+	} else {
+		$(".head_search").removeAttr("style");
+	}
 
 	_window.resize(function(){
 		var _sign_link_width = $(".sign_link").width(),
 			_basket_link_width = $(".basket_link").width();
 
-		$(".head_search").css("padding-right", (_basket_link_width+_sign_link_width+20)+"px");
+		if (_window.width() > 769) {
+			$(".head_search").css("padding-right", (_basket_link_width+_sign_link_width+20)+"px");
+		} else {
+			$(".head_search").removeAttr("style");
+		}
 	});
 
 	// Index slider

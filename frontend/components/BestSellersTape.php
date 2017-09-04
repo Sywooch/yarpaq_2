@@ -19,7 +19,7 @@ class BestSellersTape extends Tape
             ->andWhere(['p.moderated' => 1])
             ->groupBy('product_id')
             ->orderBy(['count' => SORT_DESC])
-            ->limit(10)
+            ->limit(20)
             ->with('product')
             ->all();
 
