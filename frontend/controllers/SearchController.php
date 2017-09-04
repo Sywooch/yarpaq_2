@@ -46,7 +46,19 @@ class SearchController extends BasicController
 
         $repo = new ProductRepository();
         $products = $repo->visibleOnTheSite();
-        $products->andWhere(['like', 'title', $q]);
+        $q_parts = explode(' ', $q);
+        foreach ($q_parts as $q_part) {
+            $products->andWhere(['like', 'title', $q_part]);
+        }
+
+        $detailed_products = clone $products;
+        foreach ($q_parts as $q_part) {
+            $detailed_products->orWhere(['like', 'title', $q_part]);
+        }
+
+
+        $products->union($detailed_products);
+
         $products->orWhere(['id' => $q]);
 
         // если указана категория, то находим все ее дочерние и ищем по этим категориям
