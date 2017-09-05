@@ -85,10 +85,19 @@ $(function () {
         location.href = lang_url;
     });
 
-    $('#main-search').keyup(function () {
+
+    var auto_search_container = $('.autocomplete');
+    var main_search = $('#main-search');
+    main_search.blur(function () {
+        auto_search_container.fadeOut();
+    });
+    main_search.focus(function () {
+        $(this).keyup();
+    });
+    main_search.keyup(function () {
         var q = $(this).val();
         var action = $(this).data('action');
-        var container = $('.autocomplete');
+
 
         if (q.length <= 2) {
             return;
@@ -96,10 +105,13 @@ $(function () {
 
         $.getJSON(action, {q: q}, function (response) {
 
-            if (!response.length) return false;
+            if (!response.length) {
+                auto_search_container.fadeOut();
+                return false;
+            }
 
             // clear list
-            container.html('');
+            auto_search_container.html('');
 
             // build html
             for (var i=0; i<response.length; i++) {
@@ -117,13 +129,15 @@ $(function () {
                 html += '    </a>';
                 html += '</li>';
 
-                container.append($(html));
+                auto_search_container.append($(html));
             }
 
             // show block
-            container.fadeIn();
+            auto_search_container.fadeIn();
 
         });
 
     });
+
+    var mobile_search = $('#mobile-search');
 });

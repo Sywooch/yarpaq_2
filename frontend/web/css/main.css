@@ -488,9 +488,9 @@ a.search_toggler {
   border-radius: 0 4px 4px 0;
 }
 
-.head_search form ul {
-  /*visibility: hidden;*/
-  /*opacity: 0;*/
+.autocomplete {
+  visibility: hidden;
+  opacity: 0;
   width: 100%;
   background: #fff;
   position: absolute;
@@ -507,16 +507,24 @@ a.search_toggler {
   transition: all 0.2s ease-in-out;
 }
 
-.head_search form ul li a {
+.autocomplete li a {
   display: block;
   padding: 10px 10px;
-  margin: 10px 20px;
+  margin: 10px 10px;
   color: #000;
   font-size: 14px;
   text-decoration: none;
 }
 
-.head_search form ul li a:hover {
+.autocomplete li:nth-child(2n) a {
+  margin-left: 5px;
+}
+
+.autocomplete li:nth-child(2n+1) a {
+  margin-right: 5px;
+}
+
+.autocomplete li a:hover {
   background: #f0f0f0;
 }
 
@@ -7080,7 +7088,7 @@ a.clear_filtre {
 .autocomplete li a {
   display: block;
   color: #000;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .autocomplete li a:after {
@@ -7092,6 +7100,8 @@ a.clear_filtre {
 .autocomplete-image-block {
   display: block;
   float: left;
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: contain;
   width: 60px;
   height: 60px;

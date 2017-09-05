@@ -148,14 +148,17 @@ class SearchController extends BasicController
         $repo = new ProductRepository();
         $query = $repo->visibleOnTheSite();
         $query->andWhere(['like', 'title', $q]);
-        $query->orderBy(['view' => SORT_DESC]);
+        $query->orderBy(['viewed' => SORT_DESC]);
         $products = $query->limit(6)->all();
+
 
         $result = ArrayHelper::toArray($products, [
             'common\models\Product' => [
                 'title',
                 'preview',
-                'price',
+                'price' => function ($product) {
+                    return Yii::$app->currency->convertAndFormat($product->price, $product->currency);
+                },
                 'url'
             ]
         ]);
