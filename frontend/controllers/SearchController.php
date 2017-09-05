@@ -12,12 +12,14 @@ use frontend\components\CustomLinkPager;
 use common\models\Product;
 use common\models\category\Category;
 use common\models\search\SearchLogger;
+use yii\helpers\ArrayHelper;
+use yii\web\Response;
 
 
 class SearchController extends BasicController
 {
 
-    public $freeAccessActions = ['index'];
+    public $freeAccessActions = ['index', 'auto'];
 
     public function actionIndex() {
         $r = Yii::$app->request;
@@ -138,6 +140,26 @@ class SearchController extends BasicController
             'filterBrands'      => $brands,
             'productFilter'     => $productFilter,
         ]);
+    }
+
+    public function actionAuto($q) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $repo = new ProductRepository();
+        $query = $repo->visibleOnTheSite();
+        $query->andWhere(['like', 'title', $q]);
+        $query->orderBy(['view' => SORT_DESC]);
+        $products = $query->limit(6)->all();
+
+        $result = ArrayHelper::toArray($products, [
+            'common\models\Product' => [
+                'title',
+                'preview',
+                'price',
+                'url'
+            ]
+        ]);
+        return $result;
     }
 
     private function getAllChildrenCategories($category) {

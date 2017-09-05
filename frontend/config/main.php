@@ -69,6 +69,7 @@ return [
                 'shipping/calculate'     => 'shipping/calculate',
 
                 'search'        => 'search/index',
+                'search/auto'        => 'search/auto',
 
                 'currency/switch'        => 'currency/switch',
 

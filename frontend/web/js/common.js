@@ -84,4 +84,46 @@ $(function () {
 
         location.href = lang_url;
     });
+
+    $('#main-search').keyup(function () {
+        var q = $(this).val();
+        var action = $(this).data('action');
+        var container = $('.autocomplete');
+
+        if (q.length <= 2) {
+            return;
+        }
+
+        $.getJSON(action, {q: q}, function (response) {
+
+            if (!response.length) return false;
+
+            // clear list
+            container.html('');
+
+            // build html
+            for (var i=0; i<response.length; i++) {
+                var product = response[i];
+
+                html = '<li>';
+                html +=     '<a href="'+product.url+'" class="clear">';
+                html += '        <span class="autocomplete-image-block" style="background-image: url(\''+product.preview+'\')">';
+                html += '            <img src="'+product.preview+'">';
+                html += '        </span>';
+                html += '        <span class="autocomplete-right-block">';
+                html += '            <span class="product-title">'+product.title+'</span>';
+                html += '            <div class="product-price">'+product.price+' <em style="display: none;">$40</em></div>';
+                html += '        </span>';
+                html += '    </a>';
+                html += '</li>';
+
+                container.append($(html));
+            }
+
+            // show block
+            container.fadeIn();
+
+        });
+
+    });
 });

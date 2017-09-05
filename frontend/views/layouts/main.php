@@ -213,18 +213,68 @@ $seo = $this->params['seo'];
                         <input type="text"
                                placeholder="<?= Yii::t('app', 'Enter product name'); ?>"
                                name="q" autocomplete="off"
+                               id="main-search"
+                               data-action="<?= Url::to(['search/auto']); ?>"
                                value="<?= @$this->params['q']; ?>">
                         <button type="submit"><?= Yii::t('app', 'Search'); ?></button>
-                        <ul style="display: none">
-                            <li><a href="#">Womens fashion</a></li>
-                            <li><a href="#">Mens fashion</a></li>
-                            <li><a href="#">Corablar</a></li>
-                            <li><a href="#">Kişi ayaqqabıları</a></li>
-                            <li><a href="#">Sandal və tərliklər</a></li>
+                        <ul style="display: none;" class="autocomplete">
+
+                            <li>
+                                <a href="#" class="clear">
+                                    <span class="autocomplete-image-block" style="background-image: url('http://placehold.it/60x60')">
+                                        <img src="http://placehold.it/60x60">
+                                    </span>
+                                    <span class="autocomplete-right-block">
+                                        <span class="product-title">Womens fashion</span>
+                                        <div class="product-price">$30 <em>$40</em></div>
+                                    </span>
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="clear">
+                                    <span class="autocomplete-image-block" style="background-image: url('http://placehold.it/60x60')">
+                                        <img src="http://placehold.it/60x60">
+                                    </span>
+                                    <span class="autocomplete-right-block">
+                                        <span class="product-title">Womens fashion</span>
+                                        <div class="product-price">$30 <em>$40</em></div>
+                                    </span>
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="clear">
+                                    <span class="autocomplete-image-block" style="background-image: url('http://placehold.it/60x60')">
+                                        <img src="http://placehold.it/60x60">
+                                    </span>
+                                    <span class="autocomplete-right-block">
+                                        <span class="product-title">Womens fashion</span>
+                                        <div class="product-price">$30 <span class="discount">$40</span></div>
+                                    </span>
+
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" class="clear">
+                                    <span class="autocomplete-image-block" style="background-image: url('http://placehold.it/60x60')">
+                                        <img src="http://placehold.it/60x60">
+                                    </span>
+                                    <span class="autocomplete-right-block">
+                                        <span class="product-title">Womens fashion</span>
+                                        <div class="product-price">$30 <del>$40</del></div>
+                                    </span>
+
+                                </a>
+                            </li>
+
                         </ul>
                     </form>
                     <a href="#" class="close"><?= Yii::t('app', 'Cancel'); ?></a>
-                    <div class="last_searched_list" style="display: none !important;">
+                    <div class="last_searched_list">
                         <h3>Recently searches</h3>
                         <ul>
                             <li><a href="#">Mens fashion</a></li>
