@@ -9,6 +9,10 @@ use yii\helpers\Url;
 
 class PayPalPaymentController extends BasicController
 {
+
+    public $enableCsrfValidation = false;
+
+
     public $freeAccessActions = ['process', 'callback'];
     private $pp_email = 'anar@relax.ae';
 
