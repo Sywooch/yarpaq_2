@@ -22,7 +22,7 @@ class CategoryImportController extends AdminDefaultController
     public function actionIndex() {
         ini_set('memory_limit', '-1');
 
-        $this->importCategories();
+        //$this->importCategories();
     }
 
     private function getCatAssoc() {
@@ -82,11 +82,18 @@ class CategoryImportController extends AdminDefaultController
     }
 
     private function handleCategory($category, $parent) {
+
         $model = $this->getModel($category['category_id']);
         $this->fillModel($model, $this->categories_description[$category['category_id']]);
-        $success = $this->saveModel($model, $category['category_id'], $parent);
 
-        if ($success) {
+        // если категории нет, то создать
+        if (!$this->hasAssoc($category['category_id'])) { // check old_id in assoc
+            $success = $this->saveModel($model, $category['category_id'], $parent);
+
+            if ($success) {
+                $this->handleNodeChildren($category['category_id']);
+            }
+        } else {
             $this->handleNodeChildren($category['category_id']);
         }
     }
