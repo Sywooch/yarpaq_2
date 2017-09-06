@@ -121,11 +121,12 @@ $currency = Yii::$app->currency;
             </div>
             <div class="payment_methods">
                 <header>
+                    <span class="error_text"><?= Yii::t('app', 'Choose payment type'); ?></span>
                     <h3><?= Yii::t('app', 'Payment method'); ?></h3>
                 </header>
                 <div class="methods_list">
                     <ul>
-                        <li>
+                        <li class="payment_method_row">
                             <label>
                                 <div class="image"><img src="/img/paypal_icon.png" alt=""></div>
                                 <span>PayPal</span>
@@ -133,7 +134,7 @@ $currency = Yii::$app->currency;
                                 <em></em>
                             </label>
                         </li>
-                        <li>
+                        <li class="payment_method_row">
                             <label>
                                 <div class="image"><img src="/img/visa_icon.svg" alt=""></div>
                                 <span>Visa</span>
@@ -141,7 +142,7 @@ $currency = Yii::$app->currency;
                                 <em></em>
                             </label>
                         </li>
-                        <li>
+                        <li class="payment_method_row">
                             <label>
                                 <div class="image"><img src="/img/mastercaed_icon.svg" alt=""></div>
                                 <span>Master Card</span>
@@ -149,7 +150,7 @@ $currency = Yii::$app->currency;
                                 <em></em>
                             </label>
                         </li>
-                        <li>
+                        <li class="payment_method_row">
                             <label>
                                 <div class="image"><img src="/img/albali_icon.png" alt=""></div>
                                 <span>Albalı</span>
@@ -162,7 +163,7 @@ $currency = Yii::$app->currency;
                                 <a href="#" data-taksit="6" class="albali_taksit">6 <?= Yii::t('app', 'Ay'); ?></a>
                             </div>
                         </li>
-                        <li>
+                        <li class="payment_method_row">
                             <label>
                                 <div class="image"><img src="/img/bolcard_icon.png" alt=""></div>
                                 <span>Bolkart</span>
@@ -175,11 +176,11 @@ $currency = Yii::$app->currency;
                                 <a href="#" data-taksit="6" class="bolkart_taksit">6 <?= Yii::t('app', 'Ay'); ?></a>
                             </div>
                         </li>
-                        <li>
+                        <li class="payment_method_row" id="payment_method_cod">
                             <label>
                                 <div class="image"><img src="/img/cash_icon.svg" alt=""></div>
                                 <span><?= Yii::t('app', 'Cash'); ?></span>
-                                <input type="radio" name="payment_method" checked value="6">
+                                <input type="radio" name="payment_method" value="6">
                                 <em></em>
                             </label>
                         </li>

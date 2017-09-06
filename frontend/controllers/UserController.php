@@ -219,7 +219,7 @@ class UserController extends BasicController
         $user = User::getCurrentUser();
 
         if (!$user) {
-            return $this->render('forbidden');
+            return $this->render('orders_forbidden');
         }
 
         $this->seo(Yii::t('app', 'Orders history'));

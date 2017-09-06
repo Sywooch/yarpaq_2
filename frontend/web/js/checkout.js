@@ -37,12 +37,40 @@ $(function () {
 
             $('.shipping_method_block:visible').eq(0).find('input').click();
         });
+
+
+
+        // показ методов оплаты
+        if (zone_id == 216 || zone_id == 4225) {
+            $('#payment_method_cod').show();
+        } else {
+            $('#payment_method_cod').hide();
+        }
     });
+
+    function validate () {
+        var valid = true;
+
+        $('.error_text').hide();
+
+        var payment_method = $('input[name="payment_method"]');
+        var payment_methods = $('.payment_methods');
+
+        if (payment_method.val() == '') {
+            payment_methods.find('.error_text').show();
+            valid = false;
+        }
+
+        return valid;
+    }
 
     $('#checkout-submit').click(function (e) {
         e.preventDefault();
 
-        $('#checkout-form').submit();
+        if (validate()) {
+            $('#checkout-form').submit();
+        }
+
     });
 
 

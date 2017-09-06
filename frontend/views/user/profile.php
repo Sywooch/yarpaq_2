@@ -158,7 +158,7 @@
                 </ul>
                 <div class="submit">
                     <input type="hidden" name="<?= Yii::$app->request->csrfParam ?>" value="<?= Yii::$app->request->getCsrfToken()?>">
-                    <button type="submit"><?= Yii::t('app', 'Register'); ?></button>
+                    <button type="submit"><?= Yii::t('app', 'Save'); ?></button>
                 </div>
             </form>
         </div>

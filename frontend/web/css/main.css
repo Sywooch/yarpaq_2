@@ -7066,7 +7066,7 @@ a.clear_filtre {
 }
 
 .info-block p {
-  line-height: 120%;
+  line-height: 140%;
   padding: 20px 0;
   font-size: 18px;
   color: #808080;
@@ -7135,4 +7135,9 @@ a.clear_filtre {
   color: #FF5353;
   text-decoration: line-through;
   font-size: 11px;
+}
+
+.error_text {
+  color: red;
+  float: left;
 }
