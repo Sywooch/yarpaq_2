@@ -178,7 +178,17 @@ $seo = $this->params['seo'];
                                                         <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                         <ul>
                                                             <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
-                                                            <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                            <li>
+                                                                <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
+
+                                                                <ul>
+                                                                    <?php foreach ($subsubcategory->getChildren()->all() as $subsubsubcategory) {?>
+                                                                        <li>
+                                                                            <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
+                                                                        </li>
+                                                                    <?php } ?>
+                                                                </ul>
+                                                            </li>
                                                             <?php } ?>
                                                         </ul>
                                                     </article>

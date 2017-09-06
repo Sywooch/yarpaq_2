@@ -1348,6 +1348,14 @@
   .autocomplete li {
     width: 100%;
   }
+
+  .full_nav .left_side .categories_list > ul > li > div article ul {
+    display: none;
+  }
+
+  .full_nav .left_side .categories_list > ul > li > div article ul.active {
+    display: block;
+  }
 }
 
 
