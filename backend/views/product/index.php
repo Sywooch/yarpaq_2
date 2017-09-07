@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     );
                 },
                 'enableSorting' => true,
-                'visible'       => User::hasRole('view_all_products')
+                'visible'       => User::hasPermission('view_all_products')
             ],
 
             // 'user_id',
