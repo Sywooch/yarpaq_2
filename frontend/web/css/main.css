@@ -7139,5 +7139,6 @@ a.clear_filtre {
 
 .error_text {
   color: red;
-  float: left;
+  float: right;
+  display: none;
 }

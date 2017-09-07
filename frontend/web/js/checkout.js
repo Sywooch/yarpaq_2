@@ -56,7 +56,7 @@ $(function () {
         var payment_method = $('input[name="payment_method"]');
         var payment_methods = $('.payment_methods');
 
-        if (payment_method.val() == '') {
+        if (!$('.payment_method_row.active').length) {
             payment_methods.find('.error_text').show();
             valid = false;
         }

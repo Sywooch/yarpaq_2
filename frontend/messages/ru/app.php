@@ -157,6 +157,7 @@ return [
     'I have read and agree with the {privacy_policy}' => 'Я прочитал и согласен с {privacy_policy}',
     'Privacy Policy' => 'Политикой Конфиденциальности',
 
-    'Save' => 'Сохранить'
+    'Save' => 'Сохранить',
+    'Choose payment type' => 'Выберите метод оплаты'
 
 ];

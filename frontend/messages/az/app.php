@@ -155,6 +155,7 @@ return [
     'I have read and agree with the {privacy_policy}' => 'Mən {privacy_policy} oxudum və razıyam',
     'Privacy Policy' => 'Məxfilik Siyasətini',
 
-    'Save' => 'Yadda saxla'
+    'Save' => 'Yadda saxla',
+    'Choose payment type' => 'Ödəmə üsulunu seçin'
 
 ];
