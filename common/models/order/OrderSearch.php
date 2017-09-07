@@ -11,9 +11,6 @@ use yii\data\ActiveDataProvider;
  */
 class OrderSearch extends Order
 {
-
-    const SCENARIO_OWN = 'own';
-
     public $fullname;
 
     /**
@@ -26,15 +23,6 @@ class OrderSearch extends Order
             [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status', 'fullname'], 'safe'],
             [['total', 'currency_value'], 'number']
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**
@@ -111,6 +99,18 @@ class OrderSearch extends Order
         $query->andFilterWhere(['like', 'firstname', $this->fullname]);
         $query->orFilterWhere(['like', 'lastname', $this->fullname]);
 
+        if ($this->scenario == self::SCENARIO_OWN) {
+            $query->leftJoin('{{%order_product}} op', '{{%order}}.id = op.order_id');
+            $query->leftJoin('{{%product}} p', 'op.product_id = p.id');
+
+            $query->andWhere(['p.user_id' => $this->seller_id]);
+        }
+
         return $dataProvider;
+    }
+
+    public function setOwnScenario($seller_id) {
+        $this->scenario = self::SCENARIO_OWN;
+        $this->seller_id = $seller_id;
     }
 }

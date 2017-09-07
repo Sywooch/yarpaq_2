@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use common\models\order\OrderStatus;
+use common\models\order\Order;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\order\OrderSearch */
@@ -74,6 +75,22 @@ $statuses = OrderStatus::find()
             // 'shipping_method',
             // 'shipping_code',
             // 'comment:ntext',
+            [
+                'attribute' => 'total',
+                'value' => function ($order) {
+                    if ($order->scenario == Order::SCENARIO_OWN) {
+                        $total = 0;
+
+                        foreach ($order->order_products as $order_product) {
+                            $total += $order_product->total;
+                        }
+
+                        return $total;
+                    } else {
+                        return $order->total;
+                    }
+                }
+            ],
             'total',
             [
                 'attribute' => 'order_status_id',

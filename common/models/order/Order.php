@@ -10,6 +10,7 @@ use Yii;
 use common\models\Currency;
 use common\models\Language;
 use common\models\User;
+use yii\base\Model;
 
 /**
  * This is the model class for table "{{%order}}".
@@ -67,6 +68,11 @@ class Order extends \yii\db\ActiveRecord
 {
     public $payment_method_id;
     public $shipping_method_id;
+
+    const SCENARIO_OWN = 'own';
+
+
+    public $seller_id;
 
     /**
      * @inheritdoc
@@ -277,6 +283,14 @@ class Order extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+
+    public function scenarios()
+    {
+        $scenarios = Model::scenarios();
+        $scenarios[self::SCENARIO_OWN] = $scenarios['default'];
+
+        return $scenarios;
     }
 
     public function setAsPaid() {
