@@ -63,6 +63,57 @@ $(function () {
         }, 'json');
 
     });
+
+
+    function loadCommonNotifications() {
+        var commonNotificationsBlock = $('#commonNotificationsBlock');
+        var url = commonNotificationsBlock.data('url');
+
+        $.getJSON(url, function (response) {
+
+            // moderation products
+            if (response.moderation_products !== undefined) {
+                $('#noti_moderation_products').html(response.moderation_products);
+            } else {
+                $('#noti_moderation_products').html('-');
+            }
+
+            // new orders
+            if (response.new_orders !== undefined) {
+                $('#noti_new_orders').html(response.new_orders);
+            } else {
+                $('#noti_new_orders').html('-');
+            }
+
+
+            // new reviews
+            if (response.new_reviews !== undefined) {
+                $('#noti_reviews').html(response.new_reviews);
+            } else {
+                $('#noti_reviews').html('-');
+            }
+
+
+            // out of stock products
+            if (response.out_of_stock_products !== undefined) {
+                $('#noti_out_of_stock').html(response.out_of_stock_products);
+            } else {
+                $('#noti_out_of_stock').html('-');
+            }
+
+
+            // total notifications
+            if (response.total !== undefined) {
+                $('#noti_total').html(response.total);
+            } else {
+                $('#noti_total').html('-');
+            }
+        });
+    }
+
+    // load common notifications
+    setInterval(loadCommonNotifications, 5000);
+    loadCommonNotifications();
 });
 
 $(window).scroll(function(){

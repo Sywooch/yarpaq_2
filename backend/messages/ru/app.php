@@ -102,6 +102,11 @@ return [
     'Height (sm)' => 'Высота (см)',
 
     'Create' => 'Создать',
+
+    'Moderation products' => 'Товары на модерации',
+    'New orders' => 'Новые заказы',
+    'New reviews' => 'Новые отзывы',
+    'Out of stock products' => 'Товары "Out of stock"',
 ];
 
 

@@ -103,6 +103,11 @@ return [
 
     'Create' => 'Təsdiqlə',
 
+    'Moderation products' => 'Moderasiyada olan məhsullar',
+    'New orders' => 'Yeni sifarişlər',
+    'New reviews' => 'Yeni şərhlər',
+    'Out of stock products' => '"Out of stock" məhsullar',
+
 ];
 
 
