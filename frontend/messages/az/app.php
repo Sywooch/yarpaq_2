@@ -156,6 +156,8 @@ return [
     'Privacy Policy' => 'Məxfilik Siyasətini',
 
     'Save' => 'Yadda saxla',
-    'Choose payment type' => 'Ödəmə üsulunu seçin'
+    'Choose payment type' => 'Ödəmə üsulunu seçin',
+
+    'You have successfully joined Yarpaq.az' => 'Siz uğurla Yarpaq.az saytında qeydiyyatdan keçdiniz'
 
 ];

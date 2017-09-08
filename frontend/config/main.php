@@ -83,6 +83,7 @@ return [
 
                 'user/profile'       => 'user/profile',
                 'user/orders'        => 'user/orders',
+                'user/success'       => 'user/success',
 
                 'goldenpay_complete' => 'golden-pay-payment/callback',
                 'millikart_callback' => 'albali-payment/callback',

@@ -158,6 +158,8 @@ return [
     'Privacy Policy' => 'Политикой Конфиденциальности',
 
     'Save' => 'Сохранить',
-    'Choose payment type' => 'Выберите метод оплаты'
+    'Choose payment type' => 'Выберите метод оплаты',
+
+    'You have successfully joined Yarpaq.az' => 'Вы успешно зарегистрировались на Yarpaq.az'
 
 ];

@@ -26,7 +26,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
 class UserController extends BasicController
 {
 
-    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password', 'password-recovery-receive'];
+    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password', 'password-recovery-receive', 'success'];
 
     public function actionRegistration()
     {
@@ -84,7 +84,7 @@ class UserController extends BasicController
 
                 if ($profile->save() && $address->save()) {
                     $trans->commit();
-                    return $this->redirect(Url::to(Language::getCurrent()->urlPrefix.'/'));
+                    return $this->redirect(Url::to(['user/success']));
                 } else {
                     $trans->rollBack();
                 }
@@ -270,6 +270,10 @@ class UserController extends BasicController
         }
 
         return $this->renderIsAjax('passwordRecovery', compact('model'));
+    }
+
+    public function actionSuccess() {
+        return $this->render('success_registration');
     }
 
     /**
