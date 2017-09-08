@@ -380,7 +380,8 @@ setTimeout( function() {
 	});
 
 	$(".full_nav .left_side .categories_list > ul > li > div article h3 > a").click(function(){
-		if (_window.width() < 992) {
+		if (_window.width() < 992 ) {
+
 			var _this = $(this);
 			if (_this.hasClass("active")) {
 				$(".full_nav .left_side .categories_list > ul > li > div article h3 > a").removeClass("active");
@@ -396,7 +397,7 @@ setTimeout( function() {
 	});
 
 	$(".full_nav .left_side .categories_list > ul > li > div article > ul > li > a").click(function(){
-		if (_window.width() < 992) {
+		if (_window.width() < 992 && $(this).parent().find(' > ul > li').size()) {
 			var _this = $(this);
 			if (_this.hasClass("active")) {
 				$(".full_nav .left_side .categories_list > ul > li > div article ul > li > a").removeClass("active");
