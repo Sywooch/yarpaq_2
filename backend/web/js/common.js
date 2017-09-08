@@ -65,8 +65,10 @@ $(function () {
     });
 
 
+    var commonNotificationsBlock = $('#commonNotificationsBlock');
+
     function loadCommonNotifications() {
-        var commonNotificationsBlock = $('#commonNotificationsBlock');
+
         var url = commonNotificationsBlock.data('url');
 
         $.getJSON(url, function (response) {
@@ -111,9 +113,11 @@ $(function () {
         });
     }
 
-    // load common notifications
-    setInterval(loadCommonNotifications, 5000);
-    loadCommonNotifications();
+    if (commonNotificationsBlock.length) {
+        // load common notifications
+        setInterval(loadCommonNotifications, 5000);
+        loadCommonNotifications();
+    }
 });
 
 $(window).scroll(function(){
