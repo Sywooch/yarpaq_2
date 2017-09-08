@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use common\models\order\OrderStatus;
 use common\models\order\Order;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\order\OrderSearch */
@@ -78,10 +79,10 @@ $statuses = OrderStatus::find()
             [
                 'attribute' => 'total',
                 'value' => function ($order) {
-                    if ($order->scenario == Order::SCENARIO_OWN) {
+                    if (!User::hasPermission('view_all_orders')) {
                         $total = 0;
 
-                        foreach ($order->order_products as $order_product) {
+                        foreach ($order->orderProducts as $order_product) {
                             $total += $order_product->total;
                         }
 
@@ -91,12 +92,15 @@ $statuses = OrderStatus::find()
                     }
                 }
             ],
-            'total',
             [
                 'attribute' => 'order_status_id',
                 'filter'    => ArrayHelper::map(OrderStatus::getData(), 'order_status_id', 'name'),
                 'format'    => 'raw',
                 'value'     => function ($order) use ($statuses) {
+                    if (!User::hasPermission('view_all_orders')) {
+                        return $order->status->name;
+                    }
+
                     $html = '<select data-order-id="'.$order->id.'" class="order-status-change-select">';
 
                     foreach ($statuses as $status) {
@@ -130,7 +134,14 @@ $statuses = OrderStatus::find()
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}'
+                'template' => '{view} {update}',
+                'visible' => User::hasPermission('view_all_orders')
+            ],
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'visible' => !User::hasPermission('view_all_orders')
             ],
         ],
     ]); ?>
