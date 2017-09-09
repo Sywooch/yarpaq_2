@@ -160,6 +160,7 @@ return [
     'Save' => 'Сохранить',
     'Choose payment type' => 'Выберите метод оплаты',
 
-    'You have successfully joined Yarpaq.az' => 'Вы успешно зарегистрировались на Yarpaq.az'
+    'You have successfully joined Yarpaq.az' => 'Вы успешно зарегистрировались на Yarpaq.az',
+    'Required field' => 'Обязательное поле'
 
 ];

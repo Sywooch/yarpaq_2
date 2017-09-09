@@ -8,6 +8,10 @@ use common\models\Country;
 $currency = Yii::$app->currency;
 ?>
 
+<script type="text/javascript">
+    var required_error_text = '<?= Yii::t('app', 'Required field');?>';
+</script>
+
 <div class="basket_wrapper no_toppadding">
     <h2><?= Yii::t('app', 'Checkout'); ?></h2>
     <div class="main_side">
@@ -21,55 +25,55 @@ $currency = Yii::$app->currency;
                 <h3><?= Yii::t('app', 'Shipping information'); ?></h3>
 
                 <ul>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'Name'); ?>:</span>
                             <em>*</em>
                         </div>
                         <input type="text" required name="shipping_firstname" value="<?= $shipping_info['firstname']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'Surname'); ?> :</span>
                             <em>*</em>
                         </div>
                         <input type="text" required name="shipping_lastname" value="<?= $shipping_info['lastname']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'Mobile phone'); ?> </span>
                             <em>*</em>
                         </div>
-                        <input type="text" required name="phone1" value="<?= $user_info['phone1']; ?>">
+                        <input type="tel" required name="phone1" value="<?= $user_info['phone1']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'Email'); ?> :</span>
+                            <em>*</em>
                         </div>
-                        <input type="text" required name="email" value="<?= $user_info['email']; ?>">
+                        <input type="email" required name="email" value="<?= $user_info['email']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'Address'); ?> :</span>
                             <em>*</em>
                         </div>
                         <input type="text" required name="shipping_address" value="<?= $shipping_info['address']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'City'); ?> :</span>
                             <em>*</em>
                         </div>
                         <input type="text" required name="shipping_city" value="<?= $shipping_info['city']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <div>
                             <span><?= Yii::t('app', 'Postal Code'); ?> :</span>
-                            <em>*</em>
                         </div>
-                        <input type="text" name="shipping_postcode" required value="<?= $shipping_info['postcode']; ?>">
+                        <input type="text" name="shipping_postcode" value="<?= $shipping_info['postcode']; ?>">
                     </li>
-                    <li>
+                    <li class="field_block">
                         <?php $default_country_id = $shipping_info['country_id'] ? $shipping_info['country_id'] : 15 ?>
                         <div>
                             <span><?= Yii::t('app', 'Country'); ?> :</span>
@@ -84,7 +88,7 @@ $currency = Yii::$app->currency;
                             <?php } ?>
                         </select>
                     </li>
-                    <li>
+                    <li class="field_block">
                         <?php $default_zone_id = $shipping_info['zone_id'] ? $shipping_info['zone_id'] : 216 ?>
                         <div>
                             <span><?= Yii::t('app', 'State'); ?> :</span>

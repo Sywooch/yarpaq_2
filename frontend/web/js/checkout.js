@@ -49,9 +49,28 @@ $(function () {
     });
 
     function validate () {
-        var valid = true;
-
         $('.error_text').hide();
+        $('.error')
+            .removeClass('error')
+            .find('.error_text').remove();
+
+        var valid = $('#checkout-form')[0].checkValidity();
+
+
+        var info_inputs = $('#checkout-form .address_form :input');
+        info_inputs.each(function () {
+            if ($(this).attr('required') !== undefined && $(this).val() == '') {
+
+                var field_block = $(this).closest('.field_block');
+
+                field_block.addClass('error');
+
+                var error = $('<p class="error_text">'+required_error_text+'</p>');
+                $(this).after(error);
+                error.show();
+            }
+        });
+
 
         var payment_method = $('input[name="payment_method"]');
         var payment_methods = $('.payment_methods');
@@ -69,6 +88,15 @@ $(function () {
 
         if (validate()) {
             $('#checkout-form').submit();
+        } else {
+            var body = $("html, body");
+            var error_block = $('.error');
+
+            var scrollTop = error_block.offset().top - 90;
+
+            body.stop().animate({scrollTop: scrollTop}, 500, 'swing', function() {
+
+            });
         }
 
     });

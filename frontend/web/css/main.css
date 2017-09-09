@@ -3430,6 +3430,11 @@ a.back_to_top.show_me {
   text-decoration: none;
 }
 
+.address_form .error_text {
+  margin-top: 5px;
+  float: none;
+}
+
 .promo_codes {
   background: #fff;
   margin: 0 0 10px;
