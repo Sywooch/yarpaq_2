@@ -319,7 +319,8 @@ class ProductController extends AdminDefaultController
         $out = ['results' => ['id' => '', 'text' => '']];
         if (!is_null($q)) {
             $searchModel = new ProductSearch();
-            $data = $searchModel->search(['ProductSearch' => ['title' => $q]]);
+            $searchModel->title = $q;
+            $data = $searchModel->search();
 
             $out['results'] = [];
             foreach ($data->getModels() as $model) {
