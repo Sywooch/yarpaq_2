@@ -88,7 +88,14 @@ return [
                 'goldenpay_complete' => 'golden-pay-payment/callback',
                 'millikart_callback' => 'albali-payment/callback',
 
-                'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
+                //'payment/<controller:.+>/<action:.+>' => '<controller>/<action>',
+
+                'payment/albali-payment/<action:.+>'            => 'albali-payment/<action>',
+                'payment/bolkart-payment/<action:.+>'           => 'bolkart-payment/<action>',
+                'payment/cash-on-delivery-payment/<action:.+>'  => 'cash-on-delivery-payment/<action>',
+                'payment/golden-pay-payment/<action:.+>'        => 'golden-pay-payment/<action>',
+                'payment/pay-pal-payment/<action:.+>'           => 'pay-pal-payment/<action>',
+
                 '<url:.+>'      => 'category/index'
             ],
         ],
