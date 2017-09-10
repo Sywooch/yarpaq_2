@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="label bg-light-blue bind-move-up"     href="<?php echo Url::toRoute(['move-up', 'id' => $category->id]); ?>">▲</a>
                     <a class="label bg-light-blue bind-move-down"   href="<?php echo Url::toRoute(['move-down', 'id' => $category->id]); ?>">▼</a>
 
-                    <a class="label bg-red bind-delete" href="" data-confirm="Are you sure you want to delete this item?">Delete</a>
+                    <a class="label bg-red bind-delete" href="<?= Url::toRoute(['category/delete', 'id' => $category->id]) ?>" data-confirm="Are you sure you want to delete this item?">Delete</a>
                 </span>
             </span>
 

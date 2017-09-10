@@ -168,7 +168,7 @@ class CategoryController extends AdminDefaultController
         $model = $this->findModel($id);
 
         if ($model->parent_id != 0) {
-            $model->delete();
+            $model->deleteWithChildren();
         }
 
 

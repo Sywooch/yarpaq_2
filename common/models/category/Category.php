@@ -331,25 +331,25 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         return false;
     }
 
-    public function beforeDelete() {
-        if (parent::beforeDelete()) {
-
-            // delete children
-            $children = $this->children;
-            if (count($children)) {
-                foreach ($children as $child) {
-                    if (!$child->delete()) {
-                        return false;
-                    }
-                }
-            }
-
-
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public function beforeDelete() {
+//        if (parent::beforeDelete()) {
+//
+//            // delete children
+//            $children = $this->children;
+//            if (count($children)) {
+//                foreach ($children as $child) {
+//                    if (!$child->delete()) {
+//                        return false;
+//                    }
+//                }
+//            }
+//
+//
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public function getCreatedUser() {
         return $this->hasOne(User::className(), ['id' => 'created_user_id']);
