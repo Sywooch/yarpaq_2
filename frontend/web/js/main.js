@@ -233,11 +233,19 @@ setTimeout( function() {
 	$(".full_nav .left_side .categories_list ul li a, .full_nav .left_side .top_categories > ul > li > a").mouseover(function(){
 		if (_window.width() > 992) {
 			var _this = $(this),
+			_this_index = _this.parent().index();
+			if (_this.parent().parent().parent().hasClass("categories_list")) {
+				_this_index = _this_index + $(".top_categories > ul > li").length;
+			}
 			_this_nav = _this.next().find(">*").html();
 
 			$(".full_nav .right_side").addClass("show_me");
 			$(".full_nav .right_side nav").html(_this_nav);
 			$(".full_nav .right_side nav").css("min-height", ($(".full_nav .left_side").height())+"px");
+
+
+			$(".nav_banners ul").removeClass("active");
+			$(".nav_banners ul").eq(_this_index).addClass("active");
 		}
 	});
 
@@ -783,3 +791,9 @@ _window.resize(function(){
     });
 
 /* Functional fix end */
+
+
+/* Scroll table begin */
+$(".info-block table").wrap('<div class="table_scroll"/></div>');
+
+/* Scroll table end */

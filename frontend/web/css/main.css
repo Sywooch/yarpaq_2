@@ -2002,6 +2002,14 @@ a.search_toggler {
   top: 20px;
   right: 10px;
 }
+.nav_banners ul {
+  display: none;
+}
+
+.nav_banners ul.active {
+  display: block;
+}
+
 
 a.toggler {
   display: none;
@@ -7055,6 +7063,39 @@ a.clear_filtre {
 .pagination li {
   padding: 0 0 3px;
 }
+
+
+.table_scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table_scroll table {
+  width: 100% !important;
+  min-width: 980px;
+}
+
+.table_scroll table tr:first-child td {
+  border-top: 1px solid #808080;
+}
+
+.table_scroll table tr td {
+  padding: 10px 10px;
+  border: 1px solid #808080;
+  border-top: none;
+  border-left: none;
+  font-size: 18px;
+}
+
+.table_scroll table tr td:first-child {
+  border-left: 1px solid #808080;
+}
+
+.table_scroll table tr td p {
+  padding: 0;
+  color: #000;
+}
+
 
 .info-block {
   background: #fff;

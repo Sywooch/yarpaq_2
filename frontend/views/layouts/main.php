@@ -208,10 +208,39 @@ $seo = $this->params['seo'];
                         </div>
                         <div class="right_side">
                             <nav></nav>
-                            <div class="nav_banners" style="display: none">
+                            <div class="nav_banners" style="display: none;">
                                 <ul>
-                                    <li><a href="#"><img src="/upload/Images/40.jpg" alt=""></a></li>
-                                    <li><a href="#"><img src="/upload/Images/41.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="/upload/Images/mens.jpg" alt=""></a></li>
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
+                                </ul>
+                                <ul>
+
                                 </ul>
                             </div>
                         </div>
