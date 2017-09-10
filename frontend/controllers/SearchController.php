@@ -48,9 +48,10 @@ class SearchController extends BasicController
 
         $repo = new ProductRepository();
         $products = $repo->visibleOnTheSite();
+        $products->andWhere(['like', 'title', $q]);
         $q_parts = explode(' ', $q);
         foreach ($q_parts as $q_part) {
-            $products->andWhere(['like', 'title', $q_part]);
+            $products->orWhere(['like', 'title', $q_part]);
         }
 
         $detailed_products = clone $products;
@@ -59,7 +60,7 @@ class SearchController extends BasicController
         }
 
 
-        $products->union($detailed_products);
+        //$products->union($detailed_products);
 
         $products->orWhere(['id' => $q]);
 
@@ -130,6 +131,9 @@ class SearchController extends BasicController
 
         $this->seo(Yii::t('app', 'Search'));
 
+
+        //echo $products->createCommand()->getRawSql();
+
         return $this->render('index', [
             'count'             => $pages->totalCount,
             'search_q'          => $q,
@@ -148,6 +152,7 @@ class SearchController extends BasicController
         $repo = new ProductRepository();
         $query = $repo->visibleOnTheSite();
         $query->andWhere(['like', 'title', $q]);
+        $query->orWhere(['like', 'id', $q]);
         $query->orderBy(['viewed' => SORT_DESC]);
         $products = $query->limit(6)->all();
 
