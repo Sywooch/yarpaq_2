@@ -32,13 +32,13 @@ run_slider = function(slider_index, _this, direction) {
         	if (arr_link[slider_index] == "none") {
             	$("#index_slider .image").prepend("<div style='left:100%'><img src='"+arr_src[slider_index]+"' alt='' /></div>");
         	} else {
-            	$("#index_slider .image").prepend("<div style='left:100%'><a href="+arr_link[slider_index]+"><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
+            	$("#index_slider .image").prepend("<div style='left:100%'><a href='"+arr_link[slider_index]+"'><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
         	}
         } else {
         	if (arr_link[slider_index] == "none") {
             	$("#index_slider .image").prepend("<div style='left:-100%'><img src='"+arr_src[slider_index]+"' alt='' /></div>");
         	} else {
-            	$("#index_slider .image").prepend("<div style='left:-100%'><a href="+arr_link[slider_index]+"><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
+            	$("#index_slider .image").prepend("<div style='left:-100%'><a href='"+arr_link[slider_index]+"'><img src='"+arr_src[slider_index]+"' alt='' /></a></div>");
         	}
         }
 

@@ -1810,6 +1810,7 @@ a.search_toggler {
 
 .full_nav .left_side .categories_list {
   padding: 20px 0 20px 6px;
+  min-height: 520px;
 }
 
 .full_nav .left_side .categories_list > ul > li > a {
@@ -1968,7 +1969,9 @@ a.search_toggler {
 }
 
 .full_nav .right_side nav > div article h3 a {
-  color: #191919;
+  /*color: #191919;*/
+  font-weight: bold;
+  color: #525252;
   text-decoration: none;
 }
 
@@ -1982,7 +1985,7 @@ a.search_toggler {
 
 .full_nav .right_side nav > div article ul li a {
   text-decoration: none;
-  color: #666;
+  color: #4a4a4a;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0.02px;

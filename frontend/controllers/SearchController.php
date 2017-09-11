@@ -152,7 +152,7 @@ class SearchController extends BasicController
         $repo = new ProductRepository();
         $query = $repo->visibleOnTheSite();
         $query->andWhere(['like', 'title', $q]);
-        $query->orWhere(['like', 'id', $q]);
+        $query->orWhere(['id' => $q]);
         $query->orderBy(['viewed' => SORT_DESC]);
         $products = $query->limit(6)->all();
 
