@@ -128,14 +128,24 @@ class ProductController extends AdminDefaultController
         if ($model->load(Yii::$app->request->post())) {
             $this->uploadGalleryFiles($model);
 
-            if ($model->moderated != $moderated && $model->moderated == 1) {
 
-                if (User::hasPermission('moderate_products')) {
-                    $model->moderated_at = (new \DateTime())->format('Y-m-d H:i:s');
-                } else {
-                    $model->moderated = 0;
-                }
+            // если меняется статус модерации
+            // и у юзера есть полномочия
+            if ($model->moderated != $moderated && User::hasPermission('moderate_products')) {
+                $model->moderated_at = (new \DateTime())->format('Y-m-d H:i:s');
             }
+            // иначе возвращаем в исходное состояние
+            else {
+                $model->moderated = $moderated;
+            }
+
+
+            // если товар сохранил не админ,
+            // то отправить товар на модерацию
+            if (!User::hasRole('admin')) {
+                $model->moderated = 0;
+            }
+
 
             if ($model->save()) {
                 $this->saveGalleryFiles($model);
