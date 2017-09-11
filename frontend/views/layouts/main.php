@@ -112,7 +112,7 @@ $seo = $this->params['seo'];
                         <div class="left_side">
                             <?php
                             $topCategoryList = TopCategoryList::getCategories()->all();
-                            $main_categories = Category::find()->andWhere(['depth' => 2])->orderBy('lft')->all();
+                            $main_categories = Category::find()->andWhere(['depth' => 2])->andWhere(['status' => Category::STATUS_ACTIVE])->orderBy('lft')->all();
 
                             if (count($topCategoryList)) {
                             ?>
@@ -131,7 +131,7 @@ $seo = $this->params['seo'];
 
                                                     <?php
                                                     $menu_cursor = 0;
-                                                    foreach ($category->getChildren()->all() as $subcategory) {
+                                                    foreach ($category->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subcategory) {
                                                         $menu_cursor++;
 
                                                         if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
@@ -139,7 +139,7 @@ $seo = $this->params['seo'];
                                                         <article>
                                                             <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                             <ul>
-                                                                <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                                <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
                                                                     <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
                                                                 <?php } ?>
                                                             </ul>
@@ -169,7 +169,7 @@ $seo = $this->params['seo'];
 
                                                 <?php
                                                 $menu_cursor = 0;
-                                                foreach ($category->getChildren()->all() as $subcategory) {
+                                                foreach ($category->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subcategory) {
                                                     $menu_cursor++;
 
                                                     if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
@@ -177,12 +177,12 @@ $seo = $this->params['seo'];
                                                     <article>
                                                         <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                         <ul>
-                                                            <?php foreach ($subcategory->getChildren()->all() as $subsubcategory) {?>
+                                                            <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
                                                             <li>
                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
                                                                 <ul>
-                                                                    <?php foreach ($subsubcategory->getChildren()->all() as $subsubsubcategory) {?>
+                                                                    <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
                                                                         <li>
                                                                             <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
                                                                         </li>
