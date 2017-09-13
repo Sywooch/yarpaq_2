@@ -128,7 +128,7 @@ $seo = $this->params['seo'];
                                     <?php foreach ($topCategoryList as $category) { ?>
                                         <li>
                                             <a href="<?= $category->url; ?>">
-                                                <img src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
+                                                <img width="40" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
                                             </a>
 
                                             <div>
