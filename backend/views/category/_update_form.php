@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\category\Category;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+use yii\helpers\FileHelper;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\category\Category */
@@ -17,6 +20,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin([
         'enableClientValidation' => false,
         'enableAjaxValidation' => false,
+        'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
     <div class="nav-tabs-custom">
@@ -82,7 +86,72 @@ use yii\helpers\ArrayHelper;
             });
 
             echo $form->field($model, 'parent_id')->dropDownList($categories_data);
+
             ?>
+
+            <div class="row">
+
+                <!-- Gallery -->
+                <div class="col-xs-12">
+
+                    <script type="text/javascript">
+                        var gallery_sort = [];
+                    </script>
+                    <?php
+
+                    $pluginOptions = [
+                        'allowedFileExtensions' => ['jpg', 'gif', 'png'],
+
+
+                        'initialPreviewAsData' => true,
+                        'deleteUrl' => Url::to(['category/image-delete']),
+                        'overwriteInitial' => false,
+                        'maxFileSize' => 10000,
+                        'initialCaption' => Yii::t('app', "Upload images"),
+                        'initialPreview' => [],
+                        'initialPreviewConfig' => [],
+
+                        'showCaption' => false,
+                        'showRemove' => false,
+                        'showUpload' => false,
+                        'browseClass' => 'btn btn-primary btn-block',
+                        'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                        'browseLabel' =>  Yii::t('app', 'Select')
+                    ];
+                    $gallery_sort = [];
+
+                    foreach ($model->gallery as $image) {
+
+                        if (!is_file($image->path)) continue;
+
+                        $pluginOptions['initialPreview'][] = $image->url;
+                        $mimetype = FileHelper::getMimeType( $image->path );
+                        $pluginOptions['initialPreviewConfig'][] = [
+                            'type' => substr($mimetype, 0, strpos($mimetype, '/')),
+                            'filetype' => $mimetype,
+                            'caption' => $image->src_name,
+                            'width' => "120px",
+                            'key' => $image->id
+                        ];
+                        $gallery_sort[] = $image->id;
+
+                        echo '<script type="text/javascript"> gallery_sort.push('.$image->id.'); </script>';
+                    }
+
+                    echo $form->field($model, 'galleryFiles[]')->widget(FileInput::className(), [
+                        'model' => $model,
+                        'options' => [
+                            'accept' => ['image/*', 'video/*'],
+                            'multiple' => true
+                        ],
+                        'pluginOptions' => $pluginOptions,
+                    ]); ?>
+
+                    <input type="hidden" name="gallery_sort" value="<?php echo implode(',', $gallery_sort); ?>">
+
+                </div>
+                <!-- END of gallery -->
+            </div>
         </div>
     </div>
 

@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
  */
 class Category extends \yii\db\ActiveRecord implements IPage, IDocument
 {
+    public $galleryFiles;
 
     const STATUS_ACTIVE = 1;
     const STATUS_HIDDEN = 0;
@@ -390,5 +391,9 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             ->viaTable('{{%product_category}}', ['category_id' => 'id'], function ($query) {
                 $query->orWhere('in', 'category_id', $this->categoryIDs);
             });
+    }
+
+    public function getGallery() {
+        return $this->hasMany(CategoryImage::className(), ['model_id' => 'id'])->orderBy('sort');
     }
 }

@@ -112,7 +112,12 @@ $seo = $this->params['seo'];
                         <div class="left_side">
                             <?php
                             $topCategoryList = TopCategoryList::getCategories()->all();
-                            $main_categories = Category::find()->andWhere(['depth' => 2])->andWhere(['status' => Category::STATUS_ACTIVE])->orderBy('lft')->all();
+                            $main_categories = Category::find()
+                                ->andWhere(['depth' => 2])
+                                ->andWhere(['status' => Category::STATUS_ACTIVE])
+                                ->andWhere(['isTop' => 0])
+                                ->orderBy('lft')
+                                ->all();
 
                             if (count($topCategoryList)) {
                             ?>
@@ -165,8 +170,6 @@ $seo = $this->params['seo'];
                                         <div>
                                             <nav>
 
-
-
                                                 <?php
                                                 $menu_cursor = 0;
                                                 foreach ($category->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subcategory) {
@@ -197,8 +200,6 @@ $seo = $this->params['seo'];
                                                     if (in_array($menu_cursor, [3,6,9])) { echo '</div>'; }
                                                 }
                                                 ?>
-
-
                                             </nav>
                                         </div>
                                     </li>
@@ -208,7 +209,7 @@ $seo = $this->params['seo'];
                         </div>
                         <div class="right_side">
                             <nav></nav>
-                            <div class="nav_banners" style="display: none;">
+                            <div class="nav_banners">
                                 <ul>
                                     <li><a href="#"><img src="/upload/Images/mens.jpg" alt=""></a></li>
                                 </ul>

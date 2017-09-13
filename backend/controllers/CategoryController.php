@@ -4,12 +4,14 @@ namespace backend\controllers;
 
 use common\models\category\Category;
 use common\models\category\CategoryContent;
+use common\models\category\CategoryImage;
 use common\models\Language;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
+use yii\web\UploadedFile;
 
 /**
  * PageController implements the CRUD actions for Page model.
@@ -121,6 +123,8 @@ class CategoryController extends AdminDefaultController
         $contents = $model->contents;
 
         if ($model->load(Yii::$app->request->post())) {
+            $this->uploadGalleryFiles($model);
+
 
             $transaction = Category::getDb()->beginTransaction();
 
@@ -131,6 +135,9 @@ class CategoryController extends AdminDefaultController
             } else {
                 $model->save();
             }
+
+            $this->saveGalleryFiles($model);
+            $this->saveSort();
 
             foreach ($contents as $content) {
                 /**
@@ -157,6 +164,50 @@ class CategoryController extends AdminDefaultController
 
     }
 
+    private function saveSort() {
+        $sort = Yii::$app->request->post()['gallery_sort'];
+
+        if ($sort != '') {
+            $sort = explode(',', $sort);
+            $num = 1;
+            foreach ($sort as $s) {
+                $model = CategoryImage::findOne($s);
+
+                if ($model) {
+                    $model->sort = $num++;
+                    $model->save();
+                }
+            }
+        }
+    }
+
+    private function uploadGalleryFiles($model) {
+        $model->galleryFiles = UploadedFile::getInstances($model, 'galleryFiles');
+    }
+
+    private function saveGalleryFiles($m) {
+        $files = $m->galleryFiles;
+        if (count($files)) {
+            $sort = count($m->gallery);
+            foreach ($files as $file) { $sort++;
+                if (!is_null($file)) {
+                    $model = new CategoryImage();
+                    $model->model_id = $m->id;
+                    $model->src_name = $file->name;
+                    $model->sort = $sort;
+                    $file_parts = explode(".", $file->name);
+                    $ext = end($file_parts);
+                    // generate a unique file name to prevent duplicate filenames
+                    $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
+
+                    $file->saveAs($model->path);
+
+                    $model->save();
+                }
+            }
+        }
+    }
+
     /**
      * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -175,6 +226,18 @@ class CategoryController extends AdminDefaultController
         return $this->redirect(['index']);
     }
 
+
+    public function actionImageDelete() {
+
+        $key = (int) Yii::$app->request->post('key');
+
+        $image = CategoryImage::findOne($key);
+        if ($image) {
+            $image->delete();
+        }
+
+        return json_encode(['success' => 1]);
+    }
 
     /**
      * Finds the Category model based on its primary key value.
