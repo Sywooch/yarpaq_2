@@ -1076,9 +1076,18 @@ a.search_toggler {
 }
 
 .product_carusel .swipe ul li h3 {
-  padding: 0 0 12px;
+  /*padding: 0 0 12px;*/
+  /*color: #666;*/
+  /*font-size: 14px;*/
+  /*font-weight: 400;*/
+  /*letter-spacing: 0.01px;*/
+
+  margin: 0 0 12px;
   color: #666;
   font-size: 14px;
+  line-height: 120%;
+  height: 35px;
+  overflow: hidden ;
   font-weight: 400;
   letter-spacing: 0.01px;
 }

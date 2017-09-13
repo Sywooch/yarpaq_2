@@ -58,7 +58,7 @@ class CategoryImage extends \yii\db\ActiveRecord
      * @return mixed
      */
     public function getUrl() {
-        return Yii::$app->urlManagerUploads->createUrl(Yii::$app->params['category.uploads.url'] . $this->web_name);
+        return Yii::$app->urlManagerMedia->createUrl(Yii::$app->params['category.uploads.url'] . $this->web_name);
     }
 
 

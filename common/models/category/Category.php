@@ -396,4 +396,14 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
     public function getGallery() {
         return $this->hasMany(CategoryImage::className(), ['model_id' => 'id'])->orderBy('sort');
     }
+
+    public function getIcon() {
+        $gallery = $this->gallery;
+
+        if (count($gallery)) {
+            return $gallery[0];
+        } else {
+            return new CategoryImage();
+        }
+    }
 }

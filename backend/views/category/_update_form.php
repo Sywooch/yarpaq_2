@@ -100,7 +100,7 @@ use kartik\file\FileInput;
                     <?php
 
                     $pluginOptions = [
-                        'allowedFileExtensions' => ['jpg', 'gif', 'png'],
+                        'allowedFileExtensions' => ['jpg', 'gif', 'png', 'svg'],
 
 
                         'initialPreviewAsData' => true,
@@ -145,7 +145,7 @@ use kartik\file\FileInput;
                             'multiple' => true
                         ],
                         'pluginOptions' => $pluginOptions,
-                    ]); ?>
+                    ])->label(Yii::t('app', 'Icon')); ?>
 
                     <input type="hidden" name="gallery_sort" value="<?php echo implode(',', $gallery_sort); ?>">
 
