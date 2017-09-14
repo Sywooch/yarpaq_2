@@ -9,6 +9,7 @@ class TopCategoryList
         return Category::find()
             ->andWhere(['isTop' => 1])
             ->andWhere(['depth' => 2])
-            ->andWhere(['status' => Category::STATUS_ACTIVE]);
+            ->andWhere(['status' => Category::STATUS_ACTIVE])
+            ->orderBy('lft');
     }
 }

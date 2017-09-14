@@ -1,6 +1,6 @@
 <?php
 $slide1Link = ( $slide1 = \common\models\category\Category::findOne(792) ) ? $slide1->url : '#';
-$slide2Link = ( $slide2 = \common\models\info\Info::findOne(5) ) ? $slide2->url : '#';
+$slide2Link = ( $slide2 = \common\models\category\Category::findOne(583) ) ? $slide2->url : '#';
 $slide3Link = ( $slide3 = \common\models\category\Category::findOne(576) ) ? $slide3->url : '#';
 ?>
 
@@ -9,8 +9,8 @@ $slide3Link = ( $slide3 = \common\models\category\Category::findOne(576) ) ? $sl
 <div id="index_slider">
     <div class="image">
         <div>
-            <a href="<?= $slide1Link; ?>">
-                <img src="/upload/Images/school-<?= \common\models\Language::getCurrent()->name;?>.jpg" alt="">
+            <a href="<?= $slide2Link; ?>">
+                <img src="/upload/Images/new-shoes-<?= \common\models\Language::getCurrent()->name;?>.jpg" alt="">
             </a>
         </div>
     </div>
@@ -19,9 +19,9 @@ $slide3Link = ( $slide3 = \common\models\category\Category::findOne(576) ) ? $sl
         <a href="#" class="next"></a>
     </div>
     <div class="bullets">
-        <a href="/upload/Images/delivery-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide2Link; ?>" class="active"></a>
-        <a href="/upload/Images/watch-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide3Link; ?>"></a>
-        <a href="/upload/Images/school-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide1Link; ?>"></a>
+        <a href="/upload/Images/watch-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide3Link; ?>" class="active"></a>
+        <a href="/upload/Images/new-shoes-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide2Link; ?>"></a>
+
     </div>
 </div>
 

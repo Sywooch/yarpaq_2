@@ -128,7 +128,7 @@ $seo = $this->params['seo'];
                                     <?php foreach ($topCategoryList as $category) { ?>
                                         <li>
                                             <a href="<?= $category->url; ?>">
-                                                <img width="40" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
+                                                <img width="30" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
                                             </a>
 
                                             <div>
@@ -210,39 +210,19 @@ $seo = $this->params['seo'];
                         <div class="right_side">
                             <nav></nav>
                             <div class="nav_banners">
-                                <ul>
-                                    <li><a href="#"><img src="/upload/Images/mens.jpg" alt=""></a></li>
-                                </ul>
-                                <ul>
+                                <?php foreach ($topCategoryList as $topCategory) { ?>
+                                    <ul>
 
-                                </ul>
-                                <ul>
+                                    </ul>
+                                <?php } ?>
 
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
-                                <ul>
-
-                                </ul>
+                                <?php foreach ($main_categories as $main_category) { ?>
+                                    <ul>
+                                        <?php if ($main_category->id == 555) { ?>
+                                            <li><a href="#"><img src="/upload/Images/mens.jpg" alt=""></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                <?php } ?>
                             </div>
                         </div>
 
