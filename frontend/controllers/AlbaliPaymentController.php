@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\components\taksit\Albali;
 use Yii;
 use common\models\Language;
 use common\models\order\Order;
@@ -20,10 +21,16 @@ class AlbaliPaymentController extends BasicController
         $albali = new AlbaliPayment();
 
         // *** Payment object ***
-        $amount         = intval($albali->getFilteredParam('amount', $order->total * 100));
+
+
+        $taksit         = Yii::$app->request->get('hint');
+
+        // надбавляем процент
+        $albaliTaksit = new Albali($order->total);
+        $amount         = intval($albali->getFilteredParam('amount', $albaliTaksit->getTotalAmount($taksit) * 100));
+
         $description    = $albali->getFilteredParam('item', $order->id);
         $lang           = Language::findOne( $order->language_id )->name;
-        $taksit         = Yii::$app->request->get('hint');
         $merchant       = $albali->getMerchantByTaksit($taksit);
         $reference      = md5(time());
         $resp           = $albali->getPaymentKeyJSONRequest($taksit, $amount, $lang, $reference, $description);

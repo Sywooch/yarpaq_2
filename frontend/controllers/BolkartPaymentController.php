@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\components\taksit\Bolkart;
 use Yii;
 use common\models\Language;
 use common\models\order\Order;
@@ -22,9 +23,15 @@ class BolkartPaymentController extends BasicController
 
         // *** Payment object ***
         $amount         = floor($bolkart->getFilteredParam('amount', $order->total) * 100) / 100;
+        $taksit         = Yii::$app->request->get('hint');
+
+        // надбавляем процент
+        $bolkartTaksit = new Bolkart($amount);
+        $amount = $bolkartTaksit->getTotalAmount($taksit);
+
         $description    = $bolkart->getFilteredParam('item', $order->id);
         $lang           = Language::findOne( $order->language_id )->name;
-        $taksit         = Yii::$app->request->get('hint');
+
 
         $resp = $bolkart->getPaymentKeyJSONRequest($taksit, $amount, $lang, $description, $order->email, $order->phone1);
 
