@@ -19,19 +19,68 @@ class ProductImportController extends AdminDefaultController
     private $manAssoc;
 
 
-    public function actionClearFakeImages() {
-        $images = ProductImage::find()
-//            ->andWhere(['model_id' => 9866])
-            ->all();
+//    public function actionClearFakeImages() {
+//        $images = ProductImage::find()
+////            ->andWhere(['model_id' => 9866])
+//            ->all();
+//
+//        foreach ($images as $image) {
+//
+//            if (!is_file($image->path)) {
+//                $image->delete();
+//            }
+//
+//        }
+//    }
 
-        foreach ($images as $image) {
-
-            if (!is_file($image->path)) {
-                $image->delete();
-            }
-
-        }
-    }
+//    public function actionFakeImages() {
+//        return;
+//
+//        ini_set('memory_limit', '-1');
+//        ini_set('max_execution_time', 3000); //3000 seconds = 50 minutes
+//
+//        $files = scandir('/var/www/html/image/catalog');
+//
+//
+//        // Достаем все записи картинок
+//        $images = ProductImage::find()
+////            ->andWhere(['model_id' => 9866])
+//            ->all();
+//
+//
+//
+//        // удаляем папки
+//        $papka = [];
+//        foreach ($files as $key => $file) {
+//            if (is_dir('/var/www/html/image/catalog/'.$file)) {
+//                $papka[] = $file;
+//                unset($files[$key]);
+//            }
+//        }
+//
+//        echo 'Общее количество файлов-картинок на сайте: ' . count($files).'<br>';
+//        echo 'Общее число записей картинок: '.count($images).'<br>';
+//
+//        echo 'Папок: '.count($papka).' . Лишних файлов должно быть: '.(count($files) - count($images)).'<br>';
+//
+//        $invert = array_flip($files);
+//
+//        foreach ($images as $image) {
+//            unset($invert[$image->web_name]);
+//        }
+//
+//
+//        $for_delete = array_keys($invert);
+//        echo '<pre>';
+//        var_dump($for_delete);
+//        echo '</pre>';
+//
+//
+////        foreach ($for_delete as $file) {
+////            unlink('/var/www/html/image/catalog/'.$file);
+////        }
+//
+//    }
 
     public function actionIndex() {
         ini_set('memory_limit', '-1');
