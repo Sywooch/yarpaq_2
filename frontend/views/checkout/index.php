@@ -244,7 +244,7 @@ $currency = Yii::$app->currency;
                                     <span><?= $product_option->option->name;?></span>
 
                                     <?php if ($value->optionValue->image) { ?>
-                                        <em class="icon" style="background-image: url('/uploads/options/<?= $productOption->option->id; ?>/<?= $value->optionValue->image; ?>');"></em>
+                                        <em class="icon" style="background-image: url('<?= $value->optionValue->url; ?>');"></em>
                                     <?php } else { ?>
                                         <em><?=$value->optionValue->name;?></em>
                                     <?php } ?>
