@@ -47,38 +47,55 @@ use yii\helpers\Url;
             $pages = [
                 '5' => Info::findOne(5),
                 '6' => Info::findOne(6),
-                '7' => Info::findOne(7),
                 '8' => Info::findOne(8),
                 '9' => Info::findOne(9),
                 '10' => Info::findOne(10),
+                '14' => Info::findOne(14),
+                '15' => Info::findOne(15),
+                '16' => Info::findOne(16),
             ];
             ?>
             <article>
                 <h3><?= Yii::t('app', 'Information'); ?></h3>
                 <ul>
+
+                    <?php if ($pages[14]) { ?>
+                        <li><a href="<?= $pages[14]->url; ?>"><?= $pages[14]->title; ?></a></li>
+                    <?php } ?>
+
+                    <?php if ($pages[15]) { ?>
+                        <li><a href="<?= $pages[15]->url; ?>"><?= $pages[15]->title; ?></a></li>
+                    <?php } ?>
+
                     <?php if ($pages[5]) { ?>
-                    <li><a href="<?= $pages[5]->url; ?>"><?= $pages[5]->title; ?></a></li>
+                        <li><a href="<?= $pages[5]->url; ?>"><?= $pages[5]->title; ?></a></li>
                     <?php } ?>
 
                     <?php if ($pages[6]) { ?>
-                    <li><a href="<?= $pages[6]->url; ?>"><?= $pages[6]->title; ?></a></li>
+                        <li><a href="<?= $pages[6]->url; ?>"><?= $pages[6]->title; ?></a></li>
                     <?php } ?>
+
+
 
                 </ul>
             </article>
             <article>
                 <h3>&nbsp;</h3>
                 <ul>
-                    <?php if ($pages[8]) { ?>
-                    <li><a href="<?= $pages[8]->url; ?>"><?= $pages[8]->title; ?></a></li>
+                    <?php if ($pages[16]) { ?>
+                        <li><a href="<?= $pages[16]->url; ?>"><?= $pages[16]->title; ?></a></li>
                     <?php } ?>
 
                     <?php if ($pages[9]) { ?>
-                    <li><a href="<?= $pages[9]->url; ?>"><?= $pages[9]->title; ?></a></li>
+                        <li><a href="<?= $pages[9]->url; ?>"><?= $pages[9]->title; ?></a></li>
+                    <?php } ?>
+
+                    <?php if ($pages[8]) { ?>
+                        <li><a href="<?= $pages[8]->url; ?>"><?= $pages[8]->title; ?></a></li>
                     <?php } ?>
 
                     <?php if ($pages[10]) { ?>
-                    <li><a href="<?= $pages[10]->url; ?>"><?= $pages[10]->title; ?></a></li>
+                        <li><a href="<?= $pages[10]->url; ?>"><?= $pages[10]->title; ?></a></li>
                     <?php } ?>
                 </ul>
             </article>
