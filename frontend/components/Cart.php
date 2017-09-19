@@ -327,7 +327,7 @@ class Cart extends Component
         $weight = 0;
 
         foreach ($this->getProducts() as $product) {
-            $weight += $this->weight->convert($product['weight'], $product['weight_class_id'], $this->config->get('config_weight_class_id'));
+            $weight += $product['weight'];
         }
 
         return $weight;

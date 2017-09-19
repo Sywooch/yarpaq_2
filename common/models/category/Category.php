@@ -363,7 +363,6 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
     public static function getData() {
         return ArrayHelper::map(self::find()
             ->where(['>', 'parent_id', 0])
-            ->andWhere(['status' => Category::STATUS_ACTIVE])
             ->orderBy('lft')
             ->all(),
             'id',

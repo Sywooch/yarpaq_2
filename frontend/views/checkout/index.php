@@ -266,16 +266,16 @@ $currency = Yii::$app->currency;
             <div class="totals">
                 <dl>
                     <dt><?= Yii::t('app', 'Total'); ?></dt>
-                    <dd>
+                    <dd class="cart-sub-total" data-amount="<?= $cart->subTotal ?>">
                         <?= $currency->format($cart->total); ?>
                     </dd>
                     <dt><?= Yii::t('app', 'Shipping'); ?></dt>
-                    <dd><?= Yii::t('app', 'Free'); ?></dd>
+                    <dd id="shipping-price">0 <span class="currency_icon">m</span></dd>
                 </dl>
                 <dl>
                     <dt><?= Yii::t('app', 'Total'); ?></dt>
-                    <dd>
-                        <?= $currency->format($cart->total); ?>
+                    <dd class="cart-total" data-amount="<?= $cart->total; ?>">
+                        <?= $currency->format('<span class="val">'.$cart->total.'</span>'); ?>
                     </dd>
                 </dl>
             </div>

@@ -4653,6 +4653,7 @@ a.back_to_top.show_me {
 .product_buy_last .buttons a.add,
 .product_buy_last .buttons button.add {
   display: block;
+  cursor: pointer;
   height: 44px;
   float: left;
   padding: 0 17px;

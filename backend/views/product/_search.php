@@ -88,12 +88,15 @@ use common\models\User;
 
         <div class="col-md-2">
             <?php
-            $categories = ArrayHelper::map( Category::find()->andWhere(['>','depth', 1])->all(), 'id', function ($category) {
+            $categories = ArrayHelper::map(Category::find()
+                ->where(['>', 'parent_id', 0])
+                ->orderBy('lft')
+                ->all(), 'id', function ($category) {
                 return str_repeat(' - ', $category->depth-1).$category->title;
             });
 
             $categories[''] = Yii::t('app', 'All');
-            ksort($categories);
+            //ksort($categories);
             ?>
             <?= $form->field($model, 'category')->dropDownList($categories); ?>
         </div>

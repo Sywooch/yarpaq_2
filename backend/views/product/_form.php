@@ -211,11 +211,11 @@ use common\models\User;
                             'data' => $categoriesData,
                             'options' => [
                                 'placeholder' => Yii::t('app', 'Select category').' ...',
-                                'multiple' => true,
+                                'multiple' => true
                             ],
                             'pluginOptions' => [
                                 'tags' => true,
-                                'tokenSeparators' => [',', ' '],
+                                'tokenSeparators' => [','],
                                 'maximumInputLength' => 10,
                             ],
                         ])->label(Yii::t('app', 'Category'));

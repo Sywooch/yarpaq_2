@@ -21,6 +21,17 @@ $(function () {
 
     $('#country_select').change();
 
+
+    $('.shipping_method_block input').change(function () {
+        var amount = $(this).data('amount') || 0;
+        var raw_amount = $(this).data('raw-amount') || 0;
+        var cartSubTotal = $('.cart-sub-total').data('amount');
+
+        $('#shipping-price').html(amount);
+
+        $('.cart-total .val').html(cartSubTotal + raw_amount);
+    });
+
     $('.zones_select').change(function () {
         var zone_id = $(this).val();
 
@@ -33,6 +44,9 @@ $(function () {
 
             $.each(response, function (type, obj) {
                 $('#'+type+'_shipping_method_block').show();
+                $('#'+type+'_shipping_method_block input')
+                    .attr('data-amount', obj.amount)
+                    .attr('data-raw-amount', obj.raw_amount);
             });
 
             $('.shipping_method_block:visible').eq(0).find('input').click();
