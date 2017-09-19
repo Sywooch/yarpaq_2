@@ -51,6 +51,9 @@ class OrderController extends AdminDefaultController
      */
     public function actionIndex()
     {
+        Yii::$app->session->set('redirect', Yii::$app->request->absoluteUrl);
+
+
         $searchModel = new OrderSearch();
 
 
@@ -161,7 +164,14 @@ class OrderController extends AdminDefaultController
             }
 
             if ($isValid) {
-                return $this->redirect(['update', 'id' => $order->id]);
+                if (Yii::$app->session->has('redirect')) {
+                    $redirect = Yii::$app->session->get('redirect');
+                    Yii::$app->session->remove('redirect');
+
+                    return $this->redirect($redirect);
+                } else {
+                    return $this->redirect(['update', 'id' => $order->id]);
+                }
             }
         }
 
