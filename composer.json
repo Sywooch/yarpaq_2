@@ -31,7 +31,7 @@
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
 
-        "nervetattoo/elasticsearch" : ">=2.0"
+        "elasticsearch/elasticsearch": "~5.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

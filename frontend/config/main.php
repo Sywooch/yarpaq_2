@@ -96,6 +96,8 @@ return [
                 'payment/golden-pay-payment/<action:.+>'        => 'golden-pay-payment/<action>',
                 'payment/pay-pal-payment/<action:.+>'           => 'pay-pal-payment/<action>',
 
+                'elastic' => 'elastic/index',
+
                 '<url:.+>'      => 'category/index'
             ],
         ],
