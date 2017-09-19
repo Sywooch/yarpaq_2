@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             // 'moderated_at',
-            // 'created_at',
+            'created_at',
             // 'updated_at',
 
             [
