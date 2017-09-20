@@ -121,17 +121,17 @@ $seo = $this->params['seo'];
 
                             if (count($topCategoryList)) {
                             ?>
-                            <div class="top_categories">
+                            <div class="top_categories cat_list">
 
                                 <h2><?= Yii::t('app', 'Top Categories'); ?><span></span></h2>
                                 <ul>
                                     <?php foreach ($topCategoryList as $category) { ?>
-                                        <li>
+                                        <li class="cont">
                                             <a href="<?= $category->url; ?>">
                                                 <img width="30" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
                                             </a>
 
-                                            <div>
+                                            <div class="cont-list">
                                                 <nav>
 
                                                     <?php
@@ -141,11 +141,21 @@ $seo = $this->params['seo'];
 
                                                         if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
                                                         ?>
-                                                        <article>
+                                                        <article class="cont">
                                                             <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                            <ul>
+                                                            <ul class="cont-list">
                                                                 <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
-                                                                    <li><a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a></li>
+                                                                    <li class="cont">
+                                                                        <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
+
+                                                                        <ul class="cont-list">
+                                                                            <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
+                                                                                <li class="cont">
+                                                                                    <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
+                                                                                </li>
+                                                                            <?php } ?>
+                                                                        </ul>
+                                                                    </li>
                                                                 <?php } ?>
                                                             </ul>
                                                         </article>
@@ -162,12 +172,12 @@ $seo = $this->params['seo'];
                                 </ul>
                             </div>
                             <?php } ?>
-                            <div class="categories_list">
+                            <div class="categories_list cat_list">
                                 <ul>
                                     <?php foreach ($main_categories as $category) { ?>
-                                    <li>
+                                    <li class="cont">
                                         <a href="<?= $category->url; ?>"><?= $category->title; ?></a>
-                                        <div>
+                                        <div class="cont-list">
                                             <nav>
 
                                                 <?php
@@ -177,16 +187,16 @@ $seo = $this->params['seo'];
 
                                                     if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
                                                     ?>
-                                                    <article>
+                                                    <article class="cont">
                                                         <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                        <ul>
+                                                        <ul class="cont-list">
                                                             <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
-                                                            <li>
+                                                            <li class="cont">
                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
-                                                                <ul>
+                                                                <ul class="cont-list">
                                                                     <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
-                                                                        <li>
+                                                                        <li class="cont">
                                                                             <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
                                                                         </li>
                                                                     <?php } ?>
