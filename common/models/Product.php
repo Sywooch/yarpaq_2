@@ -102,7 +102,7 @@ class Product extends \yii\db\ActiveRecord
                 }",
             ],
 
-            [['price'], 'number'],
+            [['price', 'cost_price'], 'number'],
             [['weight', 'length', 'width', 'height'], 'number'],
             [['title', 'model', 'sku', 'upc', 'ean', 'jan', 'isbn', 'mpn'], 'string', 'max' => 255],
             ['categoryIDs', 'each', 'rule' => ['integer']],
@@ -138,6 +138,7 @@ class Product extends \yii\db\ActiveRecord
             'manufacturer_id',
             '!viewed',
             '!moderated',
+            '!cost_price',
 
             'categoryIDs',
             'galleryFiles'
@@ -163,6 +164,7 @@ class Product extends \yii\db\ActiveRecord
             'location_id' => Yii::t('app', 'Location'),
             'condition_id' => Yii::t('app', 'Condition'),
             'price' => Yii::t('app', 'Price'),
+            'cost_price' => Yii::t('app', 'Cost Price'),
             'description' => Yii::t('app', 'Description'),
             'galleryFiles' => Yii::t('app', 'Gallery Files'),
             'categoryIDs' => Yii::t('app', 'Category'),

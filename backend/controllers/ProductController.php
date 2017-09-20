@@ -117,11 +117,9 @@ class ProductController extends AdminDefaultController
 
         $this->denyIfNotOwner($model);
 
-//      TODO разобраться что делать с констролем владельца, защита от подтасовки
-//        if (User::hasRole('seller', false)) {
-//            $model->user_id   = User::getCurrentUser()->id;
-//            $model->scenario  = Product::SCENARIO_SELLER;
-//        }
+        if (!User::hasRole('admin', false)) {
+            $model->scenario  = Product::SCENARIO_SELLER;
+        }
 
         $moderated = $model->moderated;
 

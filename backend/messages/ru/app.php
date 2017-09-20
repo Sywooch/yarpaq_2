@@ -3,6 +3,7 @@
 return [
     'Description' => 'Описание',
     'Price' => 'Цена',
+    'Cost Price' => 'Себестоимость',
     'Title' => 'Название',
     'Model' => 'Модель',
     'Status name' => 'Статус',

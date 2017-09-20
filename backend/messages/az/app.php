@@ -3,6 +3,7 @@
 return [
     'Description' => 'Təsvir',
     'Price' => 'Qiymət',
+    'Cost Price' => 'Maya dəyəri',
     'Title' => 'Başlıq',
     'Model' => 'Model',
     'Status name' => 'Status',

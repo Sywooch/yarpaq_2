@@ -63,14 +63,36 @@ use common\models\User;
 
                         <div class="row">
 
-                            <!-- Price -->
-                            <div class="col-xs-6">
-                                <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
-                            </div>
 
-                            <div class="col-xs-6">
-                                <?= $form->field($model, 'currency_id')->dropDownList(\common\models\Currency::getDropDownData()) ?>
-                            </div>
+                            <?php if (User::hasRole('admin')) { ?>
+
+                                <!-- Price -->
+                                <div class="col-xs-4">
+                                    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                                </div>
+
+                                <!-- Cost price -->
+                                <div class="col-xs-4">
+                                    <?= $form->field($model, 'cost_price')->textInput(['maxlength' => true]) ?>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <?= $form->field($model, 'currency_id')->dropDownList(\common\models\Currency::getDropDownData()) ?>
+                                </div>
+
+                            <?php } else { ?>
+
+                                <!-- Price -->
+                                <div class="col-xs-6">
+                                    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <?= $form->field($model, 'currency_id')->dropDownList(\common\models\Currency::getDropDownData()) ?>
+                                </div>
+
+                            <?php } ?>
+
                         </div>
 
                         <!-- Quantity -->
