@@ -132,7 +132,7 @@ $seo = $this->params['seo'];
                                             </a>
 
                                             <div class="cont-list">
-                                                <nav>
+                                                <nav class="cont-ul">
 
                                                     <?php
                                                     $menu_cursor = 0;
@@ -143,12 +143,12 @@ $seo = $this->params['seo'];
                                                         ?>
                                                         <article class="cont">
                                                             <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                            <ul class="cont-list">
+                                                            <ul class="cont-list cont-ul">
                                                                 <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
                                                                     <li class="cont">
                                                                         <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
-                                                                        <ul class="cont-list">
+                                                                        <ul class="cont-list cont-ul">
                                                                             <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
                                                                                 <li class="cont">
                                                                                     <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
@@ -178,7 +178,7 @@ $seo = $this->params['seo'];
                                     <li class="cont">
                                         <a href="<?= $category->url; ?>"><?= $category->title; ?></a>
                                         <div class="cont-list">
-                                            <nav>
+                                            <nav class="cont-ul">
 
                                                 <?php
                                                 $menu_cursor = 0;
@@ -189,12 +189,12 @@ $seo = $this->params['seo'];
                                                     ?>
                                                     <article class="cont">
                                                         <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                        <ul class="cont-list">
+                                                        <ul class="cont-list cont-ul">
                                                             <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
                                                             <li class="cont">
                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
-                                                                <ul class="cont-list">
+                                                                <ul class="cont-list cont-ul">
                                                                     <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
                                                                         <li class="cont">
                                                                             <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
