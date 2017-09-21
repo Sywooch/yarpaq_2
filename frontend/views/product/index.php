@@ -10,8 +10,14 @@ $currency = Yii::$app->currency;
     <header>
 
         <!-- Breadcrumbs -->
-        <?= $this->render('@app/views/blocks/breadcrumb', [
-            'parents' => count($product->category) ? $product->category[0]->getParents(true)->all() : [],
+        <?php
+        $categories = [];
+        if (count($product->category)) {
+            $categories = $product->category[0]->getParents(true)->all();
+            $categories[] = $product->category[0];
+        }
+        echo $this->render('@app/views/blocks/breadcrumb', [
+            'parents' => $categories,
             'currentPageTitle' => $product->title
         ]); ?>
         <!-- Breadcrumbs END -->
