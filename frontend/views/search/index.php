@@ -19,7 +19,8 @@
             <?= $this->render('@app/views/blocks/aside_filter', [
                 'productFilter' => $productFilter,
                 'filterBrands'  => $filterBrands,
-                'search_q'      => $search_q
+                'search_q'      => $search_q,
+                'count'         => $count
             ]); ?>
         </aside>
         <div class="product_list">

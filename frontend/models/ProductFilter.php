@@ -10,6 +10,10 @@ class ProductFilter extends Model
 {
 
     const SORT_PRICE_LOWEST = 'price_lowest';
+    const SORT_PRICE_HIGHEST = 'price_highest';
+    const SORT_NEWLY_LISTED = 'newly_listed';
+    const SORT_SCORE_HIGHEST = 'score_highest';
+
 
     public $condition = Product::CONDITION_NEW;
     public $brand = [];
@@ -20,7 +24,7 @@ class ProductFilter extends Model
     public $price_max;
 
     public $per_page;
-    public $sort = self::SORT_PRICE_LOWEST;
+    public $sort = self::SORT_SCORE_HIGHEST;
 
     public function rules() {
         return [
@@ -40,18 +44,25 @@ class ProductFilter extends Model
 
     public function getSortOptions() {
         return [
-            'price_lowest'  => Yii::t('app', 'Price: lowest first'),
-            'price_highest' => Yii::t('app', 'Price: highest first')
+            self::SORT_SCORE_HIGHEST    => Yii::t('app', 'Best match'),
+            self::SORT_PRICE_LOWEST     => Yii::t('app', 'Price: lowest first'),
+            self::SORT_PRICE_HIGHEST    => Yii::t('app', 'Price: highest first'),
+            self::SORT_NEWLY_LISTED     => Yii::t('app', 'Newly listed'),
         ];
     }
 
     public function getSortSetting() {
         $settings = [
-            'price_lowest'  => ['price' => SORT_ASC],
-            'price_highest' => ['price' => SORT_DESC]
+            self::SORT_PRICE_LOWEST     => ['price' => SORT_ASC],
+            self::SORT_PRICE_HIGHEST    => ['price' => SORT_DESC],
+            self::SORT_NEWLY_LISTED     => ['moderated_at' => SORT_DESC],
         ];
 
-        return $settings[$this->sort];
+        if (isset($settings[$this->sort])) {
+            return $settings[$this->sort];
+        }
+
+        return [];
     }
 
     public function getPerPageOptions() {

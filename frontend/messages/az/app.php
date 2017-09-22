@@ -14,6 +14,8 @@ return [
     'Price' => 'Qiymət',
     'Price: lowest first' => 'Əvvəlcə ucuz',
     'Price: highest first' => 'Əvvəlcə bahalı',
+    'Best match' => 'Əvvəlcə ən uyğun',
+    'Newly listed' => 'Əvvəlcə yenilər',
     'newest first' => 'Əvvəlcə yenilər',
     'Account' => 'Hesabım',
     'Price range' => 'Qiymət aralığı',

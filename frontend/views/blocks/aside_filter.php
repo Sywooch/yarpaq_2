@@ -44,6 +44,7 @@ $children = $category->getChildren()->all(); ?>
             class="sort_filter"
             value="<?= $productFilter->sort; ?>">
 
+        <?php if ($count > 1) { ?>
         <section>
             <h3><span><?= Yii::t('app', 'Price range'); ?></span></h3>
             <div>
@@ -62,6 +63,7 @@ $children = $category->getChildren()->all(); ?>
                 </div>
             </div>
         </section>
+        <?php } ?>
 
         <section>
             <h3>

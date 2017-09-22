@@ -68,6 +68,7 @@ return [
 
                 'shipping/calculate'     => 'shipping/calculate',
 
+                //'search'        => 'search/elastic',
                 'search'        => 'search/index',
                 'search/auto'        => 'search/auto',
 
@@ -96,7 +97,9 @@ return [
                 'payment/golden-pay-payment/<action:.+>'        => 'golden-pay-payment/<action>',
                 'payment/pay-pal-payment/<action:.+>'           => 'pay-pal-payment/<action>',
 
-                'elastic' => 'elastic/index',
+
+                '<controller:elastic>/<action:.+>' => 'elastic/<action>',
+                //'<controller:elastic>/<action:.+>/<id:\d+>' => 'elastic/<action>',
 
                 '<url:.+>'      => 'category/index'
             ],

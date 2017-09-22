@@ -2,12 +2,12 @@
 
 namespace common\models;
 
+use common\components\ProductSearch;
 use common\models\category\Category;
 use common\models\option\Option;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
 use common\models\review\Review;
-use Faker\Provider\DateTime;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -205,12 +205,6 @@ class Product extends \yii\db\ActiveRecord
         $this->categoryIDs = ArrayHelper::map($this->categories, 'id', 'id');
     }
 
-    public function afterSave($insert, $changedAttributes) {
-        parent::afterSave($insert, $changedAttributes);
-
-        ProductCategory::saveProductCategories($this->categoryIDs, $this->id);
-    }
-
     public function getGallery() {
         return $this->hasMany(ProductImage::className(), ['model_id' => 'id'])->orderBy('sort');
     }
@@ -388,5 +382,26 @@ class Product extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+
+        ProductCategory::saveProductCategories($this->categoryIDs, $this->id);
+
+        $search = new ProductSearch();
+        $search->index($this);
+    }
+
+    public function afterDelete() {
+        parent::afterDelete();
+
+
+        $search = new ProductSearch();
+        $search->delete($this);
+    }
+
+    public function isVisible() {
+        return $this->moderated && $this->status_id == self::STATUS_ACTIVE;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\ProductSearch;
 use common\models\Manufacturer;
 use frontend\models\ProductFilter;
 use frontend\models\ProductRepository;
@@ -19,7 +20,97 @@ use yii\web\Response;
 class SearchController extends BasicController
 {
 
-    public $freeAccessActions = ['index', 'auto'];
+    public $freeAccessActions = ['index', 'elastic', 'auto'];
+
+    public function actionElastic() {
+        $request        = Yii::$app->request;
+        $productFilter  = $this->initFilter();
+        $query          = $this->initQuery();
+        $page           = $request->get('page') ? (int) $request->get('page') : 1;
+        $elastic = new ProductSearch();
+
+
+        // pagination
+        $total = $elastic->total($query, $productFilter);
+
+        $pagination = new Pagination([
+            'totalCount' => $total,
+            'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24,
+            'page' => $page
+        ]);
+
+        $response = $elastic->search($query, $productFilter, $pagination->page, $pagination->limit);
+
+        $elasticIDs = [];
+        foreach ($response['hits']['hits'] as $hit) {
+            $elasticIDs[] = $hit['_id'];
+        }
+
+        $products = Product::find()->andWhere(['in', 'id', $elasticIDs]);
+
+        $minMaxPrice    = $elastic->minMaxPrice($query);
+        $productFilter->price_min = floor($minMaxPrice['aggregations']['min_price']['value']);
+        $productFilter->price_max = ceil($minMaxPrice['aggregations']['max_price']['value']);
+
+
+        $raw_models = ArrayHelper::map($products->all(), 'id', function ($model) {
+            return $model;
+        });
+
+        $models = [];
+        foreach ($elasticIDs as $elasticID) {
+            $models[$elasticID] = $raw_models[$elasticID];
+        }
+        // GET Products END
+
+        // GET Brands
+        $elasticBrands = $elastic->getBrands($query);
+        $brands = [];
+        if (count($elasticBrands)) {
+            $brands = Manufacturer::find()
+                ->andWhere(['in', 'id', $elastic->getBrands($query)])
+                ->all();
+        }
+        // GET Brands END
+
+
+        $this->view->params['q'] = $query;
+
+        $this->seo(Yii::t('app', 'Search'));
+
+        return $this->render('index', [
+            'count'             => $pagination->totalCount,
+            'search_q'          => $query,
+            'products'          => $models,
+            'pages'             => $pagination,
+            'pagination'        => CustomLinkPager::widget([ 'pagination' => $pagination ]),
+            'filterBrands'      => $brands,
+            'productFilter'     => $productFilter,
+        ]);
+    }
+
+    protected function initFilter() {
+        $productFilter = new ProductFilter();
+        $productFilter->load(Yii::$app->request->get());
+
+        if (!$productFilter->validate()) {
+            throw new Exception('Wrong filter');
+        }
+
+        return $productFilter;
+    }
+
+    protected function initQuery() {
+        $query = '';
+        $r = Yii::$app->request;
+        if ($r->get('q') && $r->get('q') != '') {
+            $query = htmlspecialchars(strip_tags($r->get('q')), ENT_QUOTES, 'UTF-8');
+
+            SearchLogger::log($query);
+        }
+
+        return $query;
+    }
 
     public function actionIndex() {
         $r = Yii::$app->request;
@@ -27,6 +118,7 @@ class SearchController extends BasicController
         $q = '';
         $category = null;
         $childrenCategoriesIDs = [];
+        $page = $r->get('page') ? (int) $r->get('page') : 1;
 
         // Параметры фильтра
         $productFilter = new ProductFilter();
@@ -114,7 +206,8 @@ class SearchController extends BasicController
         $productsCount = clone $products;
         $pages = new Pagination([
             'totalCount' => $productsCount->count(),
-            'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24
+            'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24,
+            'page' => $page
         ]);
         $models = $products->offset($pages->offset)
             ->limit($pages->limit)
