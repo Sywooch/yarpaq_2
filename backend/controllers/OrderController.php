@@ -274,13 +274,13 @@ class OrderController extends AdminDefaultController
 
 
                 $transaction->commit();
+
+                return ['status' => 1];
             } catch (\Exception $e) {
                 $transaction->rollBack();
                 throw $e;
             }
             // конец транзакции
-
-            return ['status' => 1];
         } else {
             return ['status' => 0];
         }
