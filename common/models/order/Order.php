@@ -241,6 +241,11 @@ class Order extends \yii\db\ActiveRecord
         $orderProduct->total        = $quantity * $product->getPrice(true);
         $isValid = $orderProduct->save();
 
+        if ($isValid) {
+            $this->total += $orderProduct->total;
+            $this->save();
+        }
+
         // создаем опции товара в заказе
         foreach ($product->appliedOptions as $appliedOption) {
 

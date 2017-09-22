@@ -259,8 +259,27 @@ class OrderController extends AdminDefaultController
         Yii::$app->response->format = Response::FORMAT_JSON;
 
         $item = OrderProduct::findOne($order_product_id);
+        $order = $item->order;
 
-        if ($item && $item->delete()) {
+        if ($item) {
+
+
+            $db = $item->getDb();
+            $transaction = $db->beginTransaction(); // Начало транзакции
+            try {
+                $item->delete();
+
+                $order->total -= $item->total; // вычитание стоимости товара из заказа
+                $order->save();
+
+
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            }
+            // конец транзакции
+
             return ['status' => 1];
         } else {
             return ['status' => 0];
