@@ -326,12 +326,14 @@ class ProductController extends AdminDefaultController
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $out = ['results' => ['id' => '', 'text' => '']];
         if (!is_null($q)) {
-            $searchModel = new ProductSearch();
-            $searchModel->title = $q;
-            $data = $searchModel->search();
+            $models = ProductSearch::find()
+                ->andWhere(['or',
+                    ['like', 'title', $q],
+                    ['id' => $q]
+                ])->all();
 
             $out['results'] = [];
-            foreach ($data->getModels() as $model) {
+            foreach ($models as $model) {
                 $out['results'][] = ['id' => $model->id, 'text' => $model->title . ' ('.$model->id.')'];
             }
         }
