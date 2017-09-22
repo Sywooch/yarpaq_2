@@ -156,9 +156,13 @@ class OrderController extends AdminDefaultController
                 foreach (Yii::$app->request->post('OrderProduct') as $orderProductData) {
                     $product = Product::findOne($orderProductData['product_id']);
 
+                    // если есть опции, подготовить массив опций
+                    $options = [];
                     if (isset($orderProductData['options'])) {
-                        $isValid = $order->addProduct($product, $orderProductData['quantity'], $orderProductData['options']) && $isValid;
+                        $options = $orderProductData['options'];
                     }
+
+                    $isValid = $order->addProduct($product, $orderProductData['quantity'], $options) && $isValid;
 
                 }
             }

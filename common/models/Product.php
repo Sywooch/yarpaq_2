@@ -64,7 +64,7 @@ class Product extends \yii\db\ActiveRecord
         '2' => 'Used'
     ];
 
-    protected $appliedOptions;
+    protected $appliedOptions = [];
 
     /**
      * @inheritdoc
