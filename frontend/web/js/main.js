@@ -77,14 +77,9 @@ run_slider = function(slider_index, _this, direction) {
 	        _this = $(this),
             _this_index = $("#index_slider .bullets a.active").index();
             console.log(slider_index)
-            if (_this_index > slider_index) {
-                direction = true;
-            } else {
-                direction = false;
-            }
 
-
-	    }
+			run_slider(slider_index, _this, direction);
+		}
 	    return false;
 	});
 
@@ -111,8 +106,8 @@ run_slider = function(slider_index, _this, direction) {
 		}
 
 		var _this = $("#index_slider .bullets a").eq(bullet_active);
-	    run_slider(slider_index, _this, direction);        
-		//$("#index_slider .bullets a").eq(bullet_active).click();
+
+		$("#index_slider .bullets a").eq(bullet_active).click();
 		return false;
 	});
 
