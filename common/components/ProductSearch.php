@@ -85,25 +85,15 @@ class ProductSearch
     }
 
     public function total($query, $filter) {
+        $queryFilter = $this->buildFilter($query, $filter);
+
 
         $params = [
             'index' => $this->index,
             'type'  => $this->type,
 
             'body'  => [
-                'query' => [
-                    'bool' => [
-                        'should' => [
-                            [
-                                'bool' => [
-                                    'must' => $this->buildFilter($query, $filter)
-                                ]
-
-                            ],
-                            [ "term"    => [ "id" => (int)$query, ] ]
-                        ],
-                    ]
-                ]
+                'query' => $this->getDefaultQuery($query, $queryFilter)
             ]
         ];
 
@@ -111,7 +101,7 @@ class ProductSearch
             $response = $this->client->count($params);
             return $response['count'];
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            Yii::error($e->getMessage());
         }
     }
 
@@ -131,27 +121,15 @@ class ProductSearch
                 $sort_query = "_score";
         }
 
+        $queryFilter = $this->buildFilter($query, $filter);
+
         $params = [
             'index' => $this->index,
             'type'  => $this->type,
 
             'body'  => [
                 "sort" => [$sort_query],
-
-                'query' => [
-                    'bool' => [
-                        'should' => [
-                            [
-                                'bool' => [
-                                    'must' => $this->buildFilter($query, $filter)
-                                ]
-
-                            ],
-                            [ "term"    => [ "id" => (int)$query, ] ]
-                        ],
-                    ]
-                ],
-
+                'query' => $this->getDefaultQuery($query, $queryFilter),
                 "from" => ($page - 1) * $limit,
                 "size" => $limit
             ]
@@ -171,36 +149,19 @@ class ProductSearch
         } catch (\Exception $e) {
             Yii::error($e->getMessage());
 
-            echo $e->getMessage();
-
             return ['hits' => ['hits' => []]];
         }
     }
 
     public function minMaxPrice($query) {
+        $defaultQuery = $this->getDefaultQuery($query);
 
         $params = [
             'index' => $this->index,
             'type'  => $this->type,
 
             'body'  => [
-                'query' => [
-                    "bool" => [
-                        'should' => [
-                            [
-                                'bool' => [
-                                    "must" => [
-                                        [
-                                            "match"   => [ "title" => $query ]
-                                        ],
-                                    ],
-                                ]
-
-                            ],
-                            [ "term"    => [ "id" => (int)$query, ] ]
-                        ],
-                    ]
-                ],
+                'query' => $defaultQuery,
                 "aggs" => [
                     "min_price" => [
                         "min" => [
@@ -222,33 +183,19 @@ class ProductSearch
             $response = $this->client->search($params);
             return $response;
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            Yii::error($e->getMessage());
         }
     }
 
     public function getBrands($query) {
+        $defaultQuery = $this->getDefaultQuery($query);
+
         $params = [
             'index' => $this->index,
             'type'  => $this->type,
 
             'body'  => [
-                'query' => [
-                    "bool" => [
-                        'should' => [
-                            [
-                                'bool' => [
-                                    "must" => [
-                                        [
-                                            "match"   => [ "title" => $query ]
-                                        ],
-                                    ],
-                                ]
-
-                            ],
-                            [ "term"    => [ "id" => (int)$query, ] ]
-                        ],
-                    ]
-                ],
+                'query' => $defaultQuery,
                 "aggs" => [
                     "brands" => [
                         "terms" => [
@@ -276,10 +223,18 @@ class ProductSearch
 
             return $result;
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            Yii::error($e->getMessage());
         }
     }
 
+    /**
+     * Дополнительная часть массива must, в которой содержаться условия
+     * из фильтра (цена, состояние, производитель)
+     *
+     * @param $query
+     * @param $filter
+     * @return array
+     */
     public function buildFilter($query, $filter) {
         $must = [
             [
@@ -317,5 +272,35 @@ class ProductSearch
         }
 
         return $must;
+    }
+
+    /**
+     * Базовый запрос который ищет по title и только видные товары
+     *
+     * @param $query
+     * @param array $mustFilter
+     * @return array
+     */
+    private function getDefaultQuery($query, array $mustFilter = []) {
+        $must = [
+            [ "match"   => [ "title" => $query ] ],
+        ];
+        if (count($mustFilter)) {
+            $must = array_merge($must, $mustFilter);
+        }
+
+        return [
+            "bool" => [
+                'should' => [
+                    [
+                        'bool' => [
+                            "must" => $must,
+                        ]
+
+                    ],
+                    [ "term"    => [ "id" => (int)$query, ] ]
+                ],
+            ]
+        ];
     }
 }

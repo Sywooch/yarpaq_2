@@ -79,6 +79,7 @@ return [
     'Search' => 'Поиск',
     'Discount' => 'Скидка',
     'Filter' => 'Фильтр',
+    'Clear filter' => 'Сбросить фильтр',
     'Products found - {count}' => 'Найдено товаров - {count}',
     'Home' => 'Главная',
     'Subcategories' => 'Подкатегории',

@@ -78,6 +78,7 @@ return [
     'Search' => 'Axtarış',
     'Discount' => 'Endirim',
     'Filter' => 'Filter',
+    'Clear filter' => 'Filteri sıfırla',
     'Products found - {count}' => 'Tapılan məhsulların sayı - {count}',
     'Home' => 'Ana səhifə',
     'Subcategories' => 'Alt kateqoriyalar',
