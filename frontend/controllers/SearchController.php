@@ -48,7 +48,7 @@ class SearchController extends BasicController
 
         $products = Product::find()->andWhere(['in', 'id', $elasticIDs]);
 
-        $minMaxPrice    = $elastic->minMaxPrice($query);
+        $minMaxPrice    = $elastic->minMaxPrice($query, $productFilter);
         $productFilter->price_min = floor($minMaxPrice['aggregations']['min_price']['value']);
         $productFilter->price_max = ceil($minMaxPrice['aggregations']['max_price']['value']);
 

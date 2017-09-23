@@ -85,7 +85,7 @@ class ProductSearch
     }
 
     public function total($query, $filter) {
-        $queryFilter = $this->buildFilter($query, $filter);
+        $queryFilter = $this->buildFilter($filter);
 
 
         $params = [
@@ -121,7 +121,7 @@ class ProductSearch
                 $sort_query = "_score";
         }
 
-        $queryFilter = $this->buildFilter($query, $filter);
+        $queryFilter = $this->buildFilter($filter);
 
         $params = [
             'index' => $this->index,
@@ -153,8 +153,9 @@ class ProductSearch
         }
     }
 
-    public function minMaxPrice($query) {
-        $defaultQuery = $this->getDefaultQuery($query);
+    public function minMaxPrice($query, $filter) {
+        $queryFilter = $this->buildFilter($filter);
+        $defaultQuery = $this->getDefaultQuery($query, $queryFilter);
 
         $params = [
             'index' => $this->index,
@@ -231,15 +232,11 @@ class ProductSearch
      * Дополнительная часть массива must, в которой содержаться условия
      * из фильтра (цена, состояние, производитель)
      *
-     * @param $query
      * @param $filter
      * @return array
      */
-    public function buildFilter($query, $filter) {
+    public function buildFilter($filter) {
         $must = [
-            [
-                "match"   => [ "title" => $query ]
-            ],
             [
                 "term"    => [
                     "condition" => $filter->condition,
