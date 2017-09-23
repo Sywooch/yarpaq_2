@@ -100,7 +100,7 @@ class ProductSearch
                                 ]
 
                             ],
-                            [ "term"    => [ "id" => $query, ] ]
+                            [ "term"    => [ "id" => (int)$query, ] ]
                         ],
                     ]
                 ]
@@ -147,7 +147,7 @@ class ProductSearch
                                 ]
 
                             ],
-                            [ "term"    => [ "id" => $query, ] ]
+                            [ "term"    => [ "id" => (int)$query, ] ]
                         ],
                     ]
                 ],
@@ -197,7 +197,7 @@ class ProductSearch
                                 ]
 
                             ],
-                            [ "term"    => [ "id" => $query, ] ]
+                            [ "term"    => [ "id" => (int)$query, ] ]
                         ],
                     ]
                 ],
@@ -245,7 +245,7 @@ class ProductSearch
                                 ]
 
                             ],
-                            [ "term"    => [ "id" => $query, ] ]
+                            [ "term"    => [ "id" => (int)$query, ] ]
                         ],
                     ]
                 ],
@@ -290,6 +290,11 @@ class ProductSearch
                     "condition" => $filter->condition,
                 ]
             ],
+            [
+                "term"    => [
+                    "visible" => 1,
+                ]
+            ]
         ];
 
         if ($filter->price_from != null && $filter->price_to != null ) {

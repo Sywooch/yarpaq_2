@@ -20,6 +20,7 @@ return [
     'Account' => 'Hesabım',
     'Price range' => 'Qiymət aralığı',
     'Condition' => 'Vəziyyət',
+    'Brand' => 'İstehsalçı',
     'Recently viewed' => 'Son baxılmış',
     'Used' => 'İşlənmiş',
     'New' => 'Yeni',

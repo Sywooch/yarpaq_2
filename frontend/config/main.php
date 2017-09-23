@@ -68,9 +68,9 @@ return [
 
                 'shipping/calculate'     => 'shipping/calculate',
 
-                //'search'        => 'search/elastic',
-                'search'        => 'search/index',
-                'search/auto'        => 'search/auto',
+                'rsearch'           => 'search/index',
+                'search'            => 'search/elastic',
+                'search/auto'       => 'search/auto',
 
                 'currency/switch'        => 'currency/switch',
 

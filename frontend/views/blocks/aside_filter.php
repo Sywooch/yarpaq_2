@@ -4,7 +4,7 @@ if (isset($category)) {
 $children = $category->getChildren()->all(); ?>
 
     <header class="mobile_header">
-        <h3>FİLTER</h3>
+        <h3><?= Yii::t('app', 'Filter'); ?></h3>
     </header>
 
 <?php if (count($children)) { ?>
@@ -44,7 +44,7 @@ $children = $category->getChildren()->all(); ?>
             class="sort_filter"
             value="<?= $productFilter->sort; ?>">
 
-        <?php if ($count > 1) { ?>
+        <?php //if ($count > 1) { ?>
         <section>
             <h3><span><?= Yii::t('app', 'Price range'); ?></span></h3>
             <div>
@@ -63,9 +63,9 @@ $children = $category->getChildren()->all(); ?>
                 </div>
             </div>
         </section>
-        <?php } ?>
+        <?php //} ?>
 
-        <section>
+        <section style="display:none">
             <h3>
                 <span><?= Yii::t('app', 'Condition'); ?></span>
                 <a href="#" class="condition-reset-btn"><?= Yii::t('app', 'Reset'); ?></a>
