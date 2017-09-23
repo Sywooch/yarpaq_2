@@ -138,7 +138,7 @@ class Product extends \yii\db\ActiveRecord
             'manufacturer_id',
             '!viewed',
             '!moderated',
-            '!cost_price',
+            'cost_price',
 
             'categoryIDs',
             'galleryFiles'
