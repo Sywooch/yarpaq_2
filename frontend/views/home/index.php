@@ -1,16 +1,38 @@
 <?php
-$slide1Link = ( $slide1 = \common\models\category\Category::findOne(792) ) ? $slide1->url : '#';
-$slide2Link = ( $slide2 = \common\models\category\Category::findOne(583) ) ? $slide2->url : '#';
-$slide3Link = ( $slide3 = \common\models\category\Category::findOne(576) ) ? $slide3->url : '#';
+
+use common\models\category\Category;
+use common\models\info\Info;
+use common\models\Language;
+
+$slide1Link = ( $slide1 = Category::findOne(940) )  ? $slide1->url : '#';
+$slide2Link = ( $slide2 = Category::findOne(949) )  ? $slide2->url : '#';
+$slide3Link = ( $slide3 = Info::findOne(5)       )  ? $slide3->url : '#';
+$slide4Link = ( $slide4 = Category::findOne(792) )  ? $slide4->url : '#';
+$slide5Link = ( $slide5 = Category::findOne(583) )  ? $slide5->url : '#';
+
+$currentLangName = Language::getCurrent()->name;
 ?>
 
 <!-- INDEX SLIDER BEGINS -->
 
+<?php
+$slides = [
+    '/upload/slides/power-bank-'.$currentLangName.'.jpg' => $slide1Link,
+    '/upload/slides/smartphone-'.$currentLangName.'.jpg' => $slide2Link,
+    '/upload/slides/deliver-'   .$currentLangName.'.jpg' => $slide3Link,
+    '/upload/slides/new-shoes-' .$currentLangName.'.jpg' => $slide4Link,
+    '/upload/slides/watch-'     .$currentLangName.'.jpg' => $slide5Link,
+];
+
+$mainImgUrl = array_keys($slides)[0];
+$mainLink = array_values($slides)[0];
+?>
+
 <div id="index_slider">
     <div class="image">
         <div>
-            <a href="<?= $slide2Link; ?>">
-                <img src="/upload/Images/new-shoes-<?= \common\models\Language::getCurrent()->name;?>.jpg" alt="">
+            <a href="<?= $mainLink; ?>">
+                <img src="<?= $mainImgUrl; ?>" alt="">
             </a>
         </div>
     </div>
@@ -19,9 +41,9 @@ $slide3Link = ( $slide3 = \common\models\category\Category::findOne(576) ) ? $sl
         <a href="#" class="next"></a>
     </div>
     <div class="bullets">
-        <a href="/upload/Images/watch-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide3Link; ?>" class="active"></a>
-        <a href="/upload/Images/new-shoes-<?= \common\models\Language::getCurrent()->name;?>.jpg" data-link="<?= $slide2Link; ?>"></a>
-
+        <?php $i=0; foreach ($slides as $imgUrl => $link) { $i++ ?>
+            <a href="<?= $imgUrl; ?>" data-link="<?= $link; ?>" <?php if ($i==1) { echo ' class="active"'; } ?>></a>
+        <?php } ?>
     </div>
 </div>
 
