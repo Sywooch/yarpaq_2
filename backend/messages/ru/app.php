@@ -1,10 +1,18 @@
 <?php
 
 return [
+    'Profile' => 'Профиль',
+    'Sign out' => 'Выход',
+    'Fullname' => 'Имя Фамилия',
     'Description' => 'Описание',
     'Price' => 'Цена',
     'Cost Price' => 'Себестоимость',
     'Title' => 'Название',
+    'Infos' => 'Информационные страницы',
+    'Name' => 'Имя',
+    'Body' => 'Тело',
+    'Template' => 'Шаблон',
+    'Create Info' => 'Создать информационную страницу',
     'Model' => 'Модель',
     'Status name' => 'Статус',
     'Enabled' => 'Активный',
@@ -23,13 +31,16 @@ return [
     'Manufacturers' => 'Производители',
     'Currencies' => 'Валюты',
     'Shipping methods' => 'Способы доставки',
+    'Shipping method' => 'Способ доставки',
     'Languages' => 'Языки',
+    'User' => 'Пользователь',
     'Users' => 'Пользователи',
     'Base' => 'База',
     'Create Order' => 'Создать заказ',
     'Order ID' => 'Номер заказа',
     'Firstname' => 'Имя',
     'Lastname' => 'Фамилия',
+    'Phone' => 'Телефон',
     'Total' => 'Всего',
     'Created At' => 'Дата создания',
     'Modified At' => 'Дата изменения',
@@ -42,7 +53,8 @@ return [
     'View' => 'Посмотреть',
     'Delete' => 'Удалить',
     'Create Manufacturer' => 'Создать производителя',
-    'Image' => 'Картинки',
+    'Images' => 'Картинки',
+    'Image' => 'Картинка',
     'Updated At' => 'Дата обновления',
     'Create Currency' => 'Создать валюту',
     'Code' => 'Код',
@@ -73,6 +85,12 @@ return [
     'Seller email' => 'Email продавца',
     'Category' => 'Категория',
     'All' => 'Все',
+    'Company' => 'Компания',
+    'City' => 'Баку',
+    'Address' => 'Адрес',
+    'Postcode' => 'Почтовый индекс',
+    'Country' => 'Страна',
+    'Zone' => 'Район',
     'Quantity' => 'Количество',
     'Moderated' => 'Допущен',
     'Add Product' => 'Добавить товар',
@@ -93,9 +111,12 @@ return [
 
     'Options' => 'Опции',
     'Add option' => 'Добавить опцию',
+    'Value' => 'Значение',
+    'Decimal Place' => 'Десятичная точность',
     'Option Value' => 'Значение опции',
     'Price prefix' => 'Изменение цены',
     'Add value' => 'Добавить значение',
+    'Option values' => 'Варианты выбора',
 
     'Weight (kg)' => 'Вес (кг)',
     'Length (sm)' => 'Длина (см)',
@@ -104,10 +125,21 @@ return [
 
     'Create' => 'Создать',
 
+    'Type' => 'Тип',
+
     'Moderation products' => 'Товары на модерации',
     'New orders' => 'Новые заказы',
     'New reviews' => 'Новые отзывы',
     'Out of stock products' => 'Товары "Out of stock"',
+
+    'Customer info' => 'Информация о покупателе',
+    'Product' => 'Товар',
+    'Delete from order' => 'Удалить из заказа',
+    'Payment info' => 'Информация об оплате',
+    'Shipping info' => 'Информация о доставке',
+    'Totals' => 'Общее',
+    'Comment' => 'Комментарий'
+
 ];
 
 

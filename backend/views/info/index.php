@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
 
         <p class="pull-right">
-            <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;'.Yii::t('app', 'Add Product'), ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;'.Yii::t('app', 'Add'), ['create'], ['class' => 'btn btn-success']) ?>
         </p>
 
         <h2><?= Html::encode($this->title) ?></h2>
@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id',
                 'headerOptions' => ['width' => '5%'],
             ],
-            'title',
+            [
+                'label' => Yii::t('app', 'Title'),
+                'attribute' => 'title'
+            ],
             [
                 'attribute' => 'status_id',
                 'label'     => Yii::t('app', 'Status'),

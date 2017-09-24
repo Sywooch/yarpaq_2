@@ -71,7 +71,7 @@ $order = $model;
                         'pluginEvents' => [
                             "change" => "function(e) { onChangeOrderUser(e); }",
                         ]
-                    ]);
+                    ])->label(Yii::t('app', 'User'));
 
                     ?>
                 </div>
@@ -91,10 +91,10 @@ $order = $model;
                 </div>
 
                 <div class="col-md-4">
-                    <?= $form->field($order, 'phone1')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($order, 'phone1')->textInput(['maxlength' => true])->label(Yii::t('app', 'Phone') . ' 1') ?>
                 </div>
                 <div class="col-md-4">
-                    <?= $form->field($order, 'phone2')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($order, 'phone2')->textInput(['maxlength' => true])->label(Yii::t('app', 'Phone') . ' 2') ?>
                 </div>
             </div>
         </div>
@@ -187,16 +187,13 @@ $order = $model;
                 <div class="row">
                     <div class="col-md-6">
 
-                        <h4><?= Yii::t('app', 'Add product'); ?></h4>
+                        <h4><?= Yii::t('app', 'Add'); ?></h4>
 
                         <?php
 
                         echo $form->field($orderProductAddForm, 'product_id')->widget(Select2::className(), [
                             'id' => 'selectAddOrderProduct',
                             'name' => 'add_product',
-                            'options' => [
-                                'placeholder' => 'Search for a product ...',
-                            ],
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'minimumInputLength' => 3,
@@ -212,7 +209,7 @@ $order = $model;
                                 'templateResult' => new JsExpression('function(city) { return city.text; }'),
                                 'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                             ],
-                        ]);
+                        ])->label(Yii::t('app', 'Product'));
 
                         ?>
 
@@ -221,7 +218,8 @@ $order = $model;
 
                 <div class="row">
                     <div class="col-md-3">
-                        <?= $form->field($orderProductAddForm, 'quantity')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($orderProductAddForm, 'quantity')->textInput(['maxlength' => true])
+                        -> label(Yii::t('app', 'Quantity'))?>
                     </div>
                 </div>
 
@@ -236,7 +234,7 @@ $order = $model;
 
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="button" class="btn btn-info btn-sm order-product-add-btn" data-id="<?= $order->id; ?>"><?= Yii::t('app', 'Add product'); ?></button>
+                    <button type="button" class="btn btn-info btn-sm order-product-add-btn" data-id="<?= $order->id; ?>"><?= Yii::t('app', 'Add'); ?></button>
                 </div>
             </div>
 
@@ -359,7 +357,7 @@ $order = $model;
                 </div>
 
                 <div class="col-md-6">
-                    <label><?= Yii::t('app', 'Shiping method'); ?>:</label><br>
+                    <label><?= Yii::t('app', 'Shipping method'); ?>:</label><br>
                     <?= $order->shipping_method; ?>
                 </div>
             </div>

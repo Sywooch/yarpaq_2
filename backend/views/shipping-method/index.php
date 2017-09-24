@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\shipping\ShippingMethodSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Shipping Methods');
+$this->title = Yii::t('app', 'Shipping methods');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="shipping-method-index">

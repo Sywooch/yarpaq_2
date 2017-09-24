@@ -43,6 +43,7 @@ $statuses = OrderStatus::find()
 
             [
                 'attribute' => 'fullname',
+                'label' => Yii::t('app', 'Fullname'),
                 'value' => function ($order) {
                     return $order->firstname . ' ' . $order->lastname;
                 }

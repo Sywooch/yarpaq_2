@@ -48,7 +48,7 @@ use mihaildev\elfinder\ElFinder;
                             //'preset' => 'basic',
                             'height' => 280
                         ]),
-                    ]) ?>
+                    ])->label(Yii::t('app', 'Body')) ?>
                     <?= $form->field($content, 'seo_keywords')->textarea(['name' => 'InfoContent_'.$language->id.'[seo_keywords]', 'id' => 'content_'.$language->id.'_seo_keywords']) ?>
                     <?= $form->field($content, 'seo_description')->textarea(['name' => 'InfoContent_'.$language->id.'[seo_description]', 'id' => 'content_'.$language->id.'_seo_description']) ?>
                 </div>
@@ -63,8 +63,8 @@ use mihaildev\elfinder\ElFinder;
 
         <div class="box-body">
             <?= $form->field($model, 'status')->dropDownList([
-                0 => 'Hidden',
-                1 => 'Active'
+                0 => Yii::t('app', 'Enabled'),
+                1 => Yii::t('app', 'Disabled')
             ]); ?>
 
             <?php
@@ -74,7 +74,7 @@ use mihaildev\elfinder\ElFinder;
             foreach ($templates as $template) {
                 $templates_data[ $template->id ] = $template->name;
             }
-            echo $form->field($model, 'template_id')->dropDownList($templates_data);
+            echo $form->field($model, 'template_id')->dropDownList($templates_data)->label(Yii::t('app', 'Template'));
             ?>
         </div>
     </div>

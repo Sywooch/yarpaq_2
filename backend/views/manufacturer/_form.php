@@ -44,7 +44,7 @@ use kartik\file\FileInput;
     echo $form->field($model, 'image')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => $uploaderPluginOptions
-    ]);
+    ])->label(Yii::t('app', 'Image'));
     ?>
 
     <div class="form-group">

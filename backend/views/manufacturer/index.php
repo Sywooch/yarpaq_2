@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'Image',
                 'format' => 'raw',
+                'label' => Yii::t('app', 'Image'),
                 'value' => function ($model) {
                     if ($model->image_web_filename!='')
                         return '<img src="'.$model->imageUrl.'" width="50px" height="auto">'; else return 'no image';

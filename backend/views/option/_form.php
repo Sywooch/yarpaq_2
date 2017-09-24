@@ -31,7 +31,8 @@ use yii\widgets\ActiveForm;
                     <?php $i=0; foreach ($model->contents as $content) { ?>
 
                         <div class="tab-pane <?php echo !$i ? 'active' : '' ?>" id="lang_<?php echo $content->language_id; ?>">
-                            <?= $form->field($content, '['.$content->language_id.']name')->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($content, '['.$content->language_id.']name')->textInput(['maxlength' => true])
+                                ->label(Yii::t('app', 'Name')) ?>
                         </div>
                         <!-- /.tab-pane -->
 

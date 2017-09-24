@@ -27,7 +27,7 @@ use common\models\User;
                         ['label' => Yii::t('app', 'Products'),          'icon' => 'list', 'url' => ['/product']],
                         ['label' => Yii::t('app', 'Orders'),            'icon' => 'shopping-cart', 'url' => ['/order']],
                         ['label' => Yii::t('app', 'Categories'),        'icon' => 'sitemap', 'url' => ['/category']],
-                        ['label' => Yii::t('app', 'Information'),       'icon' => 'info', 'url' => ['/info']],
+                        ['label' => Yii::t('app', 'Infos'),       'icon' => 'info', 'url' => ['/info']],
                         ['label' => Yii::t('app', 'Manufacturers'),     'icon' => 'tags', 'url' => ['/manufacturer']],
 
                         ['label' => Yii::t('app', 'Users'),             'icon' => 'users', 'url' => ['#'], 'items' => [
