@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\order\Order */
@@ -9,6 +9,8 @@ use yii\widgets\DetailView;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Orders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$order = $model;
 ?>
 <div class="order-view">
 
@@ -23,55 +25,293 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'user_id',
-            'firstname',
-            'lastname',
-            'email:email',
-            'phone1',
-            'phone2',
-            'fax',
-            'payment_firstname',
-            'payment_lastname',
-            'payment_company',
-            'payment_address',
-            'payment_city',
-            'payment_postcode',
-            'payment_country',
-            'payment_country_id',
-            'payment_zone',
-            'payment_zone_id',
-            'payment_method',
-            'payment_code',
-            'shipping_firstname',
-            'shipping_lastname',
-            'shipping_company',
-            'shipping_address',
-            'shipping_city',
-            'shipping_postcode',
-            'shipping_country',
-            'shipping_country_id',
-            'shipping_zone',
-            'shipping_zone_id',
-            'shipping_method',
-            'shipping_code',
-            'comment:ntext',
-            'total',
-            'order_status_id',
-            'language_id',
-            'currency_id',
-            'currency_code',
-            'currency_value',
-            'ip',
-            'forwarded_ip',
-            'user_agent',
-            'accept_language',
-            'created_at',
-            'modified_at',
-        ],
-    ]) ?>
+
+
+
+
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Yii::t('app', 'Customer info'); ?></h3>
+        </div>
+
+        <div class="box-body">
+            <div class="row">
+
+                <div class="col-md-6 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Fullname'); ?></label>
+                    <div>
+                        <?= $order->firstname; ?> <?= $order->lastname; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-6 m-b-20">
+                    <label class="control-label">Email</label>
+                    <div>
+                        <?= $order->email; ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Phone'); ?> 1</label>
+                    <div>
+                        <?= $order->phone1; ?>
+                    </div>
+
+                </div>
+                <div class="col-md-6 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Phone'); ?> 2</label>
+                    <div>
+                        <?= $order->phone2; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Yii::t('app', 'Products'); ?></h3>
+        </div>
+
+        <div class="box-body">
+
+            <table class="table table-bordered table-striped" id="productsTable">
+                <tbody>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th><?= Yii::t('app', 'Product'); ?></th>
+                    <th><?= Yii::t('app', 'Model'); ?></th>
+                    <th><?= Yii::t('app', 'Quantity'); ?></th>
+                    <th><?= Yii::t('app', 'Price'); ?></th>
+                    <th><?= Yii::t('app', 'Total'); ?></th>
+                </tr>
+
+                <?php
+                $num = 1;
+                foreach ($order->orderProducts as $orderProduct) { ?>
+                    <tr>
+                        <td><?=$num?>.</td>
+                        <td>
+                            <a target="_blank" href="<?= Url::to(['product/update', 'id' => $orderProduct->product->id]); ?>"><?= $orderProduct->product->title; ?></a>
+                            <?php foreach ($orderProduct->orderProductOptions as $orderProductOption) { ?>
+                                <small> &mdash; <?= $orderProductOption->name . ': '. $orderProductOption->value; ?></small>
+                            <?php } ?>
+
+                            <br>Kod: <?= $orderProduct->product->id; ?>
+                        </td>
+                        <td><?= $orderProduct->product->model; ?></td>
+                        <td><?= $orderProduct->quantity; ?></td>
+                        <td><?= $orderProduct->price; ?></td>
+                        <td><?= $orderProduct->total; ?></td>
+
+                    </tr>
+
+                    <?php $num++; } ?>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Yii::t('app', 'Payment info'); ?></h3>
+        </div>
+
+        <div class="box-body">
+            <div class="row">
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Firstname'); ?></label>
+                    <div>
+                        <?= $order->payment_firstname; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Lastname'); ?></label>
+                    <div>
+                        <?= $order->payment_lastname; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Company'); ?></label>
+                    <div>
+                        <?= $order->payment_company; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'City'); ?></label>
+                    <div>
+                        <?= $order->payment_city; ?>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Address'); ?></label>
+                    <div>
+                        <?= $order->payment_address; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Postcode'); ?></label>
+                    <div>
+                        <?= $order->payment_postcode; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Country'); ?></label>
+                    <div>
+                        <?= $order->paymentCountry->name; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Zone'); ?></label>
+                    <div>
+                        <?= $order->paymentZone->name; ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Yii::t('app', 'Shipping info'); ?></h3>
+        </div>
+
+        <div class="box-body">
+
+            <div class="row">
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Firstname'); ?></label>
+                    <div>
+                        <?= $order->shipping_firstname; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Lastname'); ?></label>
+                    <div>
+                        <?= $order->shipping_lastname; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Company'); ?></label>
+                    <div>
+                        <?= $order->shipping_company; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'City'); ?></label>
+                    <div>
+                        <?= $order->shipping_city; ?>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Address'); ?></label>
+                    <div>
+                        <?= $order->shipping_address; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Postcode'); ?></label>
+                    <div>
+                        <?= $order->shipping_postcode; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Country'); ?></label>
+                    <div>
+                        <?= $order->shippingCountry->name; ?>
+                    </div>
+                </div>
+
+                <div class="col-md-3 m-b-20">
+                    <label class="control-label"><?= Yii::t('app', 'Zone'); ?></label>
+                    <div>
+                        <?= $order->shippingZone->name; ?>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><?= Yii::t('app', 'Totals'); ?></h3>
+        </div>
+
+        <div class="box-body">
+
+            <div class="row">
+
+                <div class="col-md-6 m-b-20">
+                    <label><?= Yii::t('app', 'Payment method'); ?>:</label><br>
+                    <?= $order->payment_method; ?>
+                </div>
+
+                <div class="col-md-6 m-b-20">
+                    <label><?= Yii::t('app', 'Shipping method'); ?>:</label><br>
+                    <?= $order->shipping_method; ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 m-b-20">
+                    <label><?= Yii::t('app', 'Comment'); ?>:</label><br>
+                    <?= $order->comment; ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 m-b-20">
+                    <label><?= Yii::t('app', 'Status'); ?>:</label><br>
+                    <?= $order->status->name; ?>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group pull-right">
+        <?= Html::a(Yii::t('app', 'Delete'), ['order/delete', 'id' => $order->id], ['class' => 'btn btn-danger']) ?>
+    </div>
+
+    <div class="form-group">
+        <?= Html::submitButton($order->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $order->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
 
 </div>

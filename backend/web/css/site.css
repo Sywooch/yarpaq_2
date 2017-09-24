@@ -162,3 +162,7 @@ a.desc:after {
 .navbar-nav>.user-menu>.dropdown-menu {
     width: 240px;
 }
+
+.m-b-20 {
+    margin-bottom: 20px;
+}

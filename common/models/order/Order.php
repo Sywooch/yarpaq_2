@@ -2,10 +2,12 @@
 
 namespace common\models\order;
 
+use common\models\Country;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
 use common\models\OrderOption;
 use common\models\Product;
+use common\models\Zone;
 use Yii;
 use common\models\Currency;
 use common\models\Language;
@@ -154,7 +156,7 @@ class Order extends \yii\db\ActiveRecord
             'shipping_country' => Yii::t('app', 'Country'),
             'shipping_country_id' => Yii::t('app', 'Country'),
             'shipping_zone' => Yii::t('app', 'Region'),
-            'shipping_zone_id' => Yii::t('app', 'Region'),
+            'shipping_zone_id' => Yii::t('app', 'Zone'),
             'shipping_method' => Yii::t('app', 'Shipping method'),
             'shipping_code' => Yii::t('app', 'Code'),
             'comment' => Yii::t('app', 'Comment'),
@@ -300,5 +302,21 @@ class Order extends \yii\db\ActiveRecord
 
     public function setAsPaid() {
         // TODO
+    }
+
+    public function getPaymentCountry() {
+        return $this->hasOne(Country::className(), ['id' => 'payment_country_id']);
+    }
+
+    public function getPaymentZone() {
+        return $this->hasOne(Zone::className(), ['id' => 'payment_zone_id']);
+    }
+
+    public function getShippingCountry() {
+        return $this->hasOne(Country::className(), ['id' => 'shipping_country_id']);
+    }
+
+    public function getShippingZone() {
+        return $this->hasOne(Zone::className(), ['id' => 'shipping_zone_id']);
     }
 }
