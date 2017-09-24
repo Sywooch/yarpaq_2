@@ -97,21 +97,29 @@ $order = $model;
                 foreach ($order->orderProducts as $orderProduct) {
                     $product = $orderProduct->product;
 
-                    if (User::getCurrentUser()->id != $product->user_id && !User::hasPermission('view_any_order')) {
+                    if ($product && User::getCurrentUser()->id != $product->user_id && !User::hasPermission('view_any_order')) {
                         continue;
                     }
                     ?>
                     <tr>
                         <td><?=$num?>.</td>
                         <td>
-                            <a target="_blank" href="<?= Url::to(['product/update', 'id' => $product->id]); ?>"><?= $product->title; ?></a>
+
+                            <?php if ($product) { ?>
+                                <a target="_blank" href="<?= Url::to(['product/update', 'id' => $product->id]); ?>"><?= $orderProduct->name; ?></a>
+                            <?php } else { ?>
+                                <?= $orderProduct->name; ?>
+                            <?php } ?>
+
                             <?php foreach ($orderProduct->orderProductOptions as $orderProductOption) { ?>
                                 <small> &mdash; <?= $orderProductOption->name . ': '. $orderProductOption->value; ?></small>
                             <?php } ?>
 
+                            <?php if ($product) { ?>
                             <br>Kod: <?= $product->id; ?>
+                            <?php } ?>
                         </td>
-                        <td><?= $product->model; ?></td>
+                        <td><?= $orderProduct->model; ?></td>
                         <td><?= $orderProduct->quantity; ?></td>
                         <td><?= $orderProduct->price; ?></td>
                         <td><?= $orderProduct->total; ?></td>

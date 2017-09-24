@@ -122,18 +122,28 @@ $order = $model;
 
                     <?php
                     $num = 1;
-                    foreach ($order->orderProducts as $orderProduct) { ?>
+                    foreach ($order->orderProducts as $orderProduct) {
+                        $product = $orderProduct->product;
+                        ?>
                     <tr>
                         <td><?=$num?>.</td>
                         <td>
-                            <a target="_blank" href="<?= Url::to(['product/update', 'id' => $orderProduct->product->id]); ?>"><?= $orderProduct->product->title; ?></a>
+
+                            <?php if ($product) { ?>
+                                <a target="_blank" href="<?= Url::to(['product/update', 'id' => $product->id]); ?>"><?= $orderProduct->name; ?></a>
+                            <?php } else { ?>
+                                <?= $orderProduct->name; ?>
+                            <?php } ?>
+
                             <?php foreach ($orderProduct->orderProductOptions as $orderProductOption) { ?>
                                 <small> &mdash; <?= $orderProductOption->name . ': '. $orderProductOption->value; ?></small>
                             <?php } ?>
 
-                            <br>Kod: <?= $orderProduct->product->id; ?>
+                            <?php if ($product) { ?>
+                            <br>Kod: <?= $product->id; ?>
+                            <?php } ?>
                         </td>
-                        <td><?= $orderProduct->product->model; ?></td>
+                        <td><?= $orderProduct->model; ?></td>
                         <td><?= $orderProduct->quantity; ?></td>
                         <td><?= $orderProduct->price; ?></td>
                         <td><?= $orderProduct->total; ?></td>
@@ -143,7 +153,7 @@ $order = $model;
                                 type="button"
                                 class="btn btn-danger btn-xs"
                                 order-product-delete-btn
-                                data-name="<?= htmlentities($orderProduct->product->title); ?>"
+                                data-name="<?= htmlentities($orderProduct->model); ?>"
                                 data-id="<?= $orderProduct->id; ?>"
                             ><?= Yii::t('app', 'Delete from order'); ?></button></td>
                     </tr>
