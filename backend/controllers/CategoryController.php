@@ -344,4 +344,39 @@ class CategoryController extends AdminDefaultController
 
         echo json_encode(['result' => $result]);
     }
+
+    /**
+     * Ищет по названию и выдает список категорий (Ajax)
+     *
+     * @param null $q
+     * @param $full Boolean
+     * @return array
+     */
+    public function actionList($q = null, $full = false) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $models = Category::find()
+                ->leftJoin('{{%category_content}} cc', '{{%category}}.id = cc.category_id')
+                ->andWhere([
+                    'cc.lang_id' => Language::getCurrent()->id,
+                ])
+                ->andWhere(['like', 'cc.title', $q])
+                ->all();
+
+            $out['results'] = [];
+            foreach ($models as $model) {
+                if ($full) {
+                    $title = $model->fullName;
+                } else {
+                    $title = $model->title;
+                }
+
+
+                $out['results'][] = ['id' => $model->id, 'text' => $title . ' ('.$model->id.')'];
+            }
+        }
+
+        return $out;
+    }
 }

@@ -405,4 +405,18 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             return new CategoryImage();
         }
     }
+
+    public function getFullName() {
+        $parents = $this->getParents()->all();
+
+        $title = '';
+
+        foreach ($parents as $parent) {
+            $title .= $parent->title . ' > ';
+        }
+
+        $title .= $this->title;
+
+        return $title;
+    }
 }

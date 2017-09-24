@@ -10,6 +10,8 @@ use mihaildev\elfinder\ElFinder;
 use kartik\file\FileInput;
 use yii\helpers\FileHelper;
 use common\models\User;
+use common\models\category\Category;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
@@ -211,15 +213,25 @@ use common\models\User;
                     <div class="col-xs-12">
 
                         <?php
-                        $categoriesData = \common\models\category\Category::getData();
+                        $initCategories = empty($model->categoryIDs) ? '' : Category::find()->andWhere(['in', 'id', $model->categoryIDs])->all();
+                        $initValueText = ArrayHelper::map($initCategories, 'id', 'fullName');
 
                         echo $form->field($model, 'categoryIDs')->widget(Select2::classname(), [
-                            'data' => $categoriesData,
+                            'initValueText' => $initValueText,
                             'options' => [
-                                'placeholder' => Yii::t('app', 'Select category').' ...',
                                 'multiple' => true
                             ],
                             'pluginOptions' => [
+                                'allowClear' => true,
+                                'minimumInputLength' => 3,
+                                'ajax' => [
+                                    'url' => Url::to(['category/list?full=true']),
+                                    'dataType' => 'json',
+                                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                                ],
+                                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                                'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                                'templateSelection' => new JsExpression('function (city) { return city.text; }'),
                                 'tags' => true,
                                 'tokenSeparators' => [','],
                                 'maximumInputLength' => 10,
