@@ -84,7 +84,10 @@ $statuses = OrderStatus::find()
                         $total = 0;
 
                         foreach ($order->orderProducts as $order_product) {
-                            $total += $order_product->total;
+                            $product = $order_product->product;
+                            if ($product && $product->user_id == User::getCurrentUser()->id) {
+                                $total += $order_product->total;
+                            }
                         }
 
                         return $total;

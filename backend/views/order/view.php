@@ -97,7 +97,7 @@ $order = $model;
                 foreach ($order->orderProducts as $orderProduct) {
                     $product = $orderProduct->product;
 
-                    if (($product && User::getCurrentUser()->id != $product->user_id && !User::hasPermission('view_any_order') ) || !$product) {
+                    if (($product && User::getCurrentUser()->id != $product->user_id && !User::hasPermission('view_all_orders') ) || !$product) {
                         continue;
                     }
                     ?>

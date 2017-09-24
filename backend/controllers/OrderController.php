@@ -297,7 +297,7 @@ class OrderController extends AdminDefaultController
             $product = $orderProduct->product;
 
             // если товар существует и принадлежит текущему юзеру
-            if ($product && $product->user_id == User::getCurrentUser()->getId() || User::hasPermission('view_any_order')) {
+            if ($product && $product->user_id == User::getCurrentUser()->getId() || User::hasPermission('view_all_orders')) {
                 $owner = true;
             }
         }
