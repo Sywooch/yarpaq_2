@@ -77,6 +77,10 @@ class OrderController extends AdminDefaultController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $this->denyIfNotOwner($model);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -283,6 +287,20 @@ class OrderController extends AdminDefaultController
             // конец транзакции
         } else {
             return ['status' => 0];
+        }
+    }
+
+    private function denyIfNotOwner($order) {
+        $owner = false;
+
+        foreach ($order->orderProducts as $orderProduct) {
+            if ($orderProduct->product->user_id == User::getCurrentUser()->getId()) {
+                $owner = true;
+            }
+        }
+
+        if (!$owner) {
+            throw new ForbiddenHttpException('Wrong order');
         }
     }
 }

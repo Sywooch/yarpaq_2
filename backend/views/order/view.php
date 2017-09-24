@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\order\Order */
@@ -93,18 +94,24 @@ $order = $model;
 
                 <?php
                 $num = 1;
-                foreach ($order->orderProducts as $orderProduct) { ?>
+                foreach ($order->orderProducts as $orderProduct) {
+                    $product = $orderProduct->product;
+
+                    if (User::getCurrentUser()->id != $product->user_id && !User::hasPermission('view_any_order')) {
+                        continue;
+                    }
+                    ?>
                     <tr>
                         <td><?=$num?>.</td>
                         <td>
-                            <a target="_blank" href="<?= Url::to(['product/update', 'id' => $orderProduct->product->id]); ?>"><?= $orderProduct->product->title; ?></a>
+                            <a target="_blank" href="<?= Url::to(['product/update', 'id' => $product->id]); ?>"><?= $product->title; ?></a>
                             <?php foreach ($orderProduct->orderProductOptions as $orderProductOption) { ?>
                                 <small> &mdash; <?= $orderProductOption->name . ': '. $orderProductOption->value; ?></small>
                             <?php } ?>
 
-                            <br>Kod: <?= $orderProduct->product->id; ?>
+                            <br>Kod: <?= $product->id; ?>
                         </td>
-                        <td><?= $orderProduct->product->model; ?></td>
+                        <td><?= $product->model; ?></td>
                         <td><?= $orderProduct->quantity; ?></td>
                         <td><?= $orderProduct->price; ?></td>
                         <td><?= $orderProduct->total; ?></td>
