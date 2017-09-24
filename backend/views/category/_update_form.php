@@ -7,6 +7,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\FileHelper;
 use kartik\file\FileInput;
+use yii\web\JsExpression;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\category\Category */
@@ -66,8 +68,8 @@ use kartik\file\FileInput;
 
         <div class="box-body">
             <?= $form->field($model, 'status')->dropDownList([
-                0 => 'Hidden',
-                1 => 'Active'
+                0 => Yii::t('app', 'Disabled'),
+                1 => Yii::t('app', 'Enabled')
             ]); ?>
 
             <?php
@@ -81,14 +83,33 @@ use kartik\file\FileInput;
 
             echo $form->field($model, 'isTop')->checkbox();
 
-            $categories_data = ArrayHelper::map(Category::find()->orderBy('lft')->all(), 'id', function ($category) {
-                return str_repeat('—', $category->depth - 1) .' '. $category->content->title;
-            });
+            // Category BEGIN
 
-            echo $form->field($model, 'parent_id')->dropDownList($categories_data);
+            $initCategory = empty($model->parent_id) ? '' : Category::find()->andWhere(['id' => $model->parent_id])->one();
+            $initValueText = $initCategory->fullName;
+
+            echo $form->field($model, 'parent_id')->widget(Select2::classname(), [
+                'initValueText' => $initValueText,
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'minimumInputLength' => 3,
+                    'ajax' => [
+                        'url' => Url::to(['category/list?full=true']),
+                        'dataType' => 'json',
+                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                    ],
+                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                    'tags' => true,
+                    'tokenSeparators' => [','],
+                    'maximumInputLength' => 10,
+                ],
+            ])->label(Yii::t('app', 'Category'));
+
+            // Category END
 
             ?>
-
             <div class="row">
 
                 <!-- Gallery -->
