@@ -65,6 +65,7 @@ $languages = Language::find()->all();
                         'pluginOptions' => $uploaderPluginOptions
                     ])->label(Yii::t('app', 'Image'));
                     ?>
+                    <input type="hidden" name="gallery_sort" value="<?= $content->src_name; ?>">
                 </div>
                 <!-- /.tab-pane -->
 

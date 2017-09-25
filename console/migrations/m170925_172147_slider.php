@@ -9,7 +9,7 @@ class m170925_172147_slider extends Migration
     {
         $this->createTable('{{%slide}}', [
             'id'            => Schema::TYPE_PK,
-            'name'          => Schema::TYPE_STRING . ' NOT NULL',
+            'name'          => Schema::TYPE_STRING . ' CHARACTER SET utf8 NOT NULL',
             'status'        => Schema::TYPE_SMALLINT . ' NOT NULL',
             'sort'          => Schema::TYPE_SMALLINT . ' NOT NULL',
             'created_at'    => Schema::TYPE_DATETIME . ' NOT NULL',

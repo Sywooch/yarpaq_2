@@ -36,7 +36,20 @@ class SlideImage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['language_id', /* 'src_name', 'web_name'*/], 'required'],
+            [['language_id', 'src_name', 'web_name'], 'required'],
+            ['image', 'image', 'skipOnEmpty' => false, 'maxFiles' => 1,
+                // не пропускать пустое значение, если:
+                'when' => function ($model) {
+                    if ($model->src_name != '') {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                'whenClient' => "function (attribute, value) {
+                    return !$(attribute.container).find('.file-preview-thumbnails').children().length;
+                }",
+            ],
             [['model_id', 'language_id'], 'integer'],
             [['link', 'src_name', 'web_name'], 'string', 'max' => 255],
             [['model_id'], 'exist', 'skipOnError' => true, 'targetClass' => Slide::className(), 'targetAttribute' => ['model_id' => 'id']],

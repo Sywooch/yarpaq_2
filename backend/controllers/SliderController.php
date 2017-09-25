@@ -4,13 +4,13 @@ namespace backend\controllers;
 
 use common\models\Language;
 use common\models\slider\SlideImage;
+use webvimark\components\AdminDefaultController;
 use Yii;
 use common\models\slider\Slide;
 use common\models\slider\SlideSearch;
 use yii\base\Model;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use richardfan\sortable\SortableAction;
@@ -20,7 +20,7 @@ use yii\web\UploadedFile;
 /**
  * SliderController implements the CRUD actions for Slide model.
  */
-class SliderController extends Controller
+class SliderController extends AdminDefaultController
 {
 
     public function actions(){
@@ -37,16 +37,20 @@ class SliderController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
+    public function behaviors() {
+        $b = parent::behaviors();
+
+        $b = ArrayHelper::merge($b, [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete'        => ['POST'],
+                    'image-delete'  => ['POST'],
                 ],
             ],
-        ];
+        ]);
+
+        return $b;
     }
 
     /**
@@ -81,9 +85,15 @@ class SliderController extends Controller
             try {
                 $model->save();
 
-                if (Model::loadMultiple($contents, Yii::$app->request->post()) && Model::validateMultiple($contents)) {
+                $loaded = Model::loadMultiple($contents, Yii::$app->request->post());
+                foreach ($contents as $key => $content) {
+                    $content->image = UploadedFile::getInstance($content, "[$key]image");
+                    $this->uploadImage($content);
+                }
 
-                    foreach ($contents as $content) {
+                if ($loaded && Model::validateMultiple($contents)) {
+
+                    foreach ($contents as $key => $content) {
                         $content->model_id = $model->id;
                         $content->save(false);
                     }
@@ -151,9 +161,7 @@ class SliderController extends Controller
 
                     foreach ($contents as $content) {
                         $content->model_id = $model->id;
-
                         $content->image = UploadedFile::getInstance($content, "[$content->id]image");
-
                         $this->uploadImage($content);
 
                         $content->save(false);
@@ -218,7 +226,7 @@ class SliderController extends Controller
      * @param $model SlideImage
      */
     private function uploadImage($model) {
-        $image = UploadedFile::getInstance($model, "[$model->id]image");
+        $image = $model->image;
         if (!is_null($image)) {
             $model->src_name = $image->name;
 
@@ -228,30 +236,6 @@ class SliderController extends Controller
             $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
 
             $image->saveAs($model->path);
-            $model->save();
-        }
-    }
-
-    private function saveGalleryFiles($m) {
-        $files = $m->galleryFiles;
-        if (count($files)) {
-            $sort = count($m->gallery);
-            foreach ($files as $file) { $sort++;
-                if (!is_null($file)) {
-                    $model = new CategoryImage();
-                    $model->model_id = $m->id;
-                    $model->src_name = $file->name;
-                    $model->sort = $sort;
-                    $file_parts = explode(".", $file->name);
-                    $ext = end($file_parts);
-                    // generate a unique file name to prevent duplicate filenames
-                    $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
-
-                    $file->saveAs($model->path);
-
-                    $model->save();
-                }
-            }
         }
     }
 
