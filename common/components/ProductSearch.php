@@ -130,7 +130,7 @@ class ProductSearch
             'body'  => [
                 "sort" => [$sort_query],
                 'query' => $this->getDefaultQuery($query, $queryFilter),
-                "from" => ($page - 1) * $limit,
+                "from" => $page * $limit,
                 "size" => $limit
             ]
         ];

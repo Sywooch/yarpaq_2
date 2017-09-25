@@ -37,7 +37,7 @@ class CustomLinkPager extends LinkPager
         // internal pages
         list($beginPage, $endPage) = $this->getPageRange();
         for ($i = $beginPage; $i <= $endPage; ++$i) {
-            $buttons[] = $this->renderPageButton($i + 1, $i, null, false, $i+1 == $currentPage);
+            $buttons[] = $this->renderPageButton($i + 1, $i, null, false, $i == $currentPage);
         }
 
         // next page
