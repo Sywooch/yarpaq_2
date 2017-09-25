@@ -11,6 +11,10 @@ abstract class Shipping
 
         if (isset($this->rates[$geo_zone_id])) {
             $rate = $this->rates[$geo_zone_id];
+            $pairs = explode(',', $rate);
+
+            $defaultPair = $pairs[0];
+            $result = explode(':', $defaultPair)[1];
 
             foreach (explode(',', $rate) as $pair) {
                 $rate_weight    = explode(':', $pair)[0];
