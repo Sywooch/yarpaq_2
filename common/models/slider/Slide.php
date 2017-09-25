@@ -4,6 +4,7 @@ namespace common\models\slider;
 
 use common\behaviors\MetaData;
 use common\behaviors\Sortable;
+use common\models\Language;
 use Yii;
 
 /**
@@ -75,6 +76,10 @@ class Slide extends \yii\db\ActiveRecord
 
     public function getContents() {
         return $this->hasMany(SlideImage::className(), ['model_id' => 'id']);
+    }
+
+    public function getContent() {
+        return $this->hasOne(SlideImage::className(), ['model_id' => 'id'])->andWhere(['language_id' => Language::getCurrent()->id]);
     }
 
 }

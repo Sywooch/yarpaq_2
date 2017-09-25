@@ -3,6 +3,7 @@
 use common\models\category\Category;
 use common\models\info\Info;
 use common\models\Language;
+use common\models\slider\Slide;
 
 $slide1Link = ( $slide1 = Category::findOne(940) )  ? $slide1->url : '#';
 $slide2Link = ( $slide2 = Category::findOne(949) )  ? $slide2->url : '#';
@@ -16,23 +17,22 @@ $currentLangName = Language::getCurrent()->name;
 <!-- INDEX SLIDER BEGINS -->
 
 <?php
-$slides = [
-    '/upload/slides/power-bank-'.$currentLangName.'.jpg' => $slide1Link,
-    '/upload/slides/smartphone-'.$currentLangName.'.jpg' => $slide2Link,
-    '/upload/slides/deliver-'   .$currentLangName.'.jpg' => $slide3Link,
-    '/upload/slides/new-shoes-' .$currentLangName.'.jpg' => $slide4Link,
-    '/upload/slides/watch-'     .$currentLangName.'.jpg' => $slide5Link,
-];
 
-$mainImgUrl = array_keys($slides)[0];
-$mainLink = array_values($slides)[0];
+$slides = Slide::find()
+    ->andWhere(['status' => 1])
+    ->orderBy('sort')
+    ->all();
+
+if (count($slides)) {
+
+$mainSlide = $slides[0];
 ?>
 
 <div id="index_slider">
     <div class="image">
         <div>
-            <a href="<?= $mainLink; ?>">
-                <img src="<?= $mainImgUrl; ?>" alt="">
+            <a href="<?= $mainSlide->content->link; ?>">
+                <img src="<?= $mainSlide->content->url; ?>" alt="">
             </a>
         </div>
     </div>
@@ -41,13 +41,15 @@ $mainLink = array_values($slides)[0];
         <a href="#" class="next"></a>
     </div>
     <div class="bullets">
-        <?php $i=0; foreach ($slides as $imgUrl => $link) { $i++ ?>
-            <a href="<?= $imgUrl; ?>" data-link="<?= $link; ?>" <?php if ($i==1) { echo ' class="active"'; } ?>></a>
+        <?php $i=0; foreach ($slides as $slide) { $i++ ?>
+            <a href="<?= $slide->content->url; ?>" data-link="<?= $slide->content->link; ?>" <?php if ($i==1) { echo ' class="active"'; } ?>></a>
         <?php } ?>
     </div>
 </div>
 
 <!-- INDEX SLIDER END -->
+
+<?php } ?>
 
 <div class="mobile_categories" style="display: none;">
     <ul>
