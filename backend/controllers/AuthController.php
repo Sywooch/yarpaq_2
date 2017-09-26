@@ -10,6 +10,16 @@ use backend\models\LoginForm;
 
 class AuthController extends \webvimark\modules\UserManagement\controllers\AuthController
 {
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            //'captcha' => $this->module->captchaOptions,
+        ];
+    }
+
     public function actionLogin() {
         if ( !Yii::$app->user->isGuest )
         {
