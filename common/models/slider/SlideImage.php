@@ -101,4 +101,13 @@ class SlideImage extends \yii\db\ActiveRecord
     public function getPath() {
         return Yii::$app->params['slide.uploads.path'] . $this->web_name;
     }
+
+    /**
+     * Удаляет файл с диска
+     *
+     * @return bool
+     */
+    public function deleteImage() {
+        return @unlink($this->path);
+    }
 }

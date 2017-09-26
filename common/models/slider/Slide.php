@@ -82,4 +82,19 @@ class Slide extends \yii\db\ActiveRecord
         return $this->hasOne(SlideImage::className(), ['model_id' => 'id'])->andWhere(['language_id' => Language::getCurrent()->id]);
     }
 
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+
+            $contents = $this->contents;
+            foreach ($contents as $content) {
+                $content->deleteImage();
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
