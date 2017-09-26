@@ -404,4 +404,8 @@ class Product extends \yii\db\ActiveRecord
     public function isVisible() {
         return $this->moderated && $this->status_id == self::STATUS_ACTIVE;
     }
+
+    public static function deactivateProductsBySeller(User $seller) {
+        Yii::$app->db->createCommand()->update('{{%product}}', ['status_id' => Product::STATUS_INACTIVE], 'user_id = '.$seller->id)->execute();
+    }
 }

@@ -98,5 +98,19 @@ class User extends BaseUser {
         return $this->profile->firstname . ' ' . $this->profile->lastname;
     }
 
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+
+        // деактивировать товары продавца,
+        // если продавец деактивирован
+
+        if (
+            $this->hasRole('seller') && // если юзер продавец
+            $this->status != 1 && // если статус не равен "Активен"
+            $changedAttributes['status'] == 1
+        ) {
+            Product::deactivateProductsBySeller($this);
+        }
+    }
 
 }
