@@ -1,15 +1,10 @@
 <?php
 
-use common\models\category\Category;
-use common\models\info\Info;
+use yii\helpers\Url;
 use common\models\Language;
 use common\models\slider\Slide;
 
-$slide1Link = ( $slide1 = Category::findOne(940) )  ? $slide1->url : '#';
-$slide2Link = ( $slide2 = Category::findOne(949) )  ? $slide2->url : '#';
-$slide3Link = ( $slide3 = Info::findOne(5)       )  ? $slide3->url : '#';
-$slide4Link = ( $slide4 = Category::findOne(792) )  ? $slide4->url : '#';
-$slide5Link = ( $slide5 = Category::findOne(583) )  ? $slide5->url : '#';
+$slide1Link = Url::to(['seller-products/index', 'id' => 67]);
 
 $currentLangName = Language::getCurrent()->name;
 ?>
@@ -78,7 +73,7 @@ $mainSlide = $slides[0];
 
 <div class="banner_long">
     <a href="<?= $slide1Link; ?>">
-        <img src="/upload/Images/school.jpg" alt=""><img src="/upload/Images/mobile-school.jpg" alt="">
+        <img src="/upload/Images/kreslo-puff.jpg" alt=""><img src="/upload/Images/kreslo-puff-mobile.jpg" alt="">
     </a>
 </div>
 
