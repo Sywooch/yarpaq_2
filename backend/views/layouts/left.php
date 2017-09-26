@@ -19,7 +19,7 @@ use common\models\User;
         <?php
 
         if (User::hasRole('admin')) {
-            echo dmstr\widgets\Menu::widget(
+            echo \yii\bootstrap\Nav::widget(
                 [
                     'options' => ['class' => 'sidebar-menu'],
                     'items' => [
@@ -53,7 +53,7 @@ use common\models\User;
                 ]
             );
         } else {
-            echo dmstr\widgets\Menu::widget(
+            echo \yii\bootstrap\Nav::widget(
                 [
                     'options' => ['class' => 'sidebar-menu'],
                     'items' => [
