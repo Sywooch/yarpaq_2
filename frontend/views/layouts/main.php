@@ -120,59 +120,64 @@ $seo = $this->params['seo'];
                                 ->all();
 
                             if (count($topCategoryList)) {
-                            ?>
-                            <div class="top_categories cat_list">
+                                if ($this->beginCache('top-categories-'.Yii::$app->language, ['duration' => 60 * 60 * 24])) { ?>
+                                    <div class="top_categories cat_list">
 
-                                <h2><?= Yii::t('app', 'Top Categories'); ?><span></span></h2>
-                                <ul>
-                                    <?php foreach ($topCategoryList as $category) { ?>
-                                        <li class="cont">
-                                            <a href="<?= $category->url; ?>">
-                                                <img width="30" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
-                                            </a>
+                                        <h2><?= Yii::t('app', 'Top Categories'); ?><span></span></h2>
+                                        <ul>
+                                            <?php foreach ($topCategoryList as $category) { ?>
+                                                <li class="cont">
+                                                    <a href="<?= $category->url; ?>">
+                                                        <img width="30" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
+                                                    </a>
 
-                                            <div class="cont-list">
-                                                <nav class="cont-ul">
+                                                    <div class="cont-list">
+                                                        <nav class="cont-ul">
 
-                                                    <?php
-                                                    $menu_cursor = 0;
-                                                    foreach ($category->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subcategory) {
-                                                        $menu_cursor++;
+                                                            <?php
+                                                            $menu_cursor = 0;
+                                                            foreach ($category->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subcategory) {
+                                                                $menu_cursor++;
 
-                                                        if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
-                                                        ?>
-                                                        <article class="cont">
-                                                            <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
-                                                            <ul class="cont-list cont-ul">
-                                                                <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
-                                                                    <li class="cont">
-                                                                        <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
+                                                                if (in_array($menu_cursor, [1,4,7])) { echo '<div>'; }
+                                                                ?>
+                                                                <article class="cont">
+                                                                    <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
+                                                                    <ul class="cont-list cont-ul">
+                                                                        <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
+                                                                            <li class="cont">
+                                                                                <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
-                                                                        <ul class="cont-list cont-ul">
-                                                                            <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
-                                                                                <li class="cont">
-                                                                                    <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
-                                                                                </li>
-                                                                            <?php } ?>
-                                                                        </ul>
-                                                                    </li>
-                                                                <?php } ?>
-                                                            </ul>
-                                                        </article>
+                                                                                <ul class="cont-list cont-ul">
+                                                                                    <?php foreach ($subsubcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubsubcategory) {?>
+                                                                                        <li class="cont">
+                                                                                            <a href="<?= $subsubsubcategory->url; ?>"><?= $subsubsubcategory->title; ?></a>
+                                                                                        </li>
+                                                                                    <?php } ?>
+                                                                                </ul>
+                                                                            </li>
+                                                                        <?php } ?>
+                                                                    </ul>
+                                                                </article>
 
-                                                        <?php
-                                                        if (in_array($menu_cursor, [3,6,9])) { echo '</div>'; }
-                                                    }
-                                                    ?>
+                                                                <?php
+                                                                if (in_array($menu_cursor, [3,6,9])) { echo '</div>'; }
+                                                            }
+                                                            ?>
 
-                                                </nav>
-                                            </div>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
+                                                        </nav>
+                                                    </div>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                <?php
+                                    $this->endCache();
+                                }
+                                ?>
                             <?php } ?>
                             <div class="categories_list cat_list">
+                                <?php if ($this->beginCache('categories-'.Yii::$app->language, ['duration' => 60 * 60 * 24])) { ?>
                                 <ul>
                                     <?php foreach ($main_categories as $category) { ?>
                                     <li class="cont">
@@ -215,6 +220,9 @@ $seo = $this->params['seo'];
                                     </li>
                                     <?php } ?>
                                 </ul>
+                                <?php
+                                    $this->endCache();
+                                } ?>
                             </div>
                         </div>
                         <div class="right_side">
