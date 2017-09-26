@@ -213,7 +213,7 @@ use yii\helpers\ArrayHelper;
                     <div class="col-xs-12">
 
                         <?php
-                        $initCategories = empty($model->categoryIDs) ? '' : Category::find()->andWhere(['in', 'id', $model->categoryIDs])->all();
+                        $initCategories = empty($model->categoryIDs) ? [] : Category::find()->andWhere(['in', 'id', $model->categoryIDs])->all();
                         $initValueText = ArrayHelper::map($initCategories, 'id', 'fullName');
 
                         echo $form->field($model, 'categoryIDs')->widget(Select2::classname(), [
