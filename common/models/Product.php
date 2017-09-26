@@ -396,9 +396,17 @@ class Product extends \yii\db\ActiveRecord
     public function afterDelete() {
         parent::afterDelete();
 
+        // delete gallery
+        foreach ($this->gallery as $image) {
+            /**
+             * @var $image ProductImage
+             */
+            $image->deleteImage();
+        }
 
-        $search = new ProductSearch();
-        $search->delete($this);
+
+        $elasticSearch = new ProductSearch();
+        $elasticSearch->delete($this);
     }
 
     public function isVisible() {
