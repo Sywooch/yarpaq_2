@@ -86,7 +86,7 @@ use kartik\select2\Select2;
             // Category BEGIN
 
             $initCategory = empty($model->parent_id) ? '' : Category::find()->andWhere(['id' => $model->parent_id])->one();
-            $initValueText = $initCategory->fullName;
+            $initValueText = $initCategory ? $initCategory->fullName : '';
 
             echo $form->field($model, 'parent_id')->widget(Select2::classname(), [
                 'initValueText' => $initValueText,
