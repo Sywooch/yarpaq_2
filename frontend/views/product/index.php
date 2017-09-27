@@ -44,16 +44,20 @@ $currency = Yii::$app->currency;
                     </div>
                 </div>
                 <div class="thumbnails">
+                    <div class="swipe">
+                        <div class="xzoom-thumbs">
 
-                    <div class="xzoom-thumbs">
-
-                        <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
-                            <a href="<?= $image->url; ?>">
-                                <img class="xzoom-gallery" width="70" src="<?= $image->url; ?>">
-                            </a>
-                        <?php } ?>
+                            <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
+                                <a href="<?= $image->url; ?>">
+                                    <img class="xzoom-gallery" width="70" src="<?= $image->url; ?>">
+                                </a>
+                            <?php } ?>
+                        </div>
                     </div>
-
+                    <div class="arrows">
+                        <a href="#" class="prev unactive"></a>
+                        <a href="#" class="next"></a>
+                    </div>
                 </div>
             </div>
         </div>

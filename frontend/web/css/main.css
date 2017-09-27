@@ -2613,10 +2613,49 @@ a.back_to_top.show_me {
 }
 
 .priduct_gallery .thumbnails {
-  width: 60px;
+  width: 75px;
   position: absolute;
-  top: 80px;
+  top: 100px;
   left: 10px;
+}
+
+.priduct_gallery .thumbnails .swipe {
+  width: 75px;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.priduct_gallery .thumbnails .arrows a {
+  display: block;
+  width: 75px;
+  height: 20px;
+  position: absolute;
+  left: 2px;
+}
+
+.priduct_gallery .thumbnails .arrows a.unactive {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.priduct_gallery .thumbnails .arrows a.prev {
+  top: -30px;
+  background: url(../img/vertical_arrow.svg) no-repeat 50%;
+  -moz-transform: rotate(180deg);
+  /* Для Firefox */
+  -ms-transform: rotate(180deg);
+  /* Для IE */
+  -webkit-transform: rotate(180deg);
+  /* Для Safari, Chrome, iOS */
+  -o-transform: rotate(180deg);
+  /* Для Opera */
+  transform: rotate(180deg);
+}
+
+.priduct_gallery .thumbnails .arrows a.next {
+  bottom: -30px;
+  background: url(../img/vertical_arrow.svg) no-repeat 50%;
 }
 
 .priduct_gallery .thumbnails ul li {
