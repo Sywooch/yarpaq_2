@@ -2615,13 +2615,13 @@ a.back_to_top.show_me {
 .priduct_gallery .thumbnails {
   width: 75px;
   position: absolute;
-  top: 100px;
-  left: 10px;
+  top: 74px;
+  left: 12px;
 }
 
 .priduct_gallery .thumbnails .swipe {
   width: 75px;
-  height: 400px;
+  height: 406px;
   overflow: hidden;
   position: relative;
 }
@@ -2656,6 +2656,18 @@ a.back_to_top.show_me {
 .priduct_gallery .thumbnails .arrows a.next {
   bottom: -30px;
   background: url(../img/vertical_arrow.svg) no-repeat 50%;
+}
+
+.priduct_gallery .thumbnails .xzoom-thumbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation-duration: 0.3s;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-animation-duration: 0.3s;
+  -moz-transition: all 0.3s ease-in-out;
+  animation-duration: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 .priduct_gallery .thumbnails ul li {
