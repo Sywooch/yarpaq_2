@@ -3,6 +3,7 @@
 namespace common\components\image;
 
 
+use Imagine\Image\ManipulatorInterface;
 use Yii;
 use yii\base\Model;
 use yii\imagine\Image;
@@ -25,7 +26,7 @@ abstract class ImageVariation extends Model implements IImageVariation
     public static function get($originalPath, $filename) {
         $thumb = new static($filename);
 
-        if (is_file($thumb->path)) { // exists
+        if ($thumb->exists()) { // exists
             return $thumb;
         } else {
             $thumb->createFromSource($originalPath);
@@ -41,7 +42,7 @@ abstract class ImageVariation extends Model implements IImageVariation
 
     public function createFromSource($originalPath) {
         if (is_file($originalPath)) {
-            Image::thumbnail($originalPath, $this->width, $this->height)
+            Image::thumbnail($originalPath, $this->width, $this->height, ManipulatorInterface::THUMBNAIL_INSET)
                 ->save($this->path, ['jpeg_quality' => 90]);
         } else {
             Yii::error('Source file "'.$originalPath.'" doesn\'t exist');
