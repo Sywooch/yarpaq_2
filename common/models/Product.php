@@ -355,9 +355,9 @@ class Product extends \yii\db\ActiveRecord
 
     public function getPreview() {
         if (count($this->gallery)) {
-            return $this->gallery[0]->url;
+            return $this->gallery[0]->preview;
         } else {
-            return '#';
+            return '';
         }
     }
 

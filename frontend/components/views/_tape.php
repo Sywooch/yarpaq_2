@@ -6,7 +6,7 @@
             <li>
                 <div>
                     <div class="image">
-                        <img src="<?= @$product->gallery[0]->url; ?>" alt="<?= $product->title; ?>" itemprop="image">
+                        <img src="<?= $product->preview->url; ?>" alt="<?= $product->title; ?>" itemprop="image">
                     </div>
 
                     <h3><?= $product->title; ?></h3>

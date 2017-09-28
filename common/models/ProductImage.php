@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use common\models\product\ProductImagePreview;
+use common\models\product\ProductImageStandard;
 
 /**
  * This is the model class for table "{{%product_image}}".
@@ -80,7 +82,7 @@ class ProductImage extends \yii\db\ActiveRecord
      *
      * @return bool
      */
-    public function deleteImage() {
+    public function deleteImage() { // TODO при удалении удалять вариации в том числе
         return @unlink($this->path);
     }
 
@@ -95,4 +97,13 @@ class ProductImage extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public function getPreview() {
+        return ProductImagePreview::get($this->path, $this->web_name);
+    }
+
+    public function getStandard() {
+        return ProductImageStandard::get($this->path, $this->web_name);
+    }
+
 }

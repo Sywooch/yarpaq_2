@@ -32,7 +32,9 @@
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
 
-        "elasticsearch/elasticsearch": "~5.0"
+        "elasticsearch/elasticsearch": "~5.0",
+
+        "yiisoft/yii2-imagine": "~2.1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
