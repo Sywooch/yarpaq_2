@@ -33,14 +33,18 @@ abstract class ImageVariation extends Model implements IImageVariation
             if ($thumb->exists()) {
                 return $thumb;
             } else {
-                Yii::error('Unable to create "'.__CLASS__.'" thumb for '.$originalPath);
+                Yii::error('Unable to create "'.$thumb->className().'" thumb for '.$originalPath);
                 return new EmptyImage();
             }
         }
     }
 
     public function createFromSource($originalPath) {
-        Image::thumbnail($originalPath, $this->width, $this->height)
-            ->save($this->path, ['jpeg_quality' => 90]);
+        if (is_file($originalPath)) {
+            Image::thumbnail($originalPath, $this->width, $this->height)
+                ->save($this->path, ['jpeg_quality' => 90]);
+        } else {
+            Yii::error('Source file "'.$originalPath.'" doesn\'t exist');
+        }
     }
 }

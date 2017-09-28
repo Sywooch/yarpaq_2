@@ -2,10 +2,10 @@
 <article itemscope itemtype="http://schema.org/Product">
     <div class="image">
         <a href="<?= $product->url; ?>">
-            <img src="<?= $product->preview; ?>" alt="" itemprop="image">
+            <img src="<?= $product->preview->url; ?>" alt="" itemprop="image">
         </a>
     </div>
-    <h3><a href="<?= $product->url; ?>" itemprop="name"><?= $product->title; ?></a></h3>
+    <h3><a href="<?= $product->preview->url; ?>" itemprop="name"><?= $product->title; ?></a></h3>
 
     <meta itemprop="priceCurrency" content="AZN" />
 
