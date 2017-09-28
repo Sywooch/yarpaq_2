@@ -29,7 +29,7 @@ $currency = Yii::$app->currency;
             <div id="mobile-gallery">
                 <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
                     <div>
-                        <img src="<?= $image->url; ?>" alt="<?= $product->title ?>">
+                        <img src="<?= $image->preview->url; ?>" alt="<?= $product->title ?>">
                     </div>
                 <?php } ?>
             </div>
@@ -38,7 +38,7 @@ $currency = Yii::$app->currency;
                 <div class="image">
                     <div>
                         <?php if (count($product->gallery)) { ?>
-                            <img class="_xzoom" src="<?= $product->gallery[0]->url; ?>" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
+                            <img class="_xzoom" src="<?= $product->gallery[0]->standard->url; ?>" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
                         <?php } ?>
 
                     </div>
@@ -48,8 +48,8 @@ $currency = Yii::$app->currency;
                         <div class="xzoom-thumbs">
 
                             <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
-                                <a href="<?= $image->url; ?>" class="thumb">
-                                    <img class="xzoom-gallery" width="70" src="<?= $image->url; ?>">
+                                <a href="<?= $image->preview->url; ?>" class="thumb">
+                                    <img class="xzoom-gallery" width="70" src="<?= $image->preview->url; ?>">
                                 </a>
                             <?php } ?>
                         </div>

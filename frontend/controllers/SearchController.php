@@ -255,7 +255,9 @@ class SearchController extends BasicController
         $result = ArrayHelper::toArray($products, [
             'common\models\Product' => [
                 'title',
-                'preview',
+                'preview' => function ($product) {
+                    return $product->preview->url;
+                },
                 'price' => function ($product) {
                     return Yii::$app->currency->convertAndFormat($product->price, $product->currency);
                 },

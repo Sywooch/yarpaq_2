@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\image\EmptyImage;
 use common\components\ProductSearch;
 use common\models\category\Category;
 use common\models\option\Option;
@@ -353,11 +354,14 @@ class Product extends \yii\db\ActiveRecord
         return $this->price + 3;
     }
 
+    /**
+     * @return EmptyImage IImageVariation
+     */
     public function getPreview() {
         if (count($this->gallery)) {
             return $this->gallery[0]->preview;
         } else {
-            return '';
+            return new EmptyImage();
         }
     }
 

@@ -43,7 +43,7 @@ abstract class ImageVariation extends Model implements IImageVariation
     public function createFromSource($originalPath) {
         if (is_file($originalPath)) {
             Image::thumbnail($originalPath, $this->width, $this->height, ManipulatorInterface::THUMBNAIL_INSET)
-                ->save($this->path, ['jpeg_quality' => 90]);
+                ->save($this->path, ['jpeg_quality' => 85]);
         } else {
             Yii::error('Source file "'.$originalPath.'" doesn\'t exist');
         }

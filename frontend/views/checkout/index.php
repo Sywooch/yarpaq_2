@@ -224,7 +224,7 @@ $currency = Yii::$app->currency;
                 <article>
                     <div class="image">
                         <a href="<?= $product_object->url; ?>">
-                            <img src="<?= $product_object->preview; ?>" alt="<?= $product_object->title; ?>">
+                            <img src="<?= $product_object->preview->url; ?>" alt="<?= $product_object->title; ?>">
                         </a>
                     </div>
                     <div class="inner">
