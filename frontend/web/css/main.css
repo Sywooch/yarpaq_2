@@ -1960,8 +1960,8 @@ a.search_toggler {
 }
 
 .full_nav .right_side nav > div article {
-  padding: 0 0 11px;
-  margin: 0 0 18px;
+  padding: 0;
+  margin: 0 0 8px;
   border-bottom: 1px solid #f0f0f0;
 }
 

@@ -131,7 +131,7 @@ return [
     => 'Делая заказ, вы соглашаетесь с {Terms and Conditions}, и условиями {Confidentiality and Return}.',
 
     'A product can be returned at place for 2 azn. In case of not looking as in description or photos, it can be returned for free.'
-    => 'Товар может быть возвращен на месте за 2 AZN. Если товар не подходит под описание или фотографии, то может быть возвращен без оплаты.',
+    => ' Товар может быть возвращен, если он не соответствует описанию или фотографям. В противном случае, за отказ, удерживается 2 AZN за каждый товар.',
 
     'Edit' => 'Отредактировать',
 

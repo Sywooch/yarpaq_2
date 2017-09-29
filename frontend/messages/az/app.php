@@ -46,7 +46,7 @@ return [
     'Confirm and Pay' => 'Təsdiqlə və ödə',
     'Courier' => 'Kuryer ilə',
     'Post' => 'Poçt ilə',
-    'Cash' => 'Nəğd',
+    'Cash' => 'Nağd',
     'Reset filter' => 'Filteri təmizlə',
     'Remove checked items' => 'Seçilmiş məhsulları silmək',
     'Registration' => 'Qeydiyyat',
@@ -129,7 +129,7 @@ return [
     => 'Siz sifariş verərək {Terms and Conditions}, {Confidentiality and Return} şərtləri ilə razılaşmış olursunuz.',
 
     'A product can be returned at place for 2 azn. In case of not looking as in description or photos, it can be returned for free.'
-    => 'Qaytarış yerində hər bir məhsula görə 2 AZN təşkil edir. Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə ödənişsiz qaytarla bilər',
+    => 'Çatdırılma anında məhsul təsvirə və ya şəkillərə uyğun gəlmədikdə ödənişsiz qaytarıla bilər. Səbəbsiz imtina və ya dəyişdirmə isə hər məhsula görə 2 AZN təşkil edir.',
 
     'Edit' => 'Düzəliş et',
 
