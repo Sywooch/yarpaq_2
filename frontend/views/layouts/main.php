@@ -145,7 +145,7 @@ $seo = $this->params['seo'];
                                                                     <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                                     <ul class="cont-list cont-ul">
                                                                         <?php
-                                                                        $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all();
+                                                                        $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(6)->all();
                                                                         foreach ($subcategoryChildren as $subsubcategory) {?>
                                                                             <li class="cont">
                                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
@@ -203,7 +203,7 @@ $seo = $this->params['seo'];
                                                         <ul class="cont-list cont-ul">
                                                             <?php
                                                             $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all();
-                                                            foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all() as $subsubcategory) {?>
+                                                            foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(6)->all() as $subsubcategory) {?>
                                                             <li class="cont">
                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
