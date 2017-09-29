@@ -10,7 +10,7 @@ class ElasticController extends BasicController
 {
     private $index = 'yarpaq';
     private $type = 'product';
-    private $endPoint = 'https://elastic:13FBz5ryol4NH7WBupFLQl7h@3d2ffe75fd58df49bf393b33d089f355.us-east-1.aws.found.io:9243';
+    private $endPoint = 'https://elastic:1O9dV3nKiGkhtBdbGgU80tXX@7b51591276427595ffadb0b88481a0a5.us-east-1.aws.found.io:9243';
 
     public $freeAccessActions = ['index', 'one', 'create', 'delete'];
 
