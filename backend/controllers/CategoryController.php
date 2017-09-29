@@ -8,6 +8,7 @@ use common\models\category\CategoryImage;
 use common\models\Language;
 use webvimark\components\AdminDefaultController;
 use Yii;
+use yii\caching\FileCache;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
@@ -378,5 +379,13 @@ class CategoryController extends AdminDefaultController
         }
 
         return $out;
+    }
+
+    public function actionClearCache() {
+        $success = Yii::$app->frontCache->flush();
+
+        return $this->render('clear-cache', [
+            'success' => $success
+        ]);
     }
 }

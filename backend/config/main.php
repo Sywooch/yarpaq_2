@@ -73,6 +73,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],
+
+        'frontCache' => [
+            'class' => 'yii\caching\FileCache',
+            'cachePath' => '@frontend/runtime/cache'
+        ],
     ],
 
     'modules' => [

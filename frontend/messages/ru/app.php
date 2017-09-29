@@ -165,6 +165,8 @@ return [
     'Choose payment type' => 'Выберите метод оплаты',
 
     'You have successfully joined Yarpaq.az' => 'Вы успешно зарегистрировались на Yarpaq.az',
-    'Required field' => 'Обязательное поле'
+    'Required field' => 'Обязательное поле',
+
+    'See all' => 'Посмотреть все'
 
 ];

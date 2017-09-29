@@ -29,7 +29,7 @@ $currency = Yii::$app->currency;
             <div id="mobile-gallery">
                 <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
                     <div>
-                        <img src="<?= $image->preview->url; ?>" alt="<?= $product->title ?>">
+                        <img src="<?= $image->standard->url; ?>" alt="<?= $product->title ?>">
                     </div>
                 <?php } ?>
             </div>
@@ -54,10 +54,13 @@ $currency = Yii::$app->currency;
                             <?php } ?>
                         </div>
                     </div>
+
+                    <?php if (count($product->gallery) > 5) { ?>
                     <div class="arrows">
                         <a href="#" class="prev unactive"></a>
                         <a href="#" class="next"></a>
                     </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

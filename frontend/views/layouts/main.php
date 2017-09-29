@@ -144,7 +144,9 @@ $seo = $this->params['seo'];
                                                                 <article class="cont">
                                                                     <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                                     <ul class="cont-list cont-ul">
-                                                                        <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
+                                                                        <?php
+                                                                        $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all();
+                                                                        foreach ($subcategoryChildren as $subsubcategory) {?>
                                                                             <li class="cont">
                                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
@@ -156,6 +158,10 @@ $seo = $this->params['seo'];
                                                                                     <?php } ?>
                                                                                 </ul>
                                                                             </li>
+                                                                        <?php } ?>
+
+                                                                        <?php if (count($subcategoryChildren)) { ?>
+                                                                        <li><a href="<?= $subcategory->url; ?>" class="see_all"><?= Yii::t('app', 'See all'); ?> ></a></li>
                                                                         <?php } ?>
                                                                     </ul>
                                                                 </article>
@@ -195,7 +201,9 @@ $seo = $this->params['seo'];
                                                     <article class="cont">
                                                         <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                         <ul class="cont-list cont-ul">
-                                                            <?php foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all() as $subsubcategory) {?>
+                                                            <?php
+                                                            $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all();
+                                                            foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all() as $subsubcategory) {?>
                                                             <li class="cont">
                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
@@ -207,6 +215,10 @@ $seo = $this->params['seo'];
                                                                     <?php } ?>
                                                                 </ul>
                                                             </li>
+                                                            <?php } ?>
+                                                            
+                                                            <?php if (count($subcategoryChildren)) { ?>
+                                                                <li><a href="<?= $subcategory->url; ?>" class="see_all"><?= Yii::t('app', 'See all'); ?> ></a></li>
                                                             <?php } ?>
                                                         </ul>
                                                     </article>

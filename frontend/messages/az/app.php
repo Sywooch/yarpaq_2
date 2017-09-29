@@ -163,6 +163,8 @@ return [
     'Choose payment type' => 'Ödəmə üsulunu seçin',
 
     'You have successfully joined Yarpaq.az' => 'Siz uğurla Yarpaq.az saytında qeydiyyatdan keçdiniz',
-    'Required field' => 'Vacib xana'
+    'Required field' => 'Vacib xana',
+
+    'See all' => 'Hamısına bax'
 
 ];

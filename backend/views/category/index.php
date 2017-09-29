@@ -62,4 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </div>
 
+    <a href="<?= Url::toRoute(['clear-cache']); ?>" class="btn btn-default">Clear frontend cache</a>
+
 </div>
