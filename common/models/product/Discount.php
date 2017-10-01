@@ -35,8 +35,13 @@ class Discount extends \yii\db\ActiveRecord
             [['value'], 'number'],
             [['start_date', 'end_date'], 'datetime', 'format' => 'yyyy-MM-dd HH:mm:ss'],
             [['start_date', 'end_date'], 'required', 'when' => function ($discount) {
-                return $discount->period;
-            }]
+                return $discount->period === 1;
+            }, 'whenClient' => "
+
+                function (attribute, value) {
+                    return $('#discount-period').val() == '1';
+                }"
+            ]
         ];
     }
 
@@ -57,6 +62,8 @@ class Discount extends \yii\db\ActiveRecord
 
     public function beforeValidate() {
         if(parent::beforeValidate()) {
+
+            echo $this->period;
 
             if ($this->period == 0) {
                 $this->start_date = NULL;
