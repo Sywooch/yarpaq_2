@@ -16,6 +16,8 @@ use yii\helpers\ArrayHelper;
             <li><a href="<?php echo Url::to(['product/update', 'id' => $product->id]); ?>#tab_basic"><?= Yii::t('app', 'Basic'); ?></a></li>
             <li><a href="<?php echo Url::to(['product/update', 'id' => $product->id]); ?>#tab_advanced"><?= Yii::t('app', 'Advanced'); ?></a></li>
             <li class="active"><a href="#" data-toggle="tab" aria-expanded="false"><?= Yii::t('app', 'Options'); ?></a></li>
+            <li><a href="<?php echo Url::to(['discount/index', 'id' => $product->id]); ?>"><?= Yii::t('app', 'Discount')?></a></li>
+
         </ul>
         <div class="tab-content">
 

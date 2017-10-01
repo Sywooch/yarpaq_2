@@ -141,7 +141,16 @@ return [
     'Payment info' => 'Информация об оплате',
     'Shipping info' => 'Информация о доставке',
     'Totals' => 'Общее',
-    'Comment' => 'Комментарий'
+    'Comment' => 'Комментарий',
+
+    'Discount'      => 'Скидка',
+    'Percent'       => 'Процент',
+    'Start Date'    => 'Дата начала',
+    'End Date'      => 'Дата окончания',
+    'Constant'      => 'Постоянно',
+    'Range'         => 'Временной промежуток',
+    'Start Date must be earlier than End Date'  => 'Дата начала должна быть раньше Даты окончания',
+    'End Date must be later than Start Date'    => 'Дата окончания должна быть позже Даты начала'
 
 ];
 

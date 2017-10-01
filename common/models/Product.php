@@ -8,6 +8,7 @@ use common\models\category\Category;
 use common\models\option\Option;
 use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
+use common\models\product\Discount;
 use common\models\review\Review;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -342,8 +343,8 @@ class Product extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function getDiscount() { // TODO
-        return 3;
+    public function getDiscount() {
+        return $this->hasOne(Discount::className(), ['product_id' => 'id']);
     }
 
     public function getRating() { // TODO

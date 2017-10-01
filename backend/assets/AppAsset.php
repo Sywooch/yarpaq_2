@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
         'js/gallery.js',
         'js/common.js',
         'js/order.js',
+        'js/discount.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

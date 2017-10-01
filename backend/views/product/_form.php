@@ -33,6 +33,9 @@ use yii\helpers\ArrayHelper;
             <?php if (!$model->isNewRecord) { ?>
             <li><a href="<?php echo Url::to(['product-option/index', 'id' => $model->id]); ?>"><?= Yii::t('app', 'Options')?></a></li>
             <?php } ?>
+            <?php if (!$model->isNewRecord) { ?>
+            <li><a href="<?php echo Url::to(['discount/index', 'id' => $model->id]); ?>"><?= Yii::t('app', 'Discount')?></a></li>
+            <?php } ?>
         </ul>
         <div class="tab-content">
 

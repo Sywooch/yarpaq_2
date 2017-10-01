@@ -143,7 +143,16 @@ return [
     'Payment info' => 'Ödəniş haqqında məlumat',
     'Shipping info' => 'Çatdırılma haqqında məlumat',
     'Totals' => 'Ümumi',
-    'Comment' => 'Sərh'
+    'Comment' => 'Sərh',
+
+    'Discount'      => 'Endirim',
+    'Percent'       => 'Faiz',
+    'Start Date'    => 'Başlama Tarixi',
+    'End Date'      => 'Bitmə Tarixi',
+    'Constant'      => 'Daimi',
+    'Range'         => 'Vaxt aralığı',
+    'Start Date must be earlier than End Date'  => 'Başlama tarixi Bitmə tarixindən gec olmamalıdır',
+    'End Date must be later than Start Date'    => 'Başlama tarixi Bitmə tarixindən gec olmalıdır'
 
 
 ];
