@@ -12,21 +12,29 @@
                     <h3><?= $product->title; ?></h3>
                     <div class="price">
                         <span>
-                            <?= $currency->convertAndFormat($product->price, $product->currency); ?>
+                            <?= $currency->convertAndFormat($product->realPrice, $product->currency); ?>
                         </span>
                     </div>
                     <?php if ($product->hasDiscount()) { ?>
                     <div class="old_price">
                         <span>
                             <?= Yii::t('app', 'Qiymət');?>:
-                            <em><?= $currency->convertAndFormat($product->price, $product->currency); ?></em>
+                            <em><?= $currency->convertAndFormat($product->oldPrice, $product->currency); ?></em>
                         </span>
-                        <b class="discount"><?= $product->discount; ?> <i class="currency_icon">m</i> <?= Yii::t('app', 'OFF'); ?></b>
+                        <b class="discount"><?= $product->oldPrice - $product->realPrice; ?> <i class="currency_icon">m</i> <?= Yii::t('app', 'OFF'); ?></b>
                     </div>
                     <?php } ?>
                     <div class="rating">
                         <span class="star_<?= $product->rating; ?>"></span>
                     </div>
+
+                    <?php if ($product->hasDiscount()) { ?>
+                        <span class="discount_i"><?= Yii::t('app', 'Discount'); ?></span>
+                    <?php } ?>
+
+                    <?php if ($product->isNew()) { ?>
+                        <span class="new_i"><?= Yii::t('app', 'New'); ?></span>
+                    <?php } ?>
                 </div>
                 <a href="<?= $product->url; ?>"></a>
             </li>

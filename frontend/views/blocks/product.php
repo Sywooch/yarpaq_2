@@ -11,7 +11,7 @@
 
     <div class="price">
         <span itemprop="price">
-            <?= $currency->convertAndFormat($product->price, $product->currency); ?>
+            <?= $currency->convertAndFormat($product->realPrice, $product->currency); ?>
         </span>
     </div>
 

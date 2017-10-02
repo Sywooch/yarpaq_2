@@ -281,8 +281,12 @@ class Product extends \yii\db\ActiveRecord
      * @param bool|false $considerOptions Флаг - учитывай примененные опции или нет.
      * @return string
      */
-    public function getPrice($considerOptions = false) {
-        $price = $this->price;
+    public function getRealPrice($considerOptions = false) {
+        $price = $this->getAttribute('price');
+
+        if ($this->hasDiscount()) {
+            $price = $this->discount->value;
+        }
 
         if ($considerOptions && $this->appliedOptions) {
             foreach ($this->appliedOptions as $appliedOption) {
@@ -339,20 +343,39 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Zone::className(), ['id' => 'location_id']);
     }
 
-    public function hasDiscount() { // TODO
-        return false;
+    public function hasDiscount() {
+        return (bool)$this->discount;
     }
 
+    /**
+     * Возвращает объект скидки
+     *
+     * @return $this
+     */
     public function getDiscount() {
-        return $this->hasOne(Discount::className(), ['product_id' => 'id']);
+        $now = (new \DateTime())->format('Y-m-d H:i:s');
+
+        $query = $this
+            ->hasOne(Discount::className(), ['product_id' => 'id'])
+            ->andFilterWhere([
+                'or',
+                ['period' => Discount::PERIOD_CONSTANT], // либо скидка постоянная
+                [
+                    'and', // либо срок действия уже начался, но еще не закончился
+                    ['>=', 'start_date', $now],
+                    ['<=', 'end_date', $now]
+                ]
+            ]);
+
+        return $query;
     }
 
     public function getRating() { // TODO
         return 4;
     }
 
-    public function getOldPrice() { // TODO
-        return $this->price + 3;
+    public function getOldPrice() {
+        return $this->price;
     }
 
     /**

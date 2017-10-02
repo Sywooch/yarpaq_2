@@ -16,6 +16,10 @@ use Yii;
  */
 class Discount extends \yii\db\ActiveRecord
 {
+
+    const PERIOD_CONSTANT   = 0;
+    const PERIOD_RANGE      = 1;
+
     /**
      * @inheritdoc
      */

@@ -213,7 +213,7 @@ class Cart extends Component
 
                     }
 
-                    $price = $product_model->price;
+                    $price = $product_model->realPrice;
 
                     // Stock
                     if (!$product_model->quantity || ($product_model->quantity < $quantity)) {

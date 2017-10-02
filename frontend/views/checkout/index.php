@@ -229,7 +229,7 @@ $currency = Yii::$app->currency;
                     </div>
                     <div class="inner">
                         <div class="price">
-                            <?= $currency->convertAndFormat($product_object->price, $product_object->currency); ?>
+                            <?= $currency->convertAndFormat($product_object->realPrice, $product_object->currency); ?>
                         </div>
                         <p><?= $product_object->title; ?></p>
 

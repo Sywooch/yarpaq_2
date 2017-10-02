@@ -88,7 +88,7 @@ $currency = Yii::$app->currency;
                         <div class="price">
                             <span><?= Yii::t('app', 'Price'); ?>:</span>
                             <b>
-                                <?= $currency->convertAndFormat($product->price, $product->currency); ?>
+                                <?= $currency->convertAndFormat($product->realPrice, $product->currency); ?>
                             </b>
                         </div>
                         <ul>
@@ -102,7 +102,7 @@ $currency = Yii::$app->currency;
                     </div>
                     <div class="cards_dicsount">
 
-                        <?php $albali = new Albali($product->price); ?>
+                        <?php $albali = new Albali($product->realPrice); ?>
                         <div>
                             <h4>Albalı</h4>
                             <table>
@@ -132,7 +132,7 @@ $currency = Yii::$app->currency;
                         </div>
 
 
-                        <?php $bolkart = new Bolkart($product->price); ?>
+                        <?php $bolkart = new Bolkart($product->realPrice); ?>
                         <div>
                             <h4>Bolkart</h4>
                             <table>
