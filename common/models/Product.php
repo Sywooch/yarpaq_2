@@ -344,7 +344,26 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function hasDiscount() {
-        return (bool)$this->discount;
+        $discount = $this->discount;
+
+        if ($discount && $discount->value != '') {
+            $now = new \DateTime();
+            $start_date = new \DateTime($discount->start_date);
+            $end_date = new \DateTime($discount->end_date);
+
+            if (
+                $discount->period == Discount::PERIOD_CONSTANT // либо скидка постоянная
+                ||
+                (
+                    $discount->period == Discount::PERIOD_RANGE // либо временной промежуток скидки активен
+                    && $start_date <= $now
+                    && $end_date >= $now
+                )
+            ) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -353,21 +372,7 @@ class Product extends \yii\db\ActiveRecord
      * @return $this
      */
     public function getDiscount() {
-        $now = (new \DateTime())->format('Y-m-d H:i:s');
-
-        $query = $this
-            ->hasOne(Discount::className(), ['product_id' => 'id'])
-            ->andFilterWhere([
-                'or',
-                ['period' => Discount::PERIOD_CONSTANT], // либо скидка постоянная
-                [
-                    'and', // либо срок действия уже начался, но еще не закончился
-                    ['>=', 'start_date', $now],
-                    ['<=', 'end_date', $now]
-                ]
-            ]);
-
-        return $query;
+        return $this->hasOne(Discount::className(), ['product_id' => 'id']);
     }
 
     public function getRating() { // TODO
