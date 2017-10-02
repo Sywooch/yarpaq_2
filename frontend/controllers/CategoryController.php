@@ -47,9 +47,10 @@ class CategoryController extends BasicController
         // GET Products
         $repo = new ProductRepository();
         $products = $repo->visibleOnTheSite()
-            ->leftJoin('{{%product_category}}', '`product_id` = `id`')
-            ->andWhere(['category_id' => $childrenCategoriesIDs])
+            ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.`id`')
+            ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
             ->groupBy('id');
+        $products->alias('p');
 
         // get min price
         $minPriceProducts = clone $products;
@@ -66,12 +67,27 @@ class CategoryController extends BasicController
             $products->andWhere(['manufacturer_id' => $productFilter->brand]);
         }
 
-        if ($productFilter->price_from) {
-            $products->andWhere(['>=', 'price', $productFilter->price_from]);
-        }
+        if ($productFilter->price_from && $productFilter->price_to) {
+            $products->leftJoin('{{%discount}} d', 'd.product_id = p.id');
+            $products->andWhere('
+            (
+                case
 
-        if ($productFilter->price_to) {
-            $products->andWhere(['<=', 'price', $productFilter->price_to]);
+                when
+                    d.value IS NOT NULL
+                    AND ( (d.period = 1 AND d.start_date <= :now AND d.end_date >= :now OR d.period = 0)  ) then
+
+                    case when d.`value` >= :price_from and d.`value` <= :price_to then 1 else 0 end
+                else
+                    case when `price` >= :price_from AND `price` <= :price_to then 1 else 0 end
+                end
+
+            ) = 1
+            ', [
+                'now'           => ( new \DateTime() )->format('Y-m-d H:i:s'),
+                'price_from'    => $productFilter->price_from,
+                'price_to'      => $productFilter->price_to
+            ]);
         }
 
         if ($productFilter->sort) {
@@ -103,6 +119,7 @@ class CategoryController extends BasicController
             ->all();
         // GET Brands END
 
+//        echo $products->createCommand()->getRawSql();
 
         $this->seo($category->title);
 

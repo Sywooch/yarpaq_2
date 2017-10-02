@@ -48,12 +48,14 @@ $children = $category->getChildren()->all(); ?>
         <section>
             <h3><span><?= Yii::t('app', 'Price range'); ?></span></h3>
             <div>
+                <?php if (false) { ?>
                 <input type="text" class="price-range" value=""
                        data-min="<?=$productFilter->price_min?>"
                        data-max="<?=$productFilter->price_max?>"
                        data-from="<?= $productFilter->price_from ? $productFilter->price_from : $productFilter->price_min; ?>"
                        data-to="<?= $productFilter->price_to ? $productFilter->price_to : $productFilter->price_max; ?>"
                     >
+                <?php } ?>
                 <div class="price_form">
                     <input type="text" class="price_filter" name="ProductFilter[price_from]"
                            value="<?= $productFilter->price_from; ?>">

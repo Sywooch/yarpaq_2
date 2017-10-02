@@ -1109,7 +1109,7 @@ a.search_toggler {
   padding: 0 0 8px;
 }
 
-.product_carusel .swipe ul li .old_price span {
+.product_carusel .swipe ul li .old_price .price_value {
   padding: 0 20px 0 0;
   color: #7b7b7b;
   font-size: 13px;
@@ -1117,12 +1117,12 @@ a.search_toggler {
   letter-spacing: -0.09px;
 }
 
-.product_carusel .swipe ul li .old_price span em {
+.product_carusel .swipe ul li .old_price .price_value em {
   letter-spacing: -0.1px;
   text-decoration: line-through;
 }
 
-.product_carusel .swipe ul li .old_price span em b.currency_icon {
+.product_carusel .swipe ul li .old_price .price_value em b.currency_icon {
   display: inline-block;
   font-family: 'JIS AZN';
   font-size: 24px;
@@ -5074,13 +5074,14 @@ a.back_to_top.show_me {
 
 .favorites_list article .price span b.currency_icon {
   font-family: 'JIS AZN';
+  padding: 0;
 }
 
 .favorites_list article .old_price {
   padding: 0 0 8px;
 }
 
-.favorites_list article .old_price span {
+.favorites_list article .old_price .price_value {
   padding: 0 20px 0 0;
   color: #7b7b7b;
   font-size: 13px;
@@ -5088,18 +5089,9 @@ a.back_to_top.show_me {
   letter-spacing: -0.09px;
 }
 
-.favorites_list article .old_price span em {
+.favorites_list article .old_price .price_value em {
   letter-spacing: -0.1px;
   text-decoration: line-through;
-}
-
-.favorites_list article .old_price span b.currency_icon {
-  display: inline-block;
-  font-family: 'JIS AZN';
-  font-size: 24px;
-  position: relative;
-  top: 8px;
-  padding: 0 0 0 3px;
 }
 
 .favorites_list article .old_price b.discount {
@@ -6967,7 +6959,7 @@ a.clear_filtre {
   padding: 0 0 8px;
 }
 
-.product_result_list article .old_price span {
+.product_result_list article .old_price .price_value {
   padding: 0 20px 0 0;
   color: #7b7b7b;
   font-size: 13px;
@@ -6975,12 +6967,12 @@ a.clear_filtre {
   letter-spacing: -0.09px;
 }
 
-.product_result_list article .old_price span em {
+.product_result_list article .old_price .price_value em {
   letter-spacing: -0.1px;
   text-decoration: line-through;
 }
 
-.product_result_list article .old_price span b.currency_icon {
+.product_result_list article .old_price .price_value b.currency_icon {
   display: inline-block;
   font-family: 'JIS AZN';
   font-size: 24px;
@@ -7077,6 +7069,8 @@ a.clear_filtre {
 
 .currency_icon {
   font-family: 'JIS AZN';
+  display: inline-block;
+  position: relative;
 }
 
 .discount_i {

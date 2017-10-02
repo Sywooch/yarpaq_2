@@ -17,11 +17,14 @@
                     </div>
                     <?php if ($product->hasDiscount()) { ?>
                     <div class="old_price">
-                        <span>
+                        <span class="price_value">
                             <?= Yii::t('app', 'Qiymət');?>:
                             <em><?= $currency->convertAndFormat($product->oldPrice, $product->currency); ?></em>
                         </span>
-                        <b class="discount"><?= $product->oldPrice - $product->realPrice; ?> <i class="currency_icon">m</i> <?= Yii::t('app', 'OFF'); ?></b>
+                        <b class="discount">
+                            <?= $currency->convertAndFormat($product->oldPrice - $product->realPrice, $product->currency); ?>
+                            <?= Yii::t('app', 'OFF'); ?>
+                        </b>
                     </div>
                     <?php } ?>
                     <div class="rating">
