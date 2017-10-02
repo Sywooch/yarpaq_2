@@ -87,7 +87,7 @@ return [
     'Basket is empty' => 'Səbət boşdur',
     'Shipping' => 'Çatdırılma',
     'Free shipping' => 'Pulsuz çatdırılma',
-    'Delivery to all regions of the country is available' => 'Ölkənin bütün reqionlarına çatdırılma',
+    'Delivery to all regions of the country is available' => 'Ölkənin bütün regionlarına çatdırılma',
     'Easy refund' => 'Asan qaytarılma',
     'Ability to refund the product within 14 days' => 'Məhsulun 14 gün ərzində qaytarılması imkanı',
     'More info' => 'Ətraflı',
