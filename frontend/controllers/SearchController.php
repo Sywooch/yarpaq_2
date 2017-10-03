@@ -260,7 +260,7 @@ class SearchController extends BasicController
                     return $product->preview->url;
                 },
                 'price' => function ($product) {
-                    return Yii::$app->currency->convertAndFormat($product->price, $product->currency);
+                    return Yii::$app->currency->convertAndFormat($product->realPrice, $product->currency);
                 },
                 'url'
             ]
