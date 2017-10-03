@@ -15,16 +15,14 @@ class ElasticController extends BasicController
     public $freeAccessActions = ['index', 'one', 'create', 'delete'];
 
     function actionIndex() {
+        $offset = Yii::$app->request->get('offset') ? (int) Yii::$app->request->get('offset') : 0;
 
         $client = ClientBuilder::create()
             ->setHosts([$this->endPoint])
             ->build();
 
-        //ini_set('memory_limit', '512M');
-        //ini_set('max_execution_time', 3000); // 3000 seconds = 50 minutes
-
         $products = Product::find()
-            ->offset(0)
+            ->offset($offset)
             ->limit(1000)
             ->all();
         $currency = Yii::$app->currency;
@@ -39,7 +37,7 @@ class ElasticController extends BasicController
                 ]
             ];
 
-            $params['body'][] = [
+            $_product = [
                 'id'            => $product->id,
                 'title'         => strip_tags($product->title),
                 'description'   => strip_tags($product->description),
@@ -57,6 +55,15 @@ class ElasticController extends BasicController
                 // цена добавляется в базовой валюте, чтобы затем осуществлять поиск также по цене в базовой валюте
                 'price'         => $currency->convert($product->price, $product->currency, $aznCurrency)
             ];
+
+            if ($product->hasDiscount()) {
+                $_product['discount_price']        = $product->discount->value;
+                $_product['discount_period']       = $product->discount->period;
+                $_product['discount_start_date']   = (new \DateTime($product->discount->start_date))->format('Y-m-d\TH:i:sO');
+                $_product['discount_end_date']     = (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO');
+            }
+
+            $params['body'][] = $_product;
 
         }
 
@@ -107,7 +114,7 @@ class ElasticController extends BasicController
             'index' => $this->index,
             'body' => [
                 'settings' => [
-                    'number_of_shards' => 4,
+                    'number_of_shards' => 5,
                     'number_of_replicas' => 1
                 ],
                 "mappings" => [
@@ -115,7 +122,19 @@ class ElasticController extends BasicController
                         "properties" => [
                             "moderated_at" => [
                                 "type" => "date"
-                            ]
+                            ],
+                            "discount_start_date" => [
+                                "type" => "date"
+                            ],
+                            "discount_end_date" => [
+                                "type" => "date"
+                            ],
+                            "discount_period" => [
+                                "type" => "integer"
+                            ],
+                            "discount_price" => [
+                                "type" => "double"
+                            ],
                         ]
                     ]
                 ]

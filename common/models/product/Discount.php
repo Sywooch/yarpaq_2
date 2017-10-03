@@ -2,6 +2,8 @@
 
 namespace common\models\product;
 
+use common\components\ProductSearch;
+use common\models\Product;
 use Yii;
 
 /**
@@ -64,10 +66,12 @@ class Discount extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getProduct() {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
     public function beforeValidate() {
         if(parent::beforeValidate()) {
-
-            echo $this->period;
 
             if ($this->period == 0) {
                 $this->start_date = NULL;
@@ -85,5 +89,14 @@ class Discount extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+
+
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+
+        $search = new ProductSearch();
+        $search->index($this->product);
     }
 }

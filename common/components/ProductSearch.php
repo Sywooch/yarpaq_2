@@ -2,11 +2,13 @@
 
 namespace common\components;
 
+use common\models\product\Discount;
 use frontend\models\ProductFilter;
 use Yii;
 use common\models\Product;
 use Elasticsearch\ClientBuilder;
 use frontend\components\Currency;
+use yii\base\Exception;
 
 class ProductSearch
 {
@@ -57,13 +59,23 @@ class ProductSearch
                 'condition'     => $product->condition_id,
 
                 // цена добавляется в базовой валюте, чтобы затем осуществлять поиск также по цене в базовой валюте
-                'price'         => $this->currency->convert($product->price, $product->currency, $aznCurrency)
+                'price'         => $this->currency->convert($product->price, $product->currency, $aznCurrency),
             ]
         ];
 
+        if ($product->hasDiscount()) {
+            $params['body']['discount_price']        = $product->discount->value;
+            $params['body']['discount_period']       = $product->discount->period;
+            $params['body']['discount_start_date']   = (new \DateTime($product->discount->start_date))->format('Y-m-d\TH:i:sO');
+            $params['body']['discount_end_date']     = (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO');
+        }
 
         // делаем запрос
-        $this->client->index($params);
+        try {
+            $this->client->index($params);
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+        }
     }
 
     /**
@@ -249,12 +261,60 @@ class ProductSearch
         ];
 
         if ($filter->price_from != null && $filter->price_to != null ) {
+            $now = (new \DateTime())->format('Y-m-d\TH:i:sO');
+
             $must[] = [
-                "range" => [
-                    "price" => [
-                        "gte" => $filter->price_from,
-                        "lte" => $filter->price_to
+                "bool"=> [
+                  "should"=> [
+                    [
+                      "bool"=> [
+                        "must_not"=> [
+                          ["exists"=> [ "field"=> "discount_price" ]]
+                        ],
+                        "must"=> [
+                          ["range"=> [ "price"=> ["gte"=> $filter->price_from, "lte"=> $filter->price_to] ]]
+                        ]
+                      ]
+                    ],
+                    [
+                      "bool"=> [
+                        "must"=> [
+                          ["exists"=> [ "field"=> "discount_price" ]],
+                          ["range"=> ["discount_price"=> ["gte"=> $filter->price_from, "lte"=> $filter->price_to]]],
+                          [
+                            "bool"=> [
+                              "should"=> [
+                                [
+                                  "bool"=> [
+                                    "must"=> [
+                                      [ "term"=> [ "discount_period"=> Discount::PERIOD_RANGE]],
+                                      [
+                                        "range"=> [
+                                          "discount_start_date"=> [
+                                            "lte"=> $now
+                                          ]
+                                        ]
+                                      ],
+                                      [
+                                        "range"=> [
+                                          "discount_end_date"=> [
+                                            "gte"=> $now
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ],
+                                [
+                                  "term"=> [ "discount_period"=> Discount::PERIOD_CONSTANT ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
                     ]
+                  ]
                 ]
             ];
         }
