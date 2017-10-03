@@ -226,6 +226,10 @@ setTimeout( function() {
 	});
 
 	$(".full_nav .left_side .categories_list ul li a, .full_nav .left_side .top_categories > ul > li > a").mouseover(function(){
+		if ($(this).hasClass('hide_children')) {
+			return false;
+		}
+
 		if (_window.width() > 992) {
 			var _this = $(this),
 			_this_index = _this.parent().index();

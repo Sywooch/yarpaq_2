@@ -127,7 +127,7 @@ $seo = $this->params['seo'];
                                         <ul>
                                             <?php foreach ($topCategoryList as $category) { ?>
                                                 <li class="cont">
-                                                    <a href="<?= $category->url; ?>">
+                                                    <a href="<?= $category->url; ?>" <?= $category->id == 955 ? 'class="hide_children"' : ''; ?> >
                                                         <img width="30" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
                                                     </a>
 
