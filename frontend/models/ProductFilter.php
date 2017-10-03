@@ -12,7 +12,6 @@ class ProductFilter extends Model
     const SORT_PRICE_LOWEST = 'price_lowest';
     const SORT_PRICE_HIGHEST = 'price_highest';
     const SORT_NEWLY_LISTED = 'newly_listed';
-    const SORT_SCORE_HIGHEST = 'score_highest';
 
 
     public $condition = Product::CONDITION_NEW;
@@ -24,7 +23,7 @@ class ProductFilter extends Model
     public $price_max;
 
     public $per_page;
-    public $sort = self::SORT_SCORE_HIGHEST;
+    public $sort = self::SORT_NEWLY_LISTED;
 
     public function rules() {
         return [
@@ -44,7 +43,6 @@ class ProductFilter extends Model
 
     public function getSortOptions() {
         return [
-            self::SORT_SCORE_HIGHEST    => Yii::t('app', 'Best match'),
             self::SORT_PRICE_LOWEST     => Yii::t('app', 'Price: lowest first'),
             self::SORT_PRICE_HIGHEST    => Yii::t('app', 'Price: highest first'),
             self::SORT_NEWLY_LISTED     => Yii::t('app', 'Newly listed'),

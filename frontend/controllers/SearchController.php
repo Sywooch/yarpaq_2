@@ -6,6 +6,7 @@ use common\components\ProductSearch;
 use common\models\Manufacturer;
 use frontend\models\ProductFilter;
 use frontend\models\ProductRepository;
+use frontend\models\SearchProductFilter;
 use Yii;
 use yii\base\Exception;
 use yii\data\Pagination;
@@ -89,7 +90,7 @@ class SearchController extends BasicController
     }
 
     protected function initFilter() {
-        $productFilter = new ProductFilter();
+        $productFilter = new SearchProductFilter();
         $productFilter->load(Yii::$app->request->get());
 
         if (!$productFilter->validate()) {
