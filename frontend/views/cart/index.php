@@ -3,6 +3,7 @@
 use common\models\Product;
 use common\models\info\Info;
 use yii\helpers\Url;
+use common\models\option\OptionValue;
 
 $currency = Yii::$app->currency;
 ?>
@@ -37,10 +38,21 @@ $currency = Yii::$app->currency;
 
                                     <?php
                                     $mapped_options = \yii\helpers\ArrayHelper::map($product['option'], 'product_option_id', 'option_value_id');
-                                    foreach ($product_object->productOptions as $productOption) { ?>
+                                    foreach ($product_object->productOptions as $productOption) {
+                                        if (!isset($mapped_options[ $productOption->id ])) continue;
+                                        ?>
                                         <div class="size_select">
                                             <span><?= $productOption->option->name;?></span>
-                                            <a href="javascript:void(0)"><em><?= \common\models\option\OptionValue::findOne( $mapped_options[ $productOption->id ] )->name; ?></em></a>
+                                            <a href="javascript:void(0)">
+                                                <?php
+                                                $optionValue = OptionValue::findOne( $mapped_options[ $productOption->id ] );
+                                                ?>
+                                                <?php if ($optionValue->image) { ?>
+                                                    <span class="icon" style="background-image: url('<?= $optionValue->url; ?>');"></span>
+                                                <?php } else { ?>
+                                                    <span><?=$optionValue->name;?></span>
+                                                <?php } ?>
+                                            </a>
 
                                             <!--<ul>
                                                 <?php foreach ($productOption->values as $value) { ?>

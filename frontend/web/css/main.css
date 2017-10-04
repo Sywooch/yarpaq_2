@@ -7246,3 +7246,9 @@ a.clear_filtre {
   float: right;
   display: none;
 }
+
+.basket_list .icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
