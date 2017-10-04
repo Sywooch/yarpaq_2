@@ -67,6 +67,10 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             ['isTop',  'default', 'value' => 0],
             [['parent_id', 'status', 'template_id'], 'required'],
             [['parent_id', 'status', 'template_id'], 'integer'],
+            ['galleryFiles', 'required', 'when' => function ($category) {
+                $galleryCount = $category->getGallery()->count();
+                return $category->isTop == 1 && $galleryCount == 0;
+            }]
 
             // [['created_user_id', 'updated_user_id'], 'required'] // устанавливается автоматически
         ];
@@ -100,6 +104,7 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             'created_user_id' => Yii::t('app', 'Created User'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'updated_user_id' => Yii::t('app', 'Updated User'),
+            'galleryFiles' => Yii::t('app', 'Icon')
         ];
     }
 

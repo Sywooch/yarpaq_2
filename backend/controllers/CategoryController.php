@@ -134,9 +134,9 @@ class CategoryController extends AdminDefaultController
             $s = true;
 
             if ($model->parent_id != $parent_id) {
-                $model->appendTo($this->findModel($model->parent_id));
+                $s = $model->appendTo($this->findModel($model->parent_id));
             } else {
-                $model->save();
+                $s = $model->save();
             }
 
             $this->saveGalleryFiles($model);
