@@ -22,8 +22,7 @@
             <em><?= $currency->convertAndFormat($product->oldPrice, $product->currency); ?></em>
         </span>
         <b class="discount">
-            <?= $currency->convertAndFormat($product->oldPrice - $product->realPrice, $product->currency); ?>
-            <?= Yii::t('app', 'OFF'); ?>
+            <?= $currency->convertAndFormat($product->realPrice - $product->oldPrice, $product->currency); ?>
         </b>
     </div>
     <?php } ?>

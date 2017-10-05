@@ -4,26 +4,38 @@ namespace frontend\models;
 
 
 use common\models\Product;
+use common\models\product\Discount;
+use yii\db\ActiveQuery;
 
-class ProductRepository
+class ProductRepository extends ActiveQuery
 {
 
-    private $query;
-
     public function __construct() {
-        $this->query = Product::find();
+        parent::__construct(Product::className());
     }
 
     public function visibleOnTheSite() {
-        $this->query->andWhere([
-            'status_id' => Product::STATUS_ACTIVE,
-            'moderated' => 1
-        ]);
+        $this->andWhere(['status_id' => Product::STATUS_ACTIVE]);
+        $this->andWhere(['moderated' => 1]);
 
-        return $this->query;
+        return $this;
     }
 
-    public function ___toString() {
-        return $this->query;
+    public function hasDiscount() {
+        $this->joinWith('discount d');
+        $this->andWhere('d.value IS NOT NULL');
+
+        $now = (new \DateTime())->format('Y-m-d H:i:s');
+        $this->andWhere(['or',
+            ['d.period' => Discount::PERIOD_CONSTANT],
+            [
+                'and',
+                ['d.period' => Discount::PERIOD_RANGE],
+                ['<=', 'd.start_date', $now],
+                ['>=', 'd.end_date', $now]
+            ]
+        ]);
+
+        return $this;
     }
 }

@@ -57,46 +57,41 @@ $mainSlide = $slides[0];
     </ul>
 </div>
 
-<!-- TOP PRODUCTS BEGINS -->
 
-<div class="top_products">
-    <h2><?= Yii::t('app', 'Top 20 products'); ?></h2>
-    <!-- Bestsellers Tape -->
-    <?php echo \frontend\components\BestSellersTape::widget(); ?>
-    <!-- Bestsellers Tape END -->
-</div>
-
-<!-- TOP PRODUCTS END -->
-
-
-<!-- BANNER END -->
-
-<div class="banner_long">
-    <a href="<?= $slide1Link; ?>">
-        <img src="/upload/Images/kreslo-puff.jpg" alt=""><img src="/upload/Images/kreslo-puff-mobile.jpg" alt="">
-    </a>
-</div>
-
-<!-- BANNER END -->
-
-
-<!-- LAST VIEWED END -->
-
-<div class="last_viewed">
-    <div>
-        <h2><?= Yii::t('app', 'New products'); ?></h2>
-        <!-- Bestsellers Tape -->
-        <?php echo \frontend\components\NewTape::widget(); ?>
-        <!-- Bestsellers Tape END -->
+    <!-- DISCOUNT PRODUCTS BEGINS -->
+    <div class="top_products">
+        <h2><?= Yii::t('app', 'Discount products'); ?></h2>
+        <?= \frontend\components\DiscountTape::widget(); ?>
     </div>
-</div>
+    <!-- DISCOUNT PRODUCTS ENDS -->
 
-<!-- LAST VIEWED END -->
 
-<!-- New Tape -->
-<?php //echo \frontend\components\NewTape::widget(); ?>
-<!-- New Tape END -->
+    <!-- BANNER END -->
+    <div class="banner_long">
+        <a href="<?= $slide1Link; ?>">
+            <img src="/upload/Images/kreslo-puff.jpg" alt=""><img src="/upload/Images/kreslo-puff-mobile.jpg" alt="">
+        </a>
+    </div>
+    <!-- BANNER END -->
 
+
+    <!-- TOP PRODUCTS BEGINS -->
+    <div class="top_products">
+        <h2><?= Yii::t('app', 'Top 20 products'); ?></h2>
+        <?= \frontend\components\BestSellersTape::widget(); ?>
+    </div>
+    <!-- TOP PRODUCTS END -->
+
+
+
+    <!-- NEW PRODUCTS END -->
+    <div class="last_viewed">
+        <div>
+            <h2><?= Yii::t('app', 'New products'); ?></h2>
+            <?php echo \frontend\components\NewTape::widget(); ?>
+        </div>
+    </div>
+    <!-- NEW PRODUCTS END -->
 
 
 <?php if (!Yii::$app->user->isGuest) {

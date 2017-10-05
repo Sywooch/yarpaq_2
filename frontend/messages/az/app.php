@@ -165,6 +165,8 @@ return [
     'You have successfully joined Yarpaq.az' => 'Siz uğurla Yarpaq.az saytında qeydiyyatdan keçdiniz',
     'Required field' => 'Vacib xana',
 
-    'See all' => 'Hamısına bax'
+    'See all' => 'Hamısına bax',
+
+    'Discount products' => 'Endirimli məhsullar'
 
 ];

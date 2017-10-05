@@ -167,6 +167,8 @@ return [
     'You have successfully joined Yarpaq.az' => 'Вы успешно зарегистрировались на Yarpaq.az',
     'Required field' => 'Обязательное поле',
 
-    'See all' => 'Посмотреть все'
+    'See all' => 'Посмотреть все',
+
+    'Discount products' => 'Товары на скидке'
 
 ];
