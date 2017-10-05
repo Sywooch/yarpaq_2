@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Options');
                 <li class="active"><a href="#" data-toggle="tab" aria-expanded="false"><?= Yii::t('app', 'Discount'); ?></a></li>
             </ul>
             <div class="tab-content">
-                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+                <?php $form = ActiveForm::begin(); ?>
 
                 <?= $form->field($discount, 'value')->textInput(['maxlength' => true]) ?>
 
@@ -60,6 +60,15 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Options');
                 ]); ?>
 
                 <?= Html::submitButton($product->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $product->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+
+                <?php ActiveForm::end(); ?>
+
+                <?php $form = ActiveForm::begin([
+                    'action' => Url::to(['discount/delete', 'product_id' => $product->id])
+                ]); ?>
+
+                <br><br>
+                <?= Html::submitButton( Yii::t('app', 'Delete'), ['class' => 'btn btn-danger']) ?>
 
                 <?php ActiveForm::end(); ?>
             </div>

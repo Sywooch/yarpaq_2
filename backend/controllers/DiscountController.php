@@ -9,12 +9,28 @@ use common\models\Product;
 use common\models\product\Discount;
 use common\models\User;
 use webvimark\components\AdminDefaultController;
+use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\ForbiddenHttpException;
 
 class DiscountController extends AdminDefaultController
 {
-    public $enableOnlyActions = ['index'];
+    public $enableOnlyActions = ['index', 'delete'];
 
+    public function behaviors() {
+        $behaviors = parent::behaviors();
+
+        $behaviors = ArrayHelper::merge($behaviors, [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete'        => ['POST'],
+                ],
+            ],
+        ]);
+
+        return $behaviors;
+    }
 
     public function actionIndex($id)
     {
@@ -24,9 +40,6 @@ class DiscountController extends AdminDefaultController
         $discount = $product->discount ? $product->discount : new Discount(['product_id' => $product->id]);
 
         if ($discount->load(Yii::$app->request->post()) && $discount->save()) {
-
-            // TODO update elasticsearch index
-
             $this->redirect(['index', 'id' => $product->id]);
         }
 
@@ -36,6 +49,15 @@ class DiscountController extends AdminDefaultController
             'product'   => $product,
             'discount'  => $discount
         ]);
+    }
+
+    public function actionDelete($product_id) {
+        $discount = Discount::find(['product_id' => $product_id])->one();
+        if ($discount) {
+            $discount->delete();
+        }
+
+        $this->redirect(['discount/index', 'id' => $product_id]);
     }
 
     /**
