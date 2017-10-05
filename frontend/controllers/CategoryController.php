@@ -34,23 +34,39 @@ class CategoryController extends BasicController
 
         // Поиск среди категорий
         $category = Category::findByUrl($url);
-        if (!$category) {
-            throw new NotFoundHttpException();
-        }
+        if (!$category) { throw new NotFoundHttpException(); }
 
         $this->seo($category->title, null, $category->content->seo_description, $category->content->seo_keywords);
 
 
-        $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
+        // GET Brands
+        $brands = Manufacturer::find()
+            ->alias('m')
+            ->leftJoin('{{%product}} p', 'p.manufacturer_id = m.id')
+            ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.id')
+            ->groupBy('m.id');
+        // GET Brands END
+
+        if ($category->id == 1095) { // если категория скидок
+            $repo = new ProductRepository();
+            $products = $repo
+                ->visibleOnTheSite()
+                ->hasDiscount()
+                ->alias('p');
+        } else {
+            $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
+
+            $brands->where(['category_id' => $childrenCategoriesIDs]);
+
+            $repo = new ProductRepository();
+            $products = $repo->visibleOnTheSite()
+                ->leftJoin('productCategories pc')
+                ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
+                ->groupBy('id')
+                ->alias('p');
+        }
 
 
-        // GET Products
-        $repo = new ProductRepository();
-        $products = $repo->visibleOnTheSite()
-            ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.`id`')
-            ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
-            ->groupBy('id');
-        $products->alias('p');
 
         // get min price
         $minPriceProducts = clone $products;
@@ -68,7 +84,7 @@ class CategoryController extends BasicController
         }
 
         if ($productFilter->price_from && $productFilter->price_to) {
-            $products->leftJoin('{{%discount}} d', 'd.product_id = p.id');
+            $products->joinWith('discount d');
             $products->andWhere('
             (
                 case
@@ -109,19 +125,6 @@ class CategoryController extends BasicController
 
         // GET Products END
 
-        // GET Brands
-        $brands = Manufacturer::find()
-            ->alias('m')
-            ->leftJoin('{{%product}} p', 'p.manufacturer_id = m.id')
-            ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.id')
-            ->where(['category_id' => $childrenCategoriesIDs])
-            ->groupBy('m.id')
-            ->all();
-        // GET Brands END
-
-//        echo $products->createCommand()->getRawSql();
-
-        $this->seo($category->title);
 
         return $this->render('index', [
             'count'             => $pages->totalCount,
@@ -129,7 +132,7 @@ class CategoryController extends BasicController
             'products'          => $models,
             'pages'             => $pages,
             'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
-            'filterBrands'      => $brands,
+            'filterBrands'      => $brands->all(),
             'productFilter'     => $productFilter
         ]);
     }
