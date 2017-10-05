@@ -53,6 +53,16 @@ class CategoryController extends BasicController
                 ->visibleOnTheSite()
                 ->hasDiscount()
                 ->alias('p');
+
+            $distinctBrands = clone $products;
+            $distinctBrands
+                ->select('manufacturer_id')
+                ->distinct();
+
+
+
+            $brands = Manufacturer::find()
+                ->andWhere(['in', 'id', $distinctBrands]);
         } else {
             $childrenCategoriesIDs = $this->getAllChildrenCategories($category);
 
