@@ -47,7 +47,7 @@ class CategoryController extends BasicController
             ->groupBy('m.id');
         // GET Brands END
 
-        if ($category->id == 1095) { // если категория скидок
+        if ($category->id == Yii::$app->params['sale_category_id']) { // если категория скидок
             $repo = new ProductRepository();
             $products = $repo
                 ->visibleOnTheSite()
@@ -60,7 +60,7 @@ class CategoryController extends BasicController
 
             $repo = new ProductRepository();
             $products = $repo->visibleOnTheSite()
-                ->leftJoin('productCategories pc')
+                ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.`id`')
                 ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
                 ->groupBy('id')
                 ->alias('p');

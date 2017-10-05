@@ -7252,3 +7252,7 @@ a.clear_filtre {
   height: 30px;
   display: block;
 }
+
+.hide_me {
+  display: none;
+}
