@@ -346,7 +346,7 @@ class Product extends \yii\db\ActiveRecord
     public function hasDiscount() {
         $discount = $this->discount;
 
-        if ($discount && $discount->value != '') {
+        if ($discount && $discount->value !== NULL) {
             $now = new \DateTime();
             $start_date = new \DateTime($discount->start_date);
             $end_date = new \DateTime($discount->end_date);
