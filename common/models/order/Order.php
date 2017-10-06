@@ -239,8 +239,8 @@ class Order extends \yii\db\ActiveRecord
         }
 
 
-        $orderProduct->price        = $product->getPrice(true);
-        $orderProduct->total        = $quantity * $product->getPrice(true);
+        $orderProduct->price        = $product->getRealPrice(true);
+        $orderProduct->total        = $quantity * $product->getRealPrice(true);
         $isValid = $orderProduct->save();
 
         if ($isValid) {

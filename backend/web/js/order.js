@@ -113,7 +113,7 @@ $(function () {
 
         var product_id = $(this).val();
 
-        if (product_id != '') {
+        if (product_id != null) {
             checkForOptions(product_id);
         }
 
@@ -182,7 +182,7 @@ $(function () {
     });
 
     function resetAddProductForm() {
-        new_product_el.val(null).change();
+        new_product_el.val('').change();
         quantity_el.val('');
     }
 

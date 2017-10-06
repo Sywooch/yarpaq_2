@@ -21,7 +21,7 @@ class OrderProductAddForm extends Model
             ['quantity', 'required', 'when' => function ($model) {
                 return $model->product_id != '';
             }, 'whenClient' => "function (attribute, value) {
-                return $('#orderproductaddform-product_id').val() != '';
+                return $('#orderproductaddform-product_id').val() != null;
             }"],
             ['quantity', 'integer']
         ];
