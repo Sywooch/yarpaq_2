@@ -1,6 +1,7 @@
 <?php
 use common\models\info\Info;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 ?>
 <!-- FOOTER BEGINS -->
 
@@ -44,16 +45,9 @@ use yii\helpers\Url;
         <div>
 
             <?php
-            $pages = [
-                '5' => Info::findOne(5),
-                '6' => Info::findOne(6),
-                '8' => Info::findOne(8),
-                '9' => Info::findOne(9),
-                '10' => Info::findOne(10),
-                '14' => Info::findOne(14),
-                '15' => Info::findOne(15),
-                '16' => Info::findOne(16),
-            ];
+            $pages = ArrayHelper::map( Info::find()->all(), 'id', function ($page) {
+                return $page;
+            } );
             ?>
             <article>
                 <h3><?= Yii::t('app', 'Information'); ?></h3>
