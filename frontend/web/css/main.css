@@ -1520,7 +1520,8 @@ a.search_toggler {
   padding: 0 0 0 42px;
   margin: 0 0 5px;
   line-height: 24px;
-  background: url(../img/phone_icon.png) no-repeat 7px 40%;
+  background: url(../img/phone_white_icon.svg) no-repeat 3px 40%;
+  background-size: auto 20px;
 }
 
 .second_footer > div article ul li a.email {

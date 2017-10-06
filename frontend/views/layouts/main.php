@@ -43,7 +43,7 @@ $seo = $this->params['seo'];
     <link href="/js/zoom/dist/xzoom.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/js/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="/js/slick/slick-theme.css"/>
-    <link href="/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="/css/main.css?v1.0.1" rel="stylesheet" type="text/css" />
     <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="/css/common.css" rel="stylesheet" type="text/css" />
 
