@@ -46,17 +46,6 @@ $mainSlide = $slides[0];
 
 <?php } ?>
 
-<div class="mobile_categories" style="display: none;">
-    <ul>
-        <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
-        <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
-        <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
-        <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
-        <li><a href="#"><img src="upload/Images/20.jpg" alt=""></a></li>
-        <li><a href="#"><img src="upload/Images/21.jpg" alt=""></a></li>
-    </ul>
-</div>
-
 
     <!-- DISCOUNT PRODUCTS BEGINS -->
     <div class="top_products">
