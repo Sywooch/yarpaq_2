@@ -65,10 +65,12 @@ $mainSlide = $slides[0];
 
 
     <!-- TOP PRODUCTS BEGINS -->
+    <?php if ($this->beginCache('top-products-'.Yii::$app->language, ['duration' => 60 * 60 * 24])) { ?>
     <div class="top_products">
         <h2><?= Yii::t('app', 'Top 20 products'); ?></h2>
         <?= \frontend\components\BestSellersTape::widget(); ?>
     </div>
+    <?php $this->endCache(); } ?>
     <!-- TOP PRODUCTS END -->
 
 
