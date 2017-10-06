@@ -73,19 +73,6 @@
 }
 
 @font-face {
-	font-family: 'Avenir Next';
-	src: url('hinted-AvenirNext-Regular.eot');
-	src: local('Avenir Next Regular'), local('AvenirNext-Regular'),
-		url('hinted-AvenirNext-Regular.eot?#iefix') format('embedded-opentype'),
-		url('hinted-AvenirNext-Regular.woff') format('woff'),
-		url('hinted-AvenirNext-Regular.ttf') format('truetype'),
-		url('hinted-AvenirNext-Regular.svg#AvenirNext-Regular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-
-@font-face {
 	font-family: 'Roboto Lt';
 	src: url('hinted-Roboto-Light.eot');
 	src: local('Roboto Light'), local('Roboto-Light'),
