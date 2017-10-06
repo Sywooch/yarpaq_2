@@ -5,6 +5,9 @@ use common\models\category\Category;
 use common\models\category\TopCategoryList;
 use yii\helpers\Url;
 
+use frontend\assets\AppAsset;
+AppAsset::register($this);
+
 $this->beginPage();
 
 $seo = $this->params['seo'];
@@ -37,16 +40,7 @@ $seo = $this->params['seo'];
 
     <link rel="icon" type="image/png" href="/img/favicon.png"/>
 
-    <link href="/css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="/css/font/stylesheet.css" rel="stylesheet" type="text/css" />
-    <link href="/css/rangeSlider.css" rel="stylesheet" type="text/css" />
-    <link href="/js/zoom/dist/xzoom.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/js/slick/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="/js/slick/slick-theme.css"/>
-    <link href="/css/main.css?v1.0.1" rel="stylesheet" type="text/css" />
-    <link href="/css/responsive.css" rel="stylesheet" type="text/css" />
-    <link href="/css/common.css" rel="stylesheet" type="text/css" />
-
+    <?php $this->head() ?>
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -426,5 +420,8 @@ $seo = $this->params['seo'];
 </script>
 
 
+<?php $this->endBody(); ?>
 </body>
 </html>
+
+<?php $this->endPage() ?>

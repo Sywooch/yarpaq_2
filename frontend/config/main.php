@@ -10,9 +10,12 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'name' => 'Yarpaq',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'assetsAutoCompress'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'assetsAutoCompress' => [
+            'class'         => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent'
+        ],
         'cart' => [
             'class' => 'frontend\components\Cart'
         ],
