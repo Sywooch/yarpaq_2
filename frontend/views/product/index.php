@@ -27,7 +27,9 @@ $currency = Yii::$app->currency;
 
     </header>
     <div class="current_product" itemscope itemtype="http://schema.org/Product">
+        <?php if ($product->manufacturer) { ?>
         <meta itemprop="brand" content="<?= $product->manufacturer->title; ?>" />
+        <?php } ?>
 
         <div class="priduct_gallery">
 
