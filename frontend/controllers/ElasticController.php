@@ -8,17 +8,13 @@ use Elasticsearch\ClientBuilder;
 
 class ElasticController extends BasicController
 {
-    private $index = 'yarpaq';
-    private $type = 'product';
-    private $endPoint = 'https://elastic:1O9dV3nKiGkhtBdbGgU80tXX@7b51591276427595ffadb0b88481a0a5.us-east-1.aws.found.io:9243';
-
     public $freeAccessActions = ['index', 'one', 'create', 'delete'];
 
     function actionIndex() {
         $offset = Yii::$app->request->get('offset') ? (int) Yii::$app->request->get('offset') : 0;
 
         $client = ClientBuilder::create()
-            ->setHosts([$this->endPoint])
+            ->setHosts([Yii::$app->params['elastic']['endPoint']])
             ->build();
 
         $products = Product::find()
@@ -28,11 +24,13 @@ class ElasticController extends BasicController
         $currency = Yii::$app->currency;
         $aznCurrency = $currency->getCurrencyByCode('AZN');
 
+        $params = [];
+
         foreach ($products as $product) {
             $params['body'][] = [
                 'index' => [
-                    '_index' => $this->index,
-                    '_type' => $this->type,
+                    '_index' => Yii::$app->params['elastic']['index'],
+                    '_type' => Yii::$app->params['elastic']['productType'],
                     '_id' => $product->id
                 ]
             ];
@@ -79,12 +77,12 @@ class ElasticController extends BasicController
     public function actionOne($id) {
 
         $client = ClientBuilder::create()
-            ->setHosts([$this->endPoint])
+            ->setHosts([Yii::$app->params['elastic']['endPoint']])
             ->build();
 
         $params = [
-            'index' => $this->index,
-            'type'  => $this->type,
+            'index' => Yii::$app->params['elastic']['index'],
+            'type'  => Yii::$app->params['elastic']['productType'],
 
             'body'  => [
                 'query' => [
@@ -107,18 +105,18 @@ class ElasticController extends BasicController
 
     public function actionCreate() {
         $client = ClientBuilder::create()
-            ->setHosts([$this->endPoint])
+            ->setHosts([Yii::$app->params['elastic']['endPoint']])
             ->build();
 
         $params = [
-            'index' => $this->index,
+            'index' => Yii::$app->params['elastic']['index'],
             'body' => [
                 'settings' => [
                     'number_of_shards' => 5,
                     'number_of_replicas' => 1
                 ],
                 "mappings" => [
-                    $this->type => [
+                    Yii::$app->params['elastic']['productType'] => [
                         "properties" => [
                             "moderated_at" => [
                                 "type" => "date"
@@ -147,11 +145,11 @@ class ElasticController extends BasicController
 
     public function actionDelete() {
         $client = ClientBuilder::create()
-            ->setHosts([$this->endPoint])
+            ->setHosts([Yii::$app->params['elastic']['endPoint']])
             ->build();
 
         $deleteParams = [
-            'index' => $this->index
+            'index' => Yii::$app->params['elastic']['index']
         ];
         $response = $client->indices()->delete($deleteParams);
 

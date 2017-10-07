@@ -12,13 +12,18 @@ use yii\base\Exception;
 
 class ProductSearch
 {
-    private $endPoint   = 'https://elastic:1O9dV3nKiGkhtBdbGgU80tXX@7b51591276427595ffadb0b88481a0a5.us-east-1.aws.found.io:9243';
-    private $index      = 'yarpaq';
-    private $type       = 'product';
+    private $endPoint;
+    private $index;
+    private $type;
     private $currency;
     private $client;
 
     public function __construct() {
+        $this->endPoint = Yii::$app->params['elastic']['endPoint'];
+        $this->index = Yii::$app->params['elastic']['index'];
+        $this->type = Yii::$app->params['elastic']['productType'];
+
+
         $this->currency = new Currency();
 
         // подключаемся
