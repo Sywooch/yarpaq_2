@@ -215,6 +215,10 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Status::className(), ['id' => 'status_id']);
     }
 
+    public function getStockStatus() {
+        return $this->hasOne(StockStatus::className(), ['stock_status_id' => 'stock_status_id'])->andWhere(['language_id' => Language::getCurrent()->id]);
+    }
+
     public function getSeller() {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }

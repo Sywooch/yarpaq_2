@@ -169,6 +169,7 @@ return [
 
     'See all' => 'Посмотреть все',
 
-    'Discount products' => 'Товары на скидке'
+    'Discount products' => 'Товары на скидке',
+    'Availability' => 'Наличие'
 
 ];

@@ -4,8 +4,9 @@ namespace common\models;
 
 use common\models\Language;
 use Yii;
+use yii\db\ActiveRecord;
 
-class StockStatus
+class StockStatus extends ActiveRecord
 {
     public static function getDropDownData() {
         $list = Yii::$app->db->createCommand("SELECT * FROM {{%stock_status}} WHERE `language_id` = ".Language::getCurrent()->id)->queryAll(\PDO::FETCH_OBJ);

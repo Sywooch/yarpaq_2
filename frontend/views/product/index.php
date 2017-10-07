@@ -3,6 +3,8 @@
 use frontend\components\taksit\Albali;
 use frontend\components\taksit\Bolkart;
 use common\models\info\Info;
+use common\models\Product;
+use common\models\product\Discount;
 
 $currency = Yii::$app->currency;
 ?>
@@ -74,7 +76,7 @@ $currency = Yii::$app->currency;
                         <div class="rating">
                             <span class="star_<?= $product->rating; ?>"></span>
                         </div>
-                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong itemprop="availability" href="http://schema.org/InStock"/><?= $product->quantity; ?></strong></span></p>
+                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
                     </div>
                     <div class="second_info">
                         <div class="wrap_store">
@@ -83,24 +85,48 @@ $currency = Yii::$app->currency;
                         </div>
                     </div>
                 </header>
-                <div class="product_first_info">
+                <div class="product_first_info" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                     <div class="left_info">
                         <div class="price">
+
                             <span><?= Yii::t('app', 'Price'); ?>:</span>
+
+                            <!-- Price -->
                             <meta itemprop="priceCurrency" content="<?= $product->currency->code; ?>" />
                             <meta itemprop="price" content="<?= $product->realPrice; ?>" />
-                            <b>
-                                <?= $currency->convertAndFormat($product->realPrice, $product->currency); ?>
-                            </b>
+                            <?php if ($product->hasDiscount() && $product->discount->period == Discount::PERIOD_RANGE) { ?>
+                                (Sale ends <time itemprop="priceValidUntil" datetime="<?= $product->discount->end_date; ?>"><?= (new \DateTime($product->discount->end_date))->format('d M Y'); ?></time>)
+                            <?php } ?>
+
+                            <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
                         </div>
+
                         <ul>
-                            <li><?= Yii::t('app', 'Condition'); ?>:  <b><?= Yii::t('app', $product->condition);?></b></li>
+                            <!-- Condition -->
+                            <li>
+                                <?= Yii::t('app', 'Condition'); ?>:
+
+                                <?php if ($product->condition_id == Product::CONDITION_NEW) { ?>
+                                    <b itemprop="itemCondition" content="http://schema.org/NewCondition">
+                                <?php } else if ($product->condition_id == Product::CONDITION_USED) { ?>
+                                    <b itemprop="itemCondition" content="http://schema.org/UsedCondition">
+                                <?php } ?>
+
+                                    <?= Yii::t('app', $product->condition);?>
+
+                                    </b>
+                            </li>
+
 
                             <?php if ($product->manufacturer) { ?>
                             <li><?= Yii::t('app', 'Brand'); ?>:  <b itemprop="brand"><?= $product->manufacturer->title; ?></b></li>
                             <?php } ?>
 
+                            <li><?= Yii::t('app', 'Availability'); ?>:  <b itemprop="availability" content="http://schema.org/InStock"><?= Yii::t('app', $product->stockStatus->name);?></b></li>
+
                         </ul>
+
+                        <meta itemprop="url" content="><?= $product->url; ?>">
                     </div>
                     <div class="cards_dicsount">
 

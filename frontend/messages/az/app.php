@@ -167,6 +167,7 @@ return [
 
     'See all' => 'Hamısına bax',
 
-    'Discount products' => 'Endirimli məhsullar'
+    'Discount products' => 'Endirimli məhsullar',
+    'Availability' => 'Mövcudluq'
 
 ];
