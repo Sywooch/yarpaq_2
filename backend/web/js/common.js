@@ -69,7 +69,7 @@ $(function () {
 
     function loadCommonNotifications() {
 
-        var url = commonNotificationsBlock.data('url');
+        var url = commonNotificationsBlock.data('url') + '?r=' + Math.random();
 
         $.getJSON(url, function (response) {
 
