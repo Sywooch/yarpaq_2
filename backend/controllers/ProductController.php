@@ -17,6 +17,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use webvimark\components\AdminDefaultController;
+use common\components\ProductSearch as ElasticProductSearch;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -88,6 +89,8 @@ class ProductController extends AdminDefaultController
             $this->uploadGalleryFiles($model);
 
             if ($model->save()) {
+                $this->indexProduct($model); // send data to Elastic search
+
                 $this->saveGalleryFiles($model);
                 $this->saveSort();
                 return $this->redirect(['update', 'id' => $model->id, 'alert' => 'success']);
@@ -100,6 +103,11 @@ class ProductController extends AdminDefaultController
             'model' => $model,
             'zones' => $zonesData
         ]);
+    }
+
+    public function indexProduct($product) {
+        $search = new ElasticProductSearch();
+        $search->index($product);
     }
 
     /**
@@ -146,6 +154,8 @@ class ProductController extends AdminDefaultController
 
 
             if ($model->save()) {
+                $this->indexProduct($model); // send data to Elastic search
+
                 $this->saveGalleryFiles($model);
                 $this->saveSort();
 

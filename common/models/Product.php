@@ -421,9 +421,6 @@ class Product extends \yii\db\ActiveRecord
         parent::afterSave($insert, $changedAttributes);
 
         ProductCategory::saveProductCategories($this->categoryIDs, $this->id);
-
-        $search = new ProductSearch();
-        $search->index($this);
     }
 
     public function afterDelete() {
