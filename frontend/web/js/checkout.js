@@ -57,8 +57,10 @@ $(function () {
         // показ методов оплаты
         if (zone_id == 216 || zone_id == 4225) {
             $('#payment_method_cod').show();
+            $('#payment_method_cheque').hide();
         } else {
             $('#payment_method_cod').hide();
+            $('#payment_method_cheque').show();
         }
     });
 

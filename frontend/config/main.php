@@ -94,6 +94,7 @@ return [
                 'payment/albali-payment/<action:.+>'            => 'albali-payment/<action>',
                 'payment/bolkart-payment/<action:.+>'           => 'bolkart-payment/<action>',
                 'payment/cash-on-delivery-payment/<action:.+>'  => 'cash-on-delivery-payment/<action>',
+                'payment/post-payment/<action:.+>'              => 'post-payment/<action>',
                 'payment/golden-pay-payment/<action:.+>'        => 'golden-pay-payment/<action>',
                 'payment/pay-pal-payment/<action:.+>'           => 'pay-pal-payment/<action>',
 

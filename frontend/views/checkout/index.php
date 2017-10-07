@@ -188,6 +188,14 @@ $currency = Yii::$app->currency;
                                 <em></em>
                             </label>
                         </li>
+                        <li class="payment_method_row" id="payment_method_cheque">
+                            <label>
+                                <div class="image"><img src="/img/poct.svg" alt=""></div>
+                                <span><?= Yii::t('app', 'Post'); ?></span>
+                                <input type="radio" name="payment_method" value="7">
+                                <em></em>
+                            </label>
+                        </li>
                     </ul>
                 </div>
             </div>
