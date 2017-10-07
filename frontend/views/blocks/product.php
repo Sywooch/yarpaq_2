@@ -1,16 +1,13 @@
 <?php $currency = Yii::$app->currency; ?>
-<article itemscope itemtype="http://schema.org/Product">
+<article>
     <div class="image">
         <a href="<?= $product->url; ?>">
-            <img src="<?= $product->preview->url; ?>" alt="" itemprop="image">
+            <img src="<?= $product->preview->url; ?>" alt="">
         </a>
     </div>
-    <h3><a href="<?= $product->url; ?>" itemprop="name"><?= $product->title; ?></a></h3>
-
-    <meta itemprop="priceCurrency" content="AZN" />
-
+    <h3><a href="<?= $product->url; ?>"><?= $product->title; ?></a></h3>
     <div class="price">
-        <span itemprop="price">
+        <span>
             <?= $currency->convertAndFormat($product->realPrice, $product->currency); ?>
         </span>
     </div>

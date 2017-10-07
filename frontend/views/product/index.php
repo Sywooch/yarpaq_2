@@ -23,7 +23,7 @@ $currency = Yii::$app->currency;
         <!-- Breadcrumbs END -->
 
     </header>
-    <div class="current_product">
+    <div class="current_product" itemscope itemtype="http://schema.org/Product">
         <div class="priduct_gallery">
 
             <div id="mobile-gallery">
@@ -38,7 +38,7 @@ $currency = Yii::$app->currency;
                 <div class="image">
                     <div>
                         <?php if (count($product->gallery)) { ?>
-                            <img class="_xzoom" src="<?= $product->gallery[0]->standard->url; ?>" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
+                            <img itemprop="image" class="_xzoom" src="<?= $product->gallery[0]->standard->url; ?>" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
                         <?php } ?>
 
                     </div>
@@ -69,12 +69,12 @@ $currency = Yii::$app->currency;
         <div class="right_side">
             <div class="product_first">
                 <header>
-                    <h3><?= $product->title; ?></h3>
+                    <h3 itemprop="name"><?= $product->title; ?></h3>
                     <div class="first_info">
                         <div class="rating">
                             <span class="star_<?= $product->rating; ?>"></span>
                         </div>
-                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
+                        <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong itemprop="availability" href="http://schema.org/InStock"/><?= $product->quantity; ?></strong></span></p>
                     </div>
                     <div class="second_info">
                         <div class="wrap_store">
@@ -87,6 +87,8 @@ $currency = Yii::$app->currency;
                     <div class="left_info">
                         <div class="price">
                             <span><?= Yii::t('app', 'Price'); ?>:</span>
+                            <meta itemprop="priceCurrency" content="<?= $product->currency->code; ?>" />
+                            <meta itemprop="price" content="<?= $product->realPrice; ?>" />
                             <b>
                                 <?= $currency->convertAndFormat($product->realPrice, $product->currency); ?>
                             </b>
@@ -95,7 +97,7 @@ $currency = Yii::$app->currency;
                             <li><?= Yii::t('app', 'Condition'); ?>:  <b><?= Yii::t('app', $product->condition);?></b></li>
 
                             <?php if ($product->manufacturer) { ?>
-                            <li><?= Yii::t('app', 'Brand'); ?>:  <b><?= $product->manufacturer->title; ?></b></li>
+                            <li><?= Yii::t('app', 'Brand'); ?>:  <b itemprop="brand"><?= $product->manufacturer->title; ?></b></li>
                             <?php } ?>
 
                         </ul>
