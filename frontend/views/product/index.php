@@ -5,6 +5,7 @@ use frontend\components\taksit\Bolkart;
 use common\models\info\Info;
 use common\models\Product;
 use common\models\product\Discount;
+use yii\helpers\Url;
 
 $currency = Yii::$app->currency;
 ?>
@@ -26,6 +27,8 @@ $currency = Yii::$app->currency;
 
     </header>
     <div class="current_product" itemscope itemtype="http://schema.org/Product">
+        <meta itemprop="brand" content="<?= $product->manufacturer->title; ?>" />
+
         <div class="priduct_gallery">
 
             <div id="mobile-gallery">
@@ -94,11 +97,15 @@ $currency = Yii::$app->currency;
                             <!-- Price -->
                             <meta itemprop="priceCurrency" content="<?= $product->currency->code; ?>" />
                             <meta itemprop="price" content="<?= $product->realPrice; ?>" />
-                            <?php if ($product->hasDiscount() && $product->discount->period == Discount::PERIOD_RANGE) { ?>
-                                (Sale ends <time itemprop="priceValidUntil" datetime="<?= $product->discount->end_date; ?>"><?= (new \DateTime($product->discount->end_date))->format('d M Y'); ?></time>)
-                            <?php } ?>
 
                             <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
+
+                            <br><br>
+                            <?php if ($product->hasDiscount() && $product->discount->period == Discount::PERIOD_RANGE) { ?>
+                                (<time itemprop="priceValidUntil" datetime="<?= (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO'); ?>">
+                                    <?= (new \DateTime($product->discount->end_date))->format('d M Y'); ?>
+                                </time>)
+                            <?php } ?>
                         </div>
 
                         <ul>
@@ -118,15 +125,31 @@ $currency = Yii::$app->currency;
                             </li>
 
 
+                            <!-- Brand -->
                             <?php if ($product->manufacturer) { ?>
-                            <li><?= Yii::t('app', 'Brand'); ?>:  <b itemprop="brand"><?= $product->manufacturer->title; ?></b></li>
+                            <li><?= Yii::t('app', 'Brand'); ?>:  <b><?= $product->manufacturer->title; ?></b></li>
                             <?php } ?>
 
-                            <li><?= Yii::t('app', 'Availability'); ?>:  <b itemprop="availability" content="http://schema.org/InStock"><?= Yii::t('app', $product->stockStatus->name);?></b></li>
+
+                            <!-- Availability -->
+                            <li>
+                                <?= Yii::t('app', 'Availability'); ?>:
+                                <?php if ($product->stock_status_id == Product::AVAILABILITY_IN_STOCK) { ?>
+                                    <b itemprop="availability" content="http://schema.org/InStock">
+                                <?php } else if ($product->stock_status_id == Product::AVAILABILITY_PRE_ORDER) { ?>
+                                    <b itemprop="availability" content="http://schema.org/PreOrder">
+                                <?php } else { ?>
+                                    <b itemprop="availability" content="http://schema.org/OutOfStock">
+                                <?php } ?>
+
+                                    <?= Yii::t('app', $product->stockStatus->name);?>
+                                </b>
+                            </li>
 
                         </ul>
 
-                        <meta itemprop="url" content="><?= $product->url; ?>">
+                        <!-- Url -->
+                        <meta itemprop="url" content="<?= Url::to($product->url, true); ?>">
                     </div>
                     <div class="cards_dicsount">
 

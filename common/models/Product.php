@@ -61,6 +61,10 @@ class Product extends \yii\db\ActiveRecord
     const CONDITION_NEW     = 1;
     const CONDITION_USED    = 2;
 
+    const AVAILABILITY_IN_STOCK = 7;
+    const AVAILABILITY_PRE_ORDER = 8;
+    const AVAILABILITY_OUT_OF_STOCK = 5;
+
     protected $conditions = [
         '1' => 'New',
         '2' => 'Used'
