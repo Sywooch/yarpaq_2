@@ -4,7 +4,7 @@ use common\models\Language;
 use common\models\category\Category;
 use common\models\category\TopCategoryList;
 use yii\helpers\Url;
-
+use frontend\models\CategoryRepository;
 use frontend\assets\AppAsset;
 AppAsset::register($this);
 
@@ -106,11 +106,9 @@ $seo = $this->params['seo'];
                         <div class="left_side">
                             <?php
                             $topCategoryList = TopCategoryList::getCategories()->all();
-                            $main_categories = Category::find()
-                                ->andWhere(['depth' => 2])
-                                ->andWhere(['status' => Category::STATUS_ACTIVE])
-                                ->andWhere(['isTop' => 0])
-                                ->orderBy('lft')
+
+                            $main_categories = (new CategoryRepository())
+                                ->visibleOnTheSite()
                                 ->all();
 
                             if (count($topCategoryList)) {

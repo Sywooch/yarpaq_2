@@ -100,6 +100,7 @@ return [
 
 
                 '<controller:elastic>/<action:.+>' => 'elastic/<action>',
+                '<controller:sitemap>/<action:.+>' => 'sitemap/<action>',
                 //'<controller:elastic>/<action:.+>/<id:\d+>' => 'elastic/<action>',
 
                 '<url:.+>'      => 'category/index'
