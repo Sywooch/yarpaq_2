@@ -15,6 +15,12 @@ class CategoryRepository extends ActiveQuery
         $this->orderBy('lft');
     }
 
+    public function baseCategories() {
+        $this->andWhere(['depth' => 2]);
+
+        return $this;
+    }
+
     public function visibleOnTheSite() {
         $this->andWhere(['>=', 'depth', 2])
             ->andWhere(['status' => Category::STATUS_ACTIVE])
