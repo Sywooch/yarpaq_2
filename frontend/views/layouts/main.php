@@ -110,6 +110,7 @@ $seo = $this->params['seo'];
                             $main_categories = (new CategoryRepository())
                                 ->visibleOnTheSite()
                                 ->baseCategories()
+                                ->andWhere(['isTop' => 0])
                                 ->all();
 
                             if (count($topCategoryList)) {

@@ -23,8 +23,7 @@ class CategoryRepository extends ActiveQuery
 
     public function visibleOnTheSite() {
         $this->andWhere(['>=', 'depth', 2])
-            ->andWhere(['status' => Category::STATUS_ACTIVE])
-            ->andWhere(['isTop' => 0]);
+            ->andWhere(['status' => Category::STATUS_ACTIVE]);
 
         return $this;
     }

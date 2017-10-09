@@ -11,7 +11,7 @@ foreach ($categories as $category) {
 
         <loc>'.Url::to($category->url, true).'</loc>
 
-        <lastmod>'.$category->updated_at.'</lastmod>
+        <lastmod>'.( new \DateTime($category->updated_at))->format('Y-m-d').'</lastmod>
 
         <changefreq>daily</changefreq>
 
