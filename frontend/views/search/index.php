@@ -1,9 +1,9 @@
 <div class="product_block">
 
     <div class="search_results">
-        <?= Yii::t('app', '"{query}" ilə bağlı <span class="results_count">{count}</span> məhsul tapıldı', [
+        <?= Yii::t('app', '{count} results for "{query}"', [
             'query' => $search_q,
-            'count' => $count
+            'count' => '<span class="results_count">'.$count.'</span>'
         ]); ?>
     </div>
 
