@@ -10,6 +10,7 @@ use common\models\order\Order;
 use common\models\order\OrderProduct;
 use common\models\OrderOption;
 use common\models\payment\PaymentMethod;
+use common\models\Product;
 use common\models\shipping\Shipping;
 use common\models\shipping\ShippingMethod;
 use common\models\Zone;
@@ -24,6 +25,14 @@ class CheckoutController extends BasicController
 {
     public $freeAccessActions = ['index', 'confirm', 'success', 'fail', 'zones'];
 
+    /**
+     * Страница сбора данных для оформления заказа
+     * - сбор данных о покупалете
+     * - выбор метода доставки
+     * - выбор метода оплаты
+     *
+     * @return string|void
+     */
     public function actionIndex() {
         $session    = Yii::$app->session;
         $cart       = Yii::$app->cart;
@@ -87,6 +96,16 @@ class CheckoutController extends BasicController
     }
 
     // TODO доложно быть POST, передаются данные оплаты и доставки
+
+    /**
+     * Непостредственное техническое оформление заказа
+     * - создание заказа в базе данных
+     * - вычетание товара из стока
+     * - переброс на страницу оплаты
+     *
+     * @throws BadRequestHttpException
+     * @throws \yii\db\Exception
+     */
     public function actionConfirm() {
         $request        = Yii::$app->request;
         $cart           = Yii::$app->cart;
@@ -214,11 +233,9 @@ class CheckoutController extends BasicController
         $trans  = $db->beginTransaction();
 
         $orderSaved = $order->save();
-
-        //var_dump($order->getErrors());
-
         if ($orderSaved) {
 
+            // сохранение "товаров заказа"
             foreach ($cart->products as $key => $product) {
 
                 $orderProduct = new OrderProduct();
@@ -231,11 +248,19 @@ class CheckoutController extends BasicController
                 $orderProduct->price = $product['price'];
                 $orderProduct->total = $product['total'];
 
-                if (!$orderProduct->save()) {
+                if ($orderProduct->save()) {
+
+                    // если успещно сохранили "товар заказа"
+                    // то надо вычесть количество из стока
+                    $_product = Product::findOne($orderProduct->product_id);
+                    $_product->quantity -= $orderProduct->quantity;
+                    $_product->save();
+
+                } else {
                     $trans->rollBack();
-                    //var_dump($orderProduct->getErrors());
                 }
 
+                // сохранение опций "товаров заказа"
                 foreach ($product['option'] as $option) {
                     $orderOption = new OrderOption();
 
@@ -249,7 +274,6 @@ class CheckoutController extends BasicController
 
                     if (!$orderOption->save()) {
                         $trans->rollBack();
-                        //var_dump($orderOption->getErrors());
                     }
                 }
             }

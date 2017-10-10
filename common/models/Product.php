@@ -419,6 +419,11 @@ class Product extends \yii\db\ActiveRecord
                 $this->updated_at = $now->format('Y-m-d H:i:s');
             }
 
+
+            if ($this->quantity <= 0) {
+                $this->stock_status_id = self::AVAILABILITY_OUT_OF_STOCK;
+            }
+
             return true;
         }
 
