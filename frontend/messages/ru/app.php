@@ -170,6 +170,8 @@ return [
     'See all' => 'Посмотреть все',
 
     'Discount products' => 'Товары на скидке',
-    'Availability' => 'Наличие'
+    'Availability' => 'Наличие',
+
+    '{count} results for "{query}"' => '{count} результатов по запросу "{query}"',
 
 ];

@@ -168,6 +168,8 @@ return [
     'See all' => 'Hamısına bax',
 
     'Discount products' => 'Endirimli məhsullar',
-    'Availability' => 'Mövcudluq'
+    'Availability' => 'Mövcudluq',
+
+    '{count} results for "{query}"' => '"{query}" ilə bağlı {count} məhsul tapıldı'
 
 ];
