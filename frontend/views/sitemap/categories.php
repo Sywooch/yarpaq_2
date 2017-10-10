@@ -15,7 +15,7 @@ foreach ($categories as $category) {
     foreach ($languages as $language) {
         if ($language->isDefault()) continue;
 
-        echo '<xhtml:link rel="alternate" hreflang="'.$language->name.'" href="'.$category->getUrlByLanguage($language).'" />'.PHP_EOL;
+        echo '<xhtml:link rel="alternate" hreflang="'.$language->name.'" href="'.Url::to($category->getUrlByLanguage($language), true).'" />'.PHP_EOL;
     }
 
 
