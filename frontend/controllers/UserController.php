@@ -39,8 +39,11 @@ class UserController extends BasicController
         $customer   = new User(['scenario'=>'newUser']);
         $profile    = new Profile();
         $address    = new Address();
+        $agree      = 1;
 
         if ( Yii::$app->request->post() ) {
+
+            $agree                      = (int)Yii::$app->request->post('agree');
 
             $customer->password         = Yii::$app->request->post('password');
             $customer->repeat_password  = Yii::$app->request->post('confirm_password');
@@ -70,7 +73,7 @@ class UserController extends BasicController
             $trans = $db->beginTransaction();
 
             // проверяем пользователя
-            $isValid = $customer->validate();
+            $isValid = $customer->validate() && $agree;
             // проверяем все поля профиля, кроме user_id
             $isValid = $profile->validate(['firstname', 'lastname', 'org', 'phone1', 'phone2', 'fax']) && $isValid;
             // проверяем все поля адреса, кроме user_id
@@ -101,6 +104,7 @@ class UserController extends BasicController
             'customer' => $customer,
             'profile'  => $profile,
             'address'  => $address,
+            'agree'    => $agree,
 
             'customerErrors'    => $customer->getErrors(),
             'profileErrors'     => $profile->getErrors(),

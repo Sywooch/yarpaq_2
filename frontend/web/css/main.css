@@ -5760,6 +5760,10 @@ aside.aside_products article .old_price b.discount {
   border-radius: 4px;
 }
 
+.account_edit > div .form form .confirm label b input + em.error {
+  border-color: red;
+}
+
 .account_edit > div .form form .confirm label span {
   font-size: 14px;
   line-height: 21px;
