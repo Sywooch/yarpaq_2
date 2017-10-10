@@ -173,5 +173,7 @@ return [
     'Availability' => 'Наличие',
 
     '{count} results for "{query}"' => '{count} результатов по запросу "{query}"',
+    
+    'Password has been changed' => 'Пароль был изменен'
 
 ];

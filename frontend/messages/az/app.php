@@ -170,6 +170,8 @@ return [
     'Discount products' => 'Endirimli məhsullar',
     'Availability' => 'Mövcudluq',
 
-    '{count} results for "{query}"' => '"{query}" ilə bağlı {count} məhsul tapıldı'
+    '{count} results for "{query}"' => '"{query}" ilə bağlı {count} məhsul tapıldı',
+
+    'Password has been changed' => 'Şifrə yenilənib'
 
 ];

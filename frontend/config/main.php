@@ -13,6 +13,15 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'i18n' => [
+            'translations' => [
+                'yii*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'sourceLanguage' => 'en',
+                    'basePath' => '@app/messages'
+                ],
+            ],
+        ],
         'cart' => [
             'class' => 'frontend\components\Cart'
         ],

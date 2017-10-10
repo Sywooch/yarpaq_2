@@ -1,12 +1,9 @@
 <?php
-
-use webvimark\modules\UserManagement\UserManagementModule;
-
 /**
  * @var yii\web\View $this
  */
 
-$this->title = UserManagementModule::t('back', 'Change own password');
+$this->title = Yii::t('app', 'Password has been changed');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -14,6 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div>
 		<h2><?= $this->title ?></h2>
 
-		<?= UserManagementModule::t('back', 'Password has been changed') ?>
+		<?= Yii::t('app', 'Password has been changed') ?>
 	</div>
 </div>

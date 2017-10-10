@@ -300,7 +300,7 @@ class UserController extends BasicController
 
     public function actionPasswordRecoveryReceive($token)
     {
-        $this->seo(UserManagementModule::t('front', 'Change own password'));
+        $this->seo(UserManagementModule::t('back', 'Change own password'));
 
         if ( !Yii::$app->user->isGuest )
         {
