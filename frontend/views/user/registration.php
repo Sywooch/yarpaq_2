@@ -160,8 +160,8 @@
                 <div class="confirm">
                     <label>
                         <b class="checkbox">
-                            <input id="radio6" name="agree" type="checkbox" value="1" <?= $agree===1 ? 'checked' : '' ?>>
-                            <em <?= $agree===1 ? '' : 'class="error"' ?>></em>
+                            <input id="radio6" name="agree" type="checkbox" value="1" <?= ($agree === true) ? 'checked' : '' ?>>
+                            <em <?= ($agree === null || $agree === true) ? '' : 'class="error"' ?>></em>
                         </b>
                         <span>
                             <?php

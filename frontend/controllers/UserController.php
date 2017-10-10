@@ -39,11 +39,11 @@ class UserController extends BasicController
         $customer   = new User(['scenario'=>'newUser']);
         $profile    = new Profile();
         $address    = new Address();
-        $agree      = 1;
+        $agree      = null;
 
         if ( Yii::$app->request->post() ) {
 
-            $agree                      = (int)Yii::$app->request->post('agree');
+            $agree                      = (bool)Yii::$app->request->post('agree');
 
             $customer->password         = Yii::$app->request->post('password');
             $customer->repeat_password  = Yii::$app->request->post('confirm_password');

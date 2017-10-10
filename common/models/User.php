@@ -14,6 +14,7 @@ class User extends BaseUser {
     public function rules() {
         $rules = parent::rules();
 
+        $rules[] = ['email', 'required'];
         $rules[] = [['salt', 'cart'], 'string'];
 
         return $rules;
