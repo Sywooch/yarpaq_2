@@ -30,6 +30,7 @@ $statuses = OrderStatus::find()
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'layout'        => '{pager}{items}{summary}{pager}',
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 

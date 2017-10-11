@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider'  => $dataProvider,
         //'filterModel' => $searchModel,
-        'layout'        => '{items}{summary}{pager}',
+        'layout'        => '{pager}{items}{summary}{pager}',
         'columns'       => [
             ['class' => \yii\grid\CheckboxColumn::className()],
             [
