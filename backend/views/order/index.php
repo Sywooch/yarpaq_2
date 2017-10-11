@@ -1,11 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use common\models\order\OrderStatus;
-use common\models\order\Order;
 use common\models\User;
 
 /* @var $this yii\web\View */

@@ -26,6 +26,7 @@
         "kartik-v/yii2-date-range": "*",
         "kartik-v/yii2-widget-select2": "*",
         "kartik-v/yii2-widget-datetimepicker": "*",
+        "kartik-v/yii2-grid": "@dev",
 
         "creocoder/yii2-nested-sets": "0.9.*",
         "richardfan1126/yii2-sortable-gridview":"*",
