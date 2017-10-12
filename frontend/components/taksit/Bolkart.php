@@ -10,8 +10,8 @@ namespace frontend\components\taksit;
 class Bolkart extends Taksit
 {
     protected $rates = [
-        '1' => 1.8,
-        '3' => 5.8,
-        '6' => 9.8,
+        '1' => 5,
+        '3' => 9,
+        '6' => 13,
     ];
 }
