@@ -10,6 +10,7 @@ use yii\base\Exception;
 use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
 use common\models\category\Category;
+use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 
 
@@ -23,6 +24,10 @@ class CategoryController extends BasicController
         $r = Yii::$app->request;
 
         $url = preg_match('/^[\w_\-\d\/]+$/', $r->get('url')) ? $r->get('url') : '';
+
+        if ($r->get('page') && $r->get('page') == 1) {
+            $this->redirect(Url::to($url, true), 301);
+        }
 
         // Параметры фильтра
         $productFilter = new ProductFilter();

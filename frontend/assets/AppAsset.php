@@ -18,7 +18,7 @@ class AppAsset extends AssetBundle
         'js/zoom/dist/xzoom.css',
         'js/slick/slick.css',
         'js/slick/slick-theme.css',
-        'css/main.css?v1.0.2',
+        'css/main.css?v1.0.3',
         'css/responsive.css',
         'css/common.css'
     ];
