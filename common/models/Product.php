@@ -459,4 +459,8 @@ class Product extends \yii\db\ActiveRecord
     public static function deactivateProductsBySeller(User $seller) {
         Yii::$app->db->createCommand()->update('{{%product}}', ['status_id' => Product::STATUS_INACTIVE], 'user_id = '.$seller->id)->execute();
     }
+
+    public function hasStock() {
+        return ($this->stock_status_id == self::AVAILABILITY_IN_STOCK && $this->quantity > 0);
+    }
 }

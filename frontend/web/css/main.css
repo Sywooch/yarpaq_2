@@ -2561,6 +2561,7 @@ a.back_to_top.show_me {
   padding: 0 0 0 550px;
   overflow: hidden;
   position: relative;
+  min-height: 550px;
 }
 
 .current_product .right_side {

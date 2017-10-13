@@ -215,6 +215,8 @@ $currency = Yii::$app->currency;
                         </div>
                     </div>
                 </div>
+
+                <?php if ($product->hasStock()) { ?>
                 <div class="product_second_info">
                     <form action="/cart/add" method="post">
 
@@ -257,6 +259,7 @@ $currency = Yii::$app->currency;
 
                     </form>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>
