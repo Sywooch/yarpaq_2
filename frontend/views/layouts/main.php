@@ -20,6 +20,13 @@ $seo = $this->params['seo'];
     <meta name="keywords" content="<?= $seo->keywords; ?>">
     <meta name="description" content="<?= $seo->description; ?>">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
     <title><?= $seo->title; ?></title>
 
     <meta property="og:title" content="<?= $seo->title; ?>" />
@@ -37,8 +44,6 @@ $seo = $this->params['seo'];
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <link rel="icon" type="image/png" href="/img/favicon.png"/>
 
     <?php $this->head() ?>
 
