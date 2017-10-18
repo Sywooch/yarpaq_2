@@ -12,7 +12,12 @@ $children = $category->getChildren()->all(); ?>
         <h3><span><?= Yii::t('app', 'Subcategories'); ?></span></h3>
         <ul>
 
-            <?php foreach ($category->getChildren()->all() as $childCategory) { ?>
+            <?php
+
+            $category_repo = new \frontend\models\CategoryRepository();
+            $category_repo->visibleOnTheSite();
+            $category_repo->andWhere(['parent_id' => $category->id]);
+            foreach ($category_repo->all() as $childCategory) { ?>
                 <li>
                     <a href="<?= $childCategory->url; ?>">
                         <span><?= $childCategory->title; ?></span>
