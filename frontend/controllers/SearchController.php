@@ -59,7 +59,9 @@ class SearchController extends BasicController
 
         $models = [];
         foreach ($elasticIDs as $elasticID) {
-            $models[$elasticID] = $raw_models[$elasticID];
+            if (isset($raw_models[$elasticID])) {
+                $models[$elasticID] = $raw_models[$elasticID];
+            }
         }
         // GET Products END
 
