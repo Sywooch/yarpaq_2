@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\address\Address;
 use common\models\Country;
 use common\models\Language;
+use common\models\notification\RegistrationNotification;
 use common\models\order\Order;
 use common\models\Profile;
 use common\models\Zone;
@@ -87,6 +88,10 @@ class UserController extends BasicController
 
                 if ($profile->save() && $address->save()) {
                     $trans->commit();
+
+                    $adminNotification = new RegistrationNotification($customer);
+                    $adminNotification->send();
+
                     return $this->redirect(Url::to(['user/success']));
                 } else {
                     $trans->rollBack();

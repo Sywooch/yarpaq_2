@@ -127,21 +127,7 @@ return [
     ],
     'modules' => [
         'user-management' => [
-            'class' => 'webvimark\modules\UserManagement\UserManagementModule',
-            'useEmailAsLogin' => true,
-
-            'mailerOptions' => [
-                'from' => [
-                    'support@yarpaq.az' => 'Yarpaq Support'
-                ]
-            ],
-
-            'on beforeAction' => function(yii\base\ActionEvent $event) {
-                if ( $event->action->uniqueId == 'user-management/auth/login' )
-                {
-                    $event->action->controller->layout = 'loginLayout.php';
-                };
-            }
+            'emailConfirmationRequired' => true,
         ]
     ],
     'params' => $params,

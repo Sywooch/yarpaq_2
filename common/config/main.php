@@ -25,6 +25,12 @@ return [
                     ],
                 ],
 
+                'mail' => [
+                    'class'             => 'yii\i18n\PhpMessageSource',
+                    'basePath'          => '@common/messages',
+                    'sourceLanguage'    => 'en'
+                ],
+
                 'modules/user-management/*' => [
                     'class'          => 'yii\i18n\PhpMessageSource',
                     'sourceLanguage' => 'en',
@@ -36,5 +42,28 @@ return [
                 ]
             ],
         ],
+    ],
+    'modules' => [
+        'user-management' => [
+            'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+            'useEmailAsLogin' => true,
+
+            'mailerOptions' => [
+                'from' => [
+                    'support@yarpaq.az' => 'Yarpaq Support'
+                ],
+
+                'registrationFormViewFile'     => '/common/mail/registrationEmailConfirmation',
+                //'passwordRecoveryFormViewFile' => '/common/mail/passwordRecoveryMail',
+                //'confirmEmailFormViewFile'     => '/common/mail/emailConfirmationMail',
+            ],
+
+            'on beforeAction' => function(yii\base\ActionEvent $event) {
+                if ( $event->action->uniqueId == 'user-management/auth/login' )
+                {
+                    $event->action->controller->layout = 'loginLayout.php';
+                };
+            }
+        ]
     ],
 ];
