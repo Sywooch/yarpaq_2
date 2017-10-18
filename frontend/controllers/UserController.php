@@ -27,7 +27,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
 class UserController extends BasicController
 {
 
-    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password', 'password-recovery-receive', 'success'];
+    public $freeAccessActions = ['registration', 'login', 'orders', 'profile', 'recovery-password', 'password-recovery-receive', 'success', 'confirm-email-receive'];
 
     public function actionRegistration()
     {
@@ -50,7 +50,12 @@ class UserController extends BasicController
             $customer->repeat_password  = Yii::$app->request->post('confirm_password');
             $customer->email            = Yii::$app->request->post('email');
             $customer->username         = Yii::$app->request->post('email');
-            $customer->email_confirmed  = 1;
+            $customer->email_confirmed  = 0;
+
+            if ( Yii::$app->getModule('user-management')->emailConfirmationRequired && Yii::$app->getModule('user-management')->useEmailAsLogin ) {
+                $customer->status = User::STATUS_INACTIVE;
+                $customer->generateConfirmationToken();
+            }
 
             $profile->firstname         = Yii::$app->request->post('firstname');
             $profile->lastname          = Yii::$app->request->post('lastname');
@@ -338,5 +343,29 @@ class UserController extends BasicController
         }
 
         return $this->renderIsAjax('changeOwnPassword', compact('model'));
+    }
+
+    /**
+     * Receive token, find user by it and confirm email
+     *
+     * @param string $token
+     *
+     * @throws \yii\web\NotFoundHttpException
+     * @return string|\yii\web\Response
+     */
+    public function actionConfirmEmailReceive($token)
+    {
+        $user = User::findByConfirmationToken($token);
+
+        if ( !$user )
+        {
+            throw new NotFoundHttpException(UserManagementModule::t('front', 'Token not found. It may be expired'));
+        }
+
+        $user->email_confirmed = 1;
+        $user->removeConfirmationToken();
+        $user->save(false);
+
+        return $this->renderIsAjax('confirmEmailSuccess', compact('user'));
     }
 }

@@ -89,6 +89,7 @@ return [
                 'login'                     => 'user/login',
                 'password-recovery'         => 'user/recovery-password',
                 'password-recovery-receive' => 'user/password-recovery-receive',
+                'confirm-email-receive'     => 'user/confirm-email-receive',
                 'logout'                    => 'user-management/auth/logout',
 
                 'user/profile'       => 'user/profile',

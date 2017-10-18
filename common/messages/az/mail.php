@@ -1,5 +1,6 @@
 <?php
 return [
+    'Confirmation of the registration - Yarpaq.az' => 'Qeydiyyatın təsdiqlənməsi - Yarpaq.az',
     'Azerbaijan\'s Fastest Online Shopping Destination' => 'Azərbaycanın ən sürətli onlayn alış-veriş ünvanı',
     '{fullname}, welcome to Yarpaq.az website' => 'Salam, {fullname}, Yarpaq.az saytına xoş gəldiniz',
     'Dear {fullname}' => 'Hörmətli {fullname}',
