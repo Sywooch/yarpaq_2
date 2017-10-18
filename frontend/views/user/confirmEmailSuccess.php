@@ -5,7 +5,7 @@
  * @var webvimark\modules\UserManagement\models\forms\PasswordRecoveryForm $model
  */
 
-$this->title = Yii::t('app', 'Email Confirmation Successful');
+$this->title = Yii::t('app', 'Successful Email Confirmation');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
