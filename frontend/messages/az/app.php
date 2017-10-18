@@ -172,6 +172,9 @@ return [
 
     '{count} results for "{query}"' => '"{query}" ilə bağlı {count} məhsul tapıldı',
 
-    'Password has been changed' => 'Şifrə yenilənib'
+    'Password has been changed' => 'Şifrə yenilənib',
+
+    'Successful Email Confirmation' => 'Elektron ünvanın uğurlu təsdiqlənməsi',
+    'Your email was successfully confirmed' => 'Sizin elektron ünvanınız uğurla təsdiqləndi'
 
 ];

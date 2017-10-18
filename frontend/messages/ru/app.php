@@ -174,6 +174,9 @@ return [
 
     '{count} results for "{query}"' => '{count} результатов по запросу "{query}"',
     
-    'Password has been changed' => 'Пароль был изменен'
+    'Password has been changed' => 'Пароль был изменен',
+
+    'Successful Email Confirmation' => 'Успешное подтверждение электронного адреса',
+    'Your email was successfully confirmed' => 'Ваш электронный адрес был успешно подтвержден'ы
 
 ];

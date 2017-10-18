@@ -53,7 +53,6 @@ class UserController extends BasicController
             $customer->email_confirmed  = 0;
 
             if ( Yii::$app->getModule('user-management')->emailConfirmationRequired && Yii::$app->getModule('user-management')->useEmailAsLogin ) {
-                $customer->status = User::STATUS_INACTIVE;
                 $customer->generateConfirmationToken();
             }
 
