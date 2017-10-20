@@ -405,6 +405,8 @@ class ProductController extends AdminDefaultController
 
         $product->status_id = $status_id;
         if ( $product->save() ) {
+            $this->indexProduct($product);
+
             return ['status' => 1];
         } else {
             return ['status' => 0];
