@@ -24,7 +24,6 @@ class SearchController extends BasicController
     public $freeAccessActions = ['index', 'elastic', 'auto'];
 
     public function actionElastic() {
-        $request        = Yii::$app->request;
         $productFilter  = $this->initFilter();
         $query          = $this->initQuery();
         $elastic = new ProductSearch();
@@ -36,7 +35,6 @@ class SearchController extends BasicController
         $pagination = new Pagination([
             'totalCount' => $total,
             'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24,
-            //'page' => $page
         ]);
 
         $response = $elastic->search($query, $productFilter, $pagination->page, $pagination->limit);

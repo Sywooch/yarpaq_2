@@ -151,7 +151,6 @@ class ProductSearch
             ]
         ];
 
-
         try {
 
             $response = $this->client->search($params);
@@ -344,23 +343,22 @@ class ProductSearch
      */
     private function getDefaultQuery($query, array $mustFilter = []) {
         $must = [
-            [ "match"   => [ "title" => $query ] ],
+            [
+                'bool' => [
+                    'should' => [
+                        ["match"   => [ "title" => $query ] ],
+                        ["term"    => [ "id" => (int)$query ] ]
+                    ]
+                ],
+            ]
         ];
         if (count($mustFilter)) {
             $must = array_merge($must, $mustFilter);
         }
 
         return [
-            "bool" => [
-                'should' => [
-                    [
-                        'bool' => [
-                            "must" => $must,
-                        ]
-
-                    ],
-                    [ "term"    => [ "id" => (int)$query, ] ]
-                ],
+            'bool' => [
+                "must" => $must,
             ]
         ];
     }
