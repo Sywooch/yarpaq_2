@@ -90,12 +90,12 @@ use common\models\User;
             <?php
             $categories = [];
             $categories[''] = Yii::t('app', 'All');
-            $categories = array_merge($categories, ArrayHelper::map(Category::find()
+            $categories = $categories + ArrayHelper::map(Category::find()
                 ->where(['>', 'parent_id', 0])
                 ->orderBy('lft')
                 ->all(), 'id', function ($category) {
                 return str_repeat(' - ', $category->depth-1).$category->title;
-            }));
+            });
 
 
             //ksort($categories);
