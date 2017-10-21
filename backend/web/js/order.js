@@ -28,6 +28,8 @@ $(function () {
 
     });
 
+    $('#order-shipping_country_id').change();
+
 
     /**
      * При изменении страны для Payment-a подгружать доступные регионы
@@ -49,6 +51,8 @@ $(function () {
         });
 
     });
+
+    $('#order-payment_country_id').change();
 
 
     /**
