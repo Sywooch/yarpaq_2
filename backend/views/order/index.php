@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 use yii\helpers\ArrayHelper;
 use common\models\order\OrderStatus;
 use common\models\User;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\order\OrderSearch */
@@ -129,11 +130,39 @@ $statuses = OrderStatus::find()
             // 'accept_language',
             [
                 'attribute' => 'created_at',
-                'format' => ['date', 'php:d.m.Y H:i:s']
+                'filter' => DateRangePicker::widget(
+                    [
+                        'model' => $searchModel,
+                        'attribute' => 'created_at',
+                        'convertFormat' => true,
+                        'pluginOptions' => [
+                            'timePicker' => false,
+                            'timePickerIncrement' => 30,
+                            'locale'=>[
+                                'format'=>'Y-m-d'
+                            ]
+                        ],
+                        'autoUpdateOnInit' => false
+                    ]
+                )
             ],
             [
                 'attribute' => 'modified_at',
-                'format' => ['date', 'php:d.m.Y H:i:s']
+                'filter' => DateRangePicker::widget(
+                    [
+                        'model' => $searchModel,
+                        'attribute' => 'modified_at',
+                        'convertFormat' => true,
+                        'pluginOptions' => [
+                            'timePicker' => false,
+                            'timePickerIncrement' => 30,
+                            'locale'=>[
+                                'format'=>'Y-m-d'
+                            ]
+                        ],
+                        'autoUpdateOnInit' => false
+                    ]
+                )
             ],
 
             [

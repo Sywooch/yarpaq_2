@@ -60,8 +60,6 @@ class OrderSearch extends Order
             'language_id' => $this->language_id,
             'currency_id' => $this->currency_id,
             'currency_value' => $this->currency_value,
-            'created_at' => $this->created_at,
-            'modified_at' => $this->modified_at,
         ]);
 
         $query
@@ -104,6 +102,20 @@ class OrderSearch extends Order
             $query->leftJoin('{{%product}} p', 'op.product_id = p.id');
 
             $query->andWhere(['p.user_id' => $this->seller_id]);
+        }
+
+        if ($this->created_at != '') {
+            list($created_start, $created_end) = explode(' - ', $this->created_at);
+
+            $query->andFilterWhere(['>=', 'created_at', $created_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'created_at', $created_end . ' 23:59:59']);
+        }
+
+        if ($this->modified_at != '') {
+            list($created_start, $created_end) = explode(' - ', $this->modified_at);
+
+            $query->andFilterWhere(['>=', 'modified_at', $created_start . ' 00:00:00'])
+                ->andFilterWhere(['<=', 'modified_at', $created_end . ' 23:59:59']);
         }
 
         return $dataProvider;
