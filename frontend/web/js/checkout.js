@@ -23,9 +23,9 @@ $(function () {
 
 
     $('.shipping_method_block input').change(function () {
-        var amount = $(this).data('amount') || 0;
-        var raw_amount = $(this).data('raw-amount') || 0;
-        var cartSubTotal = $('.cart-sub-total').data('amount');
+        var amount = $(this).attr('data-amount') || 0;
+        var raw_amount = $(this).attr('data-raw-amount') || 0;
+        var cartSubTotal = $('.cart-sub-total').attr('data-amount');
 
         $('#shipping-price').html(amount);
 
