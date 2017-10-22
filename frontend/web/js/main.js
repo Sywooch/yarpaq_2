@@ -371,7 +371,7 @@ setTimeout( function() {
 		var cont_list = _this.closest('.cont').find('.cont-list').eq(0);
 		var list = _this.closest('.cont').find('.cont-ul').eq(0);
 
-		if (_window.width() < 992 && list.length && list.children().length) {
+		if (!_this.hasClass('see_all') && _window.width() < 992 && list.length && list.children().length) {
 
 			if (_this.hasClass("active")) {
 				_this.removeClass("active");
@@ -582,83 +582,6 @@ _window.resize(function(){
 	});
 
 /* Filtre mobile end */
-
-
-/* Product gallery begin */
-
-//$(".priduct_gallery .thumbnails li a").click(function(){
-//        var  _this = $(this),
-//        src = _this.attr("href"),
-//        _this_index = _this.parent().index(),
-//        previous = $(".priduct_gallery .thumbnails li a.active").parent().index();
-//        if (_this.hasClass("video")) {
-//	        if (_this.hasClass("active")) {} else {
-//	        	if($(".priduct_gallery").hasClass("preload")) {} else {
-//		        	$(".priduct_gallery").addClass("preload");
-//		            $(".priduct_gallery .thumbnails li a").removeClass("active");
-//		            _this.addClass("active");
-//		            if (_this_index > previous) {
-//		                $(".priduct_gallery .image").append("<div style='left: "+$(".priduct_gallery").width()+"px'><video src='"+src+"' loop='loop'></video></div>");
-//		            } else {
-//		                $(".priduct_gallery .image").append("<div style='left: -"+$(".priduct_gallery").width()+"px'><video src='"+src+"' loop='loop'></video></div>");
-//		            }
-//
-//
-//		            setTimeout(function(){
-//		                $(".priduct_gallery .image > div + div").css("left", "0");
-//		                if (_this_index > previous) {
-//		                    $(".priduct_gallery .image > div:first-child").css("left", "-100%");
-//		                } else {
-//		                    $(".priduct_gallery .image > div:first-child").css("left", "100%");
-//		                }
-//		                setTimeout(function(){
-//		                    $(".priduct_gallery .image > div:first-child").remove();
-//		        			$(".priduct_gallery").removeClass("preload");
-//		        			$(".priduct_gallery .image > div video").get(0).play();
-//		        			$(".priduct_gallery .image > div video").click(function(){
-//
-//		        					$(".priduct_gallery .image > div video").get(0).pause();
-//
-//							});
-//		                }, 600);
-//		            }, 600);
-//
-//	        	}
-//        	}
-//        } else {
-//	        if (_this.hasClass("active")) {} else {
-//	        	if($(".priduct_gallery").hasClass("preload")) {} else {
-//		        	$(".priduct_gallery").addClass("preload");
-//		            $(".priduct_gallery .thumbnails li a").removeClass("active");
-//		            _this.addClass("active");
-//		            if (_this_index > previous) {
-//		                $(".priduct_gallery .image").append("<div style='left: "+$(".priduct_gallery").width()+"px'><img src='"+src+"' alt='' /></div>");
-//		            } else {
-//		                $(".priduct_gallery .image").append("<div style='left: -"+$(".priduct_gallery").width()+"px'><img src='"+src+"' alt='' /></div>");
-//		            }
-//
-//		            $(".priduct_gallery .image > div + div img").load(function(){
-//		                $(".priduct_gallery .image > div + div").css("left", "0");
-//		                if (_this_index > previous) {
-//		                    $(".priduct_gallery .image > div:first-child").css("left", "-100%");
-//		                } else {
-//		                    $(".priduct_gallery .image > div:first-child").css("left", "100%");
-//		                }
-//		                setTimeout(function(){
-//		                    $(".priduct_gallery .image > div:first-child").remove();
-//		        			$(".priduct_gallery").removeClass("preload");
-//		                }, 600);
-//		            });
-//	        	}
-//	        }
-//        }
-//
-//        return false;
-//    });
-
-
-
-/* Product gallery end */
 
 
 /* Product tabs begin */
