@@ -245,7 +245,7 @@
     line-height: 180px;
   }
   .product_carusel .swipe ul li .old_price span {
-    display: block;
+    display: inline-block;
     padding: 0 0 5px;
   }
   /* Product carousel end */
@@ -444,12 +444,12 @@
   }
   .product_size ul li label input + span {
     padding: 10px 6px 6px 6px;
-    width: 32px;
+    /*width: 32px;*/
     height: 32px;
     line-height: 100%;
   }
   .product_size ul li label input + span::after {
-    width: 30px;
+    /*width: 30px;*/
     height: 30px;
   }
   .product_color p {
@@ -561,7 +561,7 @@
     display: none;
   }
   .size_select span {
-    display: none;
+    /*display: none;*/
   }
   .count_select {
     clear: both;
