@@ -4661,8 +4661,6 @@ a.back_to_top.show_me {
 .right_basket_list article .inner .size em {
   display: inline-block;
   vertical-align: middle;
-  width: 23px;
-  height: 23px;
   text-align: center;
   line-height: 23px;
   color: #808080;
@@ -4671,7 +4669,6 @@ a.back_to_top.show_me {
   font-weight: 400;
   letter-spacing: -0.7px;
   text-transform: uppercase;
-  background: #ebebeb;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
