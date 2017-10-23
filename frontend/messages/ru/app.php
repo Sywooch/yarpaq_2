@@ -177,6 +177,6 @@ return [
     'Password has been changed' => 'Пароль был изменен',
 
     'Successful Email Confirmation' => 'Успешное подтверждение электронного адреса',
-    'Your email was successfully confirmed' => 'Ваш электронный адрес был успешно подтвержден'ы
+    'Your email was successfully confirmed' => 'Ваш электронный адрес был успешно подтвержден'
 
 ];
