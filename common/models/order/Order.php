@@ -7,6 +7,7 @@ use common\models\option\ProductOption;
 use common\models\option\ProductOptionValue;
 use common\models\OrderOption;
 use common\models\Product;
+use common\models\shipping\Shipping;
 use common\models\Zone;
 use Yii;
 use common\models\Currency;
@@ -318,5 +319,30 @@ class Order extends \yii\db\ActiveRecord
 
     public function getShippingZone() {
         return $this->hasOne(Zone::className(), ['id' => 'shipping_zone_id']);
+    }
+
+
+    /**
+     * Пересчитывает общую сумму с учетом стоимости товаров,
+     * доставки и наценки на оплату
+     */
+    public function recalculate() {
+        $total = 0;
+        $shipping_method = Shipping::create($this->shipping_method);
+
+        foreach ($this->orderProducts as $orderProduct) {
+            // прибавляем стоимость товара
+            $total += $orderProduct->total;
+
+            // определяем вес товара
+            $weight = $orderProduct->product->weight;
+
+            // прибавляем стоимость доставки товара в соответствии
+            // с его весом и пунктом назначения
+            $total += $shipping_method->calculateCostByZone($weight, $this->shippingZone);
+        }
+
+        $this->total = $total;
+        $this->save();
     }
 }

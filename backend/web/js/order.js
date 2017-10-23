@@ -14,13 +14,20 @@ $(function () {
 
         var region_element = $('#'+$(this).data('region-element-id'));
         var url = $(this).data('url');
+        var default_zone_id = region_element.data('default-id');
 
         getJSON(url, {country_id: $(this).val()}, function (response) {
 
             region_element.html('');
 
             $.each(response.data, function (id, name) {
-                var option = $('<option value="'+id+'">'+name+'</option>');
+                var option;
+                if (default_zone_id == id) {
+                    option = $('<option value="'+id+'" selected>'+name+'</option>');
+                } else {
+                    option = $('<option value="'+id+'">'+name+'</option>');
+                }
+
                 region_element.append(option);
             });
 
@@ -38,13 +45,19 @@ $(function () {
 
         var region_element = $('#'+$(this).data('region-element-id'));
         var url = $(this).data('url');
+        var default_zone_id = region_element.data('default-id');
 
         getJSON(url, {country_id: $(this).val()}, function (response) {
 
             region_element.html('');
 
             $.each(response.data, function (id, name) {
-                var option = $('<option value="'+id+'">'+name+'</option>');
+                var option;
+                if (default_zone_id == id) {
+                    option = $('<option value="'+id+'" selected>'+name+'</option>');
+                } else {
+                    option = $('<option value="'+id+'">'+name+'</option>');
+                }
                 region_element.append(option);
             });
 

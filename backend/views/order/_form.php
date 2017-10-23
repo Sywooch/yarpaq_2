@@ -294,8 +294,9 @@ $order = $model;
 
                 <div class="col-md-3">
                     <?= $form->field($order, 'payment_zone_id')
-                        ->dropDownList(ArrayHelper::map(Zone::find()->all(), 'id', 'name')) ?>
-
+                        ->dropDownList([], [
+                            'data-default-id' => $order->payment_zone_id
+                        ]) ?>
                 </div>
             </div>
         </div>
@@ -346,7 +347,9 @@ $order = $model;
 
                 <div class="col-md-3">
                     <?= $form->field($order, 'shipping_zone_id')
-                        ->dropDownList(ArrayHelper::map(Zone::find()->all(), 'id', 'name')) ?>
+                        ->dropDownList([], [
+                            'data-default-id' => $order->shipping_zone_id
+                        ]) ?>
                 </div>
             </div>
         </div>

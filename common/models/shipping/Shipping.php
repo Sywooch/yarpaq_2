@@ -2,9 +2,22 @@
 
 namespace common\models\shipping;
 
+use common\models\Zone;
+use yii\base\Exception;
+
 abstract class Shipping
 {
     protected $rates;
+
+    public function calculateCostByZone($weight, Zone $zone) {
+        $geo_zones = $zone->geoZones;
+
+        if (isset($geo_zones[0])) {
+            return $this->calculateCost($weight, $geo_zones[0]->geo_zone_id);
+        } else {
+            throw new Exception('Geo Zone not found');
+        }
+    }
 
     public function calculateCost($weight, $geo_zone_id) {
         $result = 0;
@@ -26,6 +39,8 @@ abstract class Shipping
                     $result = $rate_cost;
                 }
             }
+        } else {
+            throw new Exception('No rates for Geo Zone ('.$geo_zone_id.')');
         }
 
         return $result;

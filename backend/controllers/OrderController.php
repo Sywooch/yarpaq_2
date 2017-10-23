@@ -171,6 +171,8 @@ class OrderController extends AdminDefaultController
                 }
             }
 
+            $order->recalculate();
+
             if ($isValid) {
                 if (Yii::$app->session->has('redirect')) {
                     $redirect = Yii::$app->session->get('redirect');
