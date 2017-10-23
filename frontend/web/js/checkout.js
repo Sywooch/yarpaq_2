@@ -29,7 +29,7 @@ $(function () {
 
         $('#shipping-price').html(amount);
 
-        $('.cart-total .val').html(cartSubTotal + raw_amount);
+        $('.cart-total .val').html(parseInt(cartSubTotal) + parseInt(raw_amount));
     });
 
     $('.zones_select').change(function () {
