@@ -8,14 +8,13 @@ class NewOrderUserNotification extends Notification
 {
     protected $layout = 'new-order-for-user';
 
-    public function __construct($user, $order) {
+    public function __construct($order) {
         $this->subject = Yii::t('app', 'Thank you for your order');
 
-        $this->to = $user->email;
+        $this->to = $order->email;
 
         $this->layoutData = [
             'order' => $order,
-            'user'  => $user
         ];
     }
 }

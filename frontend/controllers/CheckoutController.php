@@ -285,8 +285,8 @@ class CheckoutController extends BasicController
                 $session->remove('shipping_method');
                 $session->remove('guest');
 
-                //$userNotification = new NewOrderUserNotification($user, $order);
-                //$userNotification->send();
+                $userNotification = new NewOrderUserNotification($order);
+                $userNotification->send();
 
                 $adminNotification = new NewOrderAdminNotification($user, $order);
                 $adminNotification->send();

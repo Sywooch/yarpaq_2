@@ -175,6 +175,8 @@ return [
     'Password has been changed' => 'Şifrə yenilənib',
 
     'Successful Email Confirmation' => 'Elektron ünvanın uğurlu təsdiqlənməsi',
-    'Your email was successfully confirmed' => 'Sizin elektron ünvanınız uğurla təsdiqləndi'
+    'Your email was successfully confirmed' => 'Sizin elektron ünvanınız uğurla təsdiqləndi',
+
+    'Thank you for your order' => 'Sifarişinizə görə təşəkkür edirik'
 
 ];

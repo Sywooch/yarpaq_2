@@ -14,7 +14,7 @@ class Notification
 
     public function send() {
         return Yii::$app->mailer->compose($this->layout, $this->layoutData)
-            ->setFrom(Yii::$app->params['supportEmail'])
+            ->setFrom([Yii::$app->params['supportEmail'] => 'Yarpaq.az'])
             ->setTo($this->to)
             ->setSubject($this->subject)
             ->send();
