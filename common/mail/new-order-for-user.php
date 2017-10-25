@@ -11,7 +11,7 @@
             <tr>
                 <td style="padding-left: 30px; padding-top: 27px; padding-bottom: 15px;">
                     <a href="https://www.yarpaq.az/" title="Yarpaq.az" style="display: block; width: 160px;">
-                        <img src="https://www.yarpaq.az/img/logo.png" alt="Yarpaq.az" style="width:158px;" />
+                        <img src="https://www.yarpaq.az/img/logo2.png" alt="Yarpaq.az" style="width:158px;" />
                     </a>
                 </td>
 

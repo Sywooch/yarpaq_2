@@ -19,7 +19,7 @@ class AppAsset extends AssetBundle
         'js/page.js',
         'js/gallery.js',
         'js/common.js?v=1.0.1',
-        'js/order.js',
+        'js/order.js?v=1.0.1',
         'js/discount.js'
     ];
     public $depends = [
