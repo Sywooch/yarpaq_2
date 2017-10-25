@@ -69,7 +69,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($order->orderProducts as $orderProduct) { ?>
+                <?php
+                $total = 0;
+                foreach ($orderProducts as $orderProduct) {
+                    $total += $orderProduct->total;
+                    ?>
                     <tr>
                         <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?= $orderProduct->name; ?><br> Kod: <?= $orderProduct->product_id; ?></td>
                         <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: left; padding: 7px;"><?= $orderProduct->model; ?></td>
@@ -83,11 +87,11 @@
 
                 <tr>
                     <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Cəmi:</b></td>
-                    <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $order->total; ?> AZN</td>
+                    <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $total; ?> AZN</td>
                 </tr>
                 <tr>
                     <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;" colspan="4"><b>Yekun məbləğ:</b></td>
-                    <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $order->total; ?> AZN</td>
+                    <td style="font-size: 12px;	border-right: 1px solid #DDDDDD; border-bottom: 1px solid #DDDDDD; text-align: right; padding: 7px;"><?= $total; ?> AZN</td>
                 </tr>
 
                 </tfoot>

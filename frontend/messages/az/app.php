@@ -177,6 +177,7 @@ return [
     'Successful Email Confirmation' => 'Elektron ünvanın uğurlu təsdiqlənməsi',
     'Your email was successfully confirmed' => 'Sizin elektron ünvanınız uğurla təsdiqləndi',
 
-    'Thank you for your order' => 'Sifarişinizə görə təşəkkür edirik'
+    'Thank you for your order' => 'Sifarişinizə görə təşəkkür edirik',
+    'New order' => 'Yeni sifariş'
 
 ];

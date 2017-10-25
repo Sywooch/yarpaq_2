@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Country;
 use common\models\Language;
 use common\models\notification\NewOrderAdminNotification;
+use common\models\notification\NewOrderSellerNotification;
 use common\models\notification\NewOrderUserNotification;
 use common\models\order\Order;
 use common\models\order\OrderProduct;
@@ -15,6 +16,7 @@ use common\models\shipping\Shipping;
 use common\models\shipping\ShippingMethod;
 use common\models\Zone;
 use Yii;
+use yii\base\Exception;
 use yii\helpers\BaseInflector;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
@@ -281,17 +283,8 @@ class CheckoutController extends BasicController
             if ($trans->isActive) {
                 $trans->commit();
 
-                $session->remove('payment_method');
-                $session->remove('shipping_method');
-                $session->remove('guest');
-
-                $userNotification = new NewOrderUserNotification($order);
-                $userNotification->send();
-
-                $adminNotification = new NewOrderAdminNotification($user, $order);
-                $adminNotification->send();
-
-
+                $this->clearSessionCheckoutInformation();
+                $this->sendNotifications($user, $order);
 
                 // Redirect to payment page
                 $payment_class = BaseInflector::camel2id($payment_method['class']);
@@ -304,6 +297,40 @@ class CheckoutController extends BasicController
 
         }
 
+    }
+
+    private function clearSessionCheckoutInformation() {
+        $session        = Yii::$app->session;
+
+        $session->remove('payment_method');
+        $session->remove('shipping_method');
+        $session->remove('guest');
+    }
+
+
+    /**
+     * Отправляет уведомления
+     *
+     * - покупателю
+     * - продавцам
+     * - админу
+     *
+     * @param $user
+     * @param $order
+     */
+    private function sendNotifications($user, $order) {
+        try {
+            $userNotification = new NewOrderUserNotification($order);
+            $userNotification->send();
+
+            $adminNotification = new NewOrderAdminNotification($user, $order);
+            $adminNotification->send();
+
+            $sellerNotification = new NewOrderSellerNotification($order);
+            $sellerNotification->send();
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
+        }
     }
 
     public function actionZones($country_id) {
