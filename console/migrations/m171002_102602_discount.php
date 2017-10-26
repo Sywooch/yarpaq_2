@@ -15,7 +15,7 @@ class m171002_102602_discount extends Migration
             'end_date'      => $this->dateTime()
         ]);
 
-        $this->addForeignKey('product', '{{%discount}}', 'product_id', '{{%product}}', 'id');
+        $this->addForeignKey('product', '{{%discount}}', 'product_id', '{{%product}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     public function safeDown()
