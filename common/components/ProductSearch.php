@@ -362,14 +362,4 @@ class ProductSearch
             ]
         ];
     }
-
-    public function deactivateByID($id) {
-        if (!is_array($id)) {
-            $id = [$id];
-        }
-
-        //foreach () {
-
-        //}
-    }
 }
