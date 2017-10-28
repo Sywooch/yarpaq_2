@@ -456,8 +456,22 @@ class Product extends \yii\db\ActiveRecord
         return $this->moderated && $this->status_id == self::STATUS_ACTIVE;
     }
 
+    
     public static function deactivateProductsBySeller(User $seller) {
-        Yii::$app->db->createCommand()->update('{{%product}}', ['status_id' => Product::STATUS_INACTIVE], 'user_id = '.$seller->id)->execute();
+        $transaction = Yii::$app->db->beginTransaction();
+
+        $products = Product::find()->andWhere(['user_id' => $seller->id])->all();
+        foreach ($products as $product) {
+            $product->deactivate();
+        }
+
+        $transaction->commit();
+
+    }
+
+    public function deactivate() {
+        $this->status_id = self::STATUS_INACTIVE;
+        $this->save();
     }
 
     public function hasStock() {

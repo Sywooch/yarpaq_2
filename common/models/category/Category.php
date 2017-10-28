@@ -10,6 +10,7 @@ use Yii;
 use creocoder\nestedsets\NestedSetsBehavior;
 use common\models\IPage;
 use common\models\IDocument;
+use yii\base\Event;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -29,6 +30,38 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
 
     const STATUS_ACTIVE = 1;
     const STATUS_HIDDEN = 0;
+
+    const CATEGORY_DEACTIVATED = 'Category deactivated';
+
+
+    public function init() {
+        $this->on(self::CATEGORY_DEACTIVATED, function ($event) {
+            $category = $event->sender;
+
+            $products = Product::find()
+                ->alias('p')
+                ->joinWith(['categories c'])
+                ->andWhere(['c.id' => $category->id])
+                ->with('categories')
+                ->all();
+
+            foreach ($products as $product) {
+                $categories = $product->categories;
+
+                $exists = false; // полагаем, что активных категорий нет
+                foreach ($categories as $category) {
+                    if ($category->isVisible()) {
+                        $exists = true; // если есть, то меняем значение
+                    }
+                }
+
+                if (!$exists) {
+                    $product->deactivate();
+                }
+            }
+
+        });
+    }
 
     /**
      * @inheritdoc
@@ -262,6 +295,10 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         return $this->content->name;
     }
 
+    public function isVisible() {
+        return $this->status == self::STATUS_ACTIVE;
+    }
+
 
     /**
      * Возвращает полный путь элемента
@@ -303,6 +340,15 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         parent::afterFind();
 
         $this->settings = unserialize($this->settings);
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+
+        // если категория стала не видна
+        if (!$this->isVisible() && isset($changedAttributes['status']) && $changedAttributes['status'] == self::STATUS_ACTIVE) {
+            $this->trigger(Category::CATEGORY_DEACTIVATED);
+        }
     }
 
     public function beforeSave($insert)
