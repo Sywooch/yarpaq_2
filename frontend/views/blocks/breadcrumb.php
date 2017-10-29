@@ -9,7 +9,7 @@
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
             <a
                 itemscope itemtype="http://schema.org/Thing" itemprop="item"
-                href="<?= \common\models\Language::getCurrent()->urlPrefix; ?>">
+                href="<?= \common\models\Language::getCurrent()->urlPrefix; ?>/">
 
                 <span itemprop="name"><?= Yii::t('app', 'Home'); ?></span>
             </a>
