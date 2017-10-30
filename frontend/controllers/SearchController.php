@@ -152,13 +152,6 @@ class SearchController extends BasicController
         $title_cond[] = ['id' => $q];
         $products->andWhere($title_cond);
 
-//        $detailed_products = clone $products;
-//        foreach ($q_parts as $q_part) {
-//            $detailed_products->orWhere(['like', 'title', $q_part]);
-//        }
-//        $products->union($detailed_products);
-
-
         // если указана категория, то находим все ее дочерние и ищем по этим категориям
         if ($r->get('category_id')) {
             $category_id = $r->get('category_id');
@@ -249,7 +242,7 @@ class SearchController extends BasicController
         $query = $repo->visibleOnTheSite();
         $query->andFilterWhere(['or',
             ['like', 'title', $q],
-            ['id' => $q]
+            ['{{%product}}.id' => $q]
         ]);
         $query->orderBy(['viewed' => SORT_DESC]);
 
