@@ -3,9 +3,11 @@
 namespace frontend\models;
 
 
+use common\models\category\Category;
 use common\models\Product;
 use common\models\product\Discount;
 use yii\db\ActiveQuery;
+use yii\db\Query;
 
 class ProductRepository extends ActiveQuery
 {
@@ -17,6 +19,10 @@ class ProductRepository extends ActiveQuery
     public function visibleOnTheSite() {
         $this->andWhere(['status_id' => Product::STATUS_ACTIVE]);
         $this->andWhere(['moderated' => 1]);
+
+        $this->joinWith(['categories c']);
+        $this->andWhere(['c.status' => Category::STATUS_ACTIVE]);
+        $this->groupBy('{{%product}}.id');
 
         return $this;
     }

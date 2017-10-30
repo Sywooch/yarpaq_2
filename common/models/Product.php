@@ -452,8 +452,26 @@ class Product extends \yii\db\ActiveRecord
         $elasticSearch->delete($this);
     }
 
+    /**
+     * Виден ли товар на сайте
+     *
+     * @return bool
+     */
     public function isVisible() {
-        return $this->moderated && $this->status_id == self::STATUS_ACTIVE;
+        return $this->moderated && $this->status_id == self::STATUS_ACTIVE && $this->hasActiveCategory();
+    }
+
+    /**
+     * Имеет ли товар активную категорию
+     *
+     * @return bool
+     */
+    public function hasActiveCategory() {
+        foreach ($this->categories as $category) {
+            if ($category->isVisible()) {
+                return true;
+            }
+        }
     }
 
     
@@ -474,7 +492,24 @@ class Product extends \yii\db\ActiveRecord
         $this->save();
     }
 
+    public function activate() {
+        $this->status_id = self::STATUS_ACTIVE;
+        $this->save();
+    }
+
     public function hasStock() {
         return ($this->stock_status_id == self::AVAILABILITY_IN_STOCK && $this->quantity > 0);
+    }
+
+    /**
+     * Привязывает товар к конкретной категории
+     *
+     * @param Category $category
+     */
+    public function assignToCategory(Category $category) {
+        $relation = new ProductCategory();
+        $relation->product_id = $this->id;
+        $relation->category_id = $category->id;
+        $relation->save();
     }
 }

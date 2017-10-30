@@ -11,6 +11,7 @@ use creocoder\nestedsets\NestedSetsBehavior;
 use common\models\IPage;
 use common\models\IDocument;
 use yii\base\Event;
+use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -31,35 +32,14 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
     const STATUS_ACTIVE = 1;
     const STATUS_HIDDEN = 0;
 
-    const CATEGORY_DEACTIVATED = 'Category deactivated';
-
+    const CATEGORY_DEACTIVATED  = 'Category deactivated';
 
     public function init() {
+
+        // авто-деактивация дочерних каетегорий
         $this->on(self::CATEGORY_DEACTIVATED, function ($event) {
             $category = $event->sender;
-
-            $products = Product::find()
-                ->alias('p')
-                ->joinWith(['categories c'])
-                ->andWhere(['c.id' => $category->id])
-                ->with('categories')
-                ->all();
-
-            foreach ($products as $product) {
-                $categories = $product->categories;
-
-                $exists = false; // полагаем, что активных категорий нет
-                foreach ($categories as $category) {
-                    if ($category->isVisible()) {
-                        $exists = true; // если есть, то меняем значение
-                    }
-                }
-
-                if (!$exists) {
-                    $product->deactivate();
-                }
-            }
-
+            Category::updateAll(['status' => Category::STATUS_HIDDEN], ['and', 'lft>'.$category->lft, 'rgt<'.$category->rgt]);
         });
     }
 
@@ -97,8 +77,9 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         return [
             ['settings', 'safe'],
             ['status', 'default', 'value' => self::STATUS_HIDDEN],
+            ['template_id', 'default', 'value' => 1],
             ['isTop',  'default', 'value' => 0],
-            [['parent_id', 'status', 'template_id'], 'required'],
+            [['parent_id'], 'required'],
             [['parent_id', 'status', 'template_id'], 'integer'],
             ['galleryFiles', 'required', 'when' => function ($category) {
                 $galleryCount = $category->getGallery()->count();
@@ -347,7 +328,7 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
 
         // если категория стала не видна
         if (!$this->isVisible() && isset($changedAttributes['status']) && $changedAttributes['status'] == self::STATUS_ACTIVE) {
-            $this->trigger(Category::CATEGORY_DEACTIVATED);
+            $this->trigger(self::CATEGORY_DEACTIVATED);
         }
     }
 
@@ -469,5 +450,15 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         $title .= $this->title;
 
         return $title;
+    }
+
+    public function deactivate() {
+        $this->status = self::STATUS_HIDDEN;
+        $this->save();
+    }
+
+    public function activate() {
+        $this->status = self::STATUS_ACTIVE;
+        $this->save();
     }
 }
