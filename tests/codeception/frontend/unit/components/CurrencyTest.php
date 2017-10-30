@@ -46,6 +46,8 @@ class CurrencyTest extends DbTestCase
         $currencyComponent = new CurrencyComponent();
 
         $productCur = $currencyComponent->getCurrencyByCode('USD');
+
+        $this->expectException(\Exception::class);
         $currencyComponent->convert(100, $productCur);
     }
 
