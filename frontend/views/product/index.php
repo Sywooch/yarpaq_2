@@ -16,7 +16,7 @@ $currency = Yii::$app->currency;
         <?php
         $categories = [];
         if (count($product->category)) {
-            $categories = $product->category[0]->getParents(true)->all();
+            $categories = $product->category[0]->getParents(true)->andWhere(['status' => \common\models\category\Category::STATUS_ACTIVE])->all();
             $categories[] = $product->category[0];
         }
         echo $this->render('@app/views/blocks/breadcrumb', [
