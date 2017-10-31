@@ -26,7 +26,7 @@ class m170925_172147_slider extends Migration
             'src_name'      => Schema::TYPE_STRING . ' NOT NULL',
             'web_name'      => Schema::TYPE_STRING . ' NOT NULL'
         ]);
-        $this->addForeignKey('model_id', '{{%slide_image}}', 'model_id', '{{%slide}}', 'id');
+        $this->addForeignKey('model_id', '{{%slide_image}}', 'model_id', '{{%slide}}', 'id', 'CASCADE', 'CASCADE');
 
     }
 
