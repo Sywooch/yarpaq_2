@@ -60,7 +60,7 @@ return [
 
         'urlManagerYarpaq' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => '//yarpaq.az/',
+            'baseUrl' => 'https://yarpaq.az/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

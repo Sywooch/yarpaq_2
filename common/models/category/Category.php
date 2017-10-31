@@ -13,6 +13,7 @@ use common\models\IDocument;
 use yii\base\Event;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -32,6 +33,7 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
     const STATUS_ACTIVE = 1;
     const STATUS_HIDDEN = 0;
 
+    const CATEGORY_ACTIVATED    = 'Category activated';
     const CATEGORY_DEACTIVATED  = 'Category deactivated';
     const CATEGORY_DELETED      = 'Category deleted';
 
@@ -43,13 +45,9 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
             Category::updateAll(['status' => Category::STATUS_HIDDEN], ['and', 'lft>'.$category->lft, 'rgt<'.$category->rgt]);
         });
 
-        $this->on(self::CATEGORY_DEACTIVATED, function () {
-            file_get_contents('/elastic/index');
-        });
-
-        $this->on(self::CATEGORY_DELETED, function () {
-            file_get_contents('/elastic/index');
-        });
+        $this->on(self::CATEGORY_DEACTIVATED,   ['common\models\Product', 'reIndexAllProducts']);
+        $this->on(self::CATEGORY_ACTIVATED,     ['common\models\Product', 'reIndexAllProducts']);
+        $this->on(self::CATEGORY_DELETED,       ['common\models\Product', 'reIndexAllProducts']);
     }
 
     /**
@@ -344,6 +342,11 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         // если категория стала не видна
         if (!$this->isVisible() && isset($changedAttributes['status']) && $changedAttributes['status'] == self::STATUS_ACTIVE) {
             $this->trigger(self::CATEGORY_DEACTIVATED);
+        }
+
+        // если категория стала видна
+        if ($this->isVisible() && isset($changedAttributes['status']) && $changedAttributes['status'] == self::STATUS_HIDDEN) {
+            $this->trigger(self::CATEGORY_ACTIVATED);
         }
     }
 

@@ -512,4 +512,12 @@ class Product extends \yii\db\ActiveRecord
         $relation->category_id = $category->id;
         $relation->save();
     }
+
+    public static function reIndexAllProducts() {
+        try {
+            file_get_contents(Yii::$app->urlManagerYarpaq->createUrl(['elastic/index'], true));
+        } catch (\Exception $e) {
+            Yii::error( $e->getMessage() );
+        }
+    }
 }
