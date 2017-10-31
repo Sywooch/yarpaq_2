@@ -33,13 +33,22 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
     const STATUS_HIDDEN = 0;
 
     const CATEGORY_DEACTIVATED  = 'Category deactivated';
+    const CATEGORY_DELETED      = 'Category deleted';
 
     public function init() {
 
-        // авто-деактивация дочерних каетегорий
+        // авто-деактивация дочерних категорий
         $this->on(self::CATEGORY_DEACTIVATED, function ($event) {
             $category = $event->sender;
             Category::updateAll(['status' => Category::STATUS_HIDDEN], ['and', 'lft>'.$category->lft, 'rgt<'.$category->rgt]);
+        });
+
+        $this->on(self::CATEGORY_DEACTIVATED, function () {
+            file_get_contents('/elastic/index');
+        });
+
+        $this->on(self::CATEGORY_DELETED, function () {
+            file_get_contents('/elastic/index');
         });
     }
 
@@ -321,6 +330,12 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         parent::afterFind();
 
         $this->settings = unserialize($this->settings);
+    }
+
+    public function afterDelete() {
+        parent::afterDelete();
+
+        $this->trigger(self::CATEGORY_DELETED);
     }
 
     public function afterSave($insert, $changedAttributes) {
