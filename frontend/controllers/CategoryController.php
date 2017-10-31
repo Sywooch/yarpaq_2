@@ -47,8 +47,8 @@ class CategoryController extends BasicController
         // GET Brands
         $brands = Manufacturer::find()
             ->alias('m')
-            ->leftJoin('{{%product}} p', 'p.manufacturer_id = m.id')
-            ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.id')
+            ->leftJoin('{{%product}}', '{{%product}}.manufacturer_id = m.id')
+            ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = {{%product}}.id')
             ->groupBy('m.id');
         // GET Brands END
 
@@ -56,8 +56,7 @@ class CategoryController extends BasicController
             $repo = new ProductRepository();
             $products = $repo
                 ->visibleOnTheSite()
-                ->hasDiscount()
-                ->alias('p');
+                ->hasDiscount();
 
             $distinctBrands = clone $products;
             $distinctBrands
@@ -75,10 +74,9 @@ class CategoryController extends BasicController
 
             $repo = new ProductRepository();
             $products = $repo->visibleOnTheSite()
-                ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = p.`id`')
+                ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = {{%product}}.`id`')
                 ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
-                ->groupBy('id')
-                ->alias('p');
+                ->groupBy('{{%product}}.id');
         }
 
 
