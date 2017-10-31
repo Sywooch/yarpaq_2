@@ -11,66 +11,75 @@ class ElasticController extends BasicController
     public $freeAccessActions = ['index', 'one', 'create', 'delete'];
 
     function actionIndex() {
-        $offset = Yii::$app->request->get('offset') ? (int) Yii::$app->request->get('offset') : 0;
+        // это если по кусочкам делать
+        //$offset = Yii::$app->request->get('offset') ? (int) Yii::$app->request->get('offset') : 0;
 
         $client = ClientBuilder::create()
             ->setHosts([Yii::$app->params['elastic']['endPoint']])
             ->build();
 
-        $products = Product::find()
-            ->offset($offset)
-            ->limit(1000)
-            ->all();
-        $currency = Yii::$app->currency;
-        $aznCurrency = $currency->getCurrencyByCode('AZN');
+        $totalProducts = Product::find()->count();
+        $pagesCount = ceil($totalProducts / 1000);
 
-        $params = [];
+        for ($i=0; $i<$pagesCount; $i++) {
 
-        foreach ($products as $product) {
-            $params['body'][] = [
-                'index' => [
-                    '_index' => Yii::$app->params['elastic']['index'],
-                    '_type' => Yii::$app->params['elastic']['productType'],
-                    '_id' => $product->id
-                ]
-            ];
+            $offset = $i*1000;
 
-            $_product = [
-                'id'            => $product->id,
-                'title'         => strip_tags($product->title),
-                'description'   => strip_tags($product->description),
-                'model'         => strip_tags($product->model),
-                'brand'         => $product->manufacturer_id,
+            $products = Product::find()
+                ->offset($offset)
+                ->limit(1000)
+                ->all();
+            $currency = Yii::$app->currency;
+            $aznCurrency = $currency->getCurrencyByCode('AZN');
 
-                'moderated_at'  => (new \DateTime($product->moderated_at))->format('Y-m-d\TH:i:sO'),
+            $params = [];
 
-                // виден ли товар на сайте
-                'visible'       => (int)$product->isVisible(),
+            foreach ($products as $product) {
+                $params['body'][] = [
+                    'index' => [
+                        '_index' => Yii::$app->params['elastic']['index'],
+                        '_type' => Yii::$app->params['elastic']['productType'],
+                        '_id' => $product->id
+                    ]
+                ];
 
-                // состояние товара: Новый => 1, Старый => 0
-                'condition'     => $product->condition_id,
+                $_product = [
+                    'id' => $product->id,
+                    'title' => strip_tags($product->title),
+                    'description' => strip_tags($product->description),
+                    'model' => strip_tags($product->model),
+                    'brand' => $product->manufacturer_id,
 
-                // цена добавляется в базовой валюте, чтобы затем осуществлять поиск также по цене в базовой валюте
-                'price'         => $currency->convert($product->price, $product->currency, $aznCurrency)
-            ];
+                    'moderated_at' => (new \DateTime($product->moderated_at))->format('Y-m-d\TH:i:sO'),
 
-            if ($product->hasDiscount()) {
-                $_product['discount_price']        = $product->discount->value;
-                $_product['discount_period']       = $product->discount->period;
-                $_product['discount_start_date']   = (new \DateTime($product->discount->start_date))->format('Y-m-d\TH:i:sO');
-                $_product['discount_end_date']     = (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO');
+                    // виден ли товар на сайте
+                    'visible' => (int)$product->isVisible(),
+
+                    // состояние товара: Новый => 1, Старый => 0
+                    'condition' => $product->condition_id,
+
+                    // цена добавляется в базовой валюте, чтобы затем осуществлять поиск также по цене в базовой валюте
+                    'price' => $currency->convert($product->price, $product->currency, $aznCurrency)
+                ];
+
+                if ($product->hasDiscount()) {
+                    $_product['discount_price'] = $product->discount->value;
+                    $_product['discount_period'] = $product->discount->period;
+                    $_product['discount_start_date'] = (new \DateTime($product->discount->start_date))->format('Y-m-d\TH:i:sO');
+                    $_product['discount_end_date'] = (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO');
+                }
+
+                $params['body'][] = $_product;
+
             }
 
-            $params['body'][] = $_product;
+            //var_dump($params);
 
+
+            $response = $client->bulk($params);
+
+            var_dump($response);
         }
-
-        //var_dump($params);
-
-
-        $response = $client->bulk($params);
-
-        var_dump($response);
 
     }
 
