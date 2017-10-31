@@ -120,13 +120,13 @@ class ElasticController extends BasicController
         $params = [
             'index' => Yii::$app->params['elastic']['index'],
             'body' => [
-                'settings' => [
-                    'number_of_shards' => 5,
-                    'number_of_replicas' => 1
-                ],
                 "mappings" => [
                     Yii::$app->params['elastic']['productType'] => [
                         "properties" => [
+                            "title" => [
+                                "type" => "string",
+                                "analyzer" => "ngram_analyzer_with_filter"
+                            ],
                             "moderated_at" => [
                                 "type" => "date"
                             ],
@@ -143,6 +143,42 @@ class ElasticController extends BasicController
                                 "type" => "double"
                             ],
                         ]
+                    ]
+                ],
+                "settings" => [
+
+                    'number_of_shards' => 5,
+                    'number_of_replicas' => 1,
+
+                    'analysis' => [
+                        'analyzer' => [
+                            //'ngram_analyzer_number' => ['tokenizer' => 'ngram_tokenizer_number', 'filter' => 'lowercase'],
+                            //'ngram_analyzer_serial' => ['tokenizer' => 'ngram_tokenizer_serial', 'filter' => 'lowercase'],
+                            'ngram_analyzer_with_filter' => [
+                                'tokenizer' => 'ngram_tokenizer',
+                                'filter' => 'lowercase, snowball'
+                            ],
+                        ],
+                        'tokenizer' => [
+                            'ngram_tokenizer' => [
+                                'type' => 'nGram',
+                                'min_gram' => 3,
+                                'max_gram' => 10,
+                                'token_chars' => ['letter', 'digit', 'whitespace', 'punctuation', 'symbol']
+                            ],
+//                            'ngram_tokenizer_number' => [
+//                                'type' => 'nGram',
+//                                'min_gram' => 3,
+//                                'max_gram' => 5,
+//                                'token_chars' => ['letter', 'digit']
+//                            ],
+//                            'ngram_tokenizer_serial' => [
+//                                'type' => 'nGram',
+//                                'min_gram' => 4,
+//                                'max_gram' => 10,
+//                                'token_chars' => ['letter', 'whitespace', 'punctuation', 'symbol', 'digit']
+//                            ]
+                        ],
                     ]
                 ]
             ]
