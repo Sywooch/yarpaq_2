@@ -10,7 +10,7 @@ use common\models\User;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">Y</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">Y</span><span class="logo-lg">Yarpaq.az</span>', Yii::$app->urlManagerYarpaq->baseUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
