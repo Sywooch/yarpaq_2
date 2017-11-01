@@ -12,6 +12,7 @@ use yii\data\ActiveDataProvider;
 class OrderSearch extends Order
 {
     public $fullname;
+    public $products;
 
     /**
      * @inheritdoc
@@ -21,7 +22,8 @@ class OrderSearch extends Order
         return [
             [['id', 'user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
             [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status', 'fullname'], 'safe'],
-            [['total', 'currency_value'], 'number']
+            [['total', 'currency_value'], 'number'],
+            ['products', 'safe']
         ];
     }
 
@@ -94,8 +96,7 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'user_agent', $this->user_agent])
             ->andFilterWhere(['like', 'accept_language', $this->accept_language]);
 
-        $query->andFilterWhere(['like', 'firstname', $this->fullname]);
-        $query->orFilterWhere(['like', 'lastname', $this->fullname]);
+        $query->andFilterWhere(['or', ['like', 'firstname', $this->fullname], ['like', 'lastname', $this->fullname]]);
 
         if ($this->scenario == self::SCENARIO_OWN) {
             $query->leftJoin('{{%order_product}} op', '{{%order}}.id = op.order_id');
@@ -109,6 +110,11 @@ class OrderSearch extends Order
 
             $query->andFilterWhere(['>=', 'created_at', $created_start . ' 00:00:00'])
                 ->andFilterWhere(['<=', 'created_at', $created_end . ' 23:59:59']);
+        }
+
+        if ($this->products != '') {
+            $query->joinWith('orderProducts op');
+            $query->andFilterWhere(['or', ['like', 'op.name', $this->products], ['op.product_id' => $this->products]]);
         }
 
         if ($this->modified_at != '') {

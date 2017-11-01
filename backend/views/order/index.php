@@ -39,7 +39,8 @@ $statuses = OrderStatus::find()
                 'attribute' => 'id',
                 'options'   => [
                     'width' => '80px'
-                ]
+                ],
+                'label' => 'ID'
             ],
 
             [
@@ -50,34 +51,21 @@ $statuses = OrderStatus::find()
                 }
             ],
             'email:email',
-            // 'phone1',
-            // 'phone2',
-            // 'fax',
-            // 'payment_firstname',
-            // 'payment_lastname',
-            // 'payment_company',
-            // 'payment_address',
-            // 'payment_city',
-            // 'payment_postcode',
-            // 'payment_country',
-            // 'payment_country_id',
-            // 'payment_zone',
-            // 'payment_zone_id',
-            // 'payment_method',
-            // 'payment_code',
-            // 'shipping_firstname',
-            // 'shipping_lastname',
-            // 'shipping_company',
-            // 'shipping_address',
-            // 'shipping_city',
-            // 'shipping_postcode',
-            // 'shipping_country',
-            // 'shipping_country_id',
-            // 'shipping_zone',
-            // 'shipping_zone_id',
-            // 'shipping_method',
-            // 'shipping_code',
-            // 'comment:ntext',
+
+            [
+                'attribute' => 'products',
+                'format' => 'raw',
+                'value' => function ($order) {
+                    $value = '';
+
+                    foreach ($order->orderProducts as $orderProduct) {
+                        $value .= '- '.$orderProduct->name.'<br>';
+                    }
+
+                    return $value;
+                },
+            ],
+
             [
                 'attribute' => 'total',
                 'value' => function ($order) {
@@ -146,24 +134,24 @@ $statuses = OrderStatus::find()
                     ]
                 )
             ],
-            [
-                'attribute' => 'modified_at',
-                'filter' => DateRangePicker::widget(
-                    [
-                        'model' => $searchModel,
-                        'attribute' => 'modified_at',
-                        'convertFormat' => true,
-                        'pluginOptions' => [
-                            'timePicker' => false,
-                            'timePickerIncrement' => 30,
-                            'locale'=>[
-                                'format'=>'Y-m-d'
-                            ]
-                        ],
-                        'autoUpdateOnInit' => false
-                    ]
-                )
-            ],
+//            [
+//                'attribute' => 'modified_at',
+//                'filter' => DateRangePicker::widget(
+//                    [
+//                        'model' => $searchModel,
+//                        'attribute' => 'modified_at',
+//                        'convertFormat' => true,
+//                        'pluginOptions' => [
+//                            'timePicker' => false,
+//                            'timePickerIncrement' => 30,
+//                            'locale'=>[
+//                                'format'=>'Y-m-d'
+//                            ]
+//                        ],
+//                        'autoUpdateOnInit' => false
+//                    ]
+//                )
+//            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
