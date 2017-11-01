@@ -150,7 +150,10 @@ return [
     'Constant'      => 'Постоянно',
     'Range'         => 'Временной промежуток',
     'Start Date must be earlier than End Date'  => 'Дата начала должна быть раньше Даты окончания',
-    'End Date must be later than Start Date'    => 'Дата окончания должна быть позже Даты начала'
+    'End Date must be later than Start Date'    => 'Дата окончания должна быть позже Даты начала',
+    'Query' => 'Запрос',
+    'Enter user name' => 'Введите имя пользователя',
+    'Search Log' => 'Поисковые запросы'
 
 ];
 

@@ -2,16 +2,24 @@
 
 namespace common\models\search;
 
+use common\models\User;
 use Yii;
 
 class SearchLog extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%search_log}}';
+    }
+
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert))
         {
-
-
             // set Created At
             if ($this->isNewRecord) {
                 $now = new \DateTime();
@@ -25,5 +33,18 @@ class SearchLog extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+
+    public function getUser() {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'user_id'   => Yii::t('app', 'User ID'),
+            'text'      => Yii::t('app', 'Query'),
+            'count'      => Yii::t('app', 'Quantity'),
+        ];
     }
 }

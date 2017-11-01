@@ -152,8 +152,10 @@ return [
     'Constant'      => 'Daimi',
     'Range'         => 'Vaxt aralığı',
     'Start Date must be earlier than End Date'  => 'Başlama tarixi Bitmə tarixindən gec olmamalıdır',
-    'End Date must be later than Start Date'    => 'Başlama tarixi Bitmə tarixindən gec olmalıdır'
-
+    'End Date must be later than Start Date'    => 'Başlama tarixi Bitmə tarixindən gec olmalıdır',
+    'Query' => 'Sorğu',
+    'Enter user name' => 'İstifadəçi adını daxil edin',
+    'Search Log' => 'Axtarış sorğuları'
 
 ];
 
