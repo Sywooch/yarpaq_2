@@ -114,7 +114,13 @@ class OrderSearch extends Order
 
         if ($this->products != '') {
             $query->joinWith('orderProducts op');
-            $query->andFilterWhere(['or', ['like', 'op.name', $this->products], ['op.product_id' => $this->products]]);
+
+            $products_condition = ['or', ['like', 'op.name', $this->products]];
+            if ((int) $this->products > 0) {
+                $products_condition[] = ['op.product_id' => (int)$this->products];
+            }
+
+            $query->andFilterWhere($products_condition);
         }
 
         if ($this->modified_at != '') {
@@ -123,7 +129,7 @@ class OrderSearch extends Order
             $query->andFilterWhere(['>=', 'modified_at', $created_start . ' 00:00:00'])
                 ->andFilterWhere(['<=', 'modified_at', $created_end . ' 23:59:59']);
         }
-
+        
         return $dataProvider;
     }
 
