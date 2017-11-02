@@ -7,7 +7,7 @@ use Yii;
 use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 
-class NewOrderSellerNotification extends Notification
+class OrderStatusChangedSellerNotification extends Notification
 {
     protected $layout = 'new-order-for-seller';
     private $productsBySeller = [];
@@ -33,13 +33,29 @@ class NewOrderSellerNotification extends Notification
                 throw new Exception('Seller not found');
             }
 
+            $header = $this->getHeader($this->order);
+
             $this->to = $seller->email;
             $this->layoutData = [
                 'order' => $this->order,
                 'orderProducts' => $orderProducts,
-                'header'    => Yii::t('mail', 'Yeni sifariş aldınız')
+                'header' => Yii::t('mail', $header)
             ];
             parent::send();
+        }
+    }
+
+    protected function getHeader($order) {
+        switch ($order->order_status_id) {
+            case '3':
+                return Yii::t('mail', 'Your order has been sent');
+                break;
+            case '7':
+                return Yii::t('mail', 'Your order has been canceled');
+                break;
+            default:
+                return Yii::t('mail', 'Your order status is "{status_name}"', ['status_name' => $order->status->name]);
+                break;
         }
     }
 }

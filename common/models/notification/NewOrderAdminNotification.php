@@ -17,7 +17,8 @@ class NewOrderAdminNotification extends Notification
 
         $this->layoutData = [
             'order' => $order,
-            'user'  => $user
+            'user'  => $user,
+            'header'    => Yii::t('mail', 'Yeni sifariş aldınız')
         ];
     }
 }

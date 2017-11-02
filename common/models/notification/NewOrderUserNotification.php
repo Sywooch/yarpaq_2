@@ -14,7 +14,8 @@ class NewOrderUserNotification extends Notification
         $this->to = $order->email;
 
         $this->layoutData = [
-            'order' => $order,
+            'order'     => $order,
+            'header'    => Yii::t('mail', 'Sifarişiniz qəbul olundu')
         ];
     }
 }

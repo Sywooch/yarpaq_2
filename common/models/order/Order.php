@@ -14,6 +14,10 @@ use common\models\Currency;
 use common\models\Language;
 use common\models\User;
 use yii\base\Model;
+use yii\db\Exception;
+use common\models\notification\OrderStatusChangedAdminNotification;
+use common\models\notification\OrderStatusChangedUserNotification;
+use common\models\notification\OrderStatusChangedSellerNotification;
 
 /**
  * This is the model class for table "{{%order}}".
@@ -74,6 +78,7 @@ class Order extends \yii\db\ActiveRecord
 
     const SCENARIO_OWN = 'own';
 
+    const STATUS_CHANGED = 'Status changed';
 
     public $seller_id;
 
@@ -83,6 +88,26 @@ class Order extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%order}}';
+    }
+
+    public function init() {
+        $this->on(self::STATUS_CHANGED, function ($event) {
+            $order = $event->sender;
+
+            try {
+                $userNotification = new OrderStatusChangedUserNotification($order);
+                $userNotification->send();
+
+                $adminNotification = new OrderStatusChangedAdminNotification($order);
+                $adminNotification->send();
+
+                $sellerNotification = new OrderStatusChangedSellerNotification($order);
+                $sellerNotification->send();
+            } catch (Exception $e) {
+                Yii::error($e->getMessage());
+            }
+
+        });
     }
 
     /**
@@ -344,5 +369,13 @@ class Order extends \yii\db\ActiveRecord
 
         $this->total = $total;
         $this->save();
+    }
+
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+
+        if (isset($changedAttributes['order_status_id'])) {
+            $this->trigger(Order::STATUS_CHANGED);
+        }
     }
 }
