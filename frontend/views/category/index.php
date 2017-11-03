@@ -59,7 +59,10 @@
             </div>
 
             <div class="more_products">
-                <?= $this->render('@app/views/blocks/load_more_btn', ['pagination' => $pages]); ?>
+                <?= $this->render('@app/views/blocks/load_more_btn', [
+                    'pagination' => $pages,
+                    'next_page_url' => $next_page_url
+                ]); ?>
                 <?= $this->render('@app/views/blocks/pagination', ['pagination' => $pages]); ?>
             </div>
         </div>

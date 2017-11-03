@@ -161,7 +161,8 @@ class CategoryController extends BasicController
                 'pages'             => $pages,
                 'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
                 'filterBrands'      => $brands->all(),
-                'productFilter'     => $productFilter
+                'productFilter'     => $productFilter,
+                'next_page_url'     => $this->getNextPageUrl($pages)
             ]);
         }
     }
@@ -185,6 +186,13 @@ class CategoryController extends BasicController
      * @return string
      */
     protected function getNextPageUrl($pages) {
-        return isset($pages->getLinks()[Pagination::LINK_NEXT]) ? $pages->getLinks()[Pagination::LINK_NEXT] : '';
+        $link = '';
+
+        if (isset($pages->getLinks()[Pagination::LINK_NEXT])) {
+            $link = $pages->getLinks()[Pagination::LINK_NEXT];
+            $link = str_replace('%2F', '/', $link);
+        }
+
+        return $link;
     }
 }
