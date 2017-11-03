@@ -9,7 +9,7 @@ class OrderStatusChangedUserNotification extends Notification
     protected $layout = 'new-order-for-user';
 
     public function __construct($order) {
-        $this->subject = Yii::t('app', 'Thank you for your order');
+        $this->subject = Yii::t('mail', 'Order status changed');
 
         $this->to = $order->email;
 

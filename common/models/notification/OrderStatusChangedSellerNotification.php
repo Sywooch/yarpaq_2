@@ -14,7 +14,7 @@ class OrderStatusChangedSellerNotification extends Notification
     private $order;
 
     public function __construct($order) {
-        $this->subject = Yii::t('app', 'New order').': '.$order->id;
+        $this->subject = Yii::t('mail', 'Order status changed');
         $this->order = $order;
 
         // group products by seller id

@@ -13,6 +13,7 @@ return [
     'Payment method'    => 'Метод оплаты',
     'Shipping method'   => 'Метод доставки',
 
+    'Order status changed' => 'Статус заказа изменен',
     'Your order has been sent' => 'Ваш заказ отправлен',
     'Your order has been canceled' => 'Ваш заказ был отменен',
     'Your order status is "{status_name}"' => 'Статус вашего заказа "{status_name}"'

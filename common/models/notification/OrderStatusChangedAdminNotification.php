@@ -11,7 +11,7 @@ class OrderStatusChangedAdminNotification extends Notification
     protected $layout = 'new-order-for-admin';
 
     public function __construct($order) {
-        $this->subject = Yii::t('app', 'New order').': '.$order->id;
+        $this->subject = Yii::t('mail', 'Order status changed');
 
         $this->to = 'sales@yarpaq.az';
 

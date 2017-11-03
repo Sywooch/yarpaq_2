@@ -13,7 +13,7 @@ return [
     'Payment method'    => 'Ödəmə üsulu',
     'Shipping method'   => 'Çatdırılma üsulu',
 
-
+    'Order status changed' => 'Sifarişiniz statusu dəyişilib',
     'Your order has been sent' => 'Sifarişiniz göndərildi',
     'Your order has been canceled' => 'Sifarişiniz ləğv olundu',
     'Your order status is "{status_name}"' => 'Sifarişiniz statusu - "{status_name}"'
