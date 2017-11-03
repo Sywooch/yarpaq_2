@@ -1,8 +1,21 @@
-<?php $currency = Yii::$app->currency; ?>
+<?php
+$currency = Yii::$app->currency;
+$productImages = $product->gallery;
+
+if (count($productImages)) {
+    $preview = $productImages[0]->preview;
+    $previewRetina = $productImages[0]->standard;
+} else { // заглушка
+    $preview = $product->preview;
+    $previewRetina = $product->preview;
+}
+?>
 <article>
     <div class="image">
         <a href="<?= $product->url; ?>">
-            <img src="<?= $product->preview->url; ?>" alt="">
+            <img src="<?= $preview->url; ?>"
+                 srcset="<?= $previewRetina->url; ?> 2x"
+                 alt="">
         </a>
     </div>
     <h3><a href="<?= $product->url; ?>"><?= $product->title; ?></a></h3>
