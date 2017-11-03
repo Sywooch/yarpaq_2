@@ -32,10 +32,6 @@ class CategoryController extends BasicController
 
         $url = preg_match('/^[\w_\-\d\/]+$/', $r->get('url')) ? $r->get('url') : '';
 
-        if ($r->get('page') && $r->get('page') == 1) {
-            $this->redirect(Url::to($url, true), 301);
-        }
-
         // Параметры фильтра
         $productFilter = new ProductFilter();
         $productFilter->load($r->get());
