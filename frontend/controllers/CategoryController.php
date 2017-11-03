@@ -12,6 +12,7 @@ use frontend\components\CustomLinkPager;
 use common\models\category\Category;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 
 class CategoryController extends BasicController
@@ -20,6 +21,12 @@ class CategoryController extends BasicController
     public $freeAccessActions = ['index'];
 
     public function actionIndex() {
+
+        $ajax = false;
+
+        if (Yii::$app->request->isAjax) {
+            $ajax = true;
+        }
 
         $r = Yii::$app->request;
 
@@ -139,15 +146,24 @@ class CategoryController extends BasicController
         // GET Products END
 
 
-        return $this->render('index', [
-            'count'             => $pages->totalCount,
-            'category'          => $category,
-            'products'          => $models,
-            'pages'             => $pages,
-            'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
-            'filterBrands'      => $brands->all(),
-            'productFilter'     => $productFilter
-        ]);
+        if ($ajax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+
+            return [
+                'markup' => $this->renderPartial('@app/views/blocks/product_list', ['products' => $models]),
+                'next_page_url' => $this->getNextPageUrl($pages)
+            ];
+        } else {
+            return $this->render('index', [
+                'count'             => $pages->totalCount,
+                'category'          => $category,
+                'products'          => $models,
+                'pages'             => $pages,
+                'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
+                'filterBrands'      => $brands->all(),
+                'productFilter'     => $productFilter
+            ]);
+        }
     }
 
     private function getAllChildrenCategories($category) {
@@ -159,5 +175,16 @@ class CategoryController extends BasicController
         }
 
         return $childrenCategoriesIDs;
+    }
+
+    /**
+     * Возвращает URL следующей страницы, если она есть.
+     * Иначе пустую строку
+     *
+     * @param $pages Pagination
+     * @return string
+     */
+    protected function getNextPageUrl($pages) {
+        return isset($pages->getLinks()[Pagination::LINK_NEXT]) ? $pages->getLinks()[Pagination::LINK_NEXT] : '';
     }
 }

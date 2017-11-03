@@ -7253,3 +7253,8 @@ a.clear_filtre {
 .hide_me {
   display: none;
 }
+
+.show_more_btn.loading {
+  opacity: .3;
+  cursor: default;
+}

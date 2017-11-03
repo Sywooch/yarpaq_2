@@ -32,3 +32,5 @@
         <?php } ?>
     </ul>
 </div>
+
+<a href="#" class="clear_filtre"><?= Yii::t('app', 'Reset filter'); ?></a>

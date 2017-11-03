@@ -178,6 +178,8 @@ return [
     'Your email was successfully confirmed' => 'Sizin elektron ünvanınız uğurla təsdiqləndi',
 
     'Thank you for your order' => 'Sifarişinizə görə təşəkkür edirik',
-    'New order' => 'Yeni sifariş'
+    'New order' => 'Yeni sifariş',
+
+    'Show more' => 'Daha çox göstər'
 
 ];

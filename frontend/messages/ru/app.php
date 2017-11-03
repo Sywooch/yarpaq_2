@@ -180,7 +180,9 @@ return [
     'Your email was successfully confirmed' => 'Ваш электронный адрес был успешно подтвержден',
 
     'Thank you for your order' => 'Спасибо за покупку',
-    'New order' => 'Новый заказ'
+    'New order' => 'Новый заказ',
+
+    'Show more' => 'Показать больше'
 
 
 ];

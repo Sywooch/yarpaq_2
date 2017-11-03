@@ -47,50 +47,20 @@
                     <div class="cb"></div>
                 </div>
                 <div class="second">
-                    <?php
-                    echo $this->render('@app/views/blocks/applied_filters', [
+                    <?= $this->render('@app/views/blocks/applied_filters', [
                         'productFilter' => $productFilter,
                         'filterBrands' => $filterBrands
-                    ]);
-                    ?>
-                    <a href="#" class="clear_filtre"><?= Yii::t('app', 'Reset filter'); ?></a>
+                    ]); ?>
                 </div>
             </header>
+
             <div class="product_result_list">
-                <?php
-                if (isset($products) && count($products)) {
-                    foreach ($products as $product) {
-                        echo $this->render('@app/views/blocks/product', [
-                            'product' => $product
-                        ]);
-                    }
-                } else {
-                    ?>
-                    <div class="no-result">
-                        <p><?= Yii::t('app', 'No results'); ?></p>
-                    </div>
-                    <?php
-                }
-                ?>
+                <?= $this->render('@app/views/blocks/product_list', ['products' => $products]); ?>
             </div>
 
             <div class="more_products">
-            <?php
-
-            if ($pages->page > 0) {
-                \Yii::$app->view->registerMetaTag([
-                    'name' => 'robots',
-                    'content' => 'noindex, follow'
-                ]);
-            }
-
-            echo \frontend\components\CustomLinkPager::widget([
-                'pagination'    => $pages,
-                'options'       => [
-                    'class' => 'pagination'
-                ]
-            ]);
-            ?>
+                <?= $this->render('@app/views/blocks/load_more_btn', ['pagination' => $pages]); ?>
+                <?= $this->render('@app/views/blocks/pagination', ['pagination' => $pages]); ?>
             </div>
         </div>
     </div>
