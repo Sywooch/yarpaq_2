@@ -306,6 +306,11 @@
   .product_block header .second_info .wrap_store {
     margin: 0;
   }
+  .product_first header .second_info .wrap_number {
+    clear: both;
+    float: none;
+  }
+
   .product_list_wrapper {
     padding: 0;
   }

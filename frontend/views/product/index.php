@@ -88,6 +88,11 @@ $currency = Yii::$app->currency;
                             <?= Yii::t('app', 'Seller'); ?>: <b><?= $product->seller->fullname; ?></b>
                             (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', 'See other products'); ?></a>)
                         </div>
+                        <?php if ($product->condition_id == Product::CONDITION_USED) { ?>
+                        <div class="wrap_number">
+                            <a href="tel:<?= $product->seller->profile->phone1; ?>"><?= $product->seller->profile->phone1; ?></a>
+                        </div>
+                        <?php } ?>
                     </div>
                 </header>
                 <div class="product_first_info" itemprop="offers" itemscope itemtype="http://schema.org/Offer">

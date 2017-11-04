@@ -72,7 +72,7 @@ $children = $category->getChildren()->all(); ?>
         </section>
         <?php //} ?>
 
-        <section style="display:none">
+        <section>
             <h3>
                 <span><?= Yii::t('app', 'Condition'); ?></span>
                 <a href="#" class="condition-reset-btn"><?= Yii::t('app', 'Reset'); ?></a>

@@ -2794,6 +2794,17 @@ a.back_to_top.show_me {
   color: #558e1c;
 }
 
+.product_first header .second_info .wrap_number {
+  float: right;
+}
+.product_first header .second_info .wrap_number a {
+  display: inline-block;
+  background-color: red;
+  padding: 8px 15px 6px;
+  border-radius: 5px;
+  color: white;
+}
+
 .product_first_info {
   padding: 10px 30px 0;
   overflow: hidden;
