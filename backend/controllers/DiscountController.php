@@ -37,9 +37,10 @@ class DiscountController extends AdminDefaultController
         $product = Product::findOne($id);
         $this->denyIfNotOwner($product);
 
-        $discount = $product->discount ? $product->discount : new Discount(['product_id' => $product->id]);
+        $discount = $product->discount ? $product->discount : new Discount();
 
-        if ($discount->load(Yii::$app->request->post()) && $discount->save()) {
+        if ($discount->load(Yii::$app->request->post())) {
+            $product->setDiscount($discount);
             $this->redirect(['index', 'id' => $product->id]);
         }
 

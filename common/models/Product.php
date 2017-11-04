@@ -383,6 +383,10 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Discount::className(), ['product_id' => 'id']);
     }
 
+    public function setDiscount(Discount $discount) {
+        $this->link('discount', $discount);
+    }
+
     public function getRating() { // TODO
         return 4;
     }

@@ -19,6 +19,10 @@ class ProductSearch
     private $client;
 
     public function __construct() {
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
+
         $this->endPoint = Yii::$app->params['elastic']['endPoint'];
         $this->index = Yii::$app->params['elastic']['index'];
         $this->type = Yii::$app->params['elastic']['productType'];
@@ -38,6 +42,10 @@ class ProductSearch
      * @param Product $product
      */
     public function index(Product $product) {
+
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
 
         // базовая валюта
         $aznCurrency = $this->currency->getCurrencyByCode('AZN');
@@ -91,6 +99,10 @@ class ProductSearch
      */
     public function delete(Product $product) {
 
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
+
         $params = [
             'index' => $this->index,
             'type' => $this->type,
@@ -101,6 +113,10 @@ class ProductSearch
     }
 
     public function total($query, $filter) {
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
+
         $queryFilter = $this->buildFilter($filter);
 
 
@@ -122,6 +138,9 @@ class ProductSearch
     }
 
     public function search($query, $filter, $page = 1, $limit = 2) {
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
 
         switch ($filter->sort) {
             case ProductFilter::SORT_PRICE_HIGHEST:
@@ -169,6 +188,10 @@ class ProductSearch
     }
 
     public function minMaxPrice($query, $filter) {
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
+
         $queryFilter = $this->buildFilter($filter);
         $defaultQuery = $this->getDefaultQuery($query, $queryFilter);
 
@@ -204,6 +227,10 @@ class ProductSearch
     }
 
     public function getBrands($query) {
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
+
         $defaultQuery = $this->getDefaultQuery($query);
 
         $params = [

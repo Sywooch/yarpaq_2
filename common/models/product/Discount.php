@@ -96,7 +96,11 @@ class Discount extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
 
-        $search = new ProductSearch();
-        $search->index($this->product);
+        try {
+            $search = new ProductSearch();
+            $search->index($this->product);
+        } catch (\Exception $e) {
+            Yii::error($e->getMessage());
+        }
     }
 }

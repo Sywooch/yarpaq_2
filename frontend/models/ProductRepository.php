@@ -44,4 +44,20 @@ class ProductRepository extends ActiveQuery
 
         return $this;
     }
+
+    /**
+     * Фильтрует результат по ID
+     *
+     * @param $id array|string
+     * @return $this
+     */
+    public function filterByID($id) {
+        if (!is_array($id)) {
+            $id = [$id];
+        }
+
+        $this->andFilterWhere(['in', '{{%product}}.id', $id]);
+
+        return $this;
+    }
 }
