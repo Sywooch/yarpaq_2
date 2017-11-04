@@ -13,9 +13,7 @@ if (count($productImages)) {
 <article>
     <div class="image">
         <a href="<?= $product->url; ?>">
-            <img src="<?= $preview->url; ?>"
-                 srcset="<?= $previewRetina->url; ?> 2x"
-                 alt="">
+            <img src="<?= $preview->url; ?>" alt="">
         </a>
     </div>
     <h3><a href="<?= $product->url; ?>"><?= $product->title; ?></a></h3>
