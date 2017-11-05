@@ -186,7 +186,6 @@ $(function () {
     }
 
     $(document).on('click', ".thumbnails .arrows a", function() {
-        console.log('test');
         var _this = $(this);
         var container = _this.closest('.thumbnails');
         var arrowNext = container.find(".arrows a.next");
@@ -235,7 +234,7 @@ $(function () {
     });
 
     function initProductGallery() {
-        _slider_step_height = 83;
+        _slider_step_height = $(".priduct_gallery .thumbnails img").eq(0).height() + 15;
         _slider_length = $(".priduct_gallery .thumbnails img").length;
         initZoom();
     }

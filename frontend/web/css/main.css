@@ -7365,12 +7365,10 @@ a.clear_filtre {
 .popup_quick_view .product_first_info .left_info {
   width: 100%;
 }
-.popup_quick_view .product_buy_last .delivery {
-  padding-bottom: 30px;
-}
+
 .popup_quick_view .product_second_info {
-  padding: 0 30px;
-  margin: 30px 0;
+  padding: 15px 30px;
+  margin: 15px 0;
 }
 .popup_quick_view .product_buy_last .buttons {
   padding: 30px 0;
