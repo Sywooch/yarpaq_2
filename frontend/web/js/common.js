@@ -149,7 +149,9 @@ $(function () {
     $('.overlay').click(function (e) {
         e.stopPropagation();
 
-        hideOverlay();
+        if ($(this).hasClass('overlay')) {
+            hideOverlay();
+        }
     });
 
     function loadQuickViewData(quick_view_url) {
