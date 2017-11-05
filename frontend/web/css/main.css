@@ -7342,5 +7342,7 @@ a.clear_filtre {
 
 .popup_quick_view .current_product .product_first header {
   border: none;
-  margin-bototm: 0;
+  margin: 40px 30px 0;
+  padding: 0;
+  overflow: auto;
 }
