@@ -154,8 +154,12 @@ $(function () {
         e.stopPropagation();
     });
 
+    $('.popup_close_btn').click(function (e) {
+        hideOverlay();
+    });
+
     function loadQuickViewData(quick_view_url) {
-        $('.popup_quick_view').load(quick_view_url, function () {
+        $('.popup_quick_view .popup_content').load(quick_view_url, function () {
             initZoom();
         });
     }
@@ -165,7 +169,9 @@ $(function () {
     }
 
     function hideOverlay() {
-        $('.overlay').fadeOut();
+        $('.overlay').fadeOut(function () {
+            $(this).find('.popup .popup_content').html('');
+        });
     }
 
     function initZoom() {

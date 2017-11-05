@@ -61,7 +61,10 @@ $seo = $this->params['seo'];
 
 <div class="overlay">
     <div class="popup popup_quick_view">
+        <i class="popup_close_btn"></i>
+        <div class="popup_content">
 
+        </div>
     </div>
 </div>
 
@@ -393,12 +396,12 @@ $seo = $this->params['seo'];
 <script type="text/javascript" src="/js/slick/slick.min.js"></script>
 <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
-<script type="text/javascript" src="/js/main.js?v=1.0.1"></script>
+<script type="text/javascript" src="/js/main.js?v=1.1.0"></script>
 <script type="text/javascript" src="/js/product-filter.js"></script>
 <script type="text/javascript" src="/js/loadmore.js"></script>
 <script type="text/javascript" src="/js/checkout.js?v=1.0.3"></script>
 <script type="text/javascript" src="/js/basket.js"></script>
-<script type="text/javascript" src="/js/common.js?v=1.1.3"></script>
+<script type="text/javascript" src="/js/common.js?v=1.1.6"></script>
 
 <!-- BEGIN JIVOSITE CODE {literal} -->
 <script type='text/javascript'>

@@ -37,7 +37,7 @@ $currency = Yii::$app->currency;
 
                         <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
                             <a href="<?= $image->url; ?>" class="thumb">
-                                <img class="xzoom-gallery" width="64"
+                                <img class="xzoom-gallery" width="64" height="64"
                                      src="<?= $image->preview->url; ?>"
                                      xpreview="<?= $image->standard->url; ?>">
                             </a>
