@@ -1665,6 +1665,14 @@
   /* Head search end */
 }
 
+@media (max-width: 1200px) {
+
+  .product_result_list article:hover .image .quick_view_btn {
+    display: none;
+  }
+
+}
+
 @media (min-width: 922px) and (max-width: 1200px) {
   /* Header begin */
   h1.logo {

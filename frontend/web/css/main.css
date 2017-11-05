@@ -2565,7 +2565,7 @@ a.back_to_top.show_me {
 
 .current_product .right_side {
   width: 100%;
-  border-left: 2px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 .priduct_gallery {
@@ -7297,7 +7297,9 @@ a.clear_filtre {
   left: 50%;
   margin-left: -500px;
 
-  height: 600px;
+  height: 550px;
+
+  overflow: hidden;
 }
 
 .quick_view_container {
@@ -7334,4 +7336,6 @@ a.clear_filtre {
 }
 .popup_quick_view .current_product .priduct_gallery .image {
   width: 370px;
+  line-height: 519px;
+  margin-left: 95px;
 }

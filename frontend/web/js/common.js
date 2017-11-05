@@ -62,15 +62,7 @@ $(function () {
         countryField.change();
     }
 
-
-    if (!isMobile) {
-        $("._xzoom, .xzoom-gallery").xzoom();
-    } else {
-        $('#desktop-gallery').hide();
-        $('#mobile-gallery').show().slick({
-            dots: true
-        });
-    }
+    initZoom();
 
 
     $('#footer-currency').change(function () {
@@ -170,5 +162,16 @@ $(function () {
 
     function hideOverlay() {
         $('.overlay').fadeOut();
+    }
+
+    function initZoom() {
+        if (!isMobile) {
+            $("._xzoom, .xzoom-gallery").xzoom();
+        } else {
+            $('#desktop-gallery').hide();
+            $('#mobile-gallery').show().slick({
+                dots: true
+            });
+        }
     }
 });

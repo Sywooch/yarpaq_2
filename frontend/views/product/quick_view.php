@@ -37,7 +37,7 @@ $currency = Yii::$app->currency;
 
                         <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
                             <a href="<?= $image->url; ?>" class="thumb">
-                                <img class="xzoom-gallery" width="70"
+                                <img class="xzoom-gallery" width="64"
                                      src="<?= $image->preview->url; ?>"
                                      xpreview="<?= $image->standard->url; ?>">
                             </a>
@@ -62,18 +62,7 @@ $currency = Yii::$app->currency;
                     <div class="rating">
                         <span class="star_<?= $product->rating; ?>"></span>
                     </div>
-                    <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span> | <span><?= Yii::t('app', 'Quantity'); ?>: <strong><?= $product->quantity; ?></strong></span></p>
-                </div>
-                <div class="second_info">
-                    <div class="wrap_store">
-                        <?= Yii::t('app', 'Seller'); ?>: <b><?= $product->seller->fullname; ?></b>
-                        (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', 'See other products'); ?></a>)
-                    </div>
-                    <?php if ($product->condition_id == Product::CONDITION_USED) { ?>
-                        <div class="wrap_number">
-                            <a href="tel:<?= $product->seller->profile->phone1; ?>"><?= $product->seller->profile->phone1; ?></a>
-                        </div>
-                    <?php } ?>
+                    <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span></p>
                 </div>
             </header>
             <div class="product_first_info" itemprop="offers" itemscope itemtype="http://schema.org/Offer">

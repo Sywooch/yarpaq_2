@@ -19,7 +19,7 @@ if (count($productImages)) {
             <img src="<?= $preview->url; ?>" alt="">
         </a>
 
-        <div class="quick_view_container">
+        <div class="quick_view_container" style="display: none">
             <a href="#" class="quick_view_btn" data-url="<?= Url::to(['product/quick-view', 'id' => $product->id]); ?>"><?= Yii::t('app', 'QUICK VIEW'); ?></a>
         </div>
     </div>
