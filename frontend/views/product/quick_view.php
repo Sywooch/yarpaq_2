@@ -1,32 +1,19 @@
 <?php
 use common\models\Product;
-use yii\helpers\Url;
 use common\models\info\Info;
 use common\models\product\Discount;
 
 $currency = Yii::$app->currency;
 
 ?>
-<div class="current_product" itemscope itemtype="http://schema.org/Product">
-    <?php if ($product->manufacturer) { ?>
-        <meta itemprop="brand" content="<?= $product->manufacturer->title; ?>" />
-    <?php } ?>
-
+<div class="current_product">
     <div class="priduct_gallery">
-
-        <div id="mobile-gallery">
-            <?php $i=0; foreach ($product->gallery as $image) { $i++; ?>
-                <div>
-                    <img src="<?= $image->standard->url; ?>" alt="<?= $product->title ?>">
-                </div>
-            <?php } ?>
-        </div>
 
         <div id="desktop-gallery">
             <div class="image">
                 <div>
                     <?php if (count($product->gallery)) { ?>
-                        <img itemprop="image" class="_xzoom" src="<?= $product->gallery[0]->standard->url; ?>" width="370" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
+                        <img class="_xzoom" src="<?= $product->gallery[0]->standard->url; ?>" width="370" alt="" xoriginal="<?= $product->gallery[0]->url; ?>">
                     <?php } ?>
 
                 </div>
@@ -57,7 +44,7 @@ $currency = Yii::$app->currency;
     <div class="right_side">
         <div class="product_first">
             <header>
-                <h3 itemprop="name"><?= $product->title; ?></h3>
+                <h3><?= $product->title; ?></h3>
                 <div class="first_info">
                     <div class="rating">
                         <span class="star_<?= $product->rating; ?>"></span>
@@ -65,21 +52,18 @@ $currency = Yii::$app->currency;
                     <p><span><?= Yii::t('app', 'Views count'); ?>: <strong><?= $product->viewed; ?></strong></span> | <span><?= Yii::t('app', 'Product code'); ?>: <strong><?= $product->id; ?></strong></span></p>
                 </div>
             </header>
-            <div class="product_first_info" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <div class="product_first_info">
                 <div class="left_info">
                     <div class="price">
 
                         <span><?= Yii::t('app', 'Price'); ?>:</span>
 
                         <!-- Price -->
-                        <meta itemprop="priceCurrency" content="<?= $product->currency->code; ?>" />
-                        <meta itemprop="price" content="<?= $product->realPrice; ?>" />
-
                         <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
 
                         <br><br>
                         <?php if ($product->hasDiscount() && $product->discount->period == Discount::PERIOD_RANGE) { ?>
-                            (<time itemprop="priceValidUntil" datetime="<?= (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO'); ?>">
+                            (<time>
                                 <?= (new \DateTime($product->discount->end_date))->format('d M Y'); ?>
                             </time>)
                         <?php } ?>
@@ -89,16 +73,7 @@ $currency = Yii::$app->currency;
                         <!-- Condition -->
                         <li>
                             <?= Yii::t('app', 'Condition'); ?>:
-
-                            <?php if ($product->condition_id == Product::CONDITION_NEW) { ?>
-                            <b itemprop="itemCondition" content="http://schema.org/NewCondition">
-                                <?php } else if ($product->condition_id == Product::CONDITION_USED) { ?>
-                                <b itemprop="itemCondition" content="http://schema.org/UsedCondition">
-                                    <?php } ?>
-
-                                    <?= Yii::t('app', $product->condition);?>
-
-                                </b>
+                            <b><?= Yii::t('app', $product->condition);?></b>
                         </li>
 
 
@@ -111,22 +86,10 @@ $currency = Yii::$app->currency;
                         <!-- Availability -->
                         <li>
                             <?= Yii::t('app', 'Availability'); ?>:
-                            <?php if ($product->stock_status_id == Product::AVAILABILITY_IN_STOCK) { ?>
-                            <b itemprop="availability" content="http://schema.org/InStock">
-                                <?php } else if ($product->stock_status_id == Product::AVAILABILITY_PRE_ORDER) { ?>
-                                <b itemprop="availability" content="http://schema.org/PreOrder">
-                                    <?php } else { ?>
-                                    <b itemprop="availability" content="http://schema.org/OutOfStock">
-                                        <?php } ?>
-
-                                        <?= Yii::t('app', $product->stockStatus->name);?>
-                                    </b>
+                            <b><?= Yii::t('app', $product->stockStatus->name);?></b>
                         </li>
 
                     </ul>
-
-                    <!-- Url -->
-                    <meta itemprop="url" content="<?= Url::to($product->url, true); ?>">
                 </div>
 
             </div>

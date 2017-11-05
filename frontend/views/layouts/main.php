@@ -60,6 +60,8 @@ $seo = $this->params['seo'];
 <body itemscope itemtype="http://schema.org/WebPage">
 
 <div class="overlay">
+    <div class="dark">
+    </div>
     <div class="popup popup_quick_view">
         <i class="popup_close_btn"></i>
         <div class="popup_content">
@@ -396,7 +398,7 @@ $seo = $this->params['seo'];
 <script type="text/javascript" src="/js/slick/slick.min.js"></script>
 <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
-<script type="text/javascript" src="/js/main.js?v=1.1.0"></script>
+<script type="text/javascript" src="/js/main.js?v=1.1.1"></script>
 <script type="text/javascript" src="/js/product-filter.js"></script>
 <script type="text/javascript" src="/js/loadmore.js"></script>
 <script type="text/javascript" src="/js/checkout.js?v=1.0.3"></script>
