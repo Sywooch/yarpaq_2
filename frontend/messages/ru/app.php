@@ -182,7 +182,8 @@ return [
     'Thank you for your order' => 'Спасибо за покупку',
     'New order' => 'Новый заказ',
 
-    'Show more' => 'Показать больше'
+    'Show more' => 'Показать больше',
+    'QUICK VIEW' => 'БЫСТРЫЙ ПРОСМОТР'
 
 
 ];

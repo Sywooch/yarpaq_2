@@ -180,6 +180,7 @@ return [
     'Thank you for your order' => 'Sifarişinizə görə təşəkkür edirik',
     'New order' => 'Yeni sifariş',
 
-    'Show more' => 'Daha çox göstər'
+    'Show more' => 'Daha çox göstər',
+    'QUICK VIEW' => 'SÜRƏTLİ BAXIŞ'
 
 ];
