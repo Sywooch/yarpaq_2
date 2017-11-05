@@ -146,16 +146,18 @@ $(function () {
         loadQuickViewData(quick_view_url);
     });
 
-    $('.overlay').click(function (e) {
-        e.stopPropagation();
+    $('.overlay').click(function () {
+        hideOverlay();
+    });
 
-        if ($(this).hasClass('overlay')) {
-            hideOverlay();
-        }
+    $('.popup').click(function (e) {
+        e.stopPropagation();
     });
 
     function loadQuickViewData(quick_view_url) {
-        $('.popup_quick_view').load(quick_view_url);
+        $('.popup_quick_view').load(quick_view_url, function () {
+            initZoom();
+        });
     }
 
     function showOverlay() {

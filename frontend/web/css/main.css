@@ -7278,11 +7278,11 @@ a.clear_filtre {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 100
+  z-index: 50;
 }
 
 .overlay .popup {
-  position:absolute;
+  position:fixed;
   top: 0;
   background: white;
   box-shadow: 0 4px 10px 0 rgba(0,0,0,0.50);
@@ -7338,4 +7338,9 @@ a.clear_filtre {
   width: 370px;
   line-height: 519px;
   margin-left: 95px;
+}
+
+.popup_quick_view .current_product .product_first header {
+  border: none;
+  margin-bototm: 0;
 }
