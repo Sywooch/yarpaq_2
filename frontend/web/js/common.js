@@ -140,4 +140,35 @@ $(function () {
     });
 
     var mobile_search = $('#mobile-search');
+
+
+
+    // quick view
+    $('.quick_view_btn').click(function (e) {
+        e.preventDefault();
+
+        var quick_view_url = $(this).data('url');
+        if (!quick_view_url) { return; }
+
+        showOverlay();
+        loadQuickViewData(quick_view_url);
+    });
+
+    $('.overlay').click(function (e) {
+        e.stopPropagation();
+
+        hideOverlay();
+    });
+
+    function loadQuickViewData(quick_view_url) {
+        $('.popup_quick_view').load(quick_view_url);
+    }
+
+    function showOverlay() {
+        $('.overlay').fadeIn();
+    }
+
+    function hideOverlay() {
+        $('.overlay').fadeOut();
+    }
 });

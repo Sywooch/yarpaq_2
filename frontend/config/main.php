@@ -64,6 +64,7 @@ return [
             'rules' => [
                 '' => 'home/index',
                 'product-<id:\d+>' => 'product/index',
+                '<controller:product>/<action:.+>' => '<controller>/<action>',
                 'seller-products-<id:\d+>' => 'seller-products/index',
 
                 'cart'          => 'cart/index',

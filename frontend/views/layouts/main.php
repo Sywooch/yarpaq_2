@@ -58,6 +58,13 @@ $seo = $this->params['seo'];
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
+
+<div class="overlay">
+    <div class="popup popup_quick_view">
+
+    </div>
+</div>
+
 <?php $this->beginBody() ?>
 
 

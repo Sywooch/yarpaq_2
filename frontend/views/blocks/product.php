@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Url;
+
 $currency = Yii::$app->currency;
 $productImages = $product->gallery;
 
@@ -15,6 +18,10 @@ if (count($productImages)) {
         <a href="<?= $product->url; ?>">
             <img src="<?= $preview->url; ?>" alt="">
         </a>
+
+        <div class="quick_view_container">
+            <a href="#" class="quick_view_btn" data-url="<?= Url::to(['product/quick-view', 'id' => $product->id]); ?>"><?= Yii::t('app', 'QUICK VIEW'); ?></a>
+        </div>
     </div>
     <h3><a href="<?= $product->url; ?>"><?= $product->title; ?></a></h3>
     <div class="price">

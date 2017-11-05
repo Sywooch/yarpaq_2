@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 class ProductController extends BasicController
 {
 
-    public $freeAccessActions = ['index'];
+    public $freeAccessActions = ['index', 'quick-view'];
 
 
     public function actionIndex($id) {
@@ -31,6 +31,25 @@ class ProductController extends BasicController
         $this->seo($product->title, $product->preview->url, $product->description);
 
         return $this->render('index', [
+            'product'      => $product
+        ]);
+
+    }
+
+    public function actionQuickView($id) {
+
+        // Поиск продукта
+        $product = Product::findOne($id);
+
+        if (!$product || !$product->isVisible()) {
+            throw new NotFoundHttpException();
+        }
+
+        ViewedProduct::log($product->id);
+        $product->viewed++;
+        $product->save();
+
+        return $this->renderPartial('quick_view', [
             'product'      => $product
         ]);
 
