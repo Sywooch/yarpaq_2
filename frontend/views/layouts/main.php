@@ -399,7 +399,7 @@ $seo = $this->params['seo'];
 <script type="text/javascript" src="/js/imagesloaded.pkgd.min.js"></script>
 <script type="text/javascript" src="/js/ion.rangeSlider.min.js"></script>
 <script type="text/javascript" src="/js/main.js?v=1.1.2"></script>
-<script type="text/javascript" src="/js/product-filter.js"></script>
+<script type="text/javascript" src="/js/product-filter.js?v=1.0.0"></script>
 <script type="text/javascript" src="/js/loadmore.js"></script>
 <script type="text/javascript" src="/js/checkout.js?v=1.0.3"></script>
 <script type="text/javascript" src="/js/basket.js"></script>
