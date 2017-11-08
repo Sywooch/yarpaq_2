@@ -85,7 +85,10 @@ class CategoryController extends BasicController
             $repo = new ProductRepository();
             $products = $repo
                 ->visibleOnTheSite()
-                ->withinCategory($category);
+                ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = {{%product}}.`id`')
+                ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
+                ->groupBy('{{%product}}.id');
+                //->withinCategory($category); // TODO почему-то запрос зависает
         }
 
         $possibleOptions = $this->getPossibleOptionsAndValues($products, $category);
@@ -170,7 +173,9 @@ class CategoryController extends BasicController
                 'filterBrands'          => $brands->all(),
                 'productFilter'         => $productFilter,
                 'next_page_url'         => $this->getNextPageUrl($pages),
-                'possibleOptionValues'  => ArrayHelper::map($possibleOptions, 'option_value_id', 'value_name', 'option_id'),
+                'possibleOptionValues'  => ArrayHelper::map($possibleOptions, 'option_value_id', function ($row) {
+                    return ['name' => $row['value_name'], 'image' => $row['image']];
+                }, 'option_id'),
                 'possibleOptions'       => ArrayHelper::map($possibleOptions, 'option_id', 'option_name')
             ]);
         }
@@ -194,7 +199,7 @@ class CategoryController extends BasicController
 
         $productOptionValues = (new Query())
             ->from('{{%product_option_value}} v')
-            ->select(['v.option_value_id', 'ovd.name as value_name', 'ov.option_id', 'od.name as option_name'])
+            ->select(['v.option_value_id', 'ovd.name as value_name', 'ov.option_id', 'od.name as option_name', 'ov.image'])
             ->leftJoin('{{%product_option}} po', 'po.id = v.product_option_id')
             ->leftJoin('{{%option_value}} ov', 'ov.id = v.option_value_id')
             ->leftJoin('{{%option_description}} od', 'od.option_id = ov.option_id AND od.language_id = '.Language::getCurrent()->id)

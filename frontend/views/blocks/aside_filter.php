@@ -122,7 +122,7 @@ $children = $category->getChildren()->all(); ?>
                     <a href="#" class="option-values-reset-btn" data-option-id="<?=$option_id?>"><?= Yii::t('app', 'Reset'); ?></a>
                 </h3>
                 <div>
-                    <ul class="checkboxes">
+                    <ul class="checkboxes colored">
 
                         <?php foreach ($optionValues[$option_id] as $optionValueID => $optionValue) { ?>
                         <li>
@@ -134,7 +134,10 @@ $children = $category->getChildren()->all(); ?>
                                     <?php if ($productFilter->hasOptionValue($optionValueID)) echo 'checked'; ?>
                                     class="option_value_filter option_value_filter_<?=$option_id?>">
                                 <em></em>
-                                <span><?= $optionValue ?></span>
+                                <?php if ($optionValue['image']) { ?>
+                                    <i style="background: url('http://media.yarpaq.az/image/options/<?= $optionValue['image'] ?>') no-repeat; background-size: 100%;"></i>
+                                <?php } ?>
+                                <span><?= $optionValue['name'] ?></span>
                                 <!--<strong>234</strong>-->
                             </label>
                         </li>

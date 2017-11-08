@@ -6596,17 +6596,11 @@ header.mobile_header a {
   text-decoration: underline;
 }
 
-ul.checkboxes.colored li label {
-  padding: 0 0 0 50px;
-}
-
 ul.checkboxes.colored li label i {
-  display: block;
+  display: inline-block;
   width: 14px;
   height: 14px;
-  position: absolute;
-  top: 0;
-  left: 26px;
+  margin: 0 8px 0 6px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -khtml-border-radius: 2px;
