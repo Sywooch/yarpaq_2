@@ -22,7 +22,9 @@
             <?= $this->render('@app/views/blocks/aside_filter', [
                 'category'      => $category,
                 'productFilter' => $productFilter,
-                'filterBrands' => $filterBrands
+                'filterBrands' => $filterBrands,
+                'options'       => $possibleOptions,
+                'optionValues'  => $possibleOptionValues
             ]); ?>
         </aside>
 

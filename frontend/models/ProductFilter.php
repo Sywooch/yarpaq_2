@@ -24,12 +24,13 @@ class ProductFilter extends Model
 
     public $per_page;
     public $sort = self::SORT_NEWLY_LISTED;
+    public $optionValues = [];
 
     public function rules() {
         return [
             [['condition', 'per_page'], 'integer'],
             [['price_from', 'price_to'], 'number'],
-            ['brand', 'each', 'rule' => ['integer']],
+            [['brand', 'optionValues'], 'each', 'rule' => ['integer']],
             ['sort', 'sortOptionValidator']
         ];
     }
@@ -67,7 +68,26 @@ class ProductFilter extends Model
         return [24, 48];
     }
 
+    /**
+     * Индикатор выбранного Производителя в фильтре
+     * Используется для включения галочек в фильтре
+     *
+     * @param $brand_id
+     * @return bool
+     */
     public function hasBrand($brand_id) {
         return in_array($brand_id, $this->brand);
+    }
+
+
+    /**
+     * Индикатор выбранного Значения Опции в фильтре (S, M, ... )
+     * Используется для включения галочек в фильтре
+     *
+     * @param $optionValueID
+     * @return bool
+     */
+    public function hasOptionValue($optionValueID) {
+        return in_array($optionValueID, $this->optionValues);
     }
 }

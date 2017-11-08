@@ -60,4 +60,36 @@ class ProductRepository extends ActiveQuery
 
         return $this;
     }
+
+    /**
+     * Фильтрует по категории товара
+     *
+     * @param Category $category Категория
+     * @param bool|true $wholeBranch Учитывать ли вложенные категории
+     * @return $this
+     */
+    public function withinCategory(Category $category, $wholeBranch = true) {
+        if ($wholeBranch) {
+            $categoryQuery = Category::find()
+                ->select('id')
+                ->andWhere(['>', 'lft', $category->lft])
+                ->andWhere(['<', 'rgt', $category->rgt]);
+        } else {
+            $categoryQuery = $category->id;
+        }
+
+
+        $this->joinWith('productCategories pc');
+        $this->andWhere(['pc.category_id' => $categoryQuery]);
+
+        return $this;
+    }
+
+    public function withOptionValues(array $optionValues) {
+        $this->joinWith('productOptions po');
+        $this->leftJoin('{{%product_option_value}} pov', 'pov.product_option_id = po.id');
+        $this->andWhere(['pov.option_value_id' => $optionValues]);
+
+        return $this;
+    }
 }

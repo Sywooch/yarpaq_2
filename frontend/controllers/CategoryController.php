@@ -2,7 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\Language;
 use common\models\Manufacturer;
+use common\models\option\OptionValue;
+use common\models\option\ProductOption;
+use common\models\option\ProductOptionValue;
 use frontend\models\ProductFilter;
 use frontend\models\ProductRepository;
 use Yii;
@@ -10,6 +14,8 @@ use yii\base\Exception;
 use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
 use common\models\category\Category;
+use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -47,6 +53,7 @@ class CategoryController extends BasicController
         $this->seo($category->title, null, $category->content->seo_description, $category->content->seo_keywords);
 
 
+
         // GET Brands
         $brands = Manufacturer::find()
             ->alias('m')
@@ -76,13 +83,12 @@ class CategoryController extends BasicController
             $brands->where(['category_id' => $childrenCategoriesIDs]);
 
             $repo = new ProductRepository();
-            $products = $repo->visibleOnTheSite()
-                ->leftJoin('{{%product_category}} pc', 'pc.`product_id` = {{%product}}.`id`')
-                ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
-                ->groupBy('{{%product}}.id');
+            $products = $repo
+                ->visibleOnTheSite()
+                ->withinCategory($category);
         }
 
-
+        $possibleOptions = $this->getPossibleOptionsAndValues($products, $category);
 
         // get min price
         $minPriceProducts = clone $products;
@@ -90,6 +96,11 @@ class CategoryController extends BasicController
         // get max price
         $maxPriceProducts = clone $products;
         $productFilter->price_max = $maxPriceProducts->max('price');
+
+
+        if ($productFilter->optionValues) {
+            $products->withOptionValues($productFilter->optionValues);
+        }
 
         if ($productFilter->condition) {
             $products->andWhere(['condition_id' => $productFilter->condition]);
@@ -151,16 +162,49 @@ class CategoryController extends BasicController
             ];
         } else {
             return $this->render('index', [
-                'count'             => $pages->totalCount,
-                'category'          => $category,
-                'products'          => $models,
-                'pages'             => $pages,
-                'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
-                'filterBrands'      => $brands->all(),
-                'productFilter'     => $productFilter,
-                'next_page_url'     => $this->getNextPageUrl($pages)
+                'count'                 => $pages->totalCount,
+                'category'              => $category,
+                'products'              => $models,
+                'pages'                 => $pages,
+                'pagination'            => CustomLinkPager::widget([ 'pagination' => $pages ]),
+                'filterBrands'          => $brands->all(),
+                'productFilter'         => $productFilter,
+                'next_page_url'         => $this->getNextPageUrl($pages),
+                'possibleOptionValues'  => ArrayHelper::map($possibleOptions, 'option_value_id', 'value_name', 'option_id'),
+                'possibleOptions'       => ArrayHelper::map($possibleOptions, 'option_id', 'option_name')
             ]);
         }
+    }
+
+    /**
+     * Возвращает список опций и их значений, которые есть хотябы у одного товара данной категории
+     * Главное условие, чтобы уровень категории был не меньше 3
+     *
+     * @param $products
+     * @param $category
+     * @return array
+     */
+    protected function getPossibleOptionsAndValues($products, $category) {
+        if ($category->depth < 3) {
+            return [];
+        }
+
+        $pr = clone $products;
+        $pr->select('{{%product}}.id');
+
+        $productOptionValues = (new Query())
+            ->from('{{%product_option_value}} v')
+            ->select(['v.option_value_id', 'ovd.name as value_name', 'ov.option_id', 'od.name as option_name'])
+            ->leftJoin('{{%product_option}} po', 'po.id = v.product_option_id')
+            ->leftJoin('{{%option_value}} ov', 'ov.id = v.option_value_id')
+            ->leftJoin('{{%option_description}} od', 'od.option_id = ov.option_id AND od.language_id = '.Language::getCurrent()->id)
+            ->leftJoin('{{%option_value_description}} ovd', 'ovd.option_value_id = v.option_value_id AND ovd.language_id = '.Language::getCurrent()->id)
+            ->andFilterWhere(['in', 'product_id', $pr])
+            ->groupBy('v.option_value_id');
+
+        return ArrayHelper::toArray($productOptionValues->all(), 'id', function ($productOptionValue) {
+            return $productOptionValue;
+        }, 'option_id');
     }
 
     private function getAllChildrenCategories($category) {

@@ -111,6 +111,42 @@ $children = $category->getChildren()->all(); ?>
             </div>
         </section>
 
+        <?php
+
+        if (count($options)) {
+            foreach ($options as $option_id => $option_name) { ?>
+
+            <section>
+                <h3>
+                    <span><?= $option_name; ?></span>
+                    <a href="#" class="option-values-reset-btn" data-option-id="<?=$option_id?>"><?= Yii::t('app', 'Reset'); ?></a>
+                </h3>
+                <div>
+                    <ul class="checkboxes">
+
+                        <?php foreach ($optionValues[$option_id] as $optionValueID => $optionValue) { ?>
+                        <li>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    name="ProductFilter[optionValues][]"
+                                    value="<?=$optionValueID?>"
+                                    <?php if ($productFilter->hasOptionValue($optionValueID)) echo 'checked'; ?>
+                                    class="option_value_filter option_value_filter_<?=$option_id?>">
+                                <em></em>
+                                <span><?= $optionValue ?></span>
+                                <!--<strong>234</strong>-->
+                            </label>
+                        </li>
+                        <?php } ?>
+
+                    </ul>
+                </div>
+            </section>
+
+            <?php } ?>
+        <?php } ?>
+
         <?php if (count($filterBrands)) { ?>
             <section>
                 <h3>

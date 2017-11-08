@@ -26,6 +26,10 @@ class ProductOptionValue extends ActiveRecord
         return $this->hasOne(OptionValue::className(), ['id' => 'option_value_id']);
     }
 
+    public function getProductOption() {
+        return $this->hasOne(ProductOption::className(), ['id' => 'product_option_id']);
+    }
+
     public function scenarios() {
         $scenarios = parent::scenarios();
 

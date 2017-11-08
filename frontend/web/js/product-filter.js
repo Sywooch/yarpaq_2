@@ -17,6 +17,7 @@ function ProductFilter() {
         brand_input         = '.brand_filter',
         condition_input     = '.condition_filter',
         price_input         = '.price_filter',
+        option_value_input  = '.option_value_filter_',
         self = this;
 
     this.title      = null;
@@ -59,6 +60,12 @@ function ProductFilter() {
             .change();
     };
 
+    this.resetOptionValues = function (option_id) {
+        form.find(option_value_input + option_id)
+            .removeAttr('checked')
+            .change();
+    };
+
     this.resetAll = function () {
         this.resetCondition();
         this.resetBrands();
@@ -90,12 +97,28 @@ $(function () {
 
         productFilter.resetCondition();
     });
+    $('.option-values-reset-btn').click(function (e) {
+        e.preventDefault();
+
+        var option_id = $(this).data('option-id');
+
+        if (option_id === undefined) {
+            return;
+        }
+
+        productFilter.resetOptionValues(option_id);
+    });
+
+
 
 
     $('.brand_filter').change(function () {
         form.submit();
     });
     $('.condition_filter').change(function () {
+        form.submit();
+    });
+    $('.option_value_filter').change(function () {
         form.submit();
     });
 
