@@ -113,7 +113,7 @@ $children = $category->getChildren()->all(); ?>
 
         <?php
 
-        if (count($options)) {
+        if (isset($options) && count($options)) {
             foreach ($options as $option_id => $option_name) { ?>
 
             <section>
