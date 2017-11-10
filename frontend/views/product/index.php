@@ -86,7 +86,7 @@ $currency = Yii::$app->currency;
                     <div class="second_info">
                         <div class="wrap_store">
                             <?= Yii::t('app', 'Seller'); ?>: <b><?= $product->seller->fullname; ?></b>
-                            (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', 'See other products'); ?></a>)
+                            (<a href="<?= \yii\helpers\Url::to(['seller-products/index', 'id' => $product->seller->id]); ?>"><?= Yii::t('app', "View other merchant's products"); ?></a>)
                         </div>
                         <?php if ($product->condition_id == Product::CONDITION_USED) { ?>
                         <div class="wrap_number">

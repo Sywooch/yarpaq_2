@@ -118,7 +118,7 @@ return [
     'Reviews' => 'Отзывы',
     'Seller products' => 'Другие товары продавца',
     'Views count' => 'Кол-во просмотров',
-    'See other products' => 'Посмотреть другие товары',
+    "View other merchant's products" => 'Просмотреть другие товары продавца',
     'Seller' => 'Продавец',
     'Monthly' => 'Ежемесячно',
     'Month' => 'Месяц',
