@@ -136,7 +136,7 @@ $(function () {
 
 
     // quick view
-    $('.quick_view_btn').click(function (e) {
+    $(document).on('click', '.quick_view_btn', function (e) {
         e.preventDefault();
 
         var quick_view_url = $(this).data('url');
