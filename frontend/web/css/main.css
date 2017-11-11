@@ -7402,6 +7402,7 @@ a.clear_filtre {
   width: 100%;
   height: 574px;
   padding: 0 50px;
+  display: none;
 }
 
 .home_category:after {

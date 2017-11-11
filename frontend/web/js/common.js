@@ -250,6 +250,10 @@ $(function () {
         }
     }
 
+    //resizeHomeCategories();
+});
+
+function enableHomeCategoriesSwipe() {
     $('.home_category_list ul').slick({
         arrows: false,
         speed: 300,
@@ -257,8 +261,11 @@ $(function () {
         swipe: true,
         variableWidth: true
     });
+}
+function disableHomeCategoriesSwipe() {
+    $('.home_category_list ul').slick("unslick");
+}
 
-});
 
 function resizeHomeCategories() {
     $('.home_category').each(function () {
@@ -266,6 +273,13 @@ function resizeHomeCategories() {
 
         block.height( block.find('.home_category_main_cell img').height() );
     });
+
+
+    if ($(window).width() < 923) {
+        enableHomeCategoriesSwipe();
+    } else {
+        disableHomeCategoriesSwipe();
+    }
 }
 
 $(window).resize(function () {
@@ -273,5 +287,6 @@ $(window).resize(function () {
 });
 
 $(window).load(function () {
+    $('.home_category').fadeIn();
     resizeHomeCategories();
 });
