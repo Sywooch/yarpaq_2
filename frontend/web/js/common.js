@@ -250,4 +250,28 @@ $(function () {
         }
     }
 
+    $('.home_category_list ul').slick({
+        arrows: false,
+        speed: 300,
+        slidesToShow: 5,
+        swipe: true,
+        variableWidth: true
+    });
+
+});
+
+function resizeHomeCategories() {
+    $('.home_category').each(function () {
+        var block = $(this);
+
+        block.height( block.find('.home_category_main_cell img').height() );
+    });
+}
+
+$(window).resize(function () {
+    resizeHomeCategories();
+});
+
+$(window).load(function () {
+    resizeHomeCategories();
 });

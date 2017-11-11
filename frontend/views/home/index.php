@@ -85,6 +85,12 @@ $mainSlide = $slides[0];
     <!-- NEW PRODUCTS END -->
 
 
+
+    <!-- Promo Categories -->
+    <?= \frontend\components\HomeCategoryGroup::widget(); ?>
+    <!-- Promo Categories -->
+
+
 <?php if (!Yii::$app->user->isGuest) {
     //echo \frontend\components\RecentlyViewedTape::widget();
 } ?>

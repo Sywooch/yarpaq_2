@@ -128,7 +128,7 @@ return [
     'Width (sm)' => 'Enliyi (sm)',
     'Height (sm)' => 'Hündürlüyü (sm)',
 
-    'Create' => 'Təsdiqlə',
+    'Create' => 'Əlavə et',
 
     'Type' => 'Növ',
 
@@ -155,7 +155,14 @@ return [
     'End Date must be later than Start Date'    => 'Başlama tarixi Bitmə tarixindən gec olmalıdır',
     'Query' => 'Sorğu',
     'Enter user name' => 'İstifadəçi adını daxil edin',
-    'Search Log' => 'Axtarış sorğuları'
+    'Search Log' => 'Axtarış sorğuları',
+
+
+    'Appearance' => 'Görünüş',
+    'Home Categories' => 'Əsas səhifə kateqoriyaları',
+    'Background Color' => 'Fon rəngi',
+
+    'Saved' => 'Saxlanılıb'
 
 ];
 

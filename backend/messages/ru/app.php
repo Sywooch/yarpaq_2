@@ -153,7 +153,14 @@ return [
     'End Date must be later than Start Date'    => 'Дата окончания должна быть позже Даты начала',
     'Query' => 'Запрос',
     'Enter user name' => 'Введите имя пользователя',
-    'Search Log' => 'Поисковые запросы'
+    'Search Log' => 'Поисковые запросы',
+
+    'Appearance' => 'Внешний вид',
+    'Home Categories' => 'Категории главной страницы',
+    'Background Color' => 'Цвет фона',
+    
+    'Saved' => 'Сохранено'
+
 
 ];
 
