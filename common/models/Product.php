@@ -426,7 +426,10 @@ class Product extends \yii\db\ActiveRecord
 
             if ($this->quantity <= 0) {
                 $this->stock_status_id = self::AVAILABILITY_OUT_OF_STOCK;
+            } else {
+                $this->stock_status_id = self::AVAILABILITY_IN_STOCK;
             }
+
 
             return true;
         }
