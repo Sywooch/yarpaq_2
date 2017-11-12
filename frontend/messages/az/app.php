@@ -156,7 +156,7 @@ return [
     'Firstname' => 'Ad',
     'Lastname' => 'Soyad',
     'Postcode' => 'Poçt indeks',
-    'I have read and agree with the {privacy_policy}' => 'Mən {privacy_policy} oxudum və razıyam',
+    'I have read and agree with the {Privacy Policy}' => 'Mən {Privacy Policy} oxudum və razıyam',
     'Privacy Policy' => 'Məxfilik Siyasətini',
 
     'Save' => 'Yadda saxla',

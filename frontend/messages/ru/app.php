@@ -158,7 +158,7 @@ return [
     'Lastname' => 'Фамилия',
     'Postcode' => 'Почтовый индекс',
 
-    'I have read and agree with the {privacy_policy}' => 'Я прочитал и согласен с {privacy_policy}',
+    'I have read and agree with the {Privacy Policy}' => 'Я прочитал и согласен с {Privacy Policy}',
     'Privacy Policy' => 'Политикой Конфиденциальности',
 
     'Save' => 'Сохранить',
