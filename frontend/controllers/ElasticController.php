@@ -125,7 +125,8 @@ class ElasticController extends BasicController
                         "properties" => [
                             "title" => [
                                 "type" => "string",
-                                "analyzer" => "ngram_analyzer_with_filter"
+                                "analyzer" => "ngram_analyzer_with_filter",
+                                "search_analyzer" => "standard"
                             ],
                             "moderated_at" => [
                                 "type" => "date"
