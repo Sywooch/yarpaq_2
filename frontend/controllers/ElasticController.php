@@ -125,6 +125,7 @@ class ElasticController extends BasicController
                         "properties" => [
                             "title" => [
                                 "type" => "string",
+                                "index" => "analyzed",
                                 "analyzer" => "ngram_analyzer_with_filter",
                                 "search_analyzer" => "standard"
                             ],
@@ -153,32 +154,18 @@ class ElasticController extends BasicController
 
                     'analysis' => [
                         'analyzer' => [
-                            //'ngram_analyzer_number' => ['tokenizer' => 'ngram_tokenizer_number', 'filter' => 'lowercase'],
-                            //'ngram_analyzer_serial' => ['tokenizer' => 'ngram_tokenizer_serial', 'filter' => 'lowercase'],
                             'ngram_analyzer_with_filter' => [
                                 'tokenizer' => 'ngram_tokenizer',
-                                'filter' => 'lowercase, snowball'
+                                'filter' => 'lowercase'
                             ],
                         ],
                         'tokenizer' => [
                             'ngram_tokenizer' => [
-                                'type' => 'nGram',
+                                'type' => 'ngram',
                                 'min_gram' => 3,
                                 'max_gram' => 10,
                                 'token_chars' => ['letter', 'digit', 'whitespace', 'punctuation', 'symbol']
                             ],
-//                            'ngram_tokenizer_number' => [
-//                                'type' => 'nGram',
-//                                'min_gram' => 3,
-//                                'max_gram' => 5,
-//                                'token_chars' => ['letter', 'digit']
-//                            ],
-//                            'ngram_tokenizer_serial' => [
-//                                'type' => 'nGram',
-//                                'min_gram' => 4,
-//                                'max_gram' => 10,
-//                                'token_chars' => ['letter', 'whitespace', 'punctuation', 'symbol', 'digit']
-//                            ]
                         ],
                     ]
                 ]
