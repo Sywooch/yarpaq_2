@@ -291,7 +291,7 @@ class CheckoutController extends BasicController
 
         }
 
-        var_dump( $order->getErrors() );
+        //var_dump( $order->getErrors() );
 
     }
 
