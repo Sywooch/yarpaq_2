@@ -10,7 +10,6 @@
                         <td><?= Yii::t('app', 'Order date'); ?></td>
                         <td><?= Yii::t('app', 'Price'); ?></td>
                         <td><?= Yii::t('app', 'Status'); ?></td>
-                        <td><?= Yii::t('app', 'Delivered date'); ?></td>
                         <td></td>
                     </tr>
                 </thead>
@@ -18,11 +17,10 @@
                     <?php foreach ($orders as $order) { ?>
                     <tr>
                         <td><?= $order->id?></td>
-                        <td><?= $order->created_at; ?></td>
-                        <td><?= $order->total; ?></td>
+                        <td><?= ( new \DateTime($order->created_at))->format('d.m.Y H:i:s'); ?></td>
+                        <td><?= $order->total; ?> <?= $order->currency_code; ?></td>
                         <td><?= $order->status->name; ?></td>
-                        <td><?= $order->modified_at; ?></td>
-                        <td><a href="#"><?= Yii::t('app', 'More info'); ?></a></td>
+                        <td><a href="<?= \yii\helpers\Url::to(['user/order', 'id' => $order->id]) ?>"><?= Yii::t('app', 'More info'); ?></a></td>
                     </tr>
                     <?php } ?>
                 </tbody>

@@ -167,6 +167,7 @@ return [
 
     'See all' => 'Hamısına bax',
 
+    'Products' => 'Məhsullar',
     'Discount products' => 'Endirimli məhsullar',
     'Availability' => 'Mövcudluq',
 
@@ -181,6 +182,8 @@ return [
     'New order' => 'Yeni sifariş',
 
     'Show more' => 'Daha çox göstər',
-    'QUICK VIEW' => 'SÜRƏTLİ BAXIŞ'
+    'QUICK VIEW' => 'SÜRƏTLİ BAXIŞ',
+
+    'Order details' => 'Sifariş haqqında məlumat'
 
 ];

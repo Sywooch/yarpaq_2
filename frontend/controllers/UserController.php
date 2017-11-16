@@ -12,10 +12,12 @@ use common\models\Zone;
 use frontend\models\LoginForm;
 use frontend\models\ChangeOwnPasswordForm;
 use Yii;
+use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use common\models\User;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
@@ -239,6 +241,27 @@ class UserController extends BasicController
 
         return $this->render('orders', [
             'orders' => Order::find()->andWhere(['user_id' => $user->id])->all()
+        ]);
+    }
+
+    public function actionOrder($id) {
+        $user = User::getCurrentUser();
+        if (!$user) {
+            return $this->render('orders_forbidden');
+        }
+
+        $order = Order::findOne($id);
+
+        if (!$order) {
+            throw new NotFoundHttpException('Order not found');
+        }
+
+        if ($order->user_id != $user->id) {
+            throw new ForbiddenHttpException('This is not your order');
+        }
+
+        return $this->render('order', [
+            'order'=> $order
         ]);
     }
 

@@ -95,6 +95,7 @@ return [
 
                 'user/profile'       => 'user/profile',
                 'user/orders'        => 'user/orders',
+                'user/order'         => 'user/order',
                 'user/success'       => 'user/success',
 
                 'goldenpay_complete' => 'golden-pay-payment/callback',

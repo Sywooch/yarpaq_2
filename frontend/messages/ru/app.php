@@ -169,6 +169,7 @@ return [
 
     'See all' => 'Посмотреть все',
 
+    'Products' => 'Товары',
     'Discount products' => 'Товары на скидке',
     'Availability' => 'Наличие',
 
@@ -183,7 +184,9 @@ return [
     'New order' => 'Новый заказ',
 
     'Show more' => 'Показать больше',
-    'QUICK VIEW' => 'БЫСТРЫЙ ПРОСМОТР'
+    'QUICK VIEW' => 'БЫСТРЫЙ ПРОСМОТР',
+
+    'Order details' => 'Информация о заказе'
 
 
 ];

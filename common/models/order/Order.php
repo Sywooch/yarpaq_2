@@ -53,7 +53,9 @@ use common\models\notification\OrderStatusChangedSellerNotification;
  * @property integer $shipping_zone_id
  * @property string $shipping_method
  * @property string $shipping_code
+ * @property string $shipping_price
  * @property string $comment
+ * @property string $subtotal
  * @property string $total
  * @property integer $order_status_id
  * @property integer $language_id
@@ -352,23 +354,36 @@ class Order extends \yii\db\ActiveRecord
      * доставки и наценки на оплату
      */
     public function recalculate() {
-        $total = 0;
-        $shipping_method = Shipping::create($this->shipping_method);
+        $subtotal = 0;
 
         foreach ($this->orderProducts as $orderProduct) {
             // прибавляем стоимость товара
-            $total += $orderProduct->total;
+            $subtotal += $orderProduct->total;
+        }
 
+        $this->subtotal = $subtotal;
+
+        $this->recalculateShippingPrice();
+
+        $this->total = $this->subtotal + $this->shipping_price;
+
+        $this->save();
+    }
+
+    public function recalculateShippingPrice() {
+        $shipping_price = 0;
+        $shipping_method = Shipping::create($this->shipping_method);
+
+        foreach ($this->orderProducts as $orderProduct) {
             // определяем вес товара
             $weight = $orderProduct->product->weight;
 
             // прибавляем стоимость доставки товара в соответствии
             // с его весом и пунктом назначения
-            $total += $shipping_method->calculateCostByZone($weight, $this->shippingZone);
+            $shipping_price += $shipping_method->calculateCostByZone($weight, $this->shippingZone);
         }
 
-        $this->total = $total;
-        $this->save();
+        $this->shipping_price = $shipping_price;
     }
 
     public function afterSave($insert, $changedAttributes) {

@@ -152,25 +152,15 @@ class CheckoutController extends BasicController
         $order = new Order();
 
         if ($user) {
-
             $order->user_id    = $user->id;
-            $order->firstname  = $user->profile->firstname;
-            $order->lastname   = $user->profile->lastname;
-            $order->email      = $user->email;
-            $order->phone1     = $user->profile->phone1;
-            $order->phone2     = $user->profile->phone2;
-            $order->fax        = $user->profile->fax;
-
-        } else {
-
-            $order->firstname  = $request->post('shipping_firstname');
-            $order->lastname   = $request->post('shipping_lastname');
-            $order->email      = $request->post('email');
-            $order->phone1     = $request->post('phone1');
-            $order->phone2     = $request->post('phone2');
-            $order->fax        = $request->post('fax');
-
         }
+
+        $order->firstname  = $request->post('shipping_firstname');
+        $order->lastname   = $request->post('shipping_lastname');
+        $order->email      = $request->post('email');
+        $order->phone1     = $request->post('phone1');
+        $order->phone2     = $request->post('phone2');
+        $order->fax        = $request->post('fax');
 
         $order->payment_firstname       = $request->post('shipping_firstname');
         $order->payment_lastname        = $request->post('shipping_lastname');
@@ -216,14 +206,18 @@ class CheckoutController extends BasicController
         $order->shipping_code           = $shipping_method->code;
 
         $order->comment                 = $session->get('comment');
+        $order->subtotal                = $cart->total;
         $order->total                   = $cart->total;
 
 
 
         // add shipping
+        $shipping_price = 0;
         foreach ($cart->getProducts() as $product) {
-            $order->total += $shipping_method_obj->calculateCost($product['weight'], $main_geo_zone->geo_zone_id);
+            $shipping_price += $shipping_method_obj->calculateCost($product['weight'], $main_geo_zone->geo_zone_id);
         }
+        $order->shipping_price = $shipping_price;
+        $order->total += $shipping_price;
 
         $order->currency_id             = $currency->userCurrency->id;
         $order->currency_code           = $currency->userCurrency->code;
@@ -296,6 +290,8 @@ class CheckoutController extends BasicController
             }
 
         }
+
+        var_dump( $order->getErrors() );
 
     }
 
