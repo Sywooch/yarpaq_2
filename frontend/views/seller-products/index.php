@@ -62,20 +62,13 @@
             </div>
 
             <div class="more_products">
-            <?php
-            echo \frontend\components\CustomLinkPager::widget([
-                'pagination'    => $pages,
-                'options'       => [
-                    'class' => 'pagination'
-                ]
-            ]);
-            ?>
+                <?= $this->render('@app/views/blocks/load_more_btn', [
+                    'pagination' => $pages,
+                    'next_page_url' => $next_page_url
+                ]); ?>
+                <?= $this->render('@app/views/blocks/pagination', ['pagination' => $pages]); ?>
             </div>
-            <footer>
-                <span>Axtardığızı tapa bildinizmi?</span>
-                <a href="#">Bəli</a>
-                <a href="#">Xeyir</a>
-            </footer>
+
         </div>
     </div>
 

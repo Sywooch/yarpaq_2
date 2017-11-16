@@ -12,6 +12,7 @@ use yii\data\Pagination;
 use frontend\components\CustomLinkPager;
 use common\models\Product;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 
 class SellerProductsController extends BasicController
@@ -20,6 +21,11 @@ class SellerProductsController extends BasicController
     public $freeAccessActions = ['index'];
 
     public function actionIndex($id) {
+        $ajax = false;
+
+        if (Yii::$app->request->isAjax) {
+            $ajax = true;
+        }
         $r = Yii::$app->request;
 
         $url = preg_match('/^[\w_\-\d\/]+$/', $r->get('url')) ? $r->get('url') : '';
@@ -99,15 +105,27 @@ class SellerProductsController extends BasicController
 
         $this->seo($seller->fullname);
 
-        return $this->render('index', [
-            'count'             => $pages->totalCount,
-            'seller'            => $seller,
-            'products'          => $models,
-            'pages'             => $pages,
-            'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
-            'filterBrands'      => $brands,
-            'productFilter'     => $productFilter
-        ]);
+
+        if ($ajax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+
+            return [
+                'markup' => $this->renderPartial('@app/views/blocks/product_list', ['products' => $models]),
+                'next_page_url' => $this->getNextPageUrl($pages)
+            ];
+        } else {
+            return $this->render('index', [
+                'count'             => $pages->totalCount,
+                'seller'            => $seller,
+                'products'          => $models,
+                'pages'             => $pages,
+                'pagination'        => CustomLinkPager::widget([ 'pagination' => $pages ]),
+                'filterBrands'      => $brands,
+                'productFilter'     => $productFilter,
+                'next_page_url'     => $this->getNextPageUrl($pages),
+            ]);
+        }
+
     }
 
     private function getAllChildrenCategories($category) {
@@ -119,5 +137,23 @@ class SellerProductsController extends BasicController
         }
 
         return $childrenCategoriesIDs;
+    }
+
+    /**
+     * Возвращает URL следующей страницы, если она есть.
+     * Иначе пустую строку
+     *
+     * @param $pages Pagination
+     * @return string
+     */
+    protected function getNextPageUrl($pages) {
+        $link = '';
+
+        if (isset($pages->getLinks()[Pagination::LINK_NEXT])) {
+            $link = $pages->getLinks()[Pagination::LINK_NEXT];
+            $link = str_replace('%2F', '/', $link);
+        }
+
+        return $link;
     }
 }
