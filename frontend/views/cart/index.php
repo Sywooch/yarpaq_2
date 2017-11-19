@@ -106,7 +106,7 @@ $currency = Yii::$app->currency;
                 <dl>
                     <dt><?= Yii::t('app', 'Total'); ?></dt>
                     <dd id="cart-total">
-                        <?= $currency->convertAndFormat($cart->subTotal, $product_object->currency); ?>
+                        <?= $currency->format($cart->subTotal, $product_object->currency); ?>
                     </dd>
                 </dl>
             </div>

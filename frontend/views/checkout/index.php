@@ -275,7 +275,7 @@ $currency = Yii::$app->currency;
                 <dl>
                     <dt><?= Yii::t('app', 'Total'); ?></dt>
                     <dd class="cart-sub-total" data-amount="<?= $cart->subTotal ?>">
-                        <?= $currency->format($cart->total); ?>
+                        <?= $currency->format($cart->subtotal); ?>
                     </dd>
                     <dt><?= Yii::t('app', 'Shipping'); ?></dt>
                     <dd id="shipping-price">0 <span class="currency_icon">m</span></dd>

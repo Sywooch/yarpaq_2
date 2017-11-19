@@ -97,6 +97,14 @@ header#header .first > div .currency > a {
 header#header .first > div .currency > a.azn::after {
   background: url(../img/azn_white_small_icon.svg) no-repeat 0 0;
 }
+header#header .first > div .currency > a.usd::after {
+  background: url(../img/usd_white_small_icon.svg) no-repeat 0 0;
+  background-size: 50%;
+}
+header#header .first > div .currency > a.eur::after {
+  background: url(../img/eur_white_small_icon.svg) no-repeat 0 0;
+  background-size: 65%;
+}
 
 header#header .first > div .currency > a::after {
   content: "";

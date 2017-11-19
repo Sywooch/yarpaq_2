@@ -83,13 +83,20 @@ $seo = $this->params['seo'];
                 <span><?= Yii::t('app', 'Azerbaijan\'s Fastest Online Shopping Destination'); ?></span>
             </div>
             <div class="currency">
-                <a href="#" class="azn"><?= Yii::$app->currency->userCurrency->code; ?></a>
+                <a href="#" class="<?= strtolower( Yii::$app->currency->userCurrency->code ); ?>">
+                    <?= Yii::$app->currency->userCurrency->code; ?>
+                </a>
                 <ul>
                     <?php foreach (Yii::$app->currency->currencies as $currency) {
                         if ($currency == Yii::$app->currency->userCurrency) {
                             continue;
                         } ?>
-                        <li><a href="/currency/switch?id=<?= $currency->id; ?>" data-cur="<?= mb_strtolower($currency->code); ?>"><?= $currency->code; ?></a></li>
+                        <li>
+                            <a href="/currency/switch?id=<?= $currency->id; ?>"
+                               data-cur="<?= strtolower($currency->code); ?>">
+                                <?= $currency->code; ?>
+                            </a>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
@@ -401,7 +408,7 @@ $seo = $this->params['seo'];
 <script type="text/javascript" src="/js/main.js?v=1.1.2"></script>
 <script type="text/javascript" src="/js/product-filter.js?v=1.0.0"></script>
 <script type="text/javascript" src="/js/loadmore.js"></script>
-<script type="text/javascript" src="/js/checkout.js?v=1.0.3"></script>
+<script type="text/javascript" src="/js/checkout.js?v=1.1.2"></script>
 <script type="text/javascript" src="/js/basket.js"></script>
 <script type="text/javascript" src="/js/common.js?v=1.1.11"></script>
 

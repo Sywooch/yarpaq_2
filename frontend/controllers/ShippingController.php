@@ -16,15 +16,19 @@ class ShippingController extends BasicController
         $db         = Yii::$app->db;
         $cart       = Yii::$app->cart;
         $currency   = Yii::$app->currency;
+        $defaultCurrency = $currency->getCurrencyByCode('AZN');
+
 
         // Azerpoct
         $azerpoct = new AzerpoctShipping();
         $geo = $db->createCommand('SELECT geo_zone_id FROM `y2_zone_to_geo_zone` WHERE geo_zone_id IN ('.implode(', ', $azerpoct->getAvailableGeoZones()).') AND zone_id = '.(int)$zone_id)->queryOne();
         if ($geo) {
+            $fee = $azerpoct->calculateCost($cart->weight, $geo['geo_zone_id']);
+
             $response['azerpoct'] = [
                 'code'          => 'azerpoct.azerpoct_'.$geo['geo_zone_id'],
-                'amount'        => $azerpoct->calculateCost($cart->weight, $geo['geo_zone_id']) . ' <span class="currency_icon">m</span>',
-                'raw_amount'    => $azerpoct->calculateCost($cart->weight, $geo['geo_zone_id'])
+                'amount'        => $currency->convertAndFormat($fee, $defaultCurrency),
+                'raw_amount'    => $currency->convert($fee, $defaultCurrency)
             ];
         }
 
@@ -33,15 +37,14 @@ class ShippingController extends BasicController
         $elpost= new ElpostShipping();
         $geo = $db->createCommand('SELECT geo_zone_id FROM `y2_zone_to_geo_zone` WHERE geo_zone_id IN ('.implode(', ', $elpost->getAvailableGeoZones()).') AND zone_id = '.(int)$zone_id)->queryOne();
         if ($geo) {
+            $fee = $elpost->calculateCost($cart->weight, $geo['geo_zone_id']);
+
             $response['elpost'] = [
                 'code'          => 'elpost.elpost_'.$geo['geo_zone_id'],
-                'amount'        => $elpost->calculateCost($cart->weight, $geo['geo_zone_id']) . ' <span class="currency_icon">m</span>',
-                'raw_amount'    => $elpost->calculateCost($cart->weight, $geo['geo_zone_id'])
+                'amount'        => $currency->convertAndFormat($fee, $defaultCurrency),
+                'raw_amount'    => $currency->convert($fee, $defaultCurrency)
             ];
         }
-
-
-
 
         return $response;
     }
