@@ -206,21 +206,19 @@ class CheckoutController extends BasicController
         $order->shipping_code           = $shipping_method->code;
 
         $order->comment                 = $session->get('comment');
-        $order->subtotal                = $cart->total;
-        $order->total                   = $cart->total;
-
+        $order->subtotal                = $this->convertToDefaultCurrency($cart->total);
+        $order->total                   = $order->subtotal;
 
 
         // add shipping
-        $shipping_price = 0;
-        foreach ($cart->getProducts() as $product) {
-            $shipping_price += $shipping_method_obj->calculateCost($product['weight'], $main_geo_zone->geo_zone_id);
-        }
-        $order->shipping_price = $shipping_price;
-        $order->total += $shipping_price;
+        $shipping_price         = $shipping_method_obj->calculateCost($cart->weight, $main_geo_zone->geo_zone_id);
+        $order->shipping_price  = $shipping_price;
+        $order->total           += $shipping_price;
 
         $order->currency_id             = $currency->userCurrency->id;
         $order->currency_code           = $currency->userCurrency->code;
+        $order->currency_value          = $currency->userCurrency->value;
+
 
         $order->language_id             = Language::getCurrent()->id;
 
@@ -241,8 +239,8 @@ class CheckoutController extends BasicController
                 $orderProduct->name = $product['title'];
                 $orderProduct->model = $product['model'];
                 $orderProduct->quantity = $product['quantity'];
-                $orderProduct->price = $product['price'];
-                $orderProduct->total = $product['total'];
+                $orderProduct->price = $this->convertFromProductCurrencyToDefaultCurrency($product['price'], $product['currency_code']);
+                $orderProduct->total = $this->convertFromProductCurrencyToDefaultCurrency($product['total'], $product['currency_code']);
 
                 if ($orderProduct->save()) {
 
@@ -345,5 +343,33 @@ class CheckoutController extends BasicController
 
     public function actionFail() {
         return $this->render('fail');
+    }
+
+
+    /**
+     * Конвертирует сумму из текущей валюты на сайте в Манаты
+     *
+     * @param $sum
+     * @return mixed
+     */
+    protected function convertToDefaultCurrency($sum) {
+        $currentCurrency    = Yii::$app->currency->userCurrency;
+        $targetCurrency     = Yii::$app->currency->getCurrencyByCode('AZN');
+
+        return Yii::$app->currency->convert($sum, $currentCurrency, $targetCurrency);
+    }
+
+    /**
+     * Конвертирует сумму из валюты товара в Манаты
+     *
+     * @param $sum
+     * @param $productCurrencyCode
+     * @return mixed
+     */
+    protected function convertFromProductCurrencyToDefaultCurrency($sum, $productCurrencyCode) {
+        $productCurrency    = Yii::$app->currency->getCurrencyByCode($productCurrencyCode);
+        $targetCurrency     = Yii::$app->currency->getCurrencyByCode('AZN');
+
+        return Yii::$app->currency->convert($sum, $productCurrency, $targetCurrency);
     }
 }

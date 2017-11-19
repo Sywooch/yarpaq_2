@@ -18,7 +18,7 @@
                     <tr>
                         <td><?= $order->id?></td>
                         <td><?= ( new \DateTime($order->created_at))->format('d.m.Y H:i:s'); ?></td>
-                        <td><?= $order->total; ?> <?= $order->currency_code; ?></td>
+                        <td><?= Yii::$app->currency->convertAndFormat($order->total, Yii::$app->currency->getCurrencyByCode('AZN')); ?></td>
                         <td><?= $order->status->name; ?></td>
                         <td><a href="<?= \yii\helpers\Url::to(['user/order', 'id' => $order->id]) ?>"><?= Yii::t('app', 'More info'); ?></a></td>
                     </tr>
