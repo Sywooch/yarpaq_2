@@ -85,6 +85,12 @@ class ProductRepository extends ActiveQuery
         return $this;
     }
 
+    public function filterBySellerID($id) {
+        $this->andWhere(['user_id' => $id]);
+
+        return $this;
+    }
+
     public function withOptionValues(array $optionValues) {
         $this->joinWith('productOptions po');
         $this->leftJoin('{{%product_option_value}} pov', 'pov.product_option_id = po.id');

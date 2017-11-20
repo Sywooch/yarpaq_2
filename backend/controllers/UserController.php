@@ -2,7 +2,10 @@
 
 namespace backend\controllers;
 
+use common\components\ProductSearch;
+use common\models\product\ProductBulkDeleter;
 use common\models\Profile;
+use frontend\models\ProductRepository;
 use Yii;
 use common\models\User;
 use common\models\UserSearch;
@@ -208,6 +211,60 @@ class UserController extends \webvimark\modules\UserManagement\controllers\UserC
 			$out['results'] = ['id' => $id, 'text' => $model->fullname . ' ('.$model->email.')'];
 		}
 		return $out;
+	}
+
+	/**
+	 * Deletes an existing user.
+	 * If deletion is successful, the browser will be redirected to the 'index' page.
+	 *
+	 * @param int $id
+	 * @return string|\yii\web\Response
+	 * @throws NotFoundHttpException
+	 * @throws \Exception
+	 * @throws \Throwable
+	 * @throws \yii\db\Exception
+	 */
+	public function actionDelete($id)
+	{
+		$model = $this->findModel($id);
+
+		$db = Yii::$app->db;
+		$transaction = $db->beginTransaction();
+
+		try {
+			$productRepository = new ProductRepository();
+			$productRepository->filterBySellerID($model->id)
+				->select('id');
+			$productsIDs = ArrayHelper::getColumn($productRepository->all(), 'id');
+
+
+			// delete related products ELASTIC INDEX
+			$productSearch = new ProductSearch();
+			$productSearch->bulkDelete($productsIDs);
+
+
+			// delete related products
+			$productBulkDeleter = new ProductBulkDeleter($productsIDs);
+			$productBulkDeleter->execute();
+
+
+			// delete user model
+			$model->delete();
+
+
+			$transaction->commit();
+		} catch (\Exception $e) {
+			$transaction->rollBack();
+			throw $e;
+		} catch (\Throwable $e) {
+			$transaction->rollBack();
+			throw $e;
+		}
+
+
+		$redirect = $this->getRedirectPage('delete', $model);
+
+		return $redirect === false ? '' : $this->redirect($redirect);
 	}
 
 }

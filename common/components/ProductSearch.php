@@ -389,4 +389,29 @@ class ProductSearch
             ]
         ];
     }
+
+    public function bulkDelete(array $ids) {
+
+        if (!YII_ENV_PROD) { // TODO сделать тестовый Index для тестовой среды
+            return;
+        }
+
+        foreach ($ids as $id) {
+            $params ['body'][] = array(
+                'delete' => array(
+                    '_index' => $this->index,
+                    '_type' => $this->type,
+                    '_id' => $id
+                )
+            );
+        }
+
+
+        try {
+            $response = $this->client->bulk($params);
+            return $response['count'];
+        } catch (\Exception $e) {
+            Yii::error($e->getMessage());
+        }
+    }
 }
