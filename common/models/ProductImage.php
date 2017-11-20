@@ -79,11 +79,12 @@ class ProductImage extends \yii\db\ActiveRecord
 
     /**
      * Удаляет файл с диска
+     * Включая вариации.
      *
      * @return bool
      */
-    public function deleteImage() { // TODO при удалении удалять вариации в том числе
-        return @unlink($this->path);
+    public function deleteImage() {
+        return @unlink($this->preview->path) && @unlink($this->standard->path) && @unlink($this->path);
     }
 
     public function beforeDelete()
