@@ -343,7 +343,11 @@ class Cart extends Component
 
         foreach ($this->getProducts() as $product) {
             $product_currency = $this->currency->getCurrencyByCode($product['currency_code']);
-            $total += $this->currency->convert($product['total'], $product_currency);
+            $total += $this->currency->convert(
+                $product['total'],
+                $product_currency,
+                $this->currency->userCurrency
+            );
         }
 
         return $total;
@@ -361,7 +365,11 @@ class Cart extends Component
 
         foreach ($this->getProducts() as $product) {
             $product_currency = $this->currency->getCurrencyByCode($product['currency_code']);
-            $total += $this->currency->convert($product['price'] * $product['quantity'], $product_currency);
+            $total += $this->currency->convert(
+                $product['price'] * $product['quantity'],
+                $product_currency,
+                $this->currency->userCurrency
+            );
         }
 
         return $total;

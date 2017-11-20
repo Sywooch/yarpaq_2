@@ -206,12 +206,14 @@ class CheckoutController extends BasicController
         $order->shipping_code           = $shipping_method->code;
 
         $order->comment                 = $session->get('comment');
-        $order->subtotal                = $this->convertToDefaultCurrency($cart->total);
+        $order->subtotal                = $cart->total;
         $order->total                   = $order->subtotal;
 
 
         // add shipping
         $shipping_price         = $shipping_method_obj->calculateCost($cart->weight, $main_geo_zone->geo_zone_id);
+        $shipping_price         = $this->convertFromProductCurrencyToCurrentCurrency($shipping_price, 'AZN');
+
         $order->shipping_price  = $shipping_price;
         $order->total           += $shipping_price;
 
@@ -239,8 +241,8 @@ class CheckoutController extends BasicController
                 $orderProduct->name = $product['title'];
                 $orderProduct->model = $product['model'];
                 $orderProduct->quantity = $product['quantity'];
-                $orderProduct->price = $this->convertFromProductCurrencyToDefaultCurrency($product['price'], $product['currency_code']);
-                $orderProduct->total = $this->convertFromProductCurrencyToDefaultCurrency($product['total'], $product['currency_code']);
+                $orderProduct->price = $this->convertFromProductCurrencyToCurrentCurrency($product['price'], $product['currency_code']);
+                $orderProduct->total = $this->convertFromProductCurrencyToCurrentCurrency($product['total'], $product['currency_code']);
 
                 if ($orderProduct->save()) {
 
@@ -352,7 +354,7 @@ class CheckoutController extends BasicController
      * @param $sum
      * @return mixed
      */
-    protected function convertToDefaultCurrency($sum) {
+    protected function convertToCurrentCurrency($sum) {
         $currentCurrency    = Yii::$app->currency->userCurrency;
         $targetCurrency     = Yii::$app->currency->getCurrencyByCode('AZN');
 
@@ -366,9 +368,9 @@ class CheckoutController extends BasicController
      * @param $productCurrencyCode
      * @return mixed
      */
-    protected function convertFromProductCurrencyToDefaultCurrency($sum, $productCurrencyCode) {
+    protected function convertFromProductCurrencyToCurrentCurrency($sum, $productCurrencyCode) {
         $productCurrency    = Yii::$app->currency->getCurrencyByCode($productCurrencyCode);
-        $targetCurrency     = Yii::$app->currency->getCurrencyByCode('AZN');
+        $targetCurrency     = Yii::$app->currency->userCurrency;
 
         return Yii::$app->currency->convert($sum, $productCurrency, $targetCurrency);
     }

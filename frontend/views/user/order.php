@@ -31,7 +31,7 @@ $currency = Yii::$app->currency;
 
                         <div class="pair">
                             <span class="_label"><?= Yii::t('app', 'Price'); ?></span><span class="_value">
-                                <?= $currency->convertAndFormat($orderProduct->price, $currency->getCurrencyByCode('AZN')); ?>
+                                <?= $currency->format($orderProduct->price, $currency->getCurrencyByCode($order->currency_code)); ?>
                             </span>
                         </div>
                         <div class="pair">
@@ -61,17 +61,17 @@ $currency = Yii::$app->currency;
                     <dl>
                         <dt><?= Yii::t('app', 'Total'); ?></dt>
                         <dd class="cart-sub-total">
-                            <?= $currency->convertAndFormat($order->subtotal, $currency->getCurrencyByCode('AZN')); ?>
+                            <?= $currency->format($order->subtotal, $currency->getCurrencyByCode($order->currency_code)); ?>
                         </dd>
                         <dt><?= Yii::t('app', 'Shipping'); ?></dt>
                         <dd id="shipping-price">
-                            <?= $currency->convertAndFormat($order->shipping_price, $currency->getCurrencyByCode('AZN')); ?>
+                            <?= $currency->format($order->shipping_price, $currency->getCurrencyByCode($order->currency_code)); ?>
                         </dd>
                     </dl>
                     <dl>
                         <dt><?= Yii::t('app', 'Total'); ?></dt>
                         <dd class="cart-total">
-                            <?= $currency->convertAndFormat($order->total, $currency->getCurrencyByCode('AZN')); ?>
+                            <?= $currency->convertAndFormat($order->total, $currency->getCurrencyByCode($order->currency_code)); ?>
                         </dd>
                     </dl>
                 </div>
