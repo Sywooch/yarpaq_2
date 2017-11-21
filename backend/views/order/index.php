@@ -67,7 +67,7 @@ $statuses = OrderStatus::find()
             ],
 
             [
-                'attribute' => 'total',
+                'attribute' => 'converted_total',
                 'value' => function ($order) {
                     if (!User::hasPermission('view_all_orders')) {
                         $total = 0;
@@ -75,13 +75,13 @@ $statuses = OrderStatus::find()
                         foreach ($order->orderProducts as $order_product) {
                             $product = $order_product->product;
                             if ($product && $product->user_id == User::getCurrentUser()->id) {
-                                $total += $order_product->total;
+                                $total += $order_product->total * $order->currency_value;
                             }
                         }
 
                         return $total;
                     } else {
-                        return $order->total;
+                        return $order->total * $order->currency_value;
                     }
                 }
             ],

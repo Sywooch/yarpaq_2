@@ -13,6 +13,7 @@ class OrderSearch extends Order
 {
     public $fullname;
     public $products;
+    public $converted_total;
 
     /**
      * @inheritdoc
@@ -23,7 +24,7 @@ class OrderSearch extends Order
             [['id', 'user_id', 'payment_country_id', 'payment_zone_id', 'shipping_country_id', 'shipping_zone_id', 'order_status_id', 'language_id', 'currency_id'], 'integer'],
             [['firstname', 'lastname', 'email', 'phone1', 'phone2', 'fax', 'payment_firstname', 'payment_lastname', 'payment_company', 'payment_address', 'payment_city', 'payment_postcode', 'payment_country', 'payment_zone', 'payment_method', 'payment_code', 'shipping_firstname', 'shipping_lastname', 'shipping_company', 'shipping_address', 'shipping_city', 'shipping_postcode', 'shipping_country', 'shipping_zone', 'shipping_method', 'shipping_code', 'comment', 'currency_code', 'ip', 'forwarded_ip', 'user_agent', 'accept_language', 'created_at', 'modified_at', 'status', 'fullname'], 'safe'],
             [['total', 'currency_value'], 'number'],
-            ['products', 'safe']
+            [['products'], 'safe']
         ];
     }
 
@@ -34,7 +35,10 @@ class OrderSearch extends Order
      */
     public function search()
     {
-        $query = Order::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Order::find()
+            ->select('*')
+            ->addSelect('(`currency_value` * `total`) as converted_total')
+            ->orderBy(['created_at' => SORT_DESC]);
 
         // add conditions that should always apply here
 
@@ -57,7 +61,7 @@ class OrderSearch extends Order
             'payment_zone_id' => $this->payment_zone_id,
             'shipping_country_id' => $this->shipping_country_id,
             'shipping_zone_id' => $this->shipping_zone_id,
-            'total' => $this->total,
+            'converted_total' => $this->converted_total,
             'order_status_id' => $this->order_status_id,
             'language_id' => $this->language_id,
             'currency_id' => $this->currency_id,
