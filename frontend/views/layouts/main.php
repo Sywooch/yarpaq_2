@@ -410,6 +410,7 @@ $seo = $this->params['seo'];
 <script type="text/javascript" src="/js/loadmore.js"></script>
 <script type="text/javascript" src="/js/checkout.js?v=1.1.2"></script>
 <script type="text/javascript" src="/js/basket.js"></script>
+<script type="text/javascript" src="/js/leave_feedback.js"></script>
 <script type="text/javascript" src="/js/common.js?v=1.1.11"></script>
 
 <!-- BEGIN JIVOSITE CODE {literal} -->

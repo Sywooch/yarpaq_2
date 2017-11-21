@@ -1,4 +1,6 @@
 <?php
+use yii\helpers\Url;
+
 $currency = Yii::$app->currency;
 ?>
 <div class="basket_wrapper">
@@ -24,11 +26,17 @@ $currency = Yii::$app->currency;
                     <?php foreach ($order->orderProducts as $orderProduct) { ?>
                     <div class="product_item">
 
+                        <a href="<?= Url::to(['feedback/leave', 'order_product_id' => $orderProduct->id]); ?>" class="leave_feedback"><?= Yii::t('app', 'Leave feedback'); ?></a>
+
                         <div class="order_product_name_container">
                             <span class="order_product_name"><?= $orderProduct->name; ?></span>
-                            <a href="#" class="leave_feedback"></a>
                         </div>
 
+                        <div class="pair">
+                            <span class="_label"><?= Yii::t('app', 'Product code'); ?></span><span class="_value">
+                                # <?= $orderProduct->product_id; ?>
+                            </span>
+                        </div>
                         <div class="pair">
                             <span class="_label"><?= Yii::t('app', 'Price'); ?></span><span class="_value">
                                 <?= $currency->format($orderProduct->price, $currency->getCurrencyByCode($order->currency_code)); ?>
@@ -71,7 +79,7 @@ $currency = Yii::$app->currency;
                     <dl>
                         <dt><?= Yii::t('app', 'Total'); ?></dt>
                         <dd class="cart-total">
-                            <?= $currency->convertAndFormat($order->total, $currency->getCurrencyByCode($order->currency_code)); ?>
+                            <?= $currency->format($order->total, $currency->getCurrencyByCode($order->currency_code)); ?>
                         </dd>
                     </dl>
                 </div>

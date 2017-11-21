@@ -186,7 +186,13 @@ return [
     'Show more' => 'Показать больше',
     'QUICK VIEW' => 'БЫСТРЫЙ ПРОСМОТР',
 
-    'Order details' => 'Информация о заказе'
+    'Order details' => 'Информация о заказе',
+    'Leave feedback' => 'Оставить отзыв',
+    'Rate and Review' => 'Оценка товара и отзыв',
+    'Write a review' => 'Напишите отзыв',
+    'Go back' => 'Вернуться',
+    'Confirm' => 'Подтвердить',
+    'Thank you for the rate' => 'Спасибо за оценку'
 
 
 ];

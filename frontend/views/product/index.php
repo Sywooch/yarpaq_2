@@ -288,10 +288,10 @@ $currency = Yii::$app->currency;
                             <article>
                                 <div class="left_info">
                                     <div class="rating">
-                                        <span class="star_2"></span>
+                                        <span class="star_<?= $review->stars ?>"></span>
                                     </div>
                                     <h4><?= $review->customer->fullname; ?></h4>
-                                    <time><?= $review->post_date ?></time>
+                                    <time><?= (new Datetime($review->post_date))->format('d.m.Y H:i'); ?></time>
                                 </div>
                                 <div class="text">
                                     <p><?= $review->review; ?></p>

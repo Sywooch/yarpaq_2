@@ -48,8 +48,8 @@ use common\models\User;
                                     </a>
                                 </li>
 
-                                <li style="display: none">
-                                    <a href="#">
+                                <li>
+                                    <a href="<?= Url::to(['review/index', 'Review[status]' => 0]); ?>">
                                         <i class="fa fa-commenting text-yellow"></i> <span id="noti_reviews"></span> <?= Yii::t('app', 'New reviews');?>
                                     </a>
                                 </li>

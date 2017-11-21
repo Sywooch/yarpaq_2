@@ -7508,6 +7508,7 @@ a.clear_filtre {
   padding-top: 20px;
   margin-top: 10px;
   border-top: 1px solid #EEEEEE;
+  position:relative;
 }
 .order_product_name_container {
   margin-bottom: 20px;
@@ -7535,4 +7536,107 @@ a.clear_filtre {
   font-size: 19px;
   letter-spacing: 1.3px;
   margin-top: 5px;
+}
+
+.leave_feedback_page {
+  max-width: 1040px;
+  padding: 48px 15px;
+  margin: 0 auto;
+}
+
+.leave_feedback_page > div {
+  padding: 15px 50px 50px;
+  background: #fff;
+}
+
+.header_block {
+  border-bottom: 1px solid #979797;
+  padding-bottom: 25px;
+}
+
+.leave_feedback_page > div h2 {
+  margin-top: 30px;
+  color: #363636;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02px;
+  text-transform: uppercase;
+}
+
+.leave_feedback_page .review_block {
+  padding: 30px 0;
+}
+
+.leave_feedback {
+  background: #669C25;
+  padding: 12px 17px 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  text-decoration: none
+}
+
+.review_stars:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+.review_block {
+  width: 600px;
+}
+.review_block .review_stars {
+  margin: 30px 0;
+}
+
+.review_block textarea {
+  width: 100%;
+  border: 1px solid #979797;
+  height: 180px;
+  margin-top: 20px;
+  resize: none;
+}
+
+.review_block .review_container {
+  margin-top: 40px;
+}
+
+.review_stars i {
+  display: block;
+  width: 38px;
+  height: 35px;
+  float: left;
+  background: url('../img/star_off.svg') no-repeat;
+  cursor: pointer;
+}
+
+.review_stars i.on {
+  background: url('../img/star_on.svg') no-repeat;
+}
+
+.review_block .review_buttons {
+  text-align: right;
+  margin-top: 30px;
+}
+.review_block .review_button {
+  display: inline-block;
+  padding: 12px 20px 10px;
+  text-decoration: none;
+  font-family: 'Roboto';
+  letter-spacing: .58px;
+  font-size: 17px;
+  margin-left: 10px;
+}
+
+.review_buttons .review_confirm_button {
+  color: #fff;
+  background: #669C25;
+}
+
+.review_buttons .review_cancel_button {
+  color: #777777;
+  background: none;
 }

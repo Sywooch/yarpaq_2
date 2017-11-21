@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\order\Order;
 use common\models\Product;
+use common\models\review\Review;
 use Yii;
 use webvimark\components\AdminDefaultController;
 use yii\web\Response;
@@ -28,8 +29,9 @@ class NotificationController extends AdminDefaultController
             ->count();
 
 
-        // TODO новые отзывы
-        $new_reviews = 0;
+        $new_reviews = Review::find()
+            ->andWhere(['status' => 0])
+            ->count();
 
 
         // Товары c нулевым количеством

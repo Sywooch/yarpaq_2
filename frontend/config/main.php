@@ -111,11 +111,12 @@ return [
                 'payment/pay-pal-payment/<action:.+>'           => 'pay-pal-payment/<action>',
 
 
-                '<controller:elastic>/<action:.+>' => 'elastic/<action>',
-                '<controller:sitemap>/<action:.+>' => 'sitemap/<action>',
+                '<controller:elastic>/<action:.+>'  => 'elastic/<action>',
+                '<controller:sitemap>/<action:.+>'  => 'sitemap/<action>',
+                '<controller:feedback>/<action:.+>' => 'feedback/<action>',
                 //'<controller:elastic>/<action:.+>/<id:\d+>' => 'elastic/<action>',
 
-                '<url:.+>'      => 'category/index'
+                '<url:.+>'      => 'category/index',
             ],
         ],
 

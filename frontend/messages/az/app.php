@@ -184,6 +184,14 @@ return [
     'Show more' => 'Daha çox göstər',
     'QUICK VIEW' => 'SÜRƏTLİ BAXIŞ',
 
-    'Order details' => 'Sifariş haqqında məlumat'
+    'Order details' => 'Sifariş haqqında məlumat',
+    'Leave feedback' => 'Şərh yazmaq',
+    'Rate and Review' => 'Məhsulun qiymətləndirilməsi və şərh',
+    'Write a review' => 'Şərh yazın',
+    'Go back' => 'Qayıtmaq',
+    'Confirm' => 'Təsdiqləmək',
+    'Thank you for the rate' => 'Təşəkkür edirik'
+
+
 
 ];
