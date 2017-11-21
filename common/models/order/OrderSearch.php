@@ -36,8 +36,8 @@ class OrderSearch extends Order
     public function search()
     {
         $query = Order::find()
-            ->select('*')
-            ->addSelect('(`currency_value` * `total`) as converted_total')
+            ->select('{{%order}}.*')
+            ->addSelect('(`currency_value` * {{%order}}.`total`) as converted_total')
             ->orderBy(['created_at' => SORT_DESC]);
 
         // add conditions that should always apply here
