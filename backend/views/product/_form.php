@@ -117,7 +117,7 @@ use yii\helpers\ArrayHelper;
                         <?php
                         $man_list_url = \yii\helpers\Url::to(['manufacturer/model-list']);
                         // Get the initial manufacturer
-                        $manufacturer = empty($model->manufacturer_id) ? '' : \common\models\Manufacturer::findOne($model->manufacturer_id)->title;
+                        $manufacturer = $model->manufacturer ? $model->manufacturer->title : '';
 
                         echo $form->field($model, 'manufacturer_id')->widget(Select2::classname(), [
                             'initValueText' => $manufacturer,
