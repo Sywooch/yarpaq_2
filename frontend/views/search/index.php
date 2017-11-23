@@ -26,7 +26,7 @@
         <div class="product_list">
             <header>
                 <div class="first">
-                    <h2><?= Yii::t('app', 'Search'); ?>: <?= $search_q; ?></h2>
+                    <h1><?= Yii::t('app', 'Search'); ?>: <?= $search_q; ?></h1>
 
                     <div class="sort_by">
                         <a href="#"><?= Yii::t('app', 'Sort'); ?>:

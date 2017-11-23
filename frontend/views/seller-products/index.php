@@ -16,7 +16,7 @@
         <div class="product_list">
             <header>
                 <div class="first">
-                    <h2><?= $seller->fullname; ?> <span>(<?= $pages->totalCount; ?>)</span></h2>
+                    <h1><?= $seller->fullname; ?> <span>(<?= $pages->totalCount; ?>)</span></h1>
                     <div class="sort_by">
                         <a href="#"><?= Yii::t('app', 'Sort'); ?>: <span><?= $productFilter->sortOptions[ $productFilter->sort ] ?></span></a>
                         <ul>
