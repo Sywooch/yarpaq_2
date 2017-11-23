@@ -92,7 +92,7 @@ $seo = $this->params['seo'];
                             continue;
                         } ?>
                         <li>
-                            <a href="/currency/switch?id=<?= $currency->id; ?>"
+                            <a rel="nofollow" href="/currency/switch?id=<?= $currency->id; ?>"
                                data-cur="<?= strtolower($currency->code); ?>">
                                 <?= $currency->code; ?>
                             </a>
@@ -123,7 +123,7 @@ $seo = $this->params['seo'];
         <div>
             <div>
                 <a href="#" class="search_toggler"></a>
-                <h1 class="logo"><a href="<?php echo \frontend\components\HomePageLink::widget(); ?>"></a></h1>
+                <div id="main_logo" class="logo"><a href="<?php echo \frontend\components\HomePageLink::widget(); ?>"></a></div>
                 <div class="nav_trigger">
                     <a href="#"><?= Yii::t('app', 'Categories'); ?><span></span></a>
                     <div class="full_nav">

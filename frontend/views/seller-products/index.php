@@ -40,7 +40,6 @@
                         'filterBrands' => $filterBrands
                     ]);
                     ?>
-                    <a href="#" class="clear_filtre"><?= Yii::t('app', 'Clear filter'); ?></a>
                 </div>
             </header>
             <div class="product_result_list">

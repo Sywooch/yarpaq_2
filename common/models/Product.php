@@ -343,6 +343,10 @@ class Product extends \yii\db\ActiveRecord
         return Language::getCurrent()->urlPrefix.'/product-'.$this->id;
     }
 
+    public function getUrlByLanguage(Language $language) {
+        return $language->urlPrefix.'/product-'.$this->id;
+    }
+
     public function getCondition() {
         return $this->conditions[$this->condition_id];
     }

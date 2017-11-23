@@ -145,6 +145,10 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
      * @return Category|null
      */
     public static function findByUrl($url) {
+        if ($url == '') {
+            return null;
+        }
+
         $language = Language::getCurrent();
 
         $home = self::findOne(['parent_id' => 0]);

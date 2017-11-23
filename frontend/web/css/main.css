@@ -290,13 +290,13 @@ header#header .second > div > div {
   position: relative;
 }
 
-h1.logo {
+#main_logo {
   width: 170px;
   float: left;
   padding: 0 0 0 0;
 }
 
-h1.logo a {
+#main_logo a {
   display: block;
   width: 160px;
   height: 75px;
@@ -6704,7 +6704,7 @@ ul.checkboxes li label strong {
   clear: both;
 }
 
-.product_list header .first h2 {
+.product_list header .first h1 {
   float: left;
   font-weight: 400;
   letter-spacing: 0.02px;
@@ -6712,7 +6712,7 @@ ul.checkboxes li label strong {
   font-size: 23px;
 }
 
-.product_list header .first h2 span {
+.product_list header .first h1 span {
   color: #878787;
   font-size: 13px;
 }
