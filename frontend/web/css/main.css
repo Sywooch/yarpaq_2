@@ -2730,13 +2730,14 @@ a.back_to_top.show_me {
   border-bottom: 3px solid #f3f3f3;
 }
 
-.product_first header h3 {
+.product_first header h1 {
   padding: 0 0 12px;
   color: #363636;
   font-family: 'Roboto';
   font-size: 25px;
   font-weight: 400;
   letter-spacing: -1.17px;
+  line-height: 120%;
 }
 
 .product_first header .first_info {
@@ -5375,6 +5376,7 @@ aside.aside_products article .old_price b.discount {
   margin: 0 5px;
   color: #191919;
   text-decoration: none;
+  line-height: 120%;
 }
 
 .breadcrumbs ul li a:hover {
@@ -7465,6 +7467,7 @@ a.clear_filtre {
 
 .home_category .home_category_sec_cell {
   height: calc(50% - 7px);
+  margin-bototm: 14px;
 }
 
 .home_category .home_category_sec_cell a {

@@ -18,8 +18,8 @@ class AppAsset extends AssetBundle
         'js/zoom/dist/xzoom.css',
         'js/slick/slick.css',
         'js/slick/slick-theme.css',
-        'css/main.css?v1.6.1',
-        'css/responsive.css?v=1.2.2',
+        'css/main.css?v1.6.3',
+        'css/responsive.css?v=1.3',
         'css/common.css'
     ];
     public $js = [

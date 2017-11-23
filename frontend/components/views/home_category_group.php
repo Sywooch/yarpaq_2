@@ -34,7 +34,7 @@ foreach ($home_categories as $home_category) {
             </div>
 
             <div class="pc_cell home_category_right_cell">
-                <div class="home_category_sec_cell" style="margin-bottom: 14px;">
+                <div class="home_category_sec_cell">
                     <a href="<?= $home_category->product2->url; ?>"
                        style="background: url('<?= $home_category->url2; ?>') no-repeat center; background-size: cover;">
                         <img class="hide_me" src="<?= $home_category->url2; ?>">

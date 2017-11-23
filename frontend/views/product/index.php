@@ -76,7 +76,7 @@ $currency = Yii::$app->currency;
         <div class="right_side">
             <div class="product_first">
                 <header>
-                    <h3 itemprop="name"><?= $product->title; ?></h3>
+                    <h1 itemprop="name"><?= $product->title; ?></h1>
                     <div class="first_info">
                         <div class="rating">
                             <span class="star_<?= $product->rating; ?>"></span>

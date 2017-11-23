@@ -289,7 +289,7 @@
   /* Peoduct result begin */
   .product_header_mobile {
     display: block;
-    margin: 10px 0;
+    margin: 10px;
   }
   .product_block {
     padding: 0;
@@ -1405,10 +1405,17 @@
   }
   .home_category .home_category_main_cell {
     margin-left: 0;
-    width: 60%;
+    width: 62%;
   }
   .home_category .home_category_right_cell {
-    width: calc(40% - 15px);
+    width: 35%;
+    margin-left: 3%;
+  }
+  .home_category .home_category_sec_cell {
+    height: calc(50% - 5px);
+  }
+  .home_category .home_category_sec_cell:first-child {
+    margin-bottom: 10px;
   }
 }
 
