@@ -1381,7 +1381,7 @@
   }
 
   .home_category {
-    margin-bottom: 160px;
+    margin-bottom: 190px;
     padding: 0 15px;
   }
   .home_category .home_category_list {
@@ -1405,17 +1405,21 @@
   }
   .home_category .home_category_main_cell {
     margin-left: 0;
-    width: 62%;
+    width: 68%;
+    padding-right: 2%;
   }
   .home_category .home_category_right_cell {
-    width: 35%;
-    margin-left: 3%;
+    width: 32%;
+    margin-left: 0;
   }
   .home_category .home_category_sec_cell {
-    height: calc(50% - 5px);
+    height: 50%;
+    padding-top: 3%;
   }
   .home_category .home_category_sec_cell:first-child {
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 3%;
   }
 }
 

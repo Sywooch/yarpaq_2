@@ -19,7 +19,7 @@ class AppAsset extends AssetBundle
         'js/slick/slick.css',
         'js/slick/slick-theme.css',
         'css/main.css?v1.6.3',
-        'css/responsive.css?v=1.3',
+        'css/responsive.css?v=1.3.3',
         'css/common.css'
     ];
     public $js = [
