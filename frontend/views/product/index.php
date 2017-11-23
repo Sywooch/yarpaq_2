@@ -105,13 +105,21 @@ $currency = Yii::$app->currency;
                             <meta itemprop="priceCurrency" content="<?= $product->currency->code; ?>" />
                             <meta itemprop="price" content="<?= $product->realPrice; ?>" />
 
-                            <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
-
-                            <br><br>
                             <?php if ($product->hasDiscount() && $product->discount->period == Discount::PERIOD_RANGE) { ?>
-                                (<time itemprop="priceValidUntil" datetime="<?= (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO'); ?>">
-                                    <?= (new \DateTime($product->discount->end_date))->format('d M Y'); ?>
-                                </time>)
+                                <b style="text-decoration: line-through; font-size: 26px;"><?= $currency->convertAndFormat($product->oldPrice, $product->currency); ?></b>
+
+                                <b style="color: red; margin-left: 20px;"><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
+
+                                <br><br>
+
+
+                                <?= Yii::t('app', 'Available till'); ?>: <time itemprop="priceValidUntil" datetime="<?= (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO'); ?>">
+                                    <?= (new \DateTime($product->discount->end_date))->format('d.m.Y'); ?>
+                                </time>
+                            <?php } else { ?>
+
+                                <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
+
                             <?php } ?>
                         </div>
 
