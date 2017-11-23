@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'seo_category_title' => '{title} – qiymətlər, rəylər. Yarpaq.az online maqazasında, təsvir, şəkillər.',
+    'seo_category_title' => '{title} – qiymətlər, rəylər. Yarpaq.az online mağazasında, təsvir, şəkillər.',
+    'seo_product_title' => '{title} almaq, qiymət, rəylər. Yarpaq.az online mağazası.',
 
     'All sections' => 'Bütün bölmələr',
     'All categories' => 'Bütün bölmələr',

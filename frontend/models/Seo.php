@@ -29,12 +29,12 @@ class Seo extends Model
             return Yii::t('app', 'seo_category_title', [
                 'title' => $this->title
             ]);
+        } else if ($this->class == 'product') {
+            return Yii::t('app', 'seo_product_title', [
+                'title' => $this->title
+            ]);
         } else {
             return $this->title ? $this->title .' &mdash; '.Yii::t('app', 'Yarpaq online mağaza') : Yii::t('app', 'Yarpaq online mağaza');;
         }
-    }
-
-    public function getHeader() {
-
     }
 }

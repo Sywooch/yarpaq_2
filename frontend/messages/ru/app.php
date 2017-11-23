@@ -2,6 +2,7 @@
 
 return [
     'seo_category_title' => '{title} – цены, отзывы. В интернет-магазине Yarpaq.az, характеристики, описание, фотографии.',
+    'seo_product_title' => '{title} – купить, цена, отзывы. В интернет-магазине Yarpaq.az.',
 
     'All sections' => 'Все разделы',
     'All categories' => 'Все разделы',
