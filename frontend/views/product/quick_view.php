@@ -44,7 +44,7 @@ $currency = Yii::$app->currency;
     <div class="right_side">
         <div class="product_first">
             <header>
-                <h3><?= $product->title; ?></h3>
+                <h1><?= $product->title; ?></h1>
                 <div class="first_info">
                     <div class="rating">
                         <span class="star_<?= $product->rating; ?>"></span>
@@ -59,13 +59,22 @@ $currency = Yii::$app->currency;
                         <span><?= Yii::t('app', 'Price'); ?>:</span>
 
                         <!-- Price -->
-                        <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
+                        <?php if ($product->hasDiscount()) { ?>
+                            <b style="text-decoration: line-through; font-size: 26px;"><?= $currency->convertAndFormat($product->oldPrice, $product->currency); ?></b>
 
-                        <br><br>
-                        <?php if ($product->hasDiscount() && $product->discount->period == Discount::PERIOD_RANGE) { ?>
-                            (<time>
-                                <?= (new \DateTime($product->discount->end_date))->format('d M Y'); ?>
-                            </time>)
+                            <b style="color: red; margin-left: 20px;"><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
+
+                            <?php if ($product->discount->period == Discount::PERIOD_RANGE) { ?>
+                                <br><br>
+
+                                <?= Yii::t('app', 'Available till'); ?>: <time itemprop="priceValidUntil" datetime="<?= (new \DateTime($product->discount->end_date))->format('Y-m-d\TH:i:sO'); ?>">
+                                    <?= (new \DateTime($product->discount->end_date))->format('d.m.Y'); ?>
+                                </time>
+                            <?php } ?>
+                        <?php } else { ?>
+
+                            <b><?= $currency->convertAndFormat($product->realPrice, $product->currency); ?></b>
+
                         <?php } ?>
                     </div>
 

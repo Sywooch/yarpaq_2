@@ -13,8 +13,6 @@ foreach ($products as $product) {
     echo '<loc>'.Url::to($product->url, true).'</loc>'.PHP_EOL;
 
     foreach ($languages as $language) {
-        if ($language->isDefault()) continue;
-
         echo '<xhtml:link rel="alternate" hreflang="'.$language->name.'" href="'.Url::to($product->getUrlByLanguage($language), true).'" />'.PHP_EOL;
     }
 

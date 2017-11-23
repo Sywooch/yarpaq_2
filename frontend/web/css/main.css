@@ -4230,7 +4230,7 @@ a.back_to_top.show_me {
 }
 
 .product_size {
-  padding: 0 0 20px;
+  padding: 0 0 10px;
   overflow: hidden;
 }
 
@@ -7387,7 +7387,7 @@ a.clear_filtre {
   margin: 15px 0;
 }
 .popup_quick_view .product_buy_last .buttons {
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .popup .popup_close_btn {

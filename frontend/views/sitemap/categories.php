@@ -13,8 +13,6 @@ foreach ($categories as $category) {
     echo '<loc>'.Url::to($category->url, true).'</loc>'.PHP_EOL;
 
     foreach ($languages as $language) {
-        if ($language->isDefault()) continue;
-
         echo '<xhtml:link rel="alternate" hreflang="'.$language->name.'" href="'.Url::to($category->getUrlByLanguage($language), true).'" />'.PHP_EOL;
     }
 
