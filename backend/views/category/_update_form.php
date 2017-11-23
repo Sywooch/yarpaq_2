@@ -54,6 +54,7 @@ use kartik\select2\Select2;
                     <?php } ?>
 
                     <?= $form->field($content, 'name')->textInput(['name' => 'CategoryContent_'.$language->id.'[name]', 'data-name' => 'name_'.$language->id, 'maxlength' => true, 'class' => 'form-control nameField', 'id' => 'content_'.$language->id.'_name']) ?>
+                    <?= $form->field($content, 'seo_header')->textInput(['name' => 'CategoryContent_'.$language->id.'[seo_header]', 'id' => 'content_'.$language->id.'_seo_header']) ?>
                     <?= $form->field($content, 'seo_keywords')->textarea(['name' => 'CategoryContent_'.$language->id.'[seo_keywords]', 'id' => 'content_'.$language->id.'_seo_keywords']) ?>
                     <?= $form->field($content, 'seo_description')->textarea(['name' => 'CategoryContent_'.$language->id.'[seo_description]', 'id' => 'content_'.$language->id.'_seo_description']) ?>
                 </div>

@@ -9,10 +9,8 @@ use webvimark\components\BaseController;
 
 class BasicController extends BaseController
 {
-    protected function seo($title = '', $image = null, $description = null, $keywords = null) {
-
-        $seo = new Seo();
-        $seo->title = $title ? $title .' &mdash; '.Yii::t('app', 'Yarpaq online mağaza') : Yii::t('app', 'Yarpaq online mağaza');
+    protected function seo($title = '', $image = null, $description = null, $keywords = null, $type = '') {
+        $seo = new Seo($title, $type);
 
         if ($image) {
             $seo->image = $image;

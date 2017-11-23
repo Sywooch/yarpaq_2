@@ -283,6 +283,10 @@ class Category extends \yii\db\ActiveRecord implements IPage, IDocument
         return $this->content->title;
     }
 
+    public function getSeoHeader() {
+        return $this->content->seo_header ? $this->content->seo_header : $this->content->title;
+    }
+
     public function getName() {
         return $this->content->name;
     }

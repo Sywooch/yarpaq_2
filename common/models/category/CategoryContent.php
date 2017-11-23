@@ -54,7 +54,7 @@ class CategoryContent extends \yii\db\ActiveRecord
             /**
              * строки
              */
-            [['seo_keywords', 'seo_description'], 'string'],
+            [['seo_header', 'seo_keywords', 'seo_description'], 'string'],
 
             /**
              * строки с ограничением
@@ -78,6 +78,8 @@ class CategoryContent extends \yii\db\ActiveRecord
             'category_id' => Yii::t('app', 'Category ID'),
             'title' => Yii::t('app', 'Title'),
             'name' => Yii::t('app', 'Name (url)'),
+            'seo_header' => Yii::t('app', 'Seo Header'),
+            'seo_title' => Yii::t('app', 'Seo Title'),
             'seo_keywords' => Yii::t('app', 'SEO Keywords'),
             'seo_description' => Yii::t('app', 'SEO Description'),
             'created_at' => Yii::t('app', 'Created At'),
