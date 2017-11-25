@@ -14,6 +14,7 @@ class Seo extends Model
     public $image = '';
     public $type = '';
     public $url = '';
+    public $canonical;
 
 
     public function __construct($title, $class = null) {

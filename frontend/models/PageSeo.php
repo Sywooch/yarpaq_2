@@ -7,6 +7,7 @@ use common\models\IPage;
 use common\models\Product;
 use Yii;
 use yii\base\Model;
+use yii\helpers\Url;
 
 class PageSeo extends Model
 {
@@ -44,7 +45,7 @@ class PageSeo extends Model
 
     public function getCanonical() {
         if ($this->page instanceof Category) {
-            return $this->page->url;
+            return Url::to($this->page->url, true);
         } else {
             return '';
         }
