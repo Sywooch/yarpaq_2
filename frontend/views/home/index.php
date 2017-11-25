@@ -75,6 +75,11 @@ $mainSlide = $slides[0];
 
 
 
+    <!-- Promo Categories -->
+    <?= \frontend\components\HomeCategoryGroup::widget(); ?>
+    <!-- Promo Categories -->
+
+
     <!-- NEW PRODUCTS END -->
     <div class="last_viewed">
         <div>
@@ -83,12 +88,6 @@ $mainSlide = $slides[0];
         </div>
     </div>
     <!-- NEW PRODUCTS END -->
-
-
-
-    <!-- Promo Categories -->
-    <?= \frontend\components\HomeCategoryGroup::widget(); ?>
-    <!-- Promo Categories -->
 
 
 <?php if (!Yii::$app->user->isGuest) {

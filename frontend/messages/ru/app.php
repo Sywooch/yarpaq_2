@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'seo_category_title' => '{title} – цены, отзывы. В интернет-магазине Yarpaq.az, характеристики, описание, фотографии.',
+    'seo_category_title' => '{title} в Баку – цены, отзывы. В интернет-магазине Yarpaq.az, характеристики, описание, фотографии.',
     'seo_product_title' => '{title} – купить, цена, отзывы. В интернет-магазине Yarpaq.az.',
+    'Yarpaq online shop' => 'Онлайн магазин Yarpaq',
 
     'Available till' => 'Скидка до',
 

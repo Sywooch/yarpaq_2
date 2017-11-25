@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'seo_category_title' => '{title} – qiymətlər, rəylər. Yarpaq.az online mağazasında, təsvir, şəkillər.',
+    'seo_category_title' => '{title} Bakida – qiymətlər, rəylər. Yarpaq.az online mağazasında, təsvir, şəkillər.',
     'seo_product_title' => '{title} almaq, qiymət, rəylər. Yarpaq.az online mağazası.',
+    'Yarpaq online shop' => 'Yarpaq online mağaza',
 
     'Available till' => 'Son bitmə tarixi',
 

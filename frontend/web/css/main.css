@@ -5357,6 +5357,7 @@ aside.aside_products article .old_price b.discount {
   color: #a4a4a4;
   padding: 0 0 0 25px;
   position: relative;
+  line-height: 120%;
 }
 
 .breadcrumbs ul li:first-child {

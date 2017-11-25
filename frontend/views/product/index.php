@@ -6,6 +6,7 @@ use common\models\info\Info;
 use common\models\Product;
 use common\models\product\Discount;
 use yii\helpers\Url;
+use common\models\Language;
 
 $currency = Yii::$app->currency;
 ?>
@@ -232,7 +233,7 @@ $currency = Yii::$app->currency;
 
                 <?php if ($product->hasStock()) { ?>
                 <div class="product_second_info">
-                    <form action="/cart/add" method="post">
+                    <form action="<?= Language::getCurrent()->urlPrefix; ?>/cart/add" method="post">
 
                         <input class="form-token" type="hidden"
                                name="<?=Yii::$app->request->csrfParam?>"

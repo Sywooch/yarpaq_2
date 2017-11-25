@@ -1421,6 +1421,10 @@
     padding-top: 0;
     padding-bottom: 3%;
   }
+
+  .new_i, .discount_i {
+    font-size: 13px;
+  }
 }
 
 
