@@ -196,21 +196,20 @@ class CategoryController extends BasicController
 
         $pr = clone $products;
         $pr->select([
-            '`po`.`option_id`',
+            '{{%product_option}}.`option_id`',
             '`od`.`name` AS `option_name`',
             '`pov`.`option_value_id`',
             '`ovd`.`name` AS `value_name`',
             '`ov`.`image`'
         ]);
 
-        $pr->joinWith('productOptions po');
         $pr->joinWith('productOptionValues pov');
 
         $pr->leftJoin('{{%option_value}} ov', 'ov.id = pov.option_value_id');
-        $pr->leftJoin('{{%option_description}} od', 'od.option_id = po.option_id AND od.language_id = '.Language::getCurrent()->id);
+        $pr->leftJoin('{{%option_description}} od', 'od.option_id = {{%product_option}}.option_id AND od.language_id = '.Language::getCurrent()->id);
         $pr->leftJoin('{{%option_value_description}} ovd', 'ovd.option_value_id = pov.option_value_id AND ovd.language_id = '.Language::getCurrent()->id);
 
-        $pr->andWhere('po.option_id IS NOT NULL');
+        $pr->andWhere('{{%product_option}}.option_id IS NOT NULL');
         $pr->andWhere('pov.option_value_id IS NOT NULL');
 
         $pr->groupBy('`pov`.`option_value_id`');
