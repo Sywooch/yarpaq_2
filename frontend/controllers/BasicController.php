@@ -3,6 +3,8 @@
 namespace frontend\controllers;
 
 
+use common\models\IPage;
+use frontend\models\PageSeo;
 use Yii;
 use frontend\models\Seo;
 use webvimark\components\BaseController;
@@ -21,6 +23,11 @@ class BasicController extends BaseController
 
         $this->view->params['seo'] = $seo;
     }
+
+    protected function pageSeo(IPage $page) {
+        $this->view->params['seo'] = new PageSeo($page);
+    }
+
 
     public function beforeAction($action)
     {

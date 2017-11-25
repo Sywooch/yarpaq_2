@@ -50,7 +50,7 @@ class CategoryController extends BasicController
         $category = Category::findByUrl($url);
         if (!$category) { throw new NotFoundHttpException(); }
 
-        $this->seo($category->seoHeader, null, $category->content->seo_description, $category->content->seo_keywords, 'category');
+        $this->pageSeo($category);
 
 
 

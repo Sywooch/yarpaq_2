@@ -25,6 +25,11 @@ $seo = $this->params['seo'];
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+    <?php if ($seo->canonical) { ?>
+        <link rel="canonical" href="<?= $seo->canonical; ?>">
+    <?php } ?>
+
     <meta name="theme-color" content="#ffffff">
 
     <title><?= $seo->title; ?></title>
