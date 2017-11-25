@@ -189,27 +189,36 @@ class CategoryController extends BasicController
      * @param $category
      * @return array
      */
-    protected function getPossibleOptionsAndValues($products, $category) {
+    protected function getPossibleOptionsAndValues(ProductRepository $products, $category) {
         if ($category->depth < 3) {
             return [];
         }
 
         $pr = clone $products;
-        $pr->select('{{%product}}.id');
+        $pr->select([
+            '`po`.`option_id`',
+            '`od`.`name` AS `option_name`',
+            '`pov`.`option_value_id`',
+            '`ovd`.`name` AS `value_name`',
+            '`ov`.`image`'
+        ]);
 
-        $productOptionValues = (new Query())
-            ->from('{{%product_option_value}} v')
-            ->select(['v.option_value_id', 'ovd.name as value_name', 'ov.option_id', 'od.name as option_name', 'ov.image'])
-            ->leftJoin('{{%product_option}} po', 'po.id = v.product_option_id')
-            ->leftJoin('{{%option_value}} ov', 'ov.id = v.option_value_id')
-            ->leftJoin('{{%option_description}} od', 'od.option_id = ov.option_id AND od.language_id = '.Language::getCurrent()->id)
-            ->leftJoin('{{%option_value_description}} ovd', 'ovd.option_value_id = v.option_value_id AND ovd.language_id = '.Language::getCurrent()->id)
-            ->andFilterWhere(['in', 'product_id', $pr])
-            ->groupBy('v.option_value_id');
+        $pr->joinWith('productOptions po');
+        $pr->joinWith('productOptionValues pov');
 
-        return ArrayHelper::toArray($productOptionValues->all(), 'id', function ($productOptionValue) {
-            return $productOptionValue;
-        }, 'option_id');
+        $pr->leftJoin('{{%option_value}} ov', 'ov.id = pov.option_value_id');
+        $pr->leftJoin('{{%option_description}} od', 'od.option_id = po.option_id AND od.language_id = '.Language::getCurrent()->id);
+        $pr->leftJoin('{{%option_value_description}} ovd', 'ovd.option_value_id = pov.option_value_id AND ovd.language_id = '.Language::getCurrent()->id);
+
+        $pr->andWhere('po.option_id IS NOT NULL');
+        $pr->andWhere('pov.option_value_id IS NOT NULL');
+
+        $pr->groupBy('`pov`.`option_value_id`');
+
+
+        $sql = $pr->createCommand()->getRawSql();
+
+        return Yii::$app->db->createCommand($sql)->queryAll();
     }
 
     private function getAllChildrenCategories($category) {

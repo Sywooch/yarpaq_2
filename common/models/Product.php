@@ -255,6 +255,10 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasMany(ProductOption::className(), ['product_id' => 'id']);
     }
 
+    public function getProductOptionValues() {
+        return $this->hasMany(ProductOptionValue::className(), ['product_option_id' => 'id'])->via('productOptions');
+    }
+
     public function getManufacturer() {
         return $this->hasOne(Manufacturer::className(), ['id' => 'manufacturer_id']);
     }
