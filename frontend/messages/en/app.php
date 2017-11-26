@@ -7,7 +7,7 @@ return [
 
     'seo_reviews_header' => 'Reviews about {title}',
 
-    'seo_category_title' => '{title} in Baku – prices, reviews. | Yarpaq.az',
+    'seo_category_title' => '{title} in Baku – prices, reviews &mdash; Yarpaq.az',
     'seo_category_brand_title' => '',
     'seo_category_keywords' => '{title}, buy {title}, {title} prices, {title} online shop, {title} price, Yarpaq.az',
     'seo_category_description' => 'On «{title}» page you can find prices, description, photos, customer reviews and detailed characteristics about the products. You can buy {title} on Yarpaq.az online shop with warranty and delivery.',

@@ -7,7 +7,7 @@ return [
 
     'seo_reviews_header' => '{title} haqqında rəylər',
 
-    'seo_category_title' => '{title} Bakida – qiymətlər, rəylər. | Yarpaq.az',
+    'seo_category_title' => '{title} Bakida – qiymətlər, rəylər &mdash; Yarpaq.az',
     'seo_category_brand_title' => '',
     'seo_category_keywords' => '{title}, {title} almaq, {title} qiymətlər, {title} onlayn mağaza, Yarpaq.az',
     'seo_category_description' => '«{title}» bölməsində siz qiymətlər, şəkillər, istifadəçilərin rəyləri ilə tanış ola bilərsiniz. Yarpaq.az onlayn mağazasında siz {title} zəmanət və çatdırılma ilə əldə edə bilərsiniz.',

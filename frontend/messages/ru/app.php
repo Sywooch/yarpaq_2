@@ -7,7 +7,7 @@ return [
 
     'seo_reviews_header' => 'Отзывы о {title}',
 
-    'seo_category_title' => '{title} в Баку – цены, отзывы | Yarpaq.az',
+    'seo_category_title' => '{title} в Баку – цены, отзывы &mdash; Yarpaq.az',
     'seo_category_brand_title' => '',
     'seo_category_keywords' => '{title}, купить {title}, цены на {title}, {title} интернет магазин, {title} цена, Yarpaq.az',
     'seo_category_description' => 'В разделе «{title}» вы можете ознакомиться с ценами, описанием, фотографиями, отзывами покупателей и подробными техническими характеристиками товаров. В интернет-магазине Yarpaq.az можно купить {title} с гарантией и доставкой.',

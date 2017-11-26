@@ -2,12 +2,12 @@
 
 @font-face {
 	font-family: 'Roboto Condensed';
-	src: url('hinted-RobotoCondensed-Light.eot');
+	src: url('hinted-RobotoCondensed-Light.eot?v=1.0');
 	src: local('Roboto Condensed Light'), local('RobotoCondensed-Light'),
-		url('hinted-RobotoCondensed-Light.eot?#iefix') format('embedded-opentype'),
-		url('hinted-RobotoCondensed-Light.woff') format('woff'),
-		url('hinted-RobotoCondensed-Light.ttf') format('truetype'),
-		url('hinted-RobotoCondensed-Light.svg#RobotoCondensed-Light') format('svg');
+		url('hinted-RobotoCondensed-Light.eot?v=1.0#iefix') format('embedded-opentype'),
+		url('hinted-RobotoCondensed-Light.woff?v=1.0') format('woff'),
+		url('hinted-RobotoCondensed-Light.ttf?v=1.0') format('truetype'),
+		url('hinted-RobotoCondensed-Light.svg?v=1.0#RobotoCondensed-Light') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
