@@ -1,9 +1,16 @@
 <?php
 
 return [
+    'seo_home_title' => 'Mobil telefonlar, smartfonlar, kişi geyimləri, qadın geyimləri, uşaq paltarları və s | Yarpaq.az',
+    'seo_home_keywords' => '',
+    'seo_home_description' => '',
+    'seo_reviews_header' => '{title} haqqında rəylər',
     'seo_category_title' => '{title} Bakida – qiymətlər, rəylər. Yarpaq.az online mağazasında, təsvir, şəkillər.',
+    'seo_category_brand_title' => '',
+    'seo_category_keywords' => '{title}, {title} almaq, {title} qiymətlər, {title} onlayn mağaza, Yarpaq.az',
+    'seo_category_description' => '«{title}» bölməsində siz qiymətlər, şəkillər, istifadəçilərin rəyləri ilə tanış ola bilərsiniz. Yarpaq.az onlayn mağazasında siz {title} zəmanət və çatdırılma ilə əldə edə bilərsiniz.',
     'seo_product_title' => '{title} almaq, qiymət, rəylər. Yarpaq.az online mağazası.',
-    'Yarpaq online shop' => 'Yarpaq online mağaza',
+
 
     'Available till' => 'Son bitmə tarixi',
 
