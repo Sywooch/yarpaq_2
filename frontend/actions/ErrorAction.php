@@ -26,6 +26,8 @@ class ErrorAction extends \yii\web\ErrorAction
             Yii::$app->request->get('path')
         ) {
 
+            Yii::$app->getResponse()->setStatusCode(200);
+
             Yii::$app->view->registerMetaTag([
                 'name' => 'robots',
                 'content' => 'noindex'
