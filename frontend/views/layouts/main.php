@@ -16,6 +16,7 @@ $seo = $this->params['seo'];
 <html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="utf-8" />
+    <title><?= $seo->title; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="keywords" content="<?= $seo->keywords; ?>">
     <meta name="description" content="<?= $seo->description; ?>">
@@ -31,9 +32,6 @@ $seo = $this->params['seo'];
     <?php } ?>
 
     <meta name="theme-color" content="#ffffff">
-
-    <title><?= $seo->title; ?></title>
-
     <meta property="og:title" content="<?= $seo->title; ?>" />
 
     <?php if ($seo->type) { ?>

@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'seo_home_title' => 'Mobil telefonlar, smartfonlar, kişi geyimləri, qadın geyimləri, uşaq paltarları və s | Yarpaq.az',
-    'seo_home_keywords' => '',
-    'seo_home_description' => '',
+    'seo_home_title' => 'Yarpaq.az onlayn mağazası &mdash; Elektronika, kişi qadın və uşaq geyimləri, kitablar, aksesuarlar və s',
+    'seo_home_keywords' => 'internet maqazin baku, mobil telefonlar qiymətlər, televizorlar çatdırılma ilə, kişi geyimləri, qadın geyimləri, uşaq geyimləri',
+    'seo_home_description' => 'Alın və satın. Elektronika, geyimlər, çantalar, aksesuarlar, mebel, rəqəmsal kameralar və s. Yarpaq.az-da',
 
     'seo_reviews_header' => '{title} haqqında rəylər',
 
-    'seo_category_title' => '{title} Bakida almaq – qiymətlər, rəylər. | Yarpaq.az',
+    'seo_category_title' => '{title} Bakida – qiymətlər, rəylər. | Yarpaq.az',
     'seo_category_brand_title' => '',
     'seo_category_keywords' => '{title}, {title} almaq, {title} qiymətlər, {title} onlayn mağaza, Yarpaq.az',
     'seo_category_description' => '«{title}» bölməsində siz qiymətlər, şəkillər, istifadəçilərin rəyləri ilə tanış ola bilərsiniz. Yarpaq.az onlayn mağazasında siz {title} zəmanət və çatdırılma ilə əldə edə bilərsiniz.',
