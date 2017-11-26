@@ -3,11 +3,11 @@
 return [
     'seo_home_title' => 'Мобильный телефоны, смартфоны, мужская одежда, женская одежда, детская одежда и др | Yarpaq.az',
     'seo_home_keywords' => '',
-    'seo_home_description' => '',
+    'seo_home_description' => 'Покупайте и продавайте товары на Yapraq.az | ',
 
     'seo_reviews_header' => 'Отзывы о {title}',
 
-    'seo_category_title' => '{title} в Баку – цены, отзывы. В интернет-магазине Yarpaq.az, характеристики, описание, фотографии.',
+    'seo_category_title' => 'Купить {title} в Баку – цены, отзывы | Yarpaq.az',
     'seo_category_brand_title' => '',
     'seo_category_keywords' => '{title}, купить {title}, цены на {title}, {title} интернет магазин, {title} цена, Yarpaq.az',
     'seo_category_description' => 'В разделе «{title}» вы можете ознакомиться с ценами, описанием, фотографиями, отзывами покупателей и подробными техническими характеристиками товаров. В интернет-магазине Yarpaq.az можно купить {title} с гарантией и доставкой.',

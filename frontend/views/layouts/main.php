@@ -113,7 +113,7 @@ $seo = $this->params['seo'];
             </div>
             <div class="links">
                 <ul>
-                    <li><a href="http://admin.yarpaq.az"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
+                    <li><a href="http://admin.yarpaq.az" rel="nofollow"><?= Yii::t('app', 'Sell On Yarpaq'); ?></a></li>
 
                     <?php $help_center = \common\models\info\Info::findOne(4); ?>
                     <li><a href="<?= @$help_center->url; ?>"><?= @$help_center->title; ?></a></li>
