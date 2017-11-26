@@ -26,7 +26,7 @@ $seo = $this->params['seo'];
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-    <?php if ($seo->canonical) { ?>
+    <?php if (false && $seo->canonical) { ?>
         <link rel="canonical" href="<?= $seo->canonical; ?>">
     <?php } ?>
 
