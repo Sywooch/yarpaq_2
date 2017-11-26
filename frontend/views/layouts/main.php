@@ -62,7 +62,7 @@ $seo = $this->params['seo'];
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
+<body>
 
 <div class="overlay">
     <div class="dark">

@@ -20,9 +20,8 @@ class ProductController extends BasicController
         // Поиск продукта
         $product = Product::findOne($id);
 
-        if (!$product || !$product->isVisible()) {
-            throw new NotFoundHttpException();
-        }
+        if (!$product) { throw new NotFoundHttpException('Product not found'); }
+        if (!$product->isVisible()) { throw new NotFoundHttpException('Product is not shown on the site'); }
 
         ViewedProduct::log($product->id);
         $product->viewed++;

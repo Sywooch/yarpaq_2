@@ -30,7 +30,7 @@ class PageSeo extends Model
     public function getTitle() {
         if ($this->page instanceof Category) {
             return Yii::t('app', 'seo_category_title', [
-                'title' => $this->page->title
+                'title' => $this->page->seoHeader
             ]);
         } else if ($this->page instanceof Product) {
             return Yii::t('app', 'seo_product_title', [
@@ -52,7 +52,7 @@ class PageSeo extends Model
     public function getKeywords() {
         if ($this->page instanceof Category) {
             return Yii::t('app', 'seo_category_keywords', [
-                'title' => $this->page->title
+                'title' => $this->page->seoHeader ? $this->page->seoHeader : $this->page->title
             ]);
         } else {
             return '';
@@ -62,7 +62,7 @@ class PageSeo extends Model
     public function getDescription() {
         if ($this->page instanceof Category) {
             return Yii::t('app', 'seo_category_description', [
-                'title' => $this->page->title
+                'title' => $this->page->seoHeader ? $this->page->seoHeader : $this->page->title
             ]);
         } else {
             return '';

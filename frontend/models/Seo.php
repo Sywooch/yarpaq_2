@@ -35,7 +35,7 @@ class Seo extends Model
                 'title' => $this->title
             ]);
         } else {
-            return $this->title ? $this->title .' &mdash; '.Yii::t('app', 'Yarpaq online shop') : Yii::t('app', 'Yarpaq online shop');
+            return $this->title ? $this->title .' | '.Yii::t('app', 'seo_home_title') : Yii::t('app', 'seo_home_title');
         }
     }
 }
