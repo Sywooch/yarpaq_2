@@ -78,7 +78,6 @@ return [
 
                 'shipping/calculate'     => 'shipping/calculate',
 
-                'rsearch'           => 'search/index',
                 'search'            => 'search/elastic',
                 'search/auto'       => 'search/auto',
 
