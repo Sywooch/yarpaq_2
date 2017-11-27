@@ -23,7 +23,17 @@ class SearchController extends BasicController
 
     public $freeAccessActions = ['index', 'elastic', 'auto'];
 
+    protected function noIndex() {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'robots',
+            'content' => 'noindex'
+        ]);
+    }
+
     public function actionElastic() {
+        $this->noIndex();
+
+
         $productFilter  = $this->initFilter();
         $query          = $this->initQuery();
         $elastic = new ProductSearch();

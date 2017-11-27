@@ -20,12 +20,25 @@ class SellerProductsController extends BasicController
 
     public $freeAccessActions = ['index'];
 
+    protected function noIndex() {
+        Yii::$app->view->registerMetaTag([
+            'name' => 'robots',
+            'content' => 'noindex'
+        ]);
+    }
+
     public function actionIndex($id) {
+        $this->noIndex();
+
+
         $ajax = false;
 
         if (Yii::$app->request->isAjax) {
             $ajax = true;
         }
+
+
+
         $r = Yii::$app->request;
 
         $url = preg_match('/^[\w_\-\d\/]+$/', $r->get('url')) ? $r->get('url') : '';
