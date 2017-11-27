@@ -14,7 +14,7 @@ class DiscountTape extends Tape
         $this->products = $repo
             ->visibleOnTheSite()
             ->hasDiscount()
-            ->orderBy(['moderated_at' => SORT_DESC])
+            ->orderBy(['d.id' => SORT_DESC])
             ->limit(10)
             ->all();
     }

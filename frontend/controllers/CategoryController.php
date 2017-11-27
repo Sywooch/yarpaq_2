@@ -73,6 +73,8 @@ class CategoryController extends BasicController
                 ->select('manufacturer_id')
                 ->distinct();
 
+            $repo->orderBy(['d.id' => SORT_DESC]);
+
 
 
             $brands = Manufacturer::find()
@@ -89,6 +91,12 @@ class CategoryController extends BasicController
                 ->andWhere(['pc.category_id' => $childrenCategoriesIDs])
                 ->groupBy('{{%product}}.id');
                 //->withinCategory($category); // TODO почему-то запрос зависает
+
+            if ($productFilter->sort) {
+                $products->orderBy( $productFilter->sortSetting );
+            } else {
+                $products->orderBy(['price' => SORT_ASC]);
+            }
         }
 
         $possibleOptions = $this->getPossibleOptionsAndValues($products, $category);
@@ -134,12 +142,6 @@ class CategoryController extends BasicController
                 'price_from'    => $productFilter->price_from,
                 'price_to'      => $productFilter->price_to
             ]);
-        }
-
-        if ($productFilter->sort) {
-            $products->orderBy( $productFilter->sortSetting );
-        } else {
-            $products->orderBy(['price' => SORT_ASC]);
         }
 
         // pagination
