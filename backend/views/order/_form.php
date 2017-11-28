@@ -145,8 +145,8 @@ $order = $model;
                         </td>
                         <td><?= $orderProduct->model; ?></td>
                         <td><?= $orderProduct->quantity; ?></td>
-                        <td><?= $orderProduct->price; ?></td>
-                        <td><?= $orderProduct->total; ?></td>
+                        <td><?= $orderProduct->price * $order->currency_value; ?></td>
+                        <td><?= $orderProduct->total * $order->currency_value; ?></td>
 
                         <td>
                             <button
