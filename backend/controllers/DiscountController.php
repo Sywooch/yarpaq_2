@@ -53,9 +53,10 @@ class DiscountController extends AdminDefaultController
     }
 
     public function actionDelete($product_id) {
-        $discount = Discount::find(['product_id' => $product_id])->one();
-        if ($discount) {
-            $discount->delete();
+        $product  = Product::findOne($product_id);
+
+        if ($product->discount) {
+            $product->discount->delete();
         }
 
         $this->redirect(['discount/index', 'id' => $product_id]);
