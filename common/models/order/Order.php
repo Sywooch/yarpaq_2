@@ -377,7 +377,7 @@ class Order extends \yii\db\ActiveRecord
         $weight = 0;
         $shipping_method = Shipping::create($this->shipping_method);
 
-        foreach ($this->orderProducts as $orderProduct) {
+        foreach ($this->getOrderProducts()->all() as $orderProduct) {
             // определяем вес товара
             $weight = $orderProduct->product->weight;
         }
@@ -385,6 +385,9 @@ class Order extends \yii\db\ActiveRecord
         // прибавляем стоимость доставки товара в соответствии
         // с его весом и пунктом назначения
         $shipping_price += $shipping_method->calculateCostByZone($weight, $this->shippingZone);
+
+        $currency = new CurrencyComponent();
+        $shipping_price = $currency->convert($shipping_price, $currency->getCurrencyByCode('AZN'), $currency->getCurrencyByCode($this->currency_code));
 
         $this->shipping_price = $shipping_price;
     }
