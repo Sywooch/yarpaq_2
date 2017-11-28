@@ -167,7 +167,6 @@ class OrderController extends AdminDefaultController
                     }
 
                     $isValid = $order->addProduct($product, $orderProductData['quantity'], $options) && $isValid;
-
                 }
             }
 
@@ -275,8 +274,7 @@ class OrderController extends AdminDefaultController
             try {
                 $item->delete();
 
-                $order->total -= $item->total; // вычитание стоимости товара из заказа
-                $order->save();
+                $order->recalculate();
 
 
                 $transaction->commit();

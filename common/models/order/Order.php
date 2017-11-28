@@ -11,6 +11,7 @@ use common\models\shipping\Shipping;
 use common\models\Zone;
 use Yii;
 use common\models\Currency;
+use frontend\components\Currency as CurrencyComponent;
 use common\models\Language;
 use common\models\User;
 use yii\base\Model;
@@ -55,7 +56,7 @@ use common\models\notification\OrderStatusChangedSellerNotification;
  * @property string $shipping_code
  * @property string $shipping_price
  * @property string $comment
- * @property string $subtotal
+ * @property float $subtotal
  * @property string $total
  * @property integer $order_status_id
  * @property integer $language_id
@@ -245,6 +246,7 @@ class Order extends \yii\db\ActiveRecord
      * @return bool
      */
     public function addProduct(Product $product, $quantity, array $options) {
+        $currency = new CurrencyComponent();
 
         $tr = $this->getDb()->beginTransaction();
 
@@ -267,8 +269,8 @@ class Order extends \yii\db\ActiveRecord
         }
 
 
-        $orderProduct->price        = $product->getRealPrice(true);
-        $orderProduct->total        = $quantity * $product->getRealPrice(true);
+        $orderProduct->price        = $currency->convert($product->getRealPrice(true), $product->currency, $currency->getCurrencyByCode($this->currency_code));
+        $orderProduct->total        = $quantity * $orderProduct->price;
         $isValid = $orderProduct->save();
 
         if ($isValid) {
@@ -356,7 +358,7 @@ class Order extends \yii\db\ActiveRecord
     public function recalculate() {
         $subtotal = 0;
 
-        foreach ($this->orderProducts as $orderProduct) {
+        foreach ($this->getOrderProducts()->all() as $orderProduct) {
             // прибавляем стоимость товара
             $subtotal += $orderProduct->total;
         }
@@ -372,16 +374,17 @@ class Order extends \yii\db\ActiveRecord
 
     public function recalculateShippingPrice() {
         $shipping_price = 0;
+        $weight = 0;
         $shipping_method = Shipping::create($this->shipping_method);
 
         foreach ($this->orderProducts as $orderProduct) {
             // определяем вес товара
             $weight = $orderProduct->product->weight;
-
-            // прибавляем стоимость доставки товара в соответствии
-            // с его весом и пунктом назначения
-            $shipping_price += $shipping_method->calculateCostByZone($weight, $this->shippingZone);
         }
+
+        // прибавляем стоимость доставки товара в соответствии
+        // с его весом и пунктом назначения
+        $shipping_price += $shipping_method->calculateCostByZone($weight, $this->shippingZone);
 
         $this->shipping_price = $shipping_price;
     }
