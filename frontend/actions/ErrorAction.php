@@ -26,12 +26,11 @@ class ErrorAction extends \yii\web\ErrorAction
             Yii::$app->request->get('route') ||
             Yii::$app->request->get('product_id') ||
             Yii::$app->request->get('seller_id') ||
-            Yii::$app->request->get('page') ||
             Yii::$app->request->get('url') ||
             Yii::$app->request->hostName == 'admin.yarpaq.az'
         ) {
 
-            Yii::$app->getResponse()->setStatusCode(200);
+            Yii::$app->getResponse()->setStatusCode(410);
 
             Yii::$app->view->registerMetaTag([
                 'name' => 'robots',
@@ -41,6 +40,16 @@ class ErrorAction extends \yii\web\ErrorAction
         }
 
 
+        if (Yii::$app->request->get('page')) {
+
+            Yii::$app->getResponse()->setStatusCode(200);
+
+            Yii::$app->view->registerMetaTag([
+                'name' => 'robots',
+                'content' => 'noindex'
+            ]);
+
+        }
 
 
         return $this->renderHtmlResponse();
