@@ -42,6 +42,8 @@ class SearchController extends BasicController
         // pagination
         $total = $elastic->total($query, $productFilter);
 
+        SearchLogger::log($query, $total);
+
         $pagination = new Pagination([
             'totalCount' => $total,
             'defaultPageSize' => $productFilter->per_page ? $productFilter->per_page : 24,
@@ -115,8 +117,6 @@ class SearchController extends BasicController
         $r = Yii::$app->request;
         if ($r->get('q') && $r->get('q') != '') {
             $query = htmlspecialchars(strip_tags($r->get('q')), ENT_QUOTES, 'UTF-8');
-
-            SearchLogger::log($query);
         }
 
         return $query;
