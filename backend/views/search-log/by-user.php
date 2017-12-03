@@ -4,12 +4,13 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use kartik\select2\Select2;
 use yii\web\JsExpression;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\order\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Search Log') . ': '. Yii::t('app', 'By keyword');
+$this->title = Yii::t('app', 'Search Log'). ': '. Yii::t('app', 'By user');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
@@ -22,12 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout'        => '{pager}{items}{summary}{pager}',
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'text',
             [
                 'attribute' => 'user_id',
                 'headerOptions' => ['width' => '40%'],
-                'value'     => function ($model) { return $model->user ? $model->user->fullname : ''; },
+                'format' => 'raw',
+                'value'     => function ($model) {
+                    return $model->user ? '<a href="'.Url::to(['user-management/user/update', 'id' => $model->user_id]).'">'.$model->user->fullname.'</a>' : '';
+                },
                 'label' => Yii::t('app', 'User'),
                 'filter' => Select2::widget(
                     [
@@ -51,7 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                 )
             ],
-            'count'
+            'text',
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:d M Y'],
+                'label' => Yii::t('app', 'Created At')
+            ]
         ],
     ]); ?>
 

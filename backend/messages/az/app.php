@@ -162,7 +162,10 @@ return [
     'Home Categories' => 'Əsas səhifə kateqoriyaları',
     'Background Color' => 'Fon rəngi',
 
-    'Saved' => 'Saxlanılıb'
+    'Saved' => 'Saxlanılıb',
+
+    'By keyword' => 'Sözlər üzrə',
+    'By user' => 'İstifadəçilər üzrə',
 
 ];
 

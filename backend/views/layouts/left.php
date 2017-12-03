@@ -32,7 +32,10 @@ use common\models\User;
                             ['label' => Yii::t('app', 'Categories'),        'icon' => '', 'url' => ['/home-category']],
                         ]],
                         ['label' => Yii::t('app', 'Reviews'),           'url' => ['/review']],
-                        ['label' => Yii::t('app', 'Search Log'),        'icon' => 'picture-o', 'url' => ['/search-log']],
+                        ['label' => Yii::t('app', 'Search Log'),        'icon' => 'picture-o', 'items' => [
+                            ['label' => Yii::t('app', 'By keyword'), 'url' => ['/search-log']],
+                            ['label' => Yii::t('app', 'By user'), 'url' => ['/search-log/by-user']]
+                        ]],
                         ['label' => Yii::t('app', 'Infos'),       'icon' => 'info', 'url' => ['/info']],
                         ['label' => Yii::t('app', 'Manufacturers'),     'icon' => 'tags', 'url' => ['/manufacturer']],
 
