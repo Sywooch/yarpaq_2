@@ -24,7 +24,7 @@ class SearchLogSearchByUser extends SearchLog
             ->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['user_id'   => $this->user_id])
             ->andFilterWhere(['no_result'   => $this->no_result])
-            ->andWhere(['not', ['user_id' => null]])
+            //->andWhere(['not', ['user_id' => null]])
             ->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
