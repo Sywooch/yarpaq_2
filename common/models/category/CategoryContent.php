@@ -25,6 +25,8 @@ class CategoryContent extends \yii\db\ActiveRecord
 {
     protected $uploadDir = 'category';
 
+    public $promoFiles;
+
     /**
      * @inheritdoc
      */
@@ -155,5 +157,9 @@ class CategoryContent extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function getPromoGallery() {
+        return $this->hasMany(CategoryContentPromoImage::className(), ['model_id' => 'id'])->orderBy('sort');
     }
 }

@@ -4,12 +4,11 @@ namespace backend\controllers;
 
 use common\models\category\Category;
 use common\models\category\CategoryContent;
+use common\models\category\CategoryContentPromoImage;
 use common\models\category\CategoryImage;
 use common\models\Language;
 use webvimark\components\AdminDefaultController;
 use Yii;
-use yii\caching\FileCache;
-use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
@@ -125,7 +124,7 @@ class CategoryController extends AdminDefaultController
         $contents = $model->contents;
 
         if ($model->load(Yii::$app->request->post())) {
-            $this->uploadGalleryFiles($model);
+            $model->galleryFiles = UploadedFile::getInstances($model, 'galleryFiles');
 
 
             $transaction = Category::getDb()->beginTransaction();
@@ -138,14 +137,19 @@ class CategoryController extends AdminDefaultController
                 $s = $model->save();
             }
 
-            $this->saveGalleryFiles($model);
+            $this->saveGalleryFiles($model->id, $model->galleryFiles, CategoryImage::className(), $model->getGallery()->count());
             $this->saveSort();
 
             foreach ($contents as $content) {
+
                 /**
                  * @var $content CategoryContent
                  */
                 $content->attributes = Yii::$app->request->post('CategoryContent_'.$content->lang_id);
+                $content->promoFiles = UploadedFile::getInstancesByName('CategoryContent_'.$content->lang_id.'[promoFiles]');
+
+                $this->saveGalleryFiles($content->id, $content->promoFiles, CategoryContentPromoImage::className(), $content->getPromoGallery()->count());
+
                 if (!$content->save()) { $s = false; }
             }
 
@@ -187,32 +191,39 @@ class CategoryController extends AdminDefaultController
         }
     }
 
-    private function uploadGalleryFiles($model) {
-        $model->galleryFiles = UploadedFile::getInstances($model, 'galleryFiles');
-    }
+    /**
+     * Создает модели картинок в базе. Сортировка  прибавляется соответственно.
+     * Сохраняет файлы на диск
+     *
+     * @param $model_id
+     * @param $inputFiles
+     * @param $fileClassName
+     * @param $sort
+     */
+    private function saveGalleryFiles($model_id, $inputFiles, $fileClassName, $sort) {
+        if (!count($inputFiles)) return;
 
-    private function saveGalleryFiles($m) {
-        $files = $m->galleryFiles;
-        if (count($files)) {
-            $sort = count($m->gallery);
-            foreach ($files as $file) { $sort++;
-                if (!is_null($file)) {
-                    $model = new CategoryImage();
-                    $model->model_id = $m->id;
-                    $model->src_name = $file->name;
-                    $model->sort = $sort;
-                    $file_parts = explode(".", $file->name);
-                    $ext = end($file_parts);
-                    // generate a unique file name to prevent duplicate filenames
-                    $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
+        foreach ($inputFiles as $file) {
+            if (!is_null($file)) {
+                $sort++;
 
-                    $file->saveAs($model->path);
+                $model = new $fileClassName();
+                $model->model_id = $model_id;
+                $model->src_name = $file->name;
+                $model->sort = $sort;
+                $file_parts = explode(".", $file->name);
+                $ext = end($file_parts);
+                // generate a unique file name to prevent duplicate filenames
+                $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
 
-                    $model->save();
-                }
+                $file->saveAs($model->path);
+
+                $model->save();
             }
         }
+
     }
+
 
     /**
      * Deletes an existing Category model.
@@ -238,6 +249,18 @@ class CategoryController extends AdminDefaultController
         $key = (int) Yii::$app->request->post('key');
 
         $image = CategoryImage::findOne($key);
+        if ($image) {
+            $image->delete();
+        }
+
+        return json_encode(['success' => 1]);
+    }
+
+    public function actionContentImageDelete() {
+
+        $key = (int) Yii::$app->request->post('key');
+
+        $image = CategoryContentPromoImage::findOne($key);
         if ($image) {
             $image->delete();
         }

@@ -269,8 +269,8 @@ $seo = $this->params['seo'];
 
                                 <?php foreach ($main_categories as $main_category) { ?>
                                     <ul>
-                                        <?php if ($main_category->id == 555) { ?>
-                                            <li><a href="#"><img src="/upload/Images/mens.jpg" alt=""></a></li>
+                                        <?php if ($main_category->content->promoGallery) { ?>
+                                            <li><img src="<?= $main_category->content->promoGallery[0]->url; ?>" alt=""></li>
                                         <?php } ?>
                                     </ul>
                                 <?php } ?>

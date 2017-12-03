@@ -57,6 +57,73 @@ use kartik\select2\Select2;
                     <?= $form->field($content, 'seo_header')->textInput(['name' => 'CategoryContent_'.$language->id.'[seo_header]', 'id' => 'content_'.$language->id.'_seo_header']) ?>
                     <?= $form->field($content, 'seo_keywords')->textarea(['name' => 'CategoryContent_'.$language->id.'[seo_keywords]', 'id' => 'content_'.$language->id.'_seo_keywords']) ?>
                     <?= $form->field($content, 'seo_description')->textarea(['name' => 'CategoryContent_'.$language->id.'[seo_description]', 'id' => 'content_'.$language->id.'_seo_description']) ?>
+
+
+                    <div class="row">
+
+                        <!-- Gallery -->
+                        <div class="col-xs-12">
+
+                            <script type="text/javascript">
+                                var gallery_sort_promo_<?= $language->id; ?> = [];
+                            </script>
+                            <?php
+
+                            $pluginOptions = [
+                                'allowedFileExtensions' => ['jpg', 'gif', 'png', 'svg'],
+
+
+                                'initialPreviewAsData' => true,
+                                'deleteUrl' => Url::to(['category/content-image-delete']),
+                                'overwriteInitial' => false,
+                                'maxFileSize' => 10000,
+                                'initialCaption' => Yii::t('app', "Upload images"),
+                                'initialPreview' => [],
+                                'initialPreviewConfig' => [],
+
+                                'showCaption' => false,
+                                'showRemove' => false,
+                                'showUpload' => false,
+                                'browseClass' => 'btn btn-primary btn-block',
+                                'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                                'browseLabel' =>  Yii::t('app', 'Select')
+                            ];
+                            $gallery_sort = [];
+
+                            foreach ($content->promoGallery as $image) {
+
+                                if (!is_file($image->path)) continue;
+
+                                $pluginOptions['initialPreview'][] = $image->url;
+                                $mimetype = FileHelper::getMimeType( $image->path );
+                                $pluginOptions['initialPreviewConfig'][] = [
+                                    'type' => substr($mimetype, 0, strpos($mimetype, '/')),
+                                    'filetype' => $mimetype,
+                                    'caption' => $image->src_name,
+                                    'width' => "120px",
+                                    'key' => $image->id
+                                ];
+                                $gallery_sort[] = $image->id;
+
+                                echo '<script type="text/javascript"> gallery_sort_promo_<?= $language->id; ?>.push('.$image->id.'); </script>';
+                            }
+
+                            echo $form->field($content, 'promoFiles[]')->widget(FileInput::className(), [
+                                'model' => $model,
+                                'options' => [
+                                    'name' => 'CategoryContent_'.$language->id.'[promoFiles][]',
+                                    'id' => 'content_'.$language->id.'_promo_files',
+                                    'accept' => ['image/*', 'video/*'],
+                                    'multiple' => true
+                                ],
+                                'pluginOptions' => $pluginOptions,
+                            ])->label(Yii::t('app', 'Promo')); ?>
+
+                            <input type="hidden" name="gallery_sort_promo" value="<?php echo implode(',', $gallery_sort); ?>">
+
+                        </div>
+                        <!-- END of gallery -->
+                    </div>
                 </div>
                 <!-- /.tab-pane -->
                 <?php $i++; } ?>
