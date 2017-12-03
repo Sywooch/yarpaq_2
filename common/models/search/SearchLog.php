@@ -47,4 +47,8 @@ class SearchLog extends \yii\db\ActiveRecord
             'count'      => Yii::t('app', 'Quantity'),
         ];
     }
+
+    public static function getNoResultQueriesCount() {
+        return self::find()->where(['no_result' => 1])->count();
+    }
 }

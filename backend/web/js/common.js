@@ -103,6 +103,13 @@ $(function () {
                 $('#noti_out_of_stock').html('-');
             }
 
+            // out of stock products
+            if (response.no_result_queries_count !== undefined) {
+                $('#noti_no_result_queries_count').html(response.no_result_queries_count);
+            } else {
+                $('#noti_no_result_queries_count').html('-');
+            }
+
 
             // total notifications
             if (response.total !== undefined) {

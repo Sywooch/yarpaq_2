@@ -55,6 +55,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'text',
             [
+                'attribute' => 'no_result',
+                'label' => Yii::t('app', 'Results'),
+                'filter' => [
+                    '1' => Yii::t('app', 'No result'),
+                    '0' => Yii::t('app', 'Results found'),
+                ],
+                'value' => function ($query) {
+                    return $query->no_result === 1 ? Yii::t('app', 'No result') : Yii::t('app', 'Results found');
+                }
+            ],
+            [
                 'attribute' => 'created_at',
                 'format' => ['date', 'php:d M Y'],
                 'label' => Yii::t('app', 'Created At')

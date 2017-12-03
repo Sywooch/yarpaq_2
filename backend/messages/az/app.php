@@ -166,6 +166,10 @@ return [
 
     'By keyword' => 'Sözlər üzrə',
     'By user' => 'İstifadəçilər üzrə',
+    'Results' => 'Nəticələr',
+    'No result' => 'Nəticə yoxdur',
+    'Results found' => 'Nəticə var',
+    'No result queries' => 'Nəticəsiz axtarış sorğuları'
 
 ];
 

@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\order\Order;
 use common\models\Product;
 use common\models\review\Review;
+use common\models\search\SearchLog;
 use Yii;
 use webvimark\components\AdminDefaultController;
 use yii\web\Response;
@@ -40,13 +41,18 @@ class NotificationController extends AdminDefaultController
             ->count();
 
 
-        $total = $moderation_products + $new_orders + $new_reviews + $out_of_stock_products;
+        // Поисковые запросы с нулевым результатом
+        $no_result_queries_count = SearchLog::getNoResultQueriesCount();
+
+
+        $total = $moderation_products + $new_orders + $new_reviews + $out_of_stock_products + $no_result_queries_count;
 
         return [
             'moderation_products'       => $moderation_products,
             'new_orders'                => $new_orders,
             'new_reviews'               => $new_reviews,
             'out_of_stock_products'     => $out_of_stock_products,
+            'no_result_queries_count'   => $no_result_queries_count,
             'total'                     => $total
         ];
 

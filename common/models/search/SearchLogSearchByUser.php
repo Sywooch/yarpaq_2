@@ -13,15 +13,17 @@ class SearchLogSearchByUser extends SearchLog
         return [
             ['text', 'string'],
             ['user_id', 'integer'],
+            ['no_result', 'integer']
         ];
     }
 
     public function search() {
         $query = SearchLogSearchByUser::find()
-            ->select(['text', 'user_id', 'created_at'])
+            ->select(['text', 'user_id', 'created_at', 'no_result'])
             ->with('user')
             ->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['user_id'   => $this->user_id])
+            ->andFilterWhere(['no_result'   => $this->no_result])
             ->andWhere(['not', ['user_id' => null]])
             ->orderBy(['created_at' => SORT_DESC]);
 

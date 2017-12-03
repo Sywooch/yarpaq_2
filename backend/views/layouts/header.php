@@ -60,6 +60,12 @@ use common\models\User;
                                     </a>
                                 </li>
 
+                                <li>
+                                    <a href="<?= Url::to(['search-log/by-user', 'SearchLogSearchByUser[no_result]' => 1]); ?>">
+                                        <i class="fa fa-search text-black"></i> <span id="noti_no_result_queries_count"></span> <?= Yii::t('app', 'No result queries');?>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                     </ul>
