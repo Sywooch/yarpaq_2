@@ -3,7 +3,7 @@ $(function () {
     var tree = $('.tree');
     var body = $('body');
 
-    tree.delegate('.list-group-item .bind-a', 'click', function() {
+    tree.delegate('.list-group-item .bind-a', 'click', function(event, successCallback) {
         var self = $(this);
 
         $('.glyphicon', this)
@@ -48,6 +48,10 @@ $(function () {
                     group.attr('id', self.attr('href').substr(1));
                     group.insertAfter(self.closest('.list-group-item'));
                     group.collapse('show');
+
+                    if (successCallback) {
+                        successCallback();
+                    }
                 }
             });
         }
@@ -86,4 +90,34 @@ $(function () {
             }
         }, 'json');
     });
+
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var path = getParameterByName('path');
+
+    if (path) {
+        var nodes = path.split('-');
+
+        if (nodes.length) {
+            loadNode(nodes, 0);
+        }
+    }
+
+    function loadNode(nodes, cursor) {
+        $('a[href="#item-'+nodes[cursor]+'"]').trigger('click', [function () {
+            cursor++;
+            if (cursor - 1 <= nodes.length) {
+                loadNode(nodes, cursor);
+            }
+        }]);
+    }
 });

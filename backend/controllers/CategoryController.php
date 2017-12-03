@@ -9,6 +9,7 @@ use common\models\Language;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use yii\caching\FileCache;
+use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
@@ -26,8 +27,6 @@ class CategoryController extends AdminDefaultController
      */
     public function actionIndex()
     {
-        Yii::$app->session->set('redirect', Yii::$app->request->absoluteUrl);
-
         $root = Category::findOne(['parent_id' => 0]);
 
         if (!$root) {
@@ -155,15 +154,10 @@ class CategoryController extends AdminDefaultController
             if ($transaction->isActive) {
                 $transaction->commit();
 
-                if (Yii::$app->session->has('redirect')) {
-                    $redirect = Yii::$app->session->get('redirect');
-                    Yii::$app->session->remove('redirect');
+                $parents = array_map(function ($category) { return $category->id; }, $model->parents()->all());
+                array_shift($parents);
 
-                    return $this->redirect($redirect);
-                } else {
-                    return $this->redirect(['update', 'id' => $model->id]);
-                }
-
+                return $this->redirect(['index', 'path' => implode('-', $parents)]);
             }
         }
 

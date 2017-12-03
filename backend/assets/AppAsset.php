@@ -15,7 +15,7 @@ class AppAsset extends AssetBundle
         'css/tree.css'
     ];
     public $js = [
-        'js/tree.js',
+        'js/tree.js?v=1.0.1',
         'js/page.js',
         'js/gallery.js',
         'js/common.js?v=1.0.1',
