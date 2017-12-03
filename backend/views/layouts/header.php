@@ -27,7 +27,7 @@ use common\models\User;
 
                 <?php if (User::hasPermission('view_common_notifications_for_admin')) { ?>
                 <!-- Messages: style can be found in dropdown.less-->
-                <li class="dropdown notifications-menu" id="commonNotificationsBlock" data-url="<?= \yii\helpers\Url::to(['notification/common-for-admin']); ?>">
+                <li class="dropdown notifications-menu" id="commonNotificationsBlock" data-url="<?= \yii\helpers\Url::to(['/notification/common-for-admin']); ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
                         <span class="label label-warning" id="noti_total"></span>
