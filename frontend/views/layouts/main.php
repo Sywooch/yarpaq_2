@@ -263,7 +263,9 @@ $seo = $this->params['seo'];
                             <div class="nav_banners">
                                 <?php foreach ($topCategoryList as $topCategory) { ?>
                                     <ul>
-
+                                        <?php if ($topCategory->content->promoGallery) { ?>
+                                            <li><img src="<?= $topCategory->content->promoGallery[0]->url; ?>" alt=""></li>
+                                        <?php } ?>
                                     </ul>
                                 <?php } ?>
 
