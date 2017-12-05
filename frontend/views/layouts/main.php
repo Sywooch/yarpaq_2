@@ -148,7 +148,7 @@ $seo = $this->params['seo'];
                                         <ul>
                                             <?php foreach ($topCategoryList as $category) { ?>
                                                 <li class="cont">
-                                                    <a href="<?= $category->url; ?>" <?= in_array($category->id, [955, Yii::$app->params['sale_category_id']]) ? 'class="hide_children"' : ''; ?> >
+                                                    <a href="<?= $category->url; ?>" <?= in_array($category->id, [1109, 955, Yii::$app->params['sale_category_id']]) ? 'class="hide_children"' : ''; ?> >
                                                         <img width="30" src="<?= $category->icon->url; ?>" alt="<?= $category->title; ?>"><?= $category->title; ?>
                                                     </a>
 
