@@ -38,30 +38,30 @@ use common\models\User;
                             <ul class="menu">
 
                                 <li>
-                                    <a href="<?= Url::to(['product/index', 'ProductSearch[moderated]' => 0]); ?>">
+                                    <a href="<?= Url::to(['/product/index', 'ProductSearch[moderated]' => 0]); ?>">
                                         <i class="fa fa-users text-aqua"></i> <span id="noti_moderation_products"></span> <?= Yii::t('app', 'Moderation products'); ?>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= Url::to(['order/index', 'OrderSearch[order_status_id]' => 0]); ?>">
+                                    <a href="<?= Url::to(['/order/index', 'OrderSearch[order_status_id]' => 0]); ?>">
                                         <i class="fa fa-shopping-cart text-green"></i> <span id="noti_new_orders"></span> <?= Yii::t('app', 'New orders');?>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="<?= Url::to(['review/index', 'Review[status]' => 0]); ?>">
+                                    <a href="<?= Url::to(['/review/index', 'Review[status]' => 0]); ?>">
                                         <i class="fa fa-commenting text-yellow"></i> <span id="noti_reviews"></span> <?= Yii::t('app', 'New reviews');?>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="<?= Url::to(['product/index', 'ProductSearch[quantity]' => 0]); ?>">
+                                    <a href="<?= Url::to(['/product/index', 'ProductSearch[quantity]' => 0]); ?>">
                                         <i class="fa fa-remove text-red"></i> <span id="noti_out_of_stock"></span> <?= Yii::t('app', 'Out of stock products');?>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="<?= Url::to(['search-log/by-user', 'SearchLogSearchByUser[no_result]' => 1]); ?>">
+                                    <a href="<?= Url::to(['/search-log/by-user', 'SearchLogSearchByUser[no_result]' => 1]); ?>">
                                         <i class="fa fa-search text-black"></i> <span id="noti_no_result_queries_count"></span> <?= Yii::t('app', 'No result queries');?>
                                     </a>
                                 </li>
