@@ -58,7 +58,7 @@ $mainSlide = $slides[0];
     <!-- BANNER END -->
     <div class="banner_long">
         <a href="<?= $slide1Link; ?>">
-            <img src="/upload/Images/kreslo-puff.jpg" alt=""><img src="/upload/Images/kreslo-puff-mobile.jpg" alt="">
+            <img src="/upload/Images/baner_desktop.jpg" alt=""><img src="/upload/Images/baner_mobile.jpg" alt="">
         </a>
     </div>
     <!-- BANNER END -->
