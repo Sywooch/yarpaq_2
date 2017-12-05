@@ -30,7 +30,7 @@ class ErrorAction extends \yii\web\ErrorAction
             Yii::$app->request->hostName == 'admin.yarpaq.az'
         ) {
 
-            Yii::$app->getResponse()->setStatusCode(410);
+            Yii::$app->getResponse()->setStatusCode(200);
 
             Yii::$app->view->registerMetaTag([
                 'name' => 'robots',
