@@ -57,11 +57,18 @@ $mainSlide = $slides[0];
 
 
     <!-- BANNER END -->
-    <div class="banner_long">
-        <a href="<?= $slide1Link; ?>">
-            <img src="/upload/Images/baner_desktop.jpg" alt=""><img src="/upload/Images/baner_mobile.jpg" alt="">
-        </a>
-    </div>
+    <?php
+    $wide_banners = \common\models\wide_banner\WideBanner::find()->andWhere(['status' => 1])->all();
+
+    foreach ($wide_banners as $wide_banner) { ?>
+        <div class="banner_long">
+            <a href="<?= $wide_banner->content->link != '' ? $wide_banner->content->link : '#'; ?>">
+                <img src="<?= $wide_banner->content->url; ?>" alt=""><img src="<?= $wide_banner->content->mbUrl; ?>" alt="">
+            </a>
+        </div>
+        <?php
+    }
+    ?>
     <!-- BANNER END -->
 
 
