@@ -30,6 +30,7 @@ use common\models\User;
                         ['label' => Yii::t('app', 'Appearance'),        'icon' => '', 'items' => [
                             ['label' => Yii::t('app', 'Slider'),            'icon' => 'picture-o', 'url' => ['/slider']],
                             ['label' => Yii::t('app', 'Categories'),        'icon' => '', 'url' => ['/home-category']],
+                            ['label' => Yii::t('app', 'Wide banner'),       'icon' => '', 'url' => ['/wide-banner']],
                         ]],
                         ['label' => Yii::t('app', 'Reviews'),           'url' => ['/review']],
                         ['label' => Yii::t('app', 'Search Log'),        'icon' => 'picture-o', 'items' => [
