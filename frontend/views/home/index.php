@@ -4,7 +4,8 @@ use yii\helpers\Url;
 use common\models\Language;
 use common\models\slider\Slide;
 
-$slide1Link = Url::to(['seller-products/index', 'id' => 67]);
+$watches = \common\models\category\Category::findOne(577);
+$slide1Link = $watches->url;
 
 $currentLangName = Language::getCurrent()->name;
 ?>
