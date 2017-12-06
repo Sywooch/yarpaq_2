@@ -20,7 +20,8 @@ use common\models\Language;
 class WideBannerImage extends \yii\db\ActiveRecord
 {
 
-    public $image;
+    public $desktopImage;
+    public $mobileImage;
 
     /**
      * @inheritdoc
@@ -37,7 +38,7 @@ class WideBannerImage extends \yii\db\ActiveRecord
     {
         return [
             [['language_id', 'src_name', 'web_name'], 'required'],
-            ['image', 'image', 'skipOnEmpty' => false, 'maxFiles' => 1,
+            [['desktopImage', 'mobileImage'], 'image', 'skipOnEmpty' => false, 'maxFiles' => 1,
                 // не пропускать пустое значение, если:
                 'when' => function ($model) {
                     if ($model->src_name != '') {
@@ -103,11 +104,29 @@ class WideBannerImage extends \yii\db\ActiveRecord
     }
 
     /**
+     * Возвращает полные URL до файла
+     *
+     * @return mixed
+     */
+    public function getMbUrl() {
+        return Yii::$app->urlManagerMedia->createUrl(Yii::$app->params['slide.uploads.url'] . $this->web_mb_name);
+    }
+
+    /**
+     * Возвращает полный путь до файла
+     *
+     * @return string
+     */
+    public function getMbPath() {
+        return Yii::$app->params['slide.uploads.path'] . $this->web_mb_name;
+    }
+
+    /**
      * Удаляет файл с диска
      *
      * @return bool
      */
     public function deleteImage() {
-        return @unlink($this->path);
+        return ( @unlink($this->path) && @unlink($this->mbPath) );
     }
 }

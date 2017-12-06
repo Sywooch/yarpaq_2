@@ -87,8 +87,9 @@ class WideBannerController extends AdminDefaultController
 
                 $loaded = Model::loadMultiple($contents, Yii::$app->request->post());
                 foreach ($contents as $key => $content) {
-                    $content->image = UploadedFile::getInstance($content, "[$key]image");
-                    $this->uploadImage($content);
+                    $content->desktopImage = UploadedFile::getInstance($content, "[$key]desktopImage");
+                    $content->mobileImage = UploadedFile::getInstance($content, "[$key]mobileImage");
+                    $this->uploadImages($content);
                 }
 
                 if ($loaded && Model::validateMultiple($contents)) {
@@ -161,8 +162,9 @@ class WideBannerController extends AdminDefaultController
 
                     foreach ($contents as $content) {
                         $content->model_id = $model->id;
-                        $content->image = UploadedFile::getInstance($content, "[$content->id]image");
-                        $this->uploadImage($content);
+                        $content->desktopImage = UploadedFile::getInstance($content, "[$content->id]desktopImage");
+                        $content->mobileImage = UploadedFile::getInstance($content, "[$content->id]mobileImage");
+                        $this->uploadImages($content);
 
                         $content->save(false);
                     }
@@ -225,33 +227,31 @@ class WideBannerController extends AdminDefaultController
     /**
      * @param $model WideBannerImage
      */
-    private function uploadImage($model) {
-        $image = $model->image;
+    private function uploadImages($model) {
+        $image = $model->desktopImage;
         if (!is_null($image)) {
             $model->src_name = $image->name;
 
             // generate a unique file name to prevent duplicate filenames
             $file_parts = explode(".", $image->name);
             $ext = end($file_parts);
+
             $model->web_name = Yii::$app->security->generateRandomString().".{$ext}";
 
             $image->saveAs($model->path);
         }
-    }
 
-    public function actionImageDelete() {
+        $image = $model->mobileImage;
+        if (!is_null($image)) {
+            $model->src_mb_name = $image->name;
 
-        $key = (int) Yii::$app->request->post('key');
+            // generate a unique file name to prevent duplicate filenames
+            $file_parts = explode(".", $image->name);
+            $ext = end($file_parts);
 
-        $image = WideBannerImage::findOne($key);
-        if ($image) {
+            $model->web_mb_name = Yii::$app->security->generateRandomString().".{$ext}";
 
-            $image->src_name = '';
-            $image->web_name = '';
-
-            $image->save();
+            $image->saveAs($model->mbPath);
         }
-
-        return json_encode(['success' => 1]);
     }
 }

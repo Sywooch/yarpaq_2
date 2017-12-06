@@ -44,28 +44,49 @@ $languages = Language::find()->all();
                         'allowedFileExtensions' => ['jpg', 'gif', 'png'],
                         'showUpload' => false,
                         'showRemove' => false,
-                        'deleteUrl' => \yii\helpers\Url::to(['wide-banner/image-delete']),
                         'initialPreviewAsData' => true,
                         'overwriteInitial' => false,
                         'initialPreview' => [],
                         'initialPreviewConfig' => []
                     ];
-
                     if ($content->web_name != '') {
                         $uploaderPluginOptions['initialPreview'] = $content->url;
                         $uploaderPluginOptions['initialPreviewConfig'][] = [
                             'caption' => $content->src_name,
                             'width' => "120px",
-                            'key' => 1
+                            'key' => $content->id
                         ];
                     }
-
-                    echo $form->field($content, "[$index]image")->widget(FileInput::classname(), [
+                    echo $form->field($content, "[$index]desktopImage")->widget(FileInput::classname(), [
                         'options' => ['accept' => 'image/*'],
                         'pluginOptions' => $uploaderPluginOptions
-                    ])->label(Yii::t('app', 'Image'));
+                    ])->label(Yii::t('app', 'Desktop Image'));
+
+
+
+
+                    $uploaderPluginOptions = [
+                        'allowedFileExtensions' => ['jpg', 'gif', 'png'],
+                        'showUpload' => false,
+                        'showRemove' => false,
+                        'initialPreviewAsData' => true,
+                        'overwriteInitial' => false,
+                        'initialPreview' => [],
+                        'initialPreviewConfig' => []
+                    ];
+                    if ($content->web_mb_name != '') {
+                        $uploaderPluginOptions['initialPreview'] = $content->mbUrl;
+                        $uploaderPluginOptions['initialPreviewConfig'][] = [
+                            'caption' => $content->src_mb_name,
+                            'width' => "120px",
+                            'key' => $content->id
+                        ];
+                    }
+                    echo $form->field($content, "[$index]mobileImage")->widget(FileInput::classname(), [
+                        'options' => ['accept' => 'image/*'],
+                        'pluginOptions' => $uploaderPluginOptions
+                    ])->label(Yii::t('app', 'Mobile Image'));
                     ?>
-                    <input type="hidden" name="gallery_sort" value="<?= $content->src_name; ?>">
                 </div>
                 <!-- /.tab-pane -->
 
