@@ -1917,3 +1917,10 @@
   }
   /* Head search end */
 }
+
+
+@media (min-width: 923px) {
+  .right_side .limited-cat {
+    display: none;
+  }
+}

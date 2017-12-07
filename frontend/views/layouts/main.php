@@ -166,9 +166,9 @@ $seo = $this->params['seo'];
                                                                     <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                                     <ul class="cont-list cont-ul">
                                                                         <?php
-                                                                        $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(6)->all();
-                                                                        foreach ($subcategoryChildren as $subsubcategory) {?>
-                                                                            <li class="cont">
+                                                                        $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all();
+                                                                        $limit = 0; foreach ($subcategoryChildren as $subsubcategory) { $limit++;  ?>
+                                                                            <li class="cont <?= $limit >= 7 ? 'limited-cat' : ''; ?>">
                                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
                                                                                 <ul class="cont-list cont-ul">
@@ -181,7 +181,7 @@ $seo = $this->params['seo'];
                                                                             </li>
                                                                         <?php } ?>
 
-                                                                        <?php if (count($subcategoryChildren)) { ?>
+                                                                        <?php if (count($subcategoryChildren) > 6) { ?>
                                                                         <li><a href="<?= $subcategory->url; ?>" class="see_all"><?= Yii::t('app', 'See all'); ?> ></a></li>
                                                                         <?php } ?>
                                                                     </ul>
@@ -223,9 +223,9 @@ $seo = $this->params['seo'];
                                                         <h3><a href="<?= $subcategory->url; ?>"><?= $subcategory->title; ?></a></h3>
                                                         <ul class="cont-list cont-ul">
                                                             <?php
-                                                            $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(7)->all();
-                                                            foreach ($subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->limit(6)->all() as $subsubcategory) {?>
-                                                            <li class="cont">
+                                                            $subcategoryChildren = $subcategory->getChildren()->andWhere(['status' => Category::STATUS_ACTIVE])->all();
+                                                            $limit = 0; foreach ($subcategoryChildren as $subsubcategory) { $limit++; ?>
+                                                            <li class="cont <?= $limit >= 7 ? 'limited-cat' : ''; ?>">
                                                                 <a href="<?= $subsubcategory->url; ?>"><?= $subsubcategory->title; ?></a>
 
                                                                 <ul class="cont-list cont-ul">
@@ -238,7 +238,7 @@ $seo = $this->params['seo'];
                                                             </li>
                                                             <?php } ?>
                                                             
-                                                            <?php if (count($subcategoryChildren)) { ?>
+                                                            <?php if (count($subcategoryChildren) > 6) { ?>
                                                                 <li><a href="<?= $subcategory->url; ?>" class="see_all"><?= Yii::t('app', 'See all'); ?> ></a></li>
                                                             <?php } ?>
                                                         </ul>
