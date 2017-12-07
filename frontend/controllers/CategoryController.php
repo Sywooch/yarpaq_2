@@ -95,7 +95,7 @@ class CategoryController extends BasicController
             if ($productFilter->sort) {
                 $products->orderBy( $productFilter->sortSetting );
             } else {
-                $products->orderBy(['price' => SORT_ASC]);
+                $products->orderBy(['y2_product.price' => SORT_ASC]);
             }
         }
 

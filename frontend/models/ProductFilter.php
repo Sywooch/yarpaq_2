@@ -52,9 +52,9 @@ class ProductFilter extends Model
 
     public function getSortSetting() {
         $settings = [
-            self::SORT_PRICE_LOWEST     => ['price' => SORT_ASC],
-            self::SORT_PRICE_HIGHEST    => ['price' => SORT_DESC],
-            self::SORT_NEWLY_LISTED     => ['moderated_at' => SORT_DESC],
+            self::SORT_PRICE_LOWEST     => [Product::tableName().'.price' => SORT_ASC],
+            self::SORT_PRICE_HIGHEST    => [Product::tableName().'.price' => SORT_DESC],
+            self::SORT_NEWLY_LISTED     => [Product::tableName().'.moderated_at' => SORT_DESC],
         ];
 
         if (isset($settings[$this->sort])) {
